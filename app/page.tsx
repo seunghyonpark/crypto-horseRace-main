@@ -71,6 +71,9 @@ export default function Home() {
                       CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
                     </p>
 
+                    <Link href={"https://demo.craclegamez.io/gameT2E"} className="w-64 h-16 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                      <span className="text-gray-200 text-2xl ">Demo Play</span>
+                    </Link>
                     <Link href={"/gameT2E"} className="w-64 h-16 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
                       <span className="text-gray-200 text-2xl ">Play Now</span>
                     </Link>

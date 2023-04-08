@@ -652,8 +652,13 @@ startTime=1611619200000
     return (
         <>
 
-          <div className='flex flex-col w-full h-full items-center justify-center gap-5 relative
-          bg-black p-5
+          <div className='flex flex-col w-full h-full items-center justify-center relative
+         
+          p-5
+
+
+          bg-[url(/landing_background.jpg)] bg-repeat bg-contain 
+
           '>      
 
 
@@ -681,7 +686,11 @@ startTime=1611619200000
 
 
 
+<div className="w-[350px]
 
+  items-center justify-top
+  bg-black
+  ">
 
           <div className=" w-[350px] 
             relative ">
@@ -721,17 +730,26 @@ startTime=1611619200000
           </div>
 
 
-
-
-          <div className="w-[350px] flex flex-col items-left justify-end
-            rounded-b-xl text-2xl font-bold text-white
-            h-[100px]">
+          <div className="w-[350px] p-5 mt-5 items-left justify-end
+            rounded-b-xl text-2xl font-bold text-white text-left
+            h-[100px]
+            bg-black">
 
             GAMES
           </div>
 
+</div>
 
-<div className="w-[350px] grid grid-cols-2 gap-4 items-center justify-top">
+
+
+
+<div className="w-[350px] grid grid-cols-2 gap-4 
+  md:w-[350px] md:grid-cols-2 
+  lg:w-[800px] lg:grid-cols-3 
+  items-center justify-top
+  bg-black
+
+  ">
 
           <div className='w-full h-[350px] flex flex-col'>
             <span className="text-white text-center w-full text-xs font-bold">
@@ -746,7 +764,7 @@ startTime=1611619200000
             ">
 
               <Image
-              className=" h-[120px]"
+                className=" w-[282px] h=[220px]"
                 src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
 
               <p className=' text-center w-full text-xs mt-5 '>
@@ -782,8 +800,8 @@ startTime=1611619200000
               
             ">
               <Image
-              className="h-[120px] "
-              src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
+                className=" w-[282px] h=[220px]"
+                src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
 
               <p className=' text-center w-full text-xs mt-5 '>
                 CRACLE P2E is a race horse game. 
@@ -816,7 +834,7 @@ startTime=1611619200000
               hover:bg-[#D62339]
             ">
               <Image
-                className='h-[120px]'
+                className=" w-[282px] h=[220px]"
                 src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
 
               <p className=' text-center w-full text-xs mt-5 '>
@@ -852,7 +870,7 @@ Place a bet with your tokens based on how strong you think your hand is.
               hover:bg-[#D62339]
             ">
               <Image
-                className='h-[120px]'
+                className=" w-[282px] h=[220px]"
                 src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
 
               <p className=' text-center w-full text-xs mt-5'>
@@ -870,7 +888,6 @@ Place a bet with your tokens based on how strong you think your hand is.
             </div>
 
           </div>
-
 
 
       </div>

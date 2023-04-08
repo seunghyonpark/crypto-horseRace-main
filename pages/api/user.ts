@@ -13,6 +13,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  ///console.log("api user req.body", req.body);
+
+
   const { method, API_KEY } = req.body;
   if (API_KEY !== process.env.API_KEY) {
     res.status(401).json({ message: "Unauthorized" });
@@ -132,7 +136,7 @@ export default async function handler(
 
     const user = await getUser(userToken);
 
-    //console.log("api user", user);
+    ////console.log("api user", user);
 
 
     if (!user.success) {

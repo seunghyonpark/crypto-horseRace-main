@@ -647,7 +647,7 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                             alt={"at"}
                         />
                         <div
-                        className="font-bold text-sm text-white mb-6"
+                        className="font-bold text-xs text-white mb-6"
                         style={{
                             opacity: `${selectedSide === "Long" ? 100 : 0}`
                         }}
@@ -655,63 +655,31 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                             {"MY RABBIT"}
                         </div>
 
-                        {/*
-                        <Image
-                            src={
-                                "/cracle_ci.png"
-                            }
-                            width={20}
-                            height={20}
-                            alt={"at"}
-
-                            style={{
-                                opacity: `${selectSide === "Long" ? 100 : 0}`
-                            }}
-
-                        />
-                        */}
-                    
-
-       
-{/*
-<div className="relative">
-
-<Image className="absolute top-0 left-0" src={imageRabbit1} width={150} height={150} alt={"at"}/>
-
-<Image className="cursor-pointer absolute top-0 left-0 mt-1 ml-1 hover:shadow-outline" src="/logo.png" width={150} height={150} alt={"at"}/>
-
-</div>
-*/}
-
-
-{/*
-                        <span className="text-green-500"  >1: Long</span>&nbsp;&nbsp;
-                        <span className="text-green-500" >{betAmountLong}</span>
-                        */}
                     </div>
 
 
-<div
-    className="w-full h-16 "
-    style={{
-        //backgroundImage: `${selectSide === "Long" ? `url('/cracle-banner.png')` : `url('/grass.jpeg')`}`,
-        backgroundImage: `${selectedSide === "Long" ? `url('/track.png')` : `url('/grass.jpeg')`}`,
-        backgroundSize: "120px",
-        backgroundRepeat: "repeat-x",
-        backgroundPosition: `${finishLine ? "0px" : `${track}%`} 0px`,
-    }}
->
-</div>
+                    {selectedSide === "Long" && (
 
+                        <div
+                            className="w-full h-14 "
+                            style={{
+                                backgroundImage: `url('/track.png')` ,
+                                backgroundSize: "120px",
+                                backgroundRepeat: "repeat-x",
+                                backgroundPosition: `${finishLine ? "0px" : `${track}%`} 0px`,
 
+                            }}
 
+                        >
+                        </div>
 
+                    )}
 
 
 
                     <div
                     
-                        className="flex min-w-[150px] items-end justify-end mt-0"
+                        className="flex min-w-[150px] items-end justify-end "
                         style={{
                             width: `${progress2}%`,
                         }}
@@ -725,74 +693,34 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                             alt={"at"}
                         />
                         <div
-                        className="font-bold text-sm text-white mb-6"
+                        className="font-bold text-xs text-white mb-6"
                         style={{
                             opacity: `${selectedSide === "Short" ? 100 : 0}`
                         }}
                         >
                             {"MY RABBIT"}
                         </div>
-                        {/*
-                        <Image
-                            src={
-                                "/cracle_ci.png"
-                            }
-                            width={20}
-                            height={20}
-                            alt={"at"}
 
-                            style={{
-                                opacity: `${selectSide === "Short" ? 100 : 0}`
-                            }}
-                        />
-                        */}
                         
                     </div>
 
 
-{/*
-                    <div
-                        className="flex  min-w-[150px] items-end justify-end"
-                        style={{
-                            width: `${progress3}%`,
-                        }}
-                    >
-                        <Image src={"/at3.gif"} width="150" height="150" alt={"at"} />
-                    </div>
+                    {selectedSide === "Short" && (
 
                     <div
-                        className="flex  min-w-[150px] items-end justify-end"
+                        className="w-full h-14 "
                         style={{
-                            width: `${progress4}%`,
+                            backgroundImage: `url('/track.png')` ,
+                            backgroundSize: "120px",
+                            backgroundRepeat: "repeat-x",
+                            backgroundPosition: `${finishLine ? "0px" : `${track}%`} 0px`,
+
                         }}
+
                     >
-                        <Image src={"/at4.gif"} width="150" height="150" alt={"at"} />
                     </div>
 
-                    <div
-                        className="flex  min-w-[150px] items-end justify-end"
-                        style={{
-                            width: `${progress5}%`,
-                        }}
-                    >
-                        <Image src={"/at5.gif"} width="150" height="150" alt={"at"} />
-                    </div>
-
-*/}
-
-<div
-    className="w-full h-16 "
-    style={{
-        //backgroundImage: `${selectSide === "Short" ? `url('/cracle-banner.png')` : `url('/grass.jpeg')`}`,
-        backgroundImage: `${selectedSide === "Short" ? `url('/track.png')` : `url('/grass.jpeg')`}`,
-        backgroundSize: "120px",
-        backgroundRepeat: "repeat-x",
-        backgroundPosition: `${finishLine ? "0px" : `${track}%`} 0px`,
-
-    }}
-
->
-</div>
+                    )}
 
 
 

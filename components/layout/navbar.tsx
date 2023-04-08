@@ -172,9 +172,10 @@ export default function Navbar() {
         })
         const user = await res.json();
 
-        console.log("navbar user", user);
+        console.log("=====navbar user", user);
 
-        setUser(user.user.user)
+        setUser(user?.user?.user);
+        
     }
 
 

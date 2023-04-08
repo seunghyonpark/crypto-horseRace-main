@@ -748,7 +748,7 @@ startTime=1611619200000
   lg:w-[800px] lg:grid-cols-3 
   items-center justify-top
   bg-black
-
+  p-5
   ">
 
           <div className='w-full h-[350px] flex flex-col'>

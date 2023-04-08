@@ -87,10 +87,12 @@ export default function LoginPage() {
             <div className="flex flex-col items-center justify-center py-10 h-full text-gray-500">
                 <div className=" flex md:w-1/3 flex-col items-center justify-center gap-5 p-10 rounded-lg border bg-white shadow-md">
                     <h1 className="text-4xl  text-gray-500">Login</h1>
+
                     <div className="w-full relative h-[1px] border flex items-center justify-center">
                         <div className="absolute bg-green-500 left-0 w-2/3 h-[1px] z-40"></div>
                         <div className="absolute left-2/3  w-2 h-2 rounded-full bg-green-500 z-50"></div>
                     </div>
+                    
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">ID (Email Address)</span>

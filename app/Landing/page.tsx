@@ -678,13 +678,15 @@ startTime=1611619200000
 
             */}
 
-          <div className="relative">
+          <div className=" w-[350px] h-[200px]
+            relative ">
 
             <div className="w-[350px] h-[200px] flex flex-col items-left justify-start
               rounded-b-xl
               bg-[#D62339] 
-              
-              z-0
+              absolute
+              z-40
+              left-0
               ">
 
               <div className="w-full flex flex-col m-5 items-left  gap-0 text-xl text-white font-bold ">
@@ -701,9 +703,12 @@ startTime=1611619200000
             </div>
 
 {/*
-            <div className='w-[380] h-[200px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
+            <div className='w-[350] h-[200px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
               border
-              z-10'>
+              absolute
+              z-50
+              right-1/2
+              '>
             </div>
           */}
 
@@ -726,13 +731,14 @@ startTime=1611619200000
             <span className="text-white text-center w-full text-xs font-bold">
               Long/Short Trading Game
             </span>
-            <div className="border border-gray-500 rounded-md p-2 mt-2
+
+            <div className="bg-[#333333] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
             ">
 
               <Image src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
 
-              <p className='text-white text-center w-full text-xs '>
+              <p className='text-white text-center w-full text-xs mt-5 '>
                 CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
               </p>
 
@@ -756,13 +762,14 @@ startTime=1611619200000
               Horse Race Game
             </span>
 
-            <div className="border border-gray-500 rounded-md p-2 mt-2
+            <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
             ">
               <Image src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className='text-white text-center w-full text-xs '>
-                CRACLE P2E is a race horse game.<br></br>You can earn more $CRA by playing this game.
+              <p className='text-white text-center w-full text-xs mt-5 '>
+                CRACLE P2E is a race horse game. 
+                You can earn more $CRA by playing this game.
               </p>
 
             </div>
@@ -784,17 +791,14 @@ startTime=1611619200000
             Poker Game
             </span>
 
-            <div className="border border-gray-500 rounded-md p-2 mt-2
+            <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
             ">
               <Image src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className='text-white text-center w-full text-xs '>
-            Play Cracle Poker Games<br></br>
-and Earn CRA.<br></br>
-Place a bet with your tokens<br></br>
-based on how strong you<br></br>
-think your hand is.
+              <p className='text-white text-center w-full text-xs mt-5 '>
+            Play Cracle Poker Games and Earn CRA.
+Place a bet with your tokens based on how strong you think your hand is.
             </p>
 
             </div>
@@ -818,17 +822,14 @@ think your hand is.
             Coming Soon
             </span>
 
-            <div className="border border-gray-500 rounded-md p-2 mt-2
+            <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
             ">
               <Image src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className='text-white text-center w-full text-xs '>
-              Get ready for more X2E fun<br></br>
-and even bigger rewards<br></br>
-with CRACLE!<br></br>
-Stay tuned for new varieties<br></br>
-and exciting updates.
+              <p className='text-white text-center w-full text-xs mt-5'>
+              Get ready for more X2E fun and even bigger rewards with CRACLE!
+              Stay tuned for new varieties and exciting updates.
             </p>
 
             </div>

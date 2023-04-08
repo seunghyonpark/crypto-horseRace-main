@@ -653,7 +653,7 @@ startTime=1611619200000
         <>
 
           <div className='flex flex-col px-10 pb-10 w-full h-full items-center justify-center gap-5 relative
-          bg-black
+          bg-black p-2
           '>      
 
 

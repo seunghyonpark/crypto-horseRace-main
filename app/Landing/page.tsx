@@ -730,10 +730,11 @@ startTime=1611619200000
           </div>
 
 
-          <div className="w-[350px] p-5 mt-5 items-left justify-end
+          <div className="w-[350px] mt-16 p-5 items-left justify-end
             rounded-b-xl text-2xl font-bold text-white text-left
-            h-[100px]
-            bg-black">
+            h-[60px]
+            bg-black
+            ">
 
             GAMES
           </div>

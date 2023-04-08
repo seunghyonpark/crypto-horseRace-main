@@ -8,6 +8,9 @@ import Image from 'next/image';
 
 import Footer from "@/components/layout/footer";
 
+import { redirect } from 'next/navigation';
+
+
 
 
 const inter = Inter({ subsets: ['latin'] });
@@ -15,6 +18,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 
 export default function Home() {
+
+
+  redirect('/Landing');
+
 
   return (
 
@@ -129,7 +136,7 @@ export default function Home() {
 
                   </div>
 
-                  
+
 
                   <footer>
                     <Footer />

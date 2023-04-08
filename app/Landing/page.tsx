@@ -752,7 +752,9 @@ startTime=1611619200000
   p-5
   ">
 
-          <div className='w-full h-[350px] flex flex-col'>
+          <div className='w-full h-[350px] flex flex-col
+            '>
+
             <span className="text-white text-center w-full text-xs font-bold">
               T2E Game
             </span>
@@ -768,7 +770,7 @@ startTime=1611619200000
                 className=" w-[282px] h=[220px]"
                 src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
 
-              <p className=' text-center w-full text-xs mt-5 '>
+              <p className=' text-center w-full text-xs mt-5 text-white'>
                 CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
               </p>
 

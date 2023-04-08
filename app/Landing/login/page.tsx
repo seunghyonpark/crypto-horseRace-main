@@ -92,7 +92,7 @@ export default function LoginPage() {
                         <div className="absolute bg-green-500 left-0 w-2/3 h-[1px] z-40"></div>
                         <div className="absolute left-2/3  w-2 h-2 rounded-full bg-green-500 z-50"></div>
                     </div>
-                    
+
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">ID (Email Address)</span>
@@ -126,7 +126,7 @@ export default function LoginPage() {
                     <div className=""> If you have not an account  </div>
                     <Link
                         className="p-2 px-4 rounded-md bg-[#FFD369] text-gray-500  "
-                        href={"/gameT2E/register"}
+                        href={"/Landing/register"}
                     >
                         Sign Up Now
                     </Link>

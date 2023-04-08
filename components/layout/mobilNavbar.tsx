@@ -1154,7 +1154,11 @@ export default function MobilNavbar({user} : {user: any}) {
                   </Alert>
               </Snackbar>
 
-              <Snackbar open={err} autoHideDuration={6000} onClose={handleCloseErr}>
+              <Snackbar
+                  open={err}
+                  autoHideDuration={6000}
+                  onClose={handleCloseErr}
+              >
                   <Alert
                       onClose={handleCloseErr}
                       severity="error"
@@ -1163,6 +1167,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       {errMsg}
                   </Alert>
               </Snackbar>
+
             </Stack>            
             
         </>

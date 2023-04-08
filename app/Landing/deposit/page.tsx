@@ -575,21 +575,21 @@ export default function Deposit() {
             </h4>
 
             <div className='w-full max-w-xs  relative  '>
-            <input
-              ///type="number"
-              //disabled="true"
-              placeholder="Wallet Address"
-              id="deposit"
-              ///value={depositCount}
-              value={user.walletAddress}
-              onChange={(e) => {
-                setDepositCount(e.target.value);
-              }}
-              className="input input-bordered w-full max-w-xs text-gray-800"
-            />
-            <div className='absolute right-5 mt-3 z-10 btn btn-xs '>
-            <CC content={wallet} />
-            </div>
+              <input
+                ///type="number"
+                //disabled="true"
+                placeholder="Wallet Address"
+                id="deposit"
+                ///value={depositCount}
+                value={user.walletAddress}
+                onChange={(e) => {
+                  setDepositCount(e.target.value);
+                }}
+                className="input input-bordered w-full max-w-xs text-gray-800"
+              />
+              <div className='absolute right-5 mt-3 z-10 btn btn-xs '>
+                <CC content={wallet} />
+              </div>
             </div>
 
 {/*

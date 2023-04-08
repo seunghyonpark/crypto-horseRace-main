@@ -678,23 +678,25 @@ startTime=1611619200000
 
             */}
 
-          <div className=" w-[350px] h-[200px]
+
+
+
+
+
+          <div className=" w-[350px] 
             relative ">
 
-            <div className="w-[350px] h-[200px] flex flex-col items-left justify-start
+            <div className="w-[350px] h-[220px] flex flex-col items-left justify-start
               rounded-b-xl
-              bg-[#D62339] 
-              absolute
-              z-0
-              left-0
+              bg-[#D62339]
               ">
 
-              <div className="w-full flex flex-col m-5 items-left  gap-0 text-xl text-white font-bold ">
+              <div className="w-full flex flex-col m-5 items-left  gap-0 text-2xl text-white font-bold ">
                 CRACLE X2E Game<b></b>
                 Officially Released!
               </div>
 
-              <div className="w-full flex flex-col ml-5 items-left gap-0 text-sm text-white">
+              <div className="w-full flex flex-col ml-5 items-left gap-0 text-l text-white">
               A new highly profitable<br></br>
               betting game is<br></br>
               coming to you soon.
@@ -702,15 +704,20 @@ startTime=1611619200000
 
             </div>
 
-{/*
-            <div className='w-[350] h-[200px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
-              border
-              absolute
-              z-50
-              right-1/2
+            <div className='w-[190px] h-[120px]  bg-[url(/landing_cracle.png)] bg-contain bg-no-repeat content-right
+              
+              absolute right-1 bottom-0
+              z-10
               '>
             </div>
-          */}
+
+            <div className='w-[250px] h-[300px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
+              
+              absolute right-0 top-[50px]
+              z-20
+              '>
+            </div>
+          
 
           </div>
 

@@ -680,10 +680,10 @@ startTime=1611619200000
 
           <div className="relative">
 
-            <div className="w-[380px] h-[200px] flex flex-col items-left justify-start
+            <div className="w-[350px] h-[200px] flex flex-col items-left justify-start
               rounded-b-xl
-              bg-[rgb(197,55,63)] 
-              border
+              bg-[#D62339] 
+              
               z-0
               ">
 
@@ -712,7 +712,7 @@ startTime=1611619200000
 
 
 
-          <div className="w-[380] flex flex-col items-left justify-end
+          <div className="w-[350px] flex flex-col items-left justify-end
             rounded-b-xl text-2xl font-bold text-white
             h-[100px]">
 
@@ -720,10 +720,10 @@ startTime=1611619200000
           </div>
 
 
-<div className="w-[380] grid grid-cols-2 gap-4 items-center justify-top">
+<div className="w-[350px] grid grid-cols-2 gap-4 items-center justify-top">
 
           <div className='w-full h-[350px] flex flex-col'>
-            <span className="text-white text-center w-full text-sm font-bold">
+            <span className="text-white text-center w-full text-xs font-bold">
               Long/Short Trading Game
             </span>
             <div className="border border-gray-500 rounded-md p-2 mt-2
@@ -752,7 +752,7 @@ startTime=1611619200000
 
 
           <div className='w-full h-[350px] flex flex-col'>
-            <span className="text-white text-center w-full text-sm font-bold">
+            <span className="text-white text-center w-full text-xs font-bold">
               Horse Race Game
             </span>
 
@@ -780,7 +780,7 @@ startTime=1611619200000
 
 
           <div className='w-full h-[350px] flex flex-col'>
-            <span className="text-white text-center w-full text-sm font-bold">
+            <span className="text-white text-center w-full text-xs font-bold">
             Poker Game
             </span>
 
@@ -814,7 +814,7 @@ think your hand is.
 
 
           <div className='w-full h-[350px] flex flex-col'>
-            <span className="text-white text-center w-full text-sm font-bold">
+            <span className="text-white text-center w-full text-xs font-bold">
             Coming Soon
             </span>
 

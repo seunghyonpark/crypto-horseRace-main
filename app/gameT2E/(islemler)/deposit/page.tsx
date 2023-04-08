@@ -555,8 +555,8 @@ export default function Deposit() {
           Dear <span className="text-amber-500">{user.username}</span> you have{" "}
       */}
 
-          <span className="text-green-500">{user.deposit}</span>{" "}
-          <span className="text-blue-500">{Coin.name} </span>
+          <span className="text-green-500">{Number(user?.deposit).toFixed(0)}</span>{" "}
+          <span className="text-red">{Coin.name} </span>
           
           {/*
           and

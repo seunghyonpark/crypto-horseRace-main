@@ -229,10 +229,15 @@ export default function Navbar() {
     return (
         <>
             {/* //? LG Screen üstü görüntü */}
-            <div className="hidden lg:flex items-center justify-center w-full h-20 bg-[#000000] sticky top-0 z-50 
+            <div className="hidden items-center justify-center w-full h-20 bg-[#000000] sticky top-0 z-50 
+                lg:flex
                 ">
 
-                <div className="flex flex-col gap-3 items-center justify-center w-[250px] absolute top-2 bg-[#000000] rounded-lg h-full z-50 
+<div className="flex w-[800px] items-center justify-center p-5">
+
+
+                <div className="flex flex-col gap-3 items-center justify-center w-[200px] absolute top-2 bg-[#000000] rounded-lg h-full z-50 
+                     
                      ">
                     <Link href={"/Landing"} className="hover:opacity-50">
                         <Image src={"/cracle_ci.png"} alt="" width={25} height={25} />
@@ -274,20 +279,24 @@ export default function Navbar() {
                             </div>
                         </div>
                     </div>
+
                     <div className="flex items-center justify-center w-full h-[50px] bg-[#000000] px-3 ">
                         
                         <div className="flex items-center w-full gap-7 text-[#9293A6] fill-[#9293A6] uppercase">
 
 
-
-                        {
-                        user && <Link
-                            className="p-2"
-                            href={"/Landing/deposit"}
-                        >
-                            <Image src={"/wallet-icon-white.png"} width={25} height={40} alt="logo" />
-                        </Link>
-                    }
+                        {user && !game &&
+                            <Image
+                            src={user?.img}
+                            width={30}
+                            height={30}
+                            alt="pfp"
+                            className="rounded-md"
+                            onClick={() => {
+                                router.push('/gameT2E')
+                            }}
+                            />
+                        }
                         
 
                     {/*
@@ -320,10 +329,28 @@ export default function Navbar() {
 
 
                         <div className="flex items-center w-full justify-end gap-4">
+
+                            {
+                            user && <Link
+                                className="p-2"
+                                href={"/Landing/deposit"}
+                            >
+                                <Image src={"/wallet-icon-white.png"} width={25} height={40} alt="logo" />
+                            </Link>
+                            }
+
                             {
                             user && <div
                                 className={`flex items-center justify-center  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] `}
                             >
+
+                                <Link
+                                    className="pr-5"
+                                    href={"/Landing/deposit"}
+                                >
+                                    <Image src={"/wallet-icon-white.png"} width={20} height={20} alt="logo" />
+                                </Link>
+
                                 {Number(user?.deposit).toFixed(0)}
                                 
                                 
@@ -367,8 +394,12 @@ export default function Navbar() {
                                 </button>
                             } 
 
+
                         </div>
                     </div>
+                </div>
+
+
                 </div>
 
             </div>

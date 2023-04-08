@@ -1,5 +1,6 @@
 import Horses from '@/libs/enums/horses.enums'
 import React, { useEffect } from 'react'
+import Image from 'next/image'
 
 
 export default function Son20Oyun() {
@@ -15,6 +16,9 @@ export default function Son20Oyun() {
             })
         })
         const data = await response.json()
+
+        ///console.log("son20Oyun data", data)
+
         setSon20Oyun(data.all)
     }
 
@@ -30,8 +34,16 @@ export default function Son20Oyun() {
                 {
                     son20Oyun && son20Oyun.map((item: any) => {
                         return (
-                            <div key={item._id}>
-                                {item.winnerHorse}
+                            <div key={item._id}
+                                className={`flex flex-row
+                                ${item.winnerHorse === "Long" ? "text-green-500" : "text-red-500"} `}
+                                >
+
+
+                                {item.winnerHorse}&nbsp;&nbsp;
+
+                                <Image src={`/rabbit_${item.winnerHorse}.gif`} width={35} height={35} alt='alt1' />
+
                             </div>
                         )
                     })}

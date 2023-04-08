@@ -38,7 +38,7 @@ export const newHistory = async (
 };
 
 export const getHistory = async (): Promise<IHistory[]> => {
-  return await HistoryModel.find().sort({ date: -1 }).limit(20);
+  return await HistoryModel.find().sort({ date: -1 }).limit(15);
 };
 
 export const getLastHistory = async (): Promise<IHistory> => {

@@ -16,6 +16,7 @@ export default function RootLayout({
                 <header>
                     <Navbar />
                 </header>
+                
                 <div className="bg-[#1f2029] relative font-bebasNeue">
 
                     {/*

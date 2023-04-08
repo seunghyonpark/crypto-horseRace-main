@@ -1,8 +1,8 @@
 'use client';
 import BetInputs from '@/components/betScreen/betInputs'
 import BetTables from '@/components/betScreen/betTables'
-import Son20Oyun from '@/components/betScreen/son20';
-import LatestWinners from '@/components/betScreen/latestWinners';
+import Son20Oyun from '@/components/betHorse/son20';
+import LatestWinners from '@/components/betHorse/latestWinners';
 import YuruyenAt from '@/components/betEkrani/yuruyenAt'
 
 import Race from '@/components/yarisEkrani/raceGame';

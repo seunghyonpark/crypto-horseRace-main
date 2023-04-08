@@ -686,16 +686,23 @@ startTime=1611619200000
 
 
 
-<div className="w-[350px]
+<div className="
+  w-[350px]
+  lg:w-[800px]
 
   items-center justify-top
   bg-black
   ">
 
-          <div className=" w-[350px] 
+          <div className="
+            w-[350px]
+            lg:w-[800px] 
             relative ">
 
-            <div className="w-[350px] h-[220px] flex flex-col items-left justify-start
+            <div className="
+              w-[350px]
+              lg:w-[800px]
+              h-[220px] flex flex-col items-left justify-start
               rounded-b-xl
               bg-[#D62339]
               ">
@@ -716,6 +723,7 @@ startTime=1611619200000
             <div className='w-[190px] h-[120px]  bg-[url(/landing_cracle.png)] bg-contain bg-no-repeat content-right       
               absolute right-1 bottom-0
               z-1
+              lg:w-[250px] lg:h-[150px]
               '>
             </div>
 
@@ -723,6 +731,7 @@ startTime=1611619200000
               
               absolute right-0 top-[50px]
               z-2
+              lg:mr-5
               '>
             </div>
           
@@ -744,7 +753,8 @@ startTime=1611619200000
 
 
 
-<div className="w-[350px] grid grid-cols-2 gap-4 
+<div className="
+  w-[350px] grid grid-cols-2 gap-4 
   md:w-[350px] md:grid-cols-2 
   lg:w-[800px] lg:grid-cols-3 
   items-center justify-top

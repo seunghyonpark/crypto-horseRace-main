@@ -792,9 +792,15 @@ startTime=1611619200000
               <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-[#D62339] rounded-lg flex items-center justify-center">
                 <span className="text-gray-200 text-sm ">DEMO</span>
               </Link>
-              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-[#05B168] rounded-lg flex items-center justify-center">
+              <button
+                onClick={() => {
+                  getCookie('user') ? router.push('/gameT2E') : router.push('/Landing/login');
+                }}
+                className=" m-1 w-full h-10 bg-[#05B168] rounded-lg flex items-center justify-center">
                 <span className="text-gray-200 text-sm ">START</span>
-              </Link>
+              </button>
+
+
             </div>
 
           </div>

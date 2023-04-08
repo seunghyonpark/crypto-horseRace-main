@@ -230,18 +230,25 @@ export default function Navbar() {
         <>
             {/* //? LG Screen üstü görüntü */}
             <div className="hidden lg:flex items-center justify-center w-full h-20 bg-[#000000] sticky top-0 z-50 ">
-                <div className="flex flex-col gap-3 items-center justify-center w-[250px] absolute top-0 bg-[#000000] rounded-lg h-full z-50  ">
+
+                <div className="flex flex-col gap-3 items-center justify-center w-[250px] absolute top-2 bg-[#000000] rounded-lg h-full z-50 
+                     ">
                     <Link href={"/Landing"} className="hover:opacity-50">
-                        <Image src={"/logo.png"} alt="" width={150} height={20} />
+                        <Image src={"/cracle_ci.png"} alt="" width={25} height={25} />
                     </Link>
 
                     {/*
                     <div className=" font-normal text-xs text-gray-200 tracking-widest">Change Your Life</div>
                     */}
 
+                    
+                    <div className="flex w-[250px] items-center justify-center text-white text-l font-bold">
+                        CRACLE X2E
+                    </div>
+            
                 </div>
 
-                
+
                 <div className="flex flex-col items-center justify-center w-full h-full">
                     <div className="flex w-full bg-[#000000] text-[11px] h-[30px] relative ">
                         

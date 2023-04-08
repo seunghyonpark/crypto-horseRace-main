@@ -801,24 +801,27 @@ export default function MobilNavbar({user} : {user: any}) {
             <div className="lg:hidden w-full flex items-center gap-2 px-2 h-20 bg-[#24252F]">
     */}
 
-            <div className="lg:hidden w-full flex items-center gap-2 px-2 h-20 bg-[#000000]">
+            <div className="lg:hidden w-full flex flex-row items-center gap-2 px-2 h-20 bg-[#000000]">
 
           
                 <Link className='ml-3'
                   href={"/Landing"}>
-                    <Image src={"/cracle_ci.png"} width={25} height={25} alt="logo" />
+                    <Image src={"/cracle_ci.png"} width={28} height={28} alt="logo" />
                 </Link>
 
 
 
+                {!user &&
+                  <div className="flex w-[250px] items-center gap-2 text-white text-sm font-bold">
+                    CRACLE X2E
+                  </div>
+                }
 
  
 
                 
-                <div className='w-full p-2 flex items-center justify-end gap-3'>
-
-
-                  
+                <div className='w-full p-2 flex items-center justify-end gap-3 '>
+ 
 
                   {user && game?.selectedSide === "Long" &&
                     <Image

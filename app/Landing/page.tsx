@@ -733,10 +733,13 @@ startTime=1611619200000
             </span>
 
             <div className="bg-[#333333] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+              flex flex-col items-center justify-top gap-2 h-full
+              
             ">
 
-              <Image src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
+              <Image
+              className=" h-[120px]"
+                src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
 
               <p className='text-white text-center w-full text-xs mt-5 '>
                 CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
@@ -745,10 +748,10 @@ startTime=1611619200000
             </div>
 
             <div className='w-full flex flex-row p-2'>
-              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-[#D62339] rounded-lg flex items-center justify-center">
                 <span className="text-gray-200 text-sm ">DEMO</span>
               </Link>
-              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-[#05B168] rounded-lg flex items-center justify-center">
                 <span className="text-gray-200 text-sm ">START</span>
               </Link>
             </div>
@@ -763,9 +766,12 @@ startTime=1611619200000
             </span>
 
             <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+              flex flex-col items-center justify-top gap-2 h-full
+              
             ">
-              <Image src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
+              <Image
+              className="h-[120px] "
+              src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
 
               <p className='text-white text-center w-full text-xs mt-5 '>
                 CRACLE P2E is a race horse game. 
@@ -775,11 +781,11 @@ startTime=1611619200000
             </div>
 
             <div className='w-full flex flex-row p-2'>
-              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">DEMO</span>
+              <Link href={"/"} className="m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
+                <span className="text-gray-500 text-sm ">DEMO</span>
               </Link>
-              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">START</span>
+              <Link href={"/"} className=" m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
+                <span className="text-gray-500 text-sm ">START</span>
               </Link>
             </div>
 
@@ -792,9 +798,11 @@ startTime=1611619200000
             </span>
 
             <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+              flex flex-col items-center justify-top gap-2 h-full
             ">
-              <Image src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
+              <Image
+                className='h-[120px]'
+                src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
 
               <p className='text-white text-center w-full text-xs mt-5 '>
             Play Cracle Poker Games and Earn CRA.
@@ -804,11 +812,11 @@ Place a bet with your tokens based on how strong you think your hand is.
             </div>
 
             <div className='w-full flex flex-row p-2'>
-              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">DEMO</span>
+              <Link href={"/"} className="m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
+                <span className="text-gray-500 text-sm ">DEMO</span>
               </Link>
-              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">START</span>
+              <Link href={"/"} className=" m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
+                <span className="text-gray-500 text-sm ">START</span>
               </Link>
             </div>
 
@@ -823,9 +831,11 @@ Place a bet with your tokens based on how strong you think your hand is.
             </span>
 
             <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+              flex flex-col items-center justify-top gap-2 h-full
             ">
-              <Image src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
+              <Image
+                className='h-[120px]'
+                src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
 
               <p className='text-white text-center w-full text-xs mt-5'>
               Get ready for more X2E fun and even bigger rewards with CRACLE!
@@ -834,13 +844,11 @@ Place a bet with your tokens based on how strong you think your hand is.
 
             </div>
 
-            <div className='w-full flex flex-row p-2'>
-              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">DEMO</span>
-              </Link>
-              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">START</span>
-              </Link>
+            <div className='w-full flex flex-row p-2 '>
+              <div className="m-1 w-full h-10 rounded-lg flex items-center justify-center">
+                <span className="text-gray-500 text-sm text-center">More Games To Come!</span>
+              </div>
+
             </div>
 
           </div>

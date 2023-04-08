@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Web3 from "web3";
-import abi from "../../../../public/abi.json";
+import abi from "@/public/abi.json";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Stack, Snackbar, Alert } from "@mui/material";
@@ -16,7 +16,7 @@ import Link from 'next/link';
 
 import dynamic from "next/dynamic";
 
-const CC = dynamic(() => import("../../../../components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
+const CC = dynamic(() => import("@/components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
 
 
 

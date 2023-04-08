@@ -15,7 +15,7 @@ import dynamic from "next/dynamic";
 
 const textToCopy = "hello Ali"
 
- const CC = dynamic(() => import("../../../../components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
+ const CC = dynamic(() => import("@/components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
 
 
 

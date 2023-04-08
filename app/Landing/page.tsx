@@ -685,7 +685,7 @@ startTime=1611619200000
               rounded-b-xl
               bg-[#D62339] 
               absolute
-              z-40
+              z-0
               left-0
               ">
 

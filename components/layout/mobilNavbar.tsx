@@ -797,11 +797,15 @@ export default function MobilNavbar({user} : {user: any}) {
     return (
         <>
 
+{/*
             <div className="lg:hidden w-full flex items-center gap-2 px-2 h-20 bg-[#24252F]">
+    */}
+
+            <div className="lg:hidden w-full flex items-center gap-2 px-2 h-20 bg-[#000000]">
 
           
                 <Link className='ml-3'
-                  href={"/"}>
+                  href={"/Landing"}>
                     <Image src={"/cracle_ci.png"} width={25} height={25} alt="logo" />
                 </Link>
 
@@ -921,7 +925,7 @@ export default function MobilNavbar({user} : {user: any}) {
 
 
                     {!user && <Link
-                            href={"/gameT2E/login"}
+                            href={"/Landing/login"}
                             className={`text-[12px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                         >
                             Sign In
@@ -1012,7 +1016,7 @@ export default function MobilNavbar({user} : {user: any}) {
                     <div
                       className="w-full text-white text-center justify-center p-5 items-center bg-red-900 hover:bg-[#141111] flex flex-row"
                       onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/mynft')
+                        setShowModal(false), router.push('/Landing/mynft')
                       }}
                       >
                         <Image
@@ -1064,7 +1068,7 @@ export default function MobilNavbar({user} : {user: any}) {
                             setShowModal(false);
                             deleteCookie('user');
                             //////getUser();
-                            router.push('/gameT2E');
+                            router.push('/Landing');
                           }}
                       >
                           Log Out
@@ -1078,7 +1082,7 @@ export default function MobilNavbar({user} : {user: any}) {
                   <div
                     className={` w-full pt-3 items-left text-l text-white`}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/depositRequests')
+                        setShowModal(false), router.push('/Landing/depositRequests')
                     }}
                     >
                       Deposit
@@ -1087,7 +1091,7 @@ export default function MobilNavbar({user} : {user: any}) {
                   <div
                     className={`w-full pt-1 items-left text-l text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/withdrawRequests')
+                        setShowModal(false), router.push('/Landing/withdrawRequests')
                     }}
                     >
                       Withdrawal

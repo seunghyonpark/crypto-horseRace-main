@@ -229,9 +229,9 @@ export default function Navbar() {
     return (
         <>
             {/* //? LG Screen üstü görüntü */}
-            <div className="hidden lg:flex items-center justify-center w-full h-20 bg-[#24252F] sticky top-0 z-50 ">
-                <div className="flex flex-col gap-3 items-center justify-center w-[250px] absolute top-0 bg-[#24252F] rounded-lg h-full z-50  ">
-                    <Link href={"/gameT2E"} className="hover:opacity-50">
+            <div className="hidden lg:flex items-center justify-center w-full h-20 bg-[#000000] sticky top-0 z-50 ">
+                <div className="flex flex-col gap-3 items-center justify-center w-[250px] absolute top-0 bg-[#000000] rounded-lg h-full z-50  ">
+                    <Link href={"/Landing"} className="hover:opacity-50">
                         <Image src={"/logo.png"} alt="" width={150} height={20} />
                     </Link>
 
@@ -240,8 +240,12 @@ export default function Navbar() {
                     */}
 
                 </div>
+
+                
                 <div className="flex flex-col items-center justify-center w-full h-full">
-                    <div className="flex w-full bg-[#16181F] text-[11px] h-[30px] relative ">
+                    <div className="flex w-full bg-[#000000] text-[11px] h-[30px] relative ">
+                        
+
                         <div className="marquee-container relative w-full">
                             <div className="marquee ">
 {/*
@@ -262,7 +266,7 @@ export default function Navbar() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex items-center justify-center w-full h-[50px] bg-[#24252F] px-3 ">
+                    <div className="flex items-center justify-center w-full h-[50px] bg-[#000000] px-3 ">
                         
                         <div className="flex items-center w-full gap-7 text-[#9293A6] fill-[#9293A6] uppercase">
 
@@ -271,7 +275,7 @@ export default function Navbar() {
                         {
                         user && <Link
                             className="p-2"
-                            href={"/gameT2E/deposit"}
+                            href={"/Landing/deposit"}
                         >
                             <Image src={"/wallet-icon-white.png"} width={25} height={40} alt="logo" />
                         </Link>
@@ -358,7 +362,9 @@ export default function Navbar() {
                         </div>
                     </div>
                 </div>
+
             </div>
+
 
 
             <Modal
@@ -375,7 +381,7 @@ export default function Navbar() {
                   <button
                     className="w-full text-white text-center justify-left pl-3 p-2 items-left bg-red-900 hover:bg-[#141111] flex flex-row"
                     onClick={() => {
-                      setShowModal(false), router.push('/gameT2E/mynft')
+                      setShowModal(false), router.push('/Landing/mynft')
                   }}
                   >
                       <Image

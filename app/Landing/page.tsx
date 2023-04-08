@@ -652,8 +652,8 @@ startTime=1611619200000
     return (
         <>
 
-          <div className='flex flex-col px-10 pb-10 w-full h-full items-center justify-center gap-5 relative
-          bg-black p-2
+          <div className='flex flex-col w-full h-full items-center justify-center gap-5 relative
+          bg-black p-5
           '>      
 
 
@@ -678,24 +678,41 @@ startTime=1611619200000
 
             */}
 
-          <div className="w-[400px] flex flex-col items-left justify-start
-            rounded-b-xl
-           bg-[rgb(197,55,63)] h-[200px]">
+          <div className="relative">
 
-            <div className="w-full flex flex-col m-5 items-left  gap-0 text-xl text-white font-bold ">
-              CRACLE X2E Game<b></b>
-              Officially Released!
+            <div className="w-[380px] h-[200px] flex flex-col items-left justify-start
+              rounded-b-xl
+              bg-[rgb(197,55,63)] 
+              border
+              z-0
+              ">
+
+              <div className="w-full flex flex-col m-5 items-left  gap-0 text-xl text-white font-bold ">
+                CRACLE X2E Game<b></b>
+                Officially Released!
+              </div>
+
+              <div className="w-full flex flex-col ml-5 items-left gap-0 text-sm text-white">
+              A new highly profitable<br></br>
+              betting game is<br></br>
+              coming to you soon.
+              </div>
+
             </div>
 
-            <div className="w-full flex flex-col ml-5 items-left gap-0 text-sm text-white">
-            A new highly profitable<br></br>
-            betting game is<br></br>
-            coming to you soon.
+{/*
+            <div className='w-[380] h-[200px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
+              border
+              z-10'>
             </div>
+          */}
 
           </div>
 
-          <div className="w-[400px] flex flex-col items-left justify-bottom
+
+
+
+          <div className="w-[380] flex flex-col items-left justify-end
             rounded-b-xl text-2xl font-bold text-white
             h-[100px]">
 
@@ -703,7 +720,7 @@ startTime=1611619200000
           </div>
 
 
-<div className="w-[400px] grid grid-cols-2 gap-4 items-center justify-top">
+<div className="w-[380] grid grid-cols-2 gap-4 items-center justify-top">
 
           <div className='w-full h-[350px] flex flex-col'>
             <span className="text-white text-center w-full text-sm font-bold">

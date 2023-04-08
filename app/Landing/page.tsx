@@ -704,17 +704,16 @@ startTime=1611619200000
 
             </div>
 
-            <div className='w-[190px] h-[120px]  bg-[url(/landing_cracle.png)] bg-contain bg-no-repeat content-right
-              
+            <div className='w-[190px] h-[120px]  bg-[url(/landing_cracle.png)] bg-contain bg-no-repeat content-right       
               absolute right-1 bottom-0
-              z-10
+              z-1
               '>
             </div>
 
             <div className='w-[250px] h-[300px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
               
               absolute right-0 top-[50px]
-              z-20
+              z-2
               '>
             </div>
           
@@ -736,19 +735,21 @@ startTime=1611619200000
 
           <div className='w-full h-[350px] flex flex-col'>
             <span className="text-white text-center w-full text-xs font-bold">
-              Long/Short Trading Game
+              T2E Game
             </span>
 
             <div className="bg-[#333333] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 h-full
-              
+              text-[#939393]
+              hover:text-white
+              hover:bg-[#D62339]
             ">
 
               <Image
               className=" h-[120px]"
                 src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
 
-              <p className='text-white text-center w-full text-xs mt-5 '>
+              <p className=' text-center w-full text-xs mt-5 '>
                 CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
               </p>
 
@@ -768,19 +769,23 @@ startTime=1611619200000
 
 
           <div className='w-full h-[350px] flex flex-col'>
+
             <span className="text-white text-center w-full text-xs font-bold">
               Horse Race Game
             </span>
 
             <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 h-full
+              text-[#939393]
+              hover:text-white
+              hover:bg-[#D62339]
               
             ">
               <Image
               className="h-[120px] "
               src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className='text-white text-center w-full text-xs mt-5 '>
+              <p className=' text-center w-full text-xs mt-5 '>
                 CRACLE P2E is a race horse game. 
                 You can earn more $CRA by playing this game.
               </p>
@@ -806,12 +811,15 @@ startTime=1611619200000
 
             <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 h-full
+              text-[#939393]
+              hover:text-white
+              hover:bg-[#D62339]
             ">
               <Image
                 className='h-[120px]'
                 src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className='text-white text-center w-full text-xs mt-5 '>
+              <p className=' text-center w-full text-xs mt-5 '>
             Play Cracle Poker Games and Earn CRA.
 Place a bet with your tokens based on how strong you think your hand is.
             </p>
@@ -839,12 +847,15 @@ Place a bet with your tokens based on how strong you think your hand is.
 
             <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
               flex flex-col items-center justify-top gap-2 h-full
+              text-[#939393]
+              hover:text-white
+              hover:bg-[#D62339]
             ">
               <Image
                 className='h-[120px]'
                 src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className='text-white text-center w-full text-xs mt-5'>
+              <p className=' text-center w-full text-xs mt-5'>
               Get ready for more X2E fun and even bigger rewards with CRACLE!
               Stay tuned for new varieties and exciting updates.
             </p>
@@ -853,7 +864,7 @@ Place a bet with your tokens based on how strong you think your hand is.
 
             <div className='w-full flex flex-row p-2 '>
               <div className="m-1 w-full h-10 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm text-center">More Games To Come!</span>
+                <span className="text-[#939393] text-xs text-center">More Games To Come!</span>
               </div>
 
             </div>

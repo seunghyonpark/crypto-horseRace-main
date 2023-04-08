@@ -24,6 +24,7 @@ export default function Home() {
         <div className="w-full h-full flex flex-col ">
           <div className="flex">
             <div className="flex flex-col w-full min-h-screen h-full">
+
               
               <div className='w-full h-5 lg:h-16'></div>
 
@@ -34,11 +35,7 @@ export default function Home() {
                   <div className="
                     flex flex-col items-center justify-center gap-14 lg:py-10 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
                   ">
-
                     <h1 className='text-white text-center w-full text-lg font-bebasNeue md:text-3xl'>Cracle Games</h1>
-
-
-
                   <div className="border border-gray-500 p-10 m-10 rounded-md
                     flex flex-col items-center justify-center gap-14 lg:py-10 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
                   ">
@@ -130,10 +127,9 @@ export default function Home() {
                   </div>
 
 
-                  
-
-
                   </div>
+
+                  
 
                   <footer>
                     <Footer />

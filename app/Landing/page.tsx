@@ -652,7 +652,9 @@ startTime=1611619200000
     return (
         <>
 
-          <div className='flex flex-col px-10 pb-10 w-full h-full items-center justify-center gap-5 bg-[#0C0E1A] relative'>      
+          <div className='flex flex-col px-10 pb-10 w-full h-full items-center justify-center gap-5 relative
+          bg-black
+          '>      
 
 
 {/*
@@ -701,75 +703,131 @@ startTime=1611619200000
           </div>
 
 
-<div className="w-[400px] grid grid-cols-2 gap-2 items-center justify-center">
+<div className="w-[400px] grid grid-cols-2 gap-4 items-center justify-top">
 
-          <div className="border border-gray-500 rounded-md
-            flex flex-col items-center justify-center gap-14 lg:py-10 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
-          ">
+          <div className='w-full h-[350px] flex flex-col'>
+            <span className="text-white text-center w-full text-sm font-bold">
+              Long/Short Trading Game
+            </span>
+            <div className="border border-gray-500 rounded-md p-2 mt-2
+              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+            ">
 
-            <Image src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
+              <Image src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
 
-            <p className='text-white text-center w-full text-xm '>
-              CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
-            </p>
+              <p className='text-white text-center w-full text-xs '>
+                CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
+              </p>
 
-            <Link href={"https://demo.craclegamez.io/gameT2E"} className="w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-              <span className="text-gray-200 text-sm ">Demo Play</span>
-            </Link>
-            <Link href={"/gameT2E"} className="w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-              <span className="text-gray-200 text-sm ">Play Now</span>
-            </Link>
+            </div>
+
+            <div className='w-full flex flex-row p-2'>
+              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">DEMO</span>
+              </Link>
+              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">START</span>
+              </Link>
+            </div>
+
+          </div>
+
+
+
+          <div className='w-full h-[350px] flex flex-col'>
+            <span className="text-white text-center w-full text-sm font-bold">
+              Horse Race Game
+            </span>
+
+            <div className="border border-gray-500 rounded-md p-2 mt-2
+              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+            ">
+              <Image src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
+
+              <p className='text-white text-center w-full text-xs '>
+                CRACLE P2E is a race horse game.<br></br>You can earn more $CRA by playing this game.
+              </p>
+
+            </div>
+
+            <div className='w-full flex flex-row p-2'>
+              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">DEMO</span>
+              </Link>
+              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">START</span>
+              </Link>
+            </div>
+
           </div>
 
 
+          <div className='w-full h-[350px] flex flex-col'>
+            <span className="text-white text-center w-full text-sm font-bold">
+            Poker Game
+            </span>
 
+            <div className="border border-gray-500 rounded-md p-2 mt-2
+              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+            ">
+              <Image src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
 
-          <div className="border border-gray-500 rounded-md
-            flex flex-col items-center justify-center gap-14 lg:py-10 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
-          ">
-
-            <Image src="/gameP2E.jpg" width={500} height={500} alt="gameP2E" />
-
-            <p className='text-white text-center w-full text-xm '>
-              CRACLE P2E is a race horse game.<br></br>You can earn more $CRA by playing this game.
+              <p className='text-white text-center w-full text-xs '>
+            Play Cracle Poker Games<br></br>
+and Earn CRA.<br></br>
+Place a bet with your tokens<br></br>
+based on how strong you<br></br>
+think your hand is.
             </p>
-            <Link href={"/"} className="w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-              <span className="text-gray-200 text-sm ">Comming Soon</span>
-            </Link>
+
+            </div>
+
+            <div className='w-full flex flex-row p-2'>
+              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">DEMO</span>
+              </Link>
+              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">START</span>
+              </Link>
+            </div>
 
           </div>
+
                 
 
 
-          <div className="border border-gray-500 rounded-md
-            flex flex-col items-center justify-center gap-14 lg:py-10 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
-          ">
+          <div className='w-full h-[350px] flex flex-col'>
+            <span className="text-white text-center w-full text-sm font-bold">
+            Coming Soon
+            </span>
 
-            <Image src="/gameClumsybird.png" width={500} height={500} alt="gameClumsybird" />
+            <div className="border border-gray-500 rounded-md p-2 mt-2
+              flex flex-col items-center justify-top gap-2 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
+            ">
+              <Image src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
 
-            <p className='text-white text-center w-full text-xm '>
-              Clumsy Bird is a casual game.<br></br>You can earn more $CRA by playing this game.
+              <p className='text-white text-center w-full text-xs '>
+              Get ready for more X2E fun<br></br>
+and even bigger rewards<br></br>
+with CRACLE!<br></br>
+Stay tuned for new varieties<br></br>
+and exciting updates.
             </p>
-            <Link href={"/"} className="w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-              <span className="text-gray-200 text-sm ">Comming Soon</span>
-            </Link>
+
+            </div>
+
+            <div className='w-full flex flex-row p-2'>
+              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">DEMO</span>
+              </Link>
+              <Link href={"/gameT2E"} className=" m-1 w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
+                <span className="text-gray-200 text-sm ">START</span>
+              </Link>
+            </div>
 
           </div>
 
-          <div className="border border-gray-500 rounded-md
-            flex flex-col items-center justify-center gap-14 lg:py-10 bg-gradient-radial from-transparent via-[#0C0E1A] to-transparent bg-blend-difference h-full
-          ">
 
-            <Image src="/gameCryptoPlinko.png" width={500} height={500} alt="gameClumsybird" />
-
-            <p className='text-white text-center w-full text-sm '>
-              Crypto Plinko is a casual game.<br></br>You can earn more $CRA by playing this game.
-            </p>
-            <Link href={"/"} className="w-full h-10 bg-gradient-to-r from-[#08FF08] to-[#008013] rounded-lg flex items-center justify-center">
-              <span className="text-gray-200 text-sm ">Comming Soon</span>
-            </Link>
-
-          </div>
 
       </div>
 

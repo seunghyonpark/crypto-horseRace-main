@@ -762,10 +762,12 @@ startTime=1611619200000
   p-5
   ">
 
-          <div className='w-full h-[350px] flex flex-col
+          <div className='w-full h-[350px] flex flex-col mb-5
             '>
 
-            <span className="text-white text-center w-full text-xs font-bold">
+            <span className="
+              text-white text-center w-full text-xs font-bold
+              lg:text-xl">
               T2E Game
             </span>
 
@@ -799,9 +801,11 @@ startTime=1611619200000
 
 
 
-          <div className='w-full h-[350px] flex flex-col'>
+          <div className='w-full h-[350px] flex flex-col mb-5'>
 
-            <span className="text-white text-center w-full text-xs font-bold">
+            <span className="
+            text-white text-center w-full text-xs font-bold
+              lg:text-xl">
               Horse Race Game
             </span>
 
@@ -835,8 +839,10 @@ startTime=1611619200000
           </div>
 
 
-          <div className='w-full h-[350px] flex flex-col'>
-            <span className="text-white text-center w-full text-xs font-bold">
+          <div className='w-full h-[350px] flex flex-col mb-5'>
+            <span className="
+              text-white text-center w-full text-xs font-bold
+              lg:text-xl">
             Poker Game
             </span>
 
@@ -871,8 +877,10 @@ Place a bet with your tokens based on how strong you think your hand is.
                 
 
 
-          <div className='w-full h-[350px] flex flex-col'>
-            <span className="text-white text-center w-full text-xs font-bold">
+          <div className='w-full h-[350px] flex flex-col mb-5'>
+            <span className="
+              text-white text-center w-full text-xs font-bold
+              lg:text-xl">
             Coming Soon
             </span>
 
@@ -886,7 +894,9 @@ Place a bet with your tokens based on how strong you think your hand is.
                 className=" w-[282px] h=[220px]"
                 src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
 
-              <p className=' text-center w-full text-xs mt-5'>
+              <p className='
+                text-center w-full text-xs mt-5
+                '>
               Get ready for more X2E fun and even bigger rewards with CRACLE!
               Stay tuned for new varieties and exciting updates.
             </p>

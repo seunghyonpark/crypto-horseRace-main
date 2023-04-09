@@ -362,7 +362,7 @@ export default function Navbar() {
 
                             {    
                                 !user && <Link
-                                    href={"/gameT2E/login"}
+                                    href={"/Landing/login"}
                                     className={`text-[13px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                                 >
                                     Sign In

@@ -55,7 +55,20 @@ export default function MaticWithdrawRequestList() {
             headerAlign: "center",
             type: "number",
             flex: 0.2,
-            minWidth: 75,
+            minWidth: 120,
+            renderCell(params) {
+                return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+            },
+
+        },
+        {
+            field: "withdrawFee",
+            headerName: "Fee",
+            align: "center",
+            headerAlign: "center",
+            type: "number",
+            flex: 0.2,
+            minWidth: 80,
             renderCell(params) {
                 return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
             },
@@ -218,6 +231,7 @@ export default function MaticWithdrawRequestList() {
             id: i,
             email1: item.email1,
             requestAmount: item.withdrawAmount,
+            withdrawFee: item.withdrawFee,
             type: item.type,
             status: item.status,
             wallet: item.walletTo,

@@ -55,7 +55,7 @@ export default function BetHistoryList() {
             type: "number",
             headerName: "RESULT",
             flex: 0.1,
-            minWidth: 100,
+            minWidth: 130,
             align: "right",
             headerAlign: "center",
 
@@ -65,10 +65,10 @@ export default function BetHistoryList() {
                     return (
 
                         <div className='w-full flex flex-row font-bold items-right '>
-                            <div className='w-14 text-right text-white '>
+                            <div className='w-full text-right text-white '>
                                 - {Number(Math.abs(params.value)).toFixed(0)} 
                             </div>
-                            <div className='pl-2 text-white '>
+                            <div className='w-[80px] text-white text-right '>
                                 LOSE
                             </div>
                         </div>
@@ -77,10 +77,10 @@ export default function BetHistoryList() {
                 } else if (params.value > 0) {
                     return (
                         <div className='w-full flex flex-row font-bold items-right'>
-                            <div className='w-14 text-right justify-end text-white '>
+                            <div className='w-full text-right justify-end text-white '>
                                 + {Number(params.value).toFixed(0)}
                             </div>
-                            <div className='pl-2 text-white '>
+                            <div className='w-[80px] text-white text-right '>
                                 WIN
                             </div>
                         </div>
@@ -397,7 +397,7 @@ export default function BetHistoryList() {
                     <h4
                         className=" text-white text-sm font-bold"
                         style={{
-                            color: `${(rows[0]?.basePrice - rows[0]?.closePrice) > 0 ? "#ff0000" : "#00ff00"}`,
+                            color: `${(rows[0]?.basePrice - rows[0]?.closePrice) > 0 ? "rgb(239 68 68)" : "rgb(34 197 94)" }`,
                         }}
                     >
                         Last Price: {Number(rows[0]?.closePrice).toFixed(2)} 

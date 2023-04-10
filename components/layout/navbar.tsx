@@ -282,7 +282,7 @@ export default function Navbar() {
 
                     <div className="flex items-center justify-center w-full h-[50px] bg-[#000000] px-3 ">
                         
-                        <div className="flex items-center w-full gap-7 text-[#9293A6] fill-[#9293A6] uppercase">
+                        <button className="hover:opacity-50">
 
 
                         {user && !game &&
@@ -324,28 +324,19 @@ export default function Navbar() {
                     */}
 
 
-                        </div>
+                        </button>
 
 
 
                         <div className="flex items-center w-full justify-end gap-4">
 
                             {
-                            user && <Link
-                                className="p-2"
-                                href={"/Landing/deposit"}
-                            >
-                                <Image src={"/wallet-icon-white.png"} width={25} height={40} alt="logo" />
-                            </Link>
-                            }
-
-                            {
                             user && <div
-                                className={`flex items-center justify-center  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] `}
+                                className={`flex flex-row items-center justify-center  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] `}
                             >
 
                                 <Link
-                                    className="pr-5"
+                                    className="pr-5 hover:opacity-50"
                                     href={"/Landing/deposit"}
                                 >
                                     <Image src={"/wallet-icon-white.png"} width={20} height={20} alt="logo" />

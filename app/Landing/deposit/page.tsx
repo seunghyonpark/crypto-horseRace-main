@@ -14,6 +14,8 @@ import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 import Link from 'next/link';
 
+import axios from 'axios';
+
 import dynamic from "next/dynamic";
 
 const CC = dynamic(() => import("@/components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
@@ -44,6 +46,10 @@ export default function Deposit() {
   const [user, setUser] = useState<IUser>();
   const [settings, setSettings] = useState<any>();
   
+
+
+  const [input, setInput] = useState(null);
+	const [response, setResponse] = useState(null);
 
   const getUser = async () => {
     const inputs = {
@@ -510,6 +516,23 @@ export default function Deposit() {
 
 
 
+
+
+	/**
+	 * Fetches QR Code of the text input
+	 */
+	const getQrcode = async () => {
+		try {
+			const res = await axios.get('api/qrcode/', {
+				params: {input}
+			});
+			setResponse(res.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+
   return (
     <>
 
@@ -591,6 +614,16 @@ export default function Deposit() {
                 <CC content={wallet} />
               </div>
             </div>
+
+{/*
+			<button
+				className="mt-6 p-4 bg-active hover:opacity-90 rounded text-primary font-bold inline-flex"
+				onClick={() => getQrcode()}
+			>
+				Generate QR Code
+			</button>
+
+              */}
 
 {/*
             <button

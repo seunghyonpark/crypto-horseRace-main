@@ -234,13 +234,13 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                 textResult = "You win";
                 imageUrl = "/winner.gif";
 
-                push( '/gameT2E/winner?bet=' + selectedSide + '&betAmount=' + betAmount );
+                push( '/Landing/winner?bet=' + selectedSide + '&betAmount=' + betAmount );
 
             } else { // You lose
                 textResult = "You lose";
                 imageUrl = "/loser.gif";
 
-                push( '/gameT2E/loser?bet=' + selectedSide + '&betAmount=' + betAmount );
+                push( '/Landing/loser?bet=' + selectedSide + '&betAmount=' + betAmount );
             }
 
         })
@@ -327,13 +327,13 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                 textResult = "You win";
                 imageUrl = "/winner.gif";
 
-                push( '/gameT2E/winner?bet=' + betLongShort + '&betAmount=' + betAmount );
+                push( '/Landing/winner?bet=' + betLongShort + '&betAmount=' + betAmount );
 
             } else { // You lose
                 textResult = "You lose";
                 imageUrl = "/loser.gif";
 
-                push( '/gameT2E/loser?bet=' + betLongShort + '&betAmount=' + betAmount );
+                push( '/Landing/loser?bet=' + betLongShort + '&betAmount=' + betAmount );
             }
 
         })

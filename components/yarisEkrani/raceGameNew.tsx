@@ -144,10 +144,6 @@ export default function RaceNew({betPrice, betLongShort, betAmount}: {betPrice: 
             }
 
 
-            /////////push('/gameT2E/winner');
-
-
-
             /*
             MySwal.fire({
                 //title: "You Bet: " + betLongShort + "<br>Game Result: " + data,

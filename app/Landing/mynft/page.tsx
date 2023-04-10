@@ -515,46 +515,6 @@ export default function Mynft() {
 
 
   /*
-    const updateUserNftWallet = async () => {
-      console.log("updateUserNftWallet");
-
-      const formInput = {
-          method: 'updateNftWallet',
-          API_KEY: process.env.API_KEY,
-          userToken: getCookie("user"),
-          nftWalletAddress: nftWallet,
-      };
-      fetch("/api/user", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formInput),
-      })
-      .then((res) => res.json())
-      .then((data) => {
-          if (data.status) {
-  
-            alert("NFT Wallet Address Updated");
-              //handleClickSucc();
-              //router.push("/gameT2E/login");
-          }
-          else {
-
-            alert("NFT Wallet Address Update Failed");
-              //setErrMsg(data.message);
-              //handleClickErr();
-          }
-          //todo
-          // handleClickSucc();
-      });
-  
-    }
-
-    */
-
-
-
-
-  /*
   useEffect(() => {
     if (wallet) {
       //@ts-ignore

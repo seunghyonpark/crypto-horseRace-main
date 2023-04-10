@@ -274,17 +274,17 @@ export default function MyPage() {
     Banking
     </h4>
     <h4 className=" text-white text-xl font-bold">
-    <Link href={"/gameT2E/deposit"}>
+    <Link href={"/Landing/deposit"}>
     Deposit
     </Link>
     </h4>
     <h4 className=" text-white text-xl font-bold">
-    <Link href={"/gameT2E/deposit"}>
+    <Link href={"/Landing/deposit"}>
     Withdrawal
     </Link>
     </h4>
     <h4 className=" text-white text-xl font-bold ">
-    <Link href={"/gameT2E/betHistory"}>
+    <Link href={"/Landing/betHistory"}>
     History
     </Link>
     </h4>

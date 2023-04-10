@@ -108,9 +108,9 @@ export default function Landing() {
 
       socketIo.on("connect", () => {
 
-        console.log("GameT2E connect");
+        console.log("Landing connect");
 
-        console.log("GameT2E userToken", getCookie('user'));
+        console.log("Landing userToken", getCookie('user'));
 
        
         if (hasCookie('user')) {
@@ -132,8 +132,6 @@ export default function Landing() {
               
               setUsername(user.user.user.username);
 
-              /////console.log("gameT2E user", user.user.user.username);
-
               socketIo.emit("user", user.user.user.username);
 
           })();
@@ -144,7 +142,7 @@ export default function Landing() {
       });
 
       socketIo.on('status', (data: any) => {
-          console.log(socketIo.id + " GameT2E status", data);
+          console.log(socketIo.id + " Landing status", data);
 
           setStatus(data);
 
@@ -159,25 +157,25 @@ export default function Landing() {
 
       /*
       socketIo.on('time', (data: any) => {
-          console.log("GameT2E time", data);
+          console.log("Landing time", data);
           setTime(data)
       });
       */
 
 
       socketIo.on('horse1Orana', (data: any) => {
-          console.log("GameT2E horse1Orana", data);
+          console.log("Landing horse1Orana", data);
           setHorse1Oran(data)
       });
 
       socketIo.on('horse2Orana', (data: any) => {
-          console.log("GameT2E horse2Orana", data);
+          console.log("Landing horse2Orana", data);
           setHorse2Oran(data)
       });
   
       
       socketIo.on('price', (data: any) => {
-          ///console.log(socketIo.id + " GameT2E price", data.price);
+
           setCurrentPrice(data.price);
 
       });
@@ -195,10 +193,7 @@ export default function Landing() {
 
 
       socketIo.on('logout', (data: any) => {
-        console.log(socketIo.id + " GameT2E logout", data);
-
-        ////deleteCookie('user');
-        ///router.push('/gameT2E');
+        console.log(socketIo.id + " Landing logout", data);
 
         
         socketIo.disconnect();
@@ -239,54 +234,6 @@ export default function Landing() {
 
     ////useEffect(() => socketInitializer(), []);
 
-
-    /*
-    const socketInitializer = () => {
-
-        const socket = io(`${SocketEnum.id}`, {
-            transports: ["websocket"],
-        });
-
-        socket.on("connect", () => {
-            console.log("GameT2E connect");
-        });
-
-        socket.on('status', (data: any) => {
-            console.log("GameT2E status", data);
-
-            setStatus(data);
-
-            //setStatus(true);
-        });
-
-        socket.on('time', (data: any) => {
-            console.log("GameT2E time", data);
-            setTime(data)
-        });
-
-        socket.on('horse1Orana', (data: any) => {
-            console.log("GameT2E horse1Orana", data);
-            setHorse1Oran(data)
-        });
-
-        socket.on('horse2Orana', (data: any) => {
-            console.log("GameT2E horse2Orana", data);
-            setHorse2Oran(data)
-        });
-     
-        
-        socket.on('price', (data: any) => {
-            console.log(socket.id + " GameT2E price", data.price);
-            
-            setCurrentPrice(data.price);
-
-        });
-
-
-          
-    }
-
-    */
 
 
 
@@ -790,13 +737,13 @@ startTime=1611619200000
 
             <div className='w-full flex flex-row p-2'>
               <Link
-                href={"https://demo.craclegamez.io/gameT2E"}
+                href={"https://craclegamez.io/gameT2E"}
                 className="m-1 w-full h-10 bg-[#D62339] rounded-lg flex items-center justify-center disabled">
                 <span className="text-gray-200 text-sm ">DEMO</span>
               </Link>
               <button
                 onClick={() => {
-                  getCookie('user') ? router.push('/gameT2E') : router.push('/Landing/login');
+                  getCookie('user') ? router.push('/Landing') : router.push('/Landing/login');
                 }}
                 className=" m-1 w-full h-10 bg-[#05B168] rounded-lg flex items-center justify-center">
                 <span className="text-gray-200 text-sm ">START</span>

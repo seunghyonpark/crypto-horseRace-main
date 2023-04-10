@@ -293,7 +293,7 @@ export default function Navbar() {
                             alt="pfp"
                             className="rounded-md"
                             onClick={() => {
-                                router.push('/gameT2E')
+                                router.push('/Landing')
                             }}
                             />
                         }
@@ -359,24 +359,10 @@ export default function Navbar() {
                                     Login
                                 </Link>
                             }
-                            
-                            {/*
-                                
-                                !user && <Link
-                                    href={"/gameT2E/register"}
-                                    className={`text-[13px] text-[#9293A6]  border-t-2 border-yellow-500 p-1`}
-                                >
-                                    Sign Up
-                                </Link>
-                                
-                        */}
 
 
                             {
                                 user && <button
-                                    //href={"/gameT2E/profile"}
-                                    
-                                    
                                     className={`flex items-center shadow-xl  justify-center rounded-md p-1 gap-2  h-[36px] px-2 text-[#D4D1CB] text-l`}
                                     onClick={() => setShowModal(!showModal)}
                                 >
@@ -432,7 +418,7 @@ export default function Navbar() {
                     <button
                       className="w-full text-white text-center justify-center p-5 items-center bg-red-900 hover:bg-[#141111] flex flex-row"
                       onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/mynft')
+                        setShowModal(false), router.push('/Landing/mynft')
                       }}
                       >
                         <Image
@@ -486,7 +472,7 @@ export default function Navbar() {
                             setShowModal(false);
                             deleteCookie('user');
                             //////getUser();
-                            router.push('/gameT2E');
+                            router.push('/Landing');
                           }}
                       >
                           Log Out
@@ -500,7 +486,7 @@ export default function Navbar() {
                   <button
                     className={` w-full pt-3 items-left text-l text-white`}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/depositRequests')
+                        setShowModal(false), router.push('/Landing/depositRequests')
                     }}
                     >
                       Deposit
@@ -527,23 +513,11 @@ export default function Navbar() {
                   <button
                     className={` disabled pt-1 w-full items-left text-l text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E')
+                        setShowModal(false), router.push('/Landing')
                     }}
                     >
                       Game Ranking
                   </button>
-
-{/*
-                  <button
-                    className={` btn btn-success w-full`}
-                    onClick={() => {
-                      
-                        ///setShowModal(false), deleteCookie('user'), router.push('/gameT2E')
-                    }}
-                    >
-                        How to Bet in T2E Game?
-                  </button>
-                  */}
 
               </div>
 

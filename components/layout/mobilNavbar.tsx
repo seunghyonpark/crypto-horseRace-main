@@ -831,7 +831,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       alt="game"
                       className="rounded-md"
                       onClick={() => {
-                        router.push('/gameT2E')
+                        router.push('/Landing')
                       }}
                     />
                   }
@@ -844,7 +844,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       alt="game"
                       className="rounded-md"
                       onClick={() => {
-                        router.push('/gameT2E')
+                        router.push('/Landing')
                       }}
                     />
                   }
@@ -857,7 +857,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       alt="pfp"
                       className="rounded-md"
                       onClick={() => {
-                        router.push('/gameT2E')
+                        router.push('/Landing')
                       }}
                     />
                   }
@@ -909,7 +909,7 @@ export default function MobilNavbar({user} : {user: any}) {
 
 
                         <Link
-                            href={"/gameT2E/deposit"}
+                            href={"/Landing/deposit"}
                             className={"pr-3 "}
                         >
                             <Image src={"/wallet-icon-white.png"} width={13} height={40} alt="logo" />
@@ -936,19 +936,8 @@ export default function MobilNavbar({user} : {user: any}) {
                         
                     }
 
-                    {/*
-                        
-                        !user && <Link
-                            href={"/gameT2E/register"}
-                            className={`text-[13px] text-[#9293A6]  border-t-2 border-yellow-500 p-1`}
-                        >
-                            Sign Up
-                        </Link>
-                        
-                */}
                      {
                         user && <div
-                            //href={"/gameT2E/profile"}
                             
                             className={`flex items-center shadow-xl  justify-center rounded-md p-1 gap-2  h-[36px] px-2 text-[#D4D1CB] text-[12px]`}
                             onClick={() => setShowModal(!showModal)}
@@ -959,22 +948,6 @@ export default function MobilNavbar({user} : {user: any}) {
 
                         </div>
                     } 
-
-
-
-                    
-                    {/*
-                        user && <button
-                            className={`text-[10px] text-red-500`}
-                            onClick={() => {
-                                deleteCookie('user');
-                                getUser();
-                                router.push('/gameT2E');
-                            }}
-                        >
-                            Log Out
-                        </button>
-                          */}
 
               
                 </div>
@@ -998,7 +971,7 @@ export default function MobilNavbar({user} : {user: any}) {
                   <div
                     className="w-full text-white text-center justify-left pl-3 p-2 items-left bg-red-900 hover:bg-[#141111] flex flex-row"
                     onClick={() => {
-                      setShowModal(false), router.push('/gameT2E/mynft')
+                      setShowModal(false), router.push('/Landing/mynft')
                   }}
                   >
                       <Image
@@ -1103,7 +1076,7 @@ export default function MobilNavbar({user} : {user: any}) {
                   <div
                     className={`w-full pt-1 items-left text-l text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/betHistory')
+                        setShowModal(false), router.push('/Landing/betHistory')
                     }}
                     >
                       Bet History
@@ -1112,23 +1085,12 @@ export default function MobilNavbar({user} : {user: any}) {
                   <div
                     className={` disabled pt-1 w-full items-left text-l text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E')
+                        setShowModal(false), router.push('/Landing')
                     }}
                     >
                       Game Ranking
                   </div>
 
-{/*
-                  <button
-                    className={` btn btn-success w-full`}
-                    onClick={() => {
-                      
-                        ///setShowModal(false), deleteCookie('user'), router.push('/gameT2E')
-                    }}
-                    >
-                        How to Bet in T2E Game?
-                  </button>
-                  */}
 
               </div>
 

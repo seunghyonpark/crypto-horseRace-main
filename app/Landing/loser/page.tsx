@@ -158,7 +158,7 @@ export default function Loser() {
               onClick={() => {
                 ////paraYatir();
 
-                push( '/Landing' );
+                push( '/gameT2E' );
               }}
               className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-full"
             >

@@ -77,6 +77,21 @@ export default function WithdrawRequestList() {
             headerAlign: "center",
             type: "number",
             flex: 0.2,
+            minWidth: 100,
+            /*
+            renderCell(params) {
+                return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+            },
+            */
+
+        },
+        {
+            field: "fee",
+            headerName: "Fee",
+            align: "center",
+            headerAlign: "center",
+            type: "number",
+            flex: 0.2,
             minWidth: 80,
             /*
             renderCell(params) {
@@ -340,6 +355,7 @@ export default function WithdrawRequestList() {
             id: i,
             email1: item.email1,
             requestAmount: item.withdrawAmount,
+            fee: item.withdrawFee,
             type: item.type,
             status: item.status,
             wallet: item.walletTo,

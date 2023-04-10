@@ -644,7 +644,7 @@ export default function Deposit() {
             <button onClick={paraCek} className="btn btn-accent max-w-xs w-full">Withdraw</button>
 
 
-            <Link href={"/gameT2E/withdrawRequests"} className="hover:opacity-50">
+            <Link href={"/Landing/withdrawRequests"} className="hover:opacity-50">
                 List of Withdraw Requests
             </Link>
 

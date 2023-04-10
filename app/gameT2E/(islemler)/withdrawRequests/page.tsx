@@ -85,6 +85,7 @@ export default function WithdrawRequestList() {
             */
 
         },
+        
         {
             field: "status",
             headerName: "Status",
@@ -241,7 +242,11 @@ export default function WithdrawRequestList() {
           setErr(true);
           return;
         }
+        
         setWaiting(true);
+
+        const requestType = "Coin";
+
         const res = await fetch('/api/paymentRequests', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -252,7 +257,8 @@ export default function WithdrawRequestList() {
             email1: user?.email,
             withdrawAmount: miktar,
             walletTo: wallet,
-            type: settings?.requestType
+            /////type: settings?.requestType,
+            type: requestType,
           })
         });
     

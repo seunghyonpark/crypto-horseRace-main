@@ -18,6 +18,10 @@ export const paymentRequestSchema = new Schema({
     type: Number,
     required: true,
   },
+  withdrawFee: {
+    type: Number,
+    required: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -45,13 +49,14 @@ export const paymentRequestSchema = new Schema({
   },
 });
 
-export const PaymentRequest =
-  models.PaymentRequest || model("PaymentRequest", paymentRequestSchema);
+export const PaymentRequest = models.PaymentRequest || model("PaymentRequest", paymentRequestSchema);
+
 
 export const newPaymentRequest = async (
   userToken: string,
   email1: string,
   withdrawAmount: number,
+  withdrawFee: number,
   walletTo: string,
   type: string
 ) => {
@@ -59,6 +64,7 @@ export const newPaymentRequest = async (
     userToken,
     email1,
     withdrawAmount,
+    withdrawFee,
     walletTo,
     type,
   });

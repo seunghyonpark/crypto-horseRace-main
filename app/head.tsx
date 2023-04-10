@@ -9,12 +9,12 @@ export default function Head() {
       <meta property="og:site_name" content="Cracle Games"></meta>
       <meta property="og:title" content="Blockchain Games"></meta>
       <meta property="og:description" content="powered by moonlabs"></meta>
-      <meta property="og:image" content="/craclegames.png"></meta>
+      <meta property="og:image" content="/craclegames.jpg"></meta>
       <meta property="og:image:width" content="1400"></meta>
       <meta property="og:image:height" content="1400"></meta>
 
       <meta name="twitter:card" content="summary_large_image"></meta> 
-      <meta name="twitter:image" content="/craclegames.png"></meta>
+      <meta name="twitter:image" content="/craclegames.jpg"></meta>
   
 
 

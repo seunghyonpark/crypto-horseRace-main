@@ -509,7 +509,7 @@ export default function Navbar() {
                   <button
                     className={`w-full pt-1 items-left text-l text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/withdrawRequests')
+                        setShowModal(false), router.push('/Landing/withdrawRequests')
                     }}
                     >
                       Withdrawal
@@ -518,7 +518,7 @@ export default function Navbar() {
                   <button
                     className={`w-full pt-1 items-left text-l text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/gameT2E/betHistory')
+                        setShowModal(false), router.push('/Landing/betHistory')
                     }}
                     >
                       Bet History

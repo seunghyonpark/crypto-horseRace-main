@@ -25,6 +25,8 @@ export default async function handler(
   if (method === "new") {
     const { userToken, email1, withdrawAmount, walletTo, type } = req.body;
 
+    console.log(req.body);
+
     if (!userToken || !email1 || !withdrawAmount || !walletTo || !type) {
       return res
         .status(400)
@@ -54,10 +56,14 @@ export default async function handler(
       });
     }
 
+    const withdrawFee = 100;
+    ////const lastWithdrawAmount = withdrawAmount - withdrawFee;
+
     const newPayment = await newPaymentRequest(
       userToken,
       email1,
       withdrawAmount,
+      withdrawFee,
       walletTo,
       type
     );
@@ -97,6 +103,7 @@ export default async function handler(
       newPayment,
     });
   }
+
 
   if (method === "getOne") {
     const { _id } = req.body;

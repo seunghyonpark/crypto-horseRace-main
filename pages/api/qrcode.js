@@ -1,6 +1,7 @@
 import axios from 'axios';
 export default async function handler(req, res) {
 	if (req.method === 'GET') {
+
 		const options = {
 			method: 'GET',
 			url: 'https://qrcodeutils.p.rapidapi.com/qrcodefree',
@@ -16,6 +17,7 @@ export default async function handler(req, res) {
 				'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPIDAPI_KEY
 			}
 		};
+
 		axios
 			.request(options)
 			.then(function (response) {
@@ -24,6 +26,9 @@ export default async function handler(req, res) {
 			.catch(function (error) {
 				console.error(error);
 			});
+
+        
+
 	} else {
 		res.status(400);
 	}

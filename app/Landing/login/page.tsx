@@ -22,7 +22,19 @@ export default function LoginPage() {
     const [errMsg, setErrMsg] = useState<String>("");
     const router = useRouter();
 
+
+
+    const onCheckEnter = (e:any) => {
+        if(e.key === 'Enter') {
+          formSubmit();
+        }
+      }
+
+
+
     const formSubmit = () => {
+
+
         let email = (document.getElementById("email") as HTMLInputElement).value;
         let pass = (document.getElementById("password") as HTMLInputElement).value;
         const formInputs = {
@@ -93,7 +105,11 @@ export default function LoginPage() {
                         <div className="absolute left-2/3  w-2 h-2 rounded-full bg-green-500 z-50"></div>
                     </div>
 
-                    <div className="form-control w-full max-w-xs">
+                    <div
+                        className="form-control w-full max-w-xs"
+                        onKeyPress={onCheckEnter}
+                    
+                    >
                         <label className="label">
                             <span className="label-text">ID (Email Address)</span>
                         </label>

@@ -615,6 +615,7 @@ export default function Deposit() {
               </div>
             </div>
 
+
 {/*
 			<button
 				className="mt-6 p-4 bg-active hover:opacity-90 rounded text-primary font-bold inline-flex"
@@ -625,7 +626,8 @@ export default function Deposit() {
 
               */}
 
-{/*
+
+
             <button
               onClick={() => {
                 paraYatir();
@@ -634,7 +636,7 @@ export default function Deposit() {
             >
               Deposit
             </button>
-*/}
+
 
 
 

@@ -102,7 +102,7 @@ export default function WithdrawRequestList() {
         },
         {
             field: "lastAmount",
-            headerName: "Aount",
+            headerName: "Amount",
             align: "center",
             headerAlign: "center",
             type: "number",
@@ -453,7 +453,7 @@ export default function WithdrawRequestList() {
                     />
 
                     <span className="ml-5 mr-5 content-center text-sm text-green-500">
-                        Withdrawal amount is at least 1,000 ~ maximum 10,000 CRA at a time
+                        Withdraw amount is at least 1,000 ~ maximum 10,000 CRA at a time
                     </span>
 
                     <button onClick={paraCek} className="btn btn-accent max-w-xs w-full">Withdraw</button>

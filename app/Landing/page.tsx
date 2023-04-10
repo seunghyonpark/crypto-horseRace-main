@@ -827,7 +827,7 @@ startTime=1611619200000
                 src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
 
               <p className=' text-center w-full text-xs mt-5 '>
-                CRACLE P2E is a race horse game. 
+                CRACLE P2E is a Horse Race Game. 
                 You can earn more $CRA by playing this game.
               </p>
 
@@ -863,7 +863,7 @@ startTime=1611619200000
                 src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
 
               <p className=' text-center w-full text-xs mt-5 '>
-            Play Cracle Poker Games and Earn CRA.
+            Play CRACLE Poker Games and Earn CRA.
 Place a bet with your tokens based on how strong you think your hand is.
             </p>
 

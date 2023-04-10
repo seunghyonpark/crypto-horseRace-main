@@ -236,7 +236,7 @@ export default function Navbar() {
 <div className="flex w-[800px] items-center justify-center p-5">
 
 
-                <div className="flex flex-col gap-3 items-center justify-center w-[200px] absolute top-2 bg-[#000000] rounded-lg h-full z-50 
+                <div className="flex flex-col gap-3 items-center justify-center w-[200px] absolute bg-[#000000] rounded-lg h-full z-50 
                      
                      ">
                     <Link href={"/Landing"} className="hover:opacity-50">
@@ -356,7 +356,7 @@ export default function Navbar() {
                                     href={"/Landing/login"}
                                     className={`text-[13px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                                 >
-                                    Sign In
+                                    Login
                                 </Link>
                             }
                             

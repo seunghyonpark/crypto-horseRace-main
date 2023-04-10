@@ -931,7 +931,7 @@ export default function MobilNavbar({user} : {user: any}) {
                             href={"/Landing/login"}
                             className={`text-[12px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                         >
-                            Sign In
+                            Login
                         </Link>
                         
                     }

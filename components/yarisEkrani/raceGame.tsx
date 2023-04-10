@@ -481,14 +481,17 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                             <div
                                 className={`flex items-center justify-center  bg-black h-[36px] text-center text-xl px-5 text-[#BA8E09] border border-[#BA8E09] `}
                             >
+                                <span className="text-white text-left w-[80px]">ENTRY :</span>
                                 <span className="text-[#ffffff]">
                                     {Number(basePrice).toFixed(2)}
-                                </span>&nbsp;&nbsp;<span>USDT</span>
+                                </span>
+                                &nbsp;&nbsp;<span>USDT</span>
                             </div>
 
                             <div
                                 className={`flex items-center justify-center  bg-black h-[36px] text-center text-xl px-5 text-[#BA8E09] border border-[#BA8E09] `}
                             >
+                                <span className="text-white text-left w-[80px]">NOW :</span>
                                 <span
                                     className="text-[#ffffff]"
                                     style={{

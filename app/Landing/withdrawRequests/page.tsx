@@ -439,6 +439,8 @@ export default function WithdrawRequestList() {
 
                     </div>
 
+                    
+
                     <span className="ml-5 mr-5 content-center text-sm text-green-500">
                         Only BNB Smart Chain (BEP20) Available
                     </span>
@@ -459,6 +461,9 @@ export default function WithdrawRequestList() {
                     <span className="ml-5 mr-5 content-center text-sm text-white">
                         Withdraw Fee 100 CRA
                     </span>
+
+
+
 
 {/*
                     <span className="ml-5 mr-5 content-center text-sm text-white">

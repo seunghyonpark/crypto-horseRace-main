@@ -662,6 +662,8 @@ export default function Deposit() {
               <span className="text-sm text-green-500">{`(${settings?.requestType === 'Matic' ? "BNB" : Coin.name})`}</span>{" "}
 */}
             </h4>
+
+
             <input
               placeholder="Wallet Address"
               onChange={(e) => {
@@ -669,12 +671,24 @@ export default function Deposit() {
               }}
               className="input input-bordered w-full max-w-xs text-gray-800"
             />
+
+
             <input
               type="number"
-              placeholder="Type Amount"
+              placeholder="Minimum 1,000"
               id="withdraw"
               className="input input-bordered w-full max-w-xs text-gray-800"
             />
+
+
+            <span className="ml-5 mr-5 content-center text-sm text-green-500">
+                Withdraw amount is at least <br></br>1,000 ~ maximum 10,000 CRA at a time
+            </span>
+
+            <span className="ml-5 mr-5 content-center text-sm text-white">
+                Withdraw Fee 100 CRA
+            </span>
+ 
 
             <button onClick={paraCek} className="btn btn-accent max-w-xs w-full">Withdraw</button>
 

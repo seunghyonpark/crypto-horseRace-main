@@ -293,7 +293,7 @@ export default function Navbar() {
                             alt="pfp"
                             className="rounded-md"
                             onClick={() => {
-                                router.push('/Landing')
+                                router.push('/gameT2E')
                             }}
                             />
                         }

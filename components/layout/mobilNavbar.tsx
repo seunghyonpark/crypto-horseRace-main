@@ -831,7 +831,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       alt="game"
                       className="rounded-md"
                       onClick={() => {
-                        router.push('/Landing')
+                        router.push('/gameT2E')
                       }}
                     />
                   }
@@ -844,7 +844,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       alt="game"
                       className="rounded-md"
                       onClick={() => {
-                        router.push('/Landing')
+                        router.push('/gameT2E')
                       }}
                     />
                   }
@@ -857,7 +857,7 @@ export default function MobilNavbar({user} : {user: any}) {
                       alt="pfp"
                       className="rounded-md"
                       onClick={() => {
-                        router.push('/Landing')
+                        router.push('/gameT2E')
                       }}
                     />
                   }

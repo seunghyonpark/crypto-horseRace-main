@@ -743,7 +743,7 @@ startTime=1611619200000
               </Link>
               <button
                 onClick={() => {
-                  getCookie('user') ? router.push('/Landing') : router.push('/Landing/login');
+                  getCookie('user') ? router.push('/gameT2E') : router.push('/Landing/login');
                 }}
                 className=" m-1 w-full h-10 bg-[#05B168] rounded-lg flex items-center justify-center">
                 <span className="text-gray-200 text-sm ">START</span>

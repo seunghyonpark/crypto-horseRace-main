@@ -789,7 +789,9 @@ startTime=1611619200000
             </div>
 
             <div className='w-full flex flex-row p-2'>
-              <Link href={"https://demo.craclegamez.io/gameT2E"} className="m-1 w-full h-10 bg-[#D62339] rounded-lg flex items-center justify-center">
+              <Link
+                href={"https://demo.craclegamez.io/gameT2E"}
+                className="m-1 w-full h-10 bg-[#D62339] rounded-lg flex items-center justify-center disabled">
                 <span className="text-gray-200 text-sm ">DEMO</span>
               </Link>
               <button

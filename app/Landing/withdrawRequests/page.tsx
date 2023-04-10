@@ -72,7 +72,7 @@ export default function WithdrawRequestList() {
         },
         {
             field: "requestAmount",
-            headerName: "Amount",
+            headerName: "Request",
             align: "center",
             headerAlign: "center",
             type: "number",
@@ -93,6 +93,21 @@ export default function WithdrawRequestList() {
             type: "number",
             flex: 0.2,
             minWidth: 80,
+            /*
+            renderCell(params) {
+                return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+            },
+            */
+
+        },
+        {
+            field: "lastAmount",
+            headerName: "Aount",
+            align: "center",
+            headerAlign: "center",
+            type: "number",
+            flex: 0.2,
+            minWidth: 120,
             /*
             renderCell(params) {
                 return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
@@ -356,6 +371,7 @@ export default function WithdrawRequestList() {
             email1: item.email1,
             requestAmount: item.withdrawAmount,
             fee: item.withdrawFee,
+            lastAmount: item.withdrawAmount - item.withdrawFee,
             type: item.type,
             status: item.status,
             wallet: item.walletTo,
@@ -422,6 +438,10 @@ export default function WithdrawRequestList() {
                         />
 
                     </div>
+
+                    <span className="ml-5 mr-5 content-center text-sm text-green-500">
+                        Only BNB Smart Chain (BEP20) Available
+                    </span>
 
                     
 

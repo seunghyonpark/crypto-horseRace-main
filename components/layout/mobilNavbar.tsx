@@ -81,7 +81,7 @@ const MySwal = withReactContent(Swal);
 
 
 
-export default function MobilNavbar({user} : {user: any}) {
+export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
   ////console.log("MobilNavbar user", user);
  
@@ -312,7 +312,7 @@ export default function MobilNavbar({user} : {user: any}) {
 
     const router = useRouter();
 
-    const [game, setGame] = useState<any>();
+    ////const [game, setGame] = useState<any>();
 
 
     const [craUsdt, setCraUsdt] = useState<any>();
@@ -381,10 +381,14 @@ export default function MobilNavbar({user} : {user: any}) {
     })
     */
 
+
+    /*
     useEffect(() => {
 
-
       const getGame = async () => {
+
+        console.log("mobiNavbar getGame user.username", user?.username);
+
         const res = await fetch('/api/game', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -402,13 +406,19 @@ export default function MobilNavbar({user} : {user: any}) {
       }
 
 
-      if (hasCookie("user") && user) {
+      if (hasCookie("user") && user?.username) {
               getGame();
       }
 
-      setWallet(user?.nftWalletAddress);
+    }, [user?.username]);
 
-    }, [user]);
+    */
+
+    
+
+    useEffect(() => {
+      setWallet(user?.nftWalletAddress);
+    }, [user?.nftWalletAddress]);
 
     /*
     useEffect(() => {

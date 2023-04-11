@@ -510,14 +510,14 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
 
 
                         <div className="
-                            absolute right-2 md:right-10 flex flex-col text-center items-center justify-center fill-gray-200 text-gray-200
+                            absolute right-3 md:right-10 flex flex-col text-center text-xs items-center justify-center fill-gray-200 text-gray-200
                             "
                             onClick={() => {
                                 setSoundStatus(!soundStatus)
                             }}
                         >
 
-                            {soundStatus ? <> <BsFillVolumeUpFill className="w-8 h-8" /> Sound On </> : <> <BsFillVolumeMuteFill className="w-8 h-8" /> Sound Off</>}
+                            {soundStatus ? <> <BsFillVolumeUpFill className="w-5 h-5" /> Sound On </> : <> <BsFillVolumeMuteFill className="w-5 h-5" /> Sound Off</>}
                         
                         </div>
 

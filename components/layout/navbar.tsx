@@ -170,11 +170,11 @@ export default function Navbar() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputs)
         })
-        const user = await res.json();
+        const data = await res.json();
 
-        console.log("=====navbar user", user);
+        console.log("=====navbar getUser", data);
 
-        setUser(user?.user?.user);
+        setUser(data?.user?.user);
         
     }
 
@@ -187,6 +187,7 @@ export default function Navbar() {
 
     const [showModal, setShowModal] = useState(false);
 
+
     useEffect(() => {
         if (hasCookie("user") && !user) {
             setInterval(() => {
@@ -196,34 +197,47 @@ export default function Navbar() {
     })
 
 
+
+
+
     useEffect(() => {
 
-
         const getGame = async () => {
-          const res = await fetch('/api/game', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              cache: 'no-store',
-              body: JSON.stringify({
-                  method: "getGameByUsername",
-                  API_KEY: process.env.API_KEY,
-                  username: user?.username,
-              })
-          })
-          const data = await res.json()
+
+            const res = await fetch('/api/game', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                cache: 'no-store',
+                body: JSON.stringify({
+                    method: "getGameByUsername",
+                    API_KEY: process.env.API_KEY,
+                    username: user?.username,
+                })
+            })
+            const data = await res.json()
     
-         
-          setGame(data.game)
+            console.log("=====navbar getGame", data);
+    
+            setGame(data.game)
         }
-  
-  
-        if (hasCookie("user") && user) {
+
+
+
+        //setInterval(() => {
+            if (hasCookie("user") && user?.username) {
                 getGame();
-        }
-  
+            }
+        //}, 10 * 1000)
+    }, [user]);
+
+
+
+    useEffect(() => {
         setWallet(user?.nftWalletAddress);
-  
-      }, [user]);
+    }, [user?.nftWalletAddress]);
+
+
+
 
 
     return (
@@ -285,6 +299,32 @@ export default function Navbar() {
                         <button className="hover:opacity-50">
 
 
+                        {user && game?.selectedSide === "Long" &&
+                            <Image
+                            src={'/rabbit1.gif'}
+                            width={35}
+                            height={35}
+                            alt="game"
+                            className="rounded-md"
+                            onClick={() => {
+                                router.push('/gameT2E')
+                            }}
+                            />
+                        }
+
+                        {user && game?.selectedSide === "Short" &&
+                            <Image
+                            src={'/rabbit2.gif'}
+                            width={35}
+                            height={35}
+                            alt="game"
+                            className="rounded-md"
+                            onClick={() => {
+                                router.push('/gameT2E')
+                            }}
+                            />
+                        }
+
                         {user && !game &&
                             <Image
                             src={user?.img}
@@ -297,6 +337,9 @@ export default function Navbar() {
                             }}
                             />
                         }
+
+
+
                         
 
                     {/*
@@ -471,7 +514,7 @@ export default function Navbar() {
                           onClick={() => {
                             setShowModal(false);
                             deleteCookie('user');
-                            //////getUser();
+                            getUser();
                             router.push('/Landing');
                           }}
                       >
@@ -558,7 +601,7 @@ export default function Navbar() {
 
             {/* //? Mobil Navbar */}
             
-            <MobilNavbar user={user} />
+            <MobilNavbar user={user} game={game} />
                         
 
 

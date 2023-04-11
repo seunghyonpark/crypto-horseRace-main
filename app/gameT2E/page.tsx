@@ -717,12 +717,12 @@ useEffect(() => {
                 (
                     <div className='flex flex-col px-10 pb-10 w-full h-full items-center justify-center gap-5 bg-[#0C0E1A] relative'>
                         
-                        
+                        {/*
                         <LatestWinners />
                 
 
                         <Son20Oyun />
-                
+                        */}
 
                         <div className="bg-center bg-no-repeat bg-contain bg-[url(/back.svg)] h-full w-full ">
                             <div className=" flex flex-col items-center justify-center

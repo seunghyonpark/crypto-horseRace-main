@@ -62,22 +62,15 @@ export default function WithdrawRequestList() {
             align: "center",
             headerAlign: "center",
         },
-        {
-            field: "wallet",
-            headerName: "To",
-            flex: 0.1,
-            minWidth: 80,
-            align: "center",
-            headerAlign: "center",
-        },
+
         {
             field: "requestAmount",
             headerName: "Request",
-            align: "center",
+            align: "right",
             headerAlign: "center",
             type: "number",
             flex: 0.2,
-            minWidth: 100,
+            minWidth: 90,
             /*
             renderCell(params) {
                 return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
@@ -88,11 +81,11 @@ export default function WithdrawRequestList() {
         {
             field: "fee",
             headerName: "Fee",
-            align: "center",
+            align: "right",
             headerAlign: "center",
             type: "number",
             flex: 0.2,
-            minWidth: 80,
+            minWidth: 60,
             /*
             renderCell(params) {
                 return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
@@ -103,11 +96,11 @@ export default function WithdrawRequestList() {
         {
             field: "lastAmount",
             headerName: "Amount",
-            align: "center",
+            align: "right",
             headerAlign: "center",
             type: "number",
             flex: 0.2,
-            minWidth: 120,
+            minWidth: 90,
             /*
             renderCell(params) {
                 return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
@@ -122,10 +115,18 @@ export default function WithdrawRequestList() {
             headerAlign: "center",
             description: "This column has a value getter and is not sortable.",
             flex: 0.1,
-            minWidth: 100,
+            minWidth: 80,
             renderCell(params) {
                 return <Chip label={params.value} color={params.value === "Rejected" ? "error" : params.value === "Accepted" ? "info" : params.value === "Waiting" ? "warning" : "success"} />;
             },
+        },
+        {
+            field: "wallet",
+            headerName: "To",
+            flex: 0.1,
+            minWidth: 80,
+            align: "center",
+            headerAlign: "center",
         },
         {
             field: "createdAt",

@@ -914,22 +914,18 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
                     {
                         user && <div
-                            className={`flex items-center justify-center  bg-black rounded-md h-[38px] text-[13px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] `}
+                            className={`flex items-center justify-center  bg-black rounded-md h-[38px] text-[15px] text-center px-2 text-[#BA8E09] border border-[#BA8E09] `}
                         >
 
+                          <Link
+                              href={"/Landing/deposit"}
+                              className={"pr-3 "}
+                          >
+                              <Image src={"/wallet-icon-white.png"} width={15} height={50} alt="logo" />
+                          </Link>
 
-                        <Link
-                            href={"/Landing/deposit"}
-                            className={"pr-3 "}
-                        >
-                            <Image src={"/wallet-icon-white.png"} width={13} height={40} alt="logo" />
-                        </Link>
-                    
+                            {`${Number(user?.deposit).toFixed(0)}`}&nbsp;&nbsp;<span className=" text-red-500">{" "}{Coin.symbol}</span>
 
-                            {`${Number(user?.deposit).toFixed(0)}`}&nbsp;&nbsp;<span className="text-[8px]  text-red-500">{" "}{Coin.symbol}</span>
-
-                           
-                        
                         </div>
 
 
@@ -939,7 +935,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
                     {!user && <Link
                             href={"/Landing/login"}
-                            className={`text-[12px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
+                            className={`text-[15px] text-[#9293A6]  border-t-2 border-green-500 p-2`}
                         >
                             Login
                         </Link>
@@ -949,7 +945,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                      {
                         user && <div
                             
-                            className={`flex items-center shadow-xl  justify-center rounded-md p-1 gap-2  h-[36px] px-2 text-[#D4D1CB] text-[12px]`}
+                            className={`flex items-center shadow-xl  justify-center rounded-md p-1 gap-2  h-[38px] px-2 text-[#D4D1CB] text-[15px]`}
                             onClick={() => setShowModal(!showModal)}
                             
 

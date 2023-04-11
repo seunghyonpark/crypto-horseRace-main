@@ -7,12 +7,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState, useMemo } from 'react';
-import Button from "@mui/material/Button";
+
+import { Button } from "@mui/material";
+import { HelpCenter } from "@mui/icons-material";
 
 
 ////import Wallet from "../../components/Wallet";
 ////import { useListen } from "../../hooks/useListen";
 ////import { useMetamask } from "../../hooks/useMetamask";
+
+
+
 
 import Sidebar from "./Sidebar";
 
@@ -1098,6 +1103,21 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                     >
                       Game Ranking
                   </div>
+
+                  <div
+                    className={` pt-5 w-full items-left text-l text-white `}
+                    onClick={() => {
+                        setShowModal(false), router.push('/gameT2E/help')
+                    }}
+                    >
+                      How to Bet in T2E Game?<br></br>
+
+                      <Button variant="contained" color="primary" startIcon={<HelpCenter />}>
+                        Click Here
+                      </Button>
+
+                  </div>
+
 
 
               </div>

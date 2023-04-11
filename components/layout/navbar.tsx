@@ -9,6 +9,9 @@ import { IUser } from '@/libs/interface/user';
 import MobilNavbar from './mobilNavbar';
 import { useRouter } from 'next/navigation';
 
+import { Button } from "@mui/material";
+import { HelpCenter } from "@mui/icons-material";
+
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -562,6 +565,20 @@ export default function Navbar() {
                     >
                       Game Ranking
                   </button>
+
+                  <div
+                    className={` pt-5 w-full items-left text-l text-white `}
+                    onClick={() => {
+                        setShowModal(false), router.push('/gameT2E/help')
+                    }}
+                    >
+                      How to Bet in T2E Game?<br></br>
+
+                      <Button variant="contained" color="primary" startIcon={<HelpCenter />}>
+                        Click Here
+                      </Button>
+
+                  </div>
 
               </div>
 

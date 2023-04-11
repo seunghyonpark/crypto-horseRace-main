@@ -561,7 +561,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             ////setBetAmount(user?.deposit - 0.00001)
                             setBetAmount(50000)
                         }}
-                        className=' w-7 btn-circle absolute left-10 z-10 bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black text-xs'> Max
+                        className=' w-8 btn-circle absolute left-10 z-10 bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black text-[10px]'> Max
                         </button>}
                     
                     <input onChange={(e: any) => {
@@ -664,7 +664,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
       Save
     </Button>
                   */}
-                  
+
                         <button onClick={() => { setSecilenAt(Horses.Horse2) }}
                             className={`btn border text-center text-xl border-red-500  text-red-500 p-1 bg=[#333541] btn-xl w-28 h-14 ${secilenAt === Horses.Horse2 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
                         >

@@ -479,21 +479,21 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
                         <div className="flex flex-col gap-0 border-red-100">
 
                             <div
-                                className={`flex items-center justify-center  bg-black h-[36px] text-center text-xl px-5 text-[#BA8E09] border border-[#BA8E09] `}
+                                className={`flex items-center justify-center  bg-black h-[36px] text-center text-sm px-5 text-[#BA8E09] border border-[#BA8E09] `}
                             >
-                                <span className="text-white text-left w-[80px]">ENTRY :</span>
-                                <span className="text-[#ffffff]">
+                                <span className="text-white text-left w-[80px] ">ENTRY :</span>
+                                <span className="text-[#ffffff] text-xl">
                                     {Number(basePrice).toFixed(2)}
                                 </span>
                                 &nbsp;&nbsp;<span>USDT</span>
                             </div>
 
                             <div
-                                className={`flex items-center justify-center  bg-black h-[36px] text-center text-xl px-5 text-[#BA8E09] border border-[#BA8E09] `}
+                                className={`flex items-center justify-center  bg-black h-[36px] text-center text-sm px-5 text-[#BA8E09] border border-[#BA8E09] `}
                             >
-                                <span className="text-white text-left w-[80px]">NOW :</span>
+                                <span className="text-white text-left w-[80px] ">NOW :</span>
                                 <span
-                                    className="text-[#ffffff]"
+                                    className="text-[#ffffff] text-xl"
                                     style={{
                                         color: `${ (basePrice - currentPrice) === 0 ? "#ffffff" : (basePrice - currentPrice) > 0 ? "#ff0000" : "#00ff00"}`,
                                     }}

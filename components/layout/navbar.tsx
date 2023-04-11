@@ -250,11 +250,11 @@ export default function Navbar() {
 <div className="flex w-[800px] items-center justify-center p-5">
 
 
-                <div className="flex flex-col gap-3 items-center justify-center w-[200px] absolute bg-[#000000] rounded-lg h-full z-50 
+                <div className="flex flex-col pt-2 gap-3 items-center justify-center w-[200px] absolute bg-[#000000] rounded-lg h-full z-50 
                      
                      ">
                     <Link href={"/Landing"} className="hover:opacity-50">
-                        <Image src={"/cracle_ci.png"} alt="" width={25} height={25} />
+                        <Image src={"/cracle_ci.png"} alt="" width={20} height={20} />
                     </Link>
 
                     {/*
@@ -269,32 +269,33 @@ export default function Navbar() {
                 </div>
 
 
-                <div className="flex flex-col items-center justify-center w-full h-full">
+                <div className="flex flex-col items-center justify-center w-full h-full ">
+                    
+{/*
                     <div className="flex w-full bg-[#000000] text-[11px] h-[30px] relative ">
                         
-
                         <div className="marquee-container relative w-full">
                             <div className="marquee ">
-{/*
+
                                 <span>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet culpa voluptates quis incidunt officiis optio fugiat voluptatum enim aliquid reprehenderit, praesentium repudiandae cum velit quos dicta eum quasi suscipit consectetur.
                                 </span>
-                */}
+                
 
                             </div>
                             <div className="marquee marquee2 ">
 
-{/*                                
+                        
                                 <span>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum perferendis eveniet inventore est velit ad modi ratione repellat doloremque dicta quod asperiores numquam dignissimos quo, reprehenderit ex rem nulla ipsam!
                                 </span>
-*/}
 
                             </div>
                         </div>
                     </div>
+*/}
 
-                    <div className="flex items-center justify-center w-full h-[50px] bg-[#000000] px-3 ">
+                    <div className="flex items-center justify-center w-full h-full bg-[#000000] px-3 ">
                         
                         <button className="hover:opacity-50">
 

@@ -585,21 +585,21 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             setBetAmount(parseInt(betAmount) + 100)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[5px]'>+100</button>
+                          text-[8px]'>+100</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 500)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[5px]'>+500</button>
+                          text-[8px]'>+500</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 1000)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[5px]'>+1000</button>
+                          text-[8px]'>+1000</button>
                 
 
                     <button
@@ -607,14 +607,14 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             setBetAmount(parseInt(betAmount) * 2)
                         }}
                         className=' btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[5px]'>x2</button>
+                          text-[8px]'>x2</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) / 2)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[5px]'>/2</button>
+                          text-[8px]'>/2</button>
                     
             
                 </div>

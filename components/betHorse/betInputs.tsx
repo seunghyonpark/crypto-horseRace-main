@@ -8,6 +8,13 @@ import { FaCoins } from 'react-icons/fa';
 
 import { Stack, Snackbar, Alert } from "@mui/material";
 
+import { Button } from "@mui/material";
+
+import { BikeScooter } from "@mui/icons-material";
+
+
+
+
 //@ts-ignore
 import { io } from "socket.io-client";
 import SocketEnum from '@/libs/enums/socket';
@@ -651,6 +658,13 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             {Horses.Horse1}
 
                         </button>
+
+{/*
+                        <Button variant="contained" color="primary" startIcon={<BikeScooter />}>
+      Save
+    </Button>
+                  */}
+                  
                         <button onClick={() => { setSecilenAt(Horses.Horse2) }}
                             className={`btn border text-center text-xl border-red-500  text-red-500 p-1 bg=[#333541] btn-xl w-28 h-14 ${secilenAt === Horses.Horse2 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
                         >

@@ -592,7 +592,8 @@ export default function Deposit() {
 
           
           {/* //? Matic Deposit  */}
-          <div className="w-full border rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-10">
+          <div className="w-full border rounded-lg flex flex-col items-center justify-top p-2 gap-5 py-10">
+
             <h4 className=" ">
               Deposit <span className="text-sm text-red-500">(CRA)</span>{" "}
             </h4>
@@ -630,7 +631,7 @@ export default function Deposit() {
               */}
 
 
-
+{/*
             <button
               onClick={() => {
                 paraYatir();
@@ -639,18 +640,22 @@ export default function Deposit() {
             >
               Deposit
             </button>
+            */}
+
+            <span className="ml-5 mr-5 content-center text-sm text-green-500">
+              If you send coins to your wallet address, it will be processed automatically.
+            </span>
 
 
-
-
-            <Link href={"/Landing/depositRequests"} className="hover:opacity-50">
+      
+            <Link 
+              href={"/Landing/depositRequests"}
+              className="  hover:opacity-50 ">
                 List of Deposit Requests
             </Link>
+  
 
 
-            <span className="text-l p-5 text-green-500"> 
-            If you send coins to your wallet address, it will be processed automatically.
-            </span>
 
           </div>
 

@@ -725,10 +725,11 @@ useEffect(() => {
                         */}
 
                         <div className="bg-center bg-no-repeat bg-contain bg-[url(/back.svg)] h-full w-full ">
+
                             <div className=" flex flex-col items-center justify-center
-                              md:gap-14 md:py-10 bg-gradient-radial
+                              md:gap-5 md:py-3 bg-gradient-radial
                               from-transparent via-[#0C0E1A] to-transparent bg-blend-difference
-                              h-full md:px-60 mt-5">
+                              h-full md:px-6 mt-2">
                                 {/*
                                 <YuruyenAt time={time} horseSrc={'/at.json'} />
                                 */}
@@ -739,7 +740,7 @@ useEffect(() => {
 
 
 
-<div className='w-full flex justify-center '>
+<div className='w-full flex justify-center  '>
 
 <HighchartsReact
   highcharts = { Highcharts }
@@ -749,7 +750,7 @@ useEffect(() => {
   //containerProps={{ style: { height: "250px", width: "350px" } }}
   //containerProps={{ style: { height: "250px", width: "100%", padding: "1px" } }}
 
-  containerProps = {{ className: 'h-[250px] w-full max-w-[600px] m-0 p-[1px] bg-gray-600 rounded-md ' }}
+  containerProps = {{ className: 'h-[200px] lg:h-[300px] w-full max-w-[650px] m-0 p-[1px] bg-gray-600  ' }}
   //  containerProps = {{ className: 'chartContainer' }}
   immutable = { false }
   allowChartUpdate = { true }
@@ -758,13 +759,11 @@ useEffect(() => {
 </div>
 
 
-
-
                                 <div
-                                    className={`flex items-center justify-center text-l  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] mt-3`}
+                                    className={`  flex items-center justify-center text-l  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] mt-3`}
                                 >
                                    <span className="text-[#ffffff] text-sm">PRICE (ETH):</span>&nbsp;&nbsp;&nbsp;
-                                   <span className="text-sm">{Number(currentPrice).toFixed(2)}&nbsp;&nbsp;&nbsp;</span>
+                                   <span className="text-xl">{Number(currentPrice).toFixed(2)}&nbsp;&nbsp;&nbsp;</span>
                                    <span className="text-[#ffffff] text-sm">USDT</span>
                                 </div>
 

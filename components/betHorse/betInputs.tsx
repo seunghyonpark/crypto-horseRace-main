@@ -543,6 +543,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
     return (
         <>
             <div className='flex flex-col items-center justify-center gap-5 w-full lg:w-2/3 '>
+
                 {/* //? Input amount manuel */}
                 <div className='flex items-center w-full md:w-1/2 relative'>
                     <div className='absolute left-3 z-10'> <FaCoins className='fill-yellow-500' /> </div>
@@ -584,21 +585,21 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             setBetAmount(parseInt(betAmount) + 100)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-xs'>+100</button>
+                          text-[5px]'>+100</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 500)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-xs'>+500</button>
+                          text-[5px]'>+500</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 1000)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-xs'>+1000</button>
+                          text-[5px]'>+1000</button>
                 
 
                     <button
@@ -606,29 +607,31 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             setBetAmount(parseInt(betAmount) * 2)
                         }}
                         className=' btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-xs'>x2</button>
+                          text-[5px]'>x2</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) / 2)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-xs'>/2</button>
+                          text-[5px]'>/2</button>
                     
             
                 </div>
-                
+
+
+
                 {/* //? Horse Select Buttons */}
                 <div className='flex flex-col md:flex-row items-center justify-center w-full md:justify-around gap-3'>
 
                     <button onClick={() => { setSecilenAt(Horses.Horse1) }}
-                        className={`btn hidden md:block border text-center text-xl border-white text-white p-1 bg=[#333541] btn-xl w-80 h-16 ${secilenAt === Horses.Horse1 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
+                        className={`btn hidden md:block border text-center text-xl border-green-500 text-green-500 p-1 bg=[#333541] btn-xl w-80 h-16 ${secilenAt === Horses.Horse1 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
                     >
                         {Horses.Horse1}
                     </button>
 
                     <button onClick={() => { setSecilenAt(Horses.Horse2) }}
-                        className={`btn hidden md:block border text-center text-xl border-white text-white p-1 bg=[#333541] btn-xl w-80 h-16 ${secilenAt === Horses.Horse2 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
+                        className={`btn hidden md:block border text-center text-xl  border-red-500  text-red-500 p-1 bg=[#333541] btn-xl w-80 h-16 ${secilenAt === Horses.Horse2 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
                     >
                         {Horses.Horse2}
                     </button>
@@ -649,7 +652,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
 
                         </button>
                         <button onClick={() => { setSecilenAt(Horses.Horse2) }}
-                            className={`btn border text-center border-red-600 text-xl text-red-600 p-1 bg=[#333541] btn-xl w-28 h-14 ${secilenAt === Horses.Horse2 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
+                            className={`btn border text-center text-xl border-red-500  text-red-500 p-1 bg=[#333541] btn-xl w-28 h-14 ${secilenAt === Horses.Horse2 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
                         >
                             {/*
                             {Horses.Horse2} x {horse2}
@@ -661,29 +664,11 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
 
                     </div>
 
-{/*
-                    <button onClick={() => { setSecilenAt(Horses.Horse3) }}
-                        className={`btn hidden md:block border text-center border-white text-white p-1 btn-circle bg=[#333541] btn-xl w-20 h-20 ${secilenAt === Horses.Horse3 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
-                    >{Horses.Horse3} x{horse3}</button>
-                    <button onClick={() => { setSecilenAt(Horses.Horse4) }}
-                        className={`btn hidden md:block border text-center border-white text-white p-1 btn-circle bg=[#333541] btn-xl w-20 h-20 ${secilenAt === Horses.Horse4 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
-                    >{Horses.Horse4} x{horse4}</button>
-                    <div className="space-x-10 md:hidden">
-                        <button onClick={() => { setSecilenAt(Horses.Horse3) }}
-                            className={`btn border text-center border-white text-white p-1 btn-circle bg=[#333541] btn-xl w-20 h-20 ${secilenAt === Horses.Horse3 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
-                        >{Horses.Horse3} x{horse3}</button>
-                        <button onClick={() => { setSecilenAt(Horses.Horse4) }}
-                            className={`btn border text-center border-white text-white p-1 btn-circle bg=[#333541] btn-xl w-20 h-20 ${secilenAt === Horses.Horse4 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
-                        >{Horses.Horse4} x{horse4}</button>
-                    </div>
-                    <button onClick={() => { setSecilenAt(Horses.Horse5) }}
-                        className={`btn border text-center border-white text-white p-1 btn-circle bg=[#333541] btn-xl w-20 h-20 ${secilenAt === Horses.Horse5 ? "bg=[#333541]" : secilenAt === 0 ? "bg=[#333541]" : "btn-ghost"}`}
-                    >{Horses.Horse5} x{horse5}</button>
-*/}
-
 
                 </div>
 
+
+                
                 
                 <button onClick={placeBet} className='btn btn-success mt-1 w-full'>Place Bet</button>
 

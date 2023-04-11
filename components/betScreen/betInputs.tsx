@@ -168,13 +168,31 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
 
         if (user) {
 
-            /*
-            if (betAmount > user?.deposit) return alert('You dont have enough money to bet this amount');
+            
+            if (betAmount > user?.deposit) {
+              //return alert('You dont have enough money to bet this amount');
 
-            if (betAmount === 0) return alert('You need to enter a bet amount');
+              setErrMsgSnackbar("You don't have enough money to bet this amount");
+              setErr(true);
+              return;
+            }
 
-            if (betAmount < 0) return alert('You cannot bet a negative amount');
-            */
+            if (betAmount === 0) {
+              //return alert('You need to enter a bet amount');
+
+              setErrMsgSnackbar("You need to enter a bet amount");
+              setErr(true);
+              return;
+            }
+
+            if (betAmount < 0) {
+              //return alert('You cannot bet a negative amount');
+
+              setErrMsgSnackbar("You cannot bet a negative amount");
+              setErr(true);
+              return;
+            }
+            
 
             ////if (secilenAt === null) return alert('You need to select long or short to bet');
 

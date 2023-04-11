@@ -578,28 +578,28 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                 </div>
 
                 {/* //? Miktar Selector Buttons */}
-                <div className='grid grid-cols-5 content-center md:flex w-full gap-6 items-center justify-center text-xs text-white'>
+                <div className='grid grid-cols-5 content-center md:flex w-full gap-5 items-center justify-center text-xs text-white border'>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 100)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[8px]'>+100</button>
+                          text-[10px]'>+100</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 500)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[8px]'>+500</button>
+                          text-[10px]'>+500</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) + 1000)
                         }}
                         className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[8px]'>+1000</button>
+                          text-[10px]'>+1000</button>
                 
 
                     <button
@@ -607,13 +607,13 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             setBetAmount(parseInt(betAmount) * 2)
                         }}
                         className=' btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[8px]'>x2</button>
+                          text-[10px]'>x2</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) / 2)
                         }}
-                        className='btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
+                        className='  btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
                           text-[8px]'>/2</button>
                     
             

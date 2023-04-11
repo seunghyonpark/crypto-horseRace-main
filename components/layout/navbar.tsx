@@ -388,7 +388,7 @@ export default function Navbar() {
                                 {Number(user?.deposit).toFixed(0)}
                                 
                                 
-                                &nbsp;<span className="text-[#9293A6]">{" "}{Coin.symbol}</span>
+                                &nbsp;<span className="text-red-500 text-[8px]">{" "}{Coin.symbol}</span>
                                 
 
                             </div>

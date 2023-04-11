@@ -924,7 +924,9 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                               <Image src={"/wallet-icon-white.png"} width={15} height={50} alt="logo" />
                           </Link>
 
-                            {`${Number(user?.deposit).toFixed(0)}`}&nbsp;&nbsp;<span className=" text-red-500">{" "}{Coin.symbol}</span>
+                            {`${Number(user?.deposit).toFixed(0)}`}
+                            
+                            &nbsp;<span className=" text-red-500 text-[8px]">{" "}{Coin.symbol}</span>
 
                         </div>
 

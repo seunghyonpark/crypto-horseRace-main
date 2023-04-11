@@ -580,7 +580,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                         }
                         type="number"
                         placeholder='100~50000 CRA'
-                        className='input w-full pl-20 text-sm' />
+                        className='input w-full pl-20 text-base' />
                     <button onClick={() => { setBetAmount(0) }} className='absolute right-5 z-5 btn btn-xs btn-outline border-gray-700'>Clear</button>
                 </div>
 

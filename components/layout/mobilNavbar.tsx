@@ -919,7 +919,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
                     {
                         user && <div
-                            className={`flex items-center justify-center  bg-black rounded-md h-[38px] text-[15px] text-center px-2 text-[#BA8E09] border border-[#BA8E09] `}
+                            className={`flex items-center justify-center  bg-black rounded-md h-[38px] text-[15px] text-center px-2 ml-2 text-[#BA8E09] border border-[#BA8E09] `}
                         >
 
                           <Link
@@ -1069,7 +1069,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
 
                   <div
-                    className={` w-full pt-3 items-left text-l text-white`}
+                    className={` w-full pt-3 items-left text-base text-white`}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/depositRequests')
                     }}
@@ -1078,7 +1078,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   </div>
 
                   <div
-                    className={`w-full pt-1 items-left text-l text-white `}
+                    className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/withdrawRequests')
                     }}
@@ -1087,7 +1087,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   </div>
 
                   <div
-                    className={`w-full pt-1 items-left text-l text-white `}
+                    className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/betHistory')
                     }}
@@ -1096,7 +1096,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   </div>
 
                   <div
-                    className={` disabled pt-1 w-full items-left text-l text-[#A9A9A9] `}
+                    className={` disabled pt-1 w-full items-left text-base text-[#A9A9A9] `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing')
                     }}
@@ -1105,7 +1105,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   </div>
 
                   <div
-                    className={` pt-5 w-full items-left text-l text-white `}
+                    className={` pt-5 w-full items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/gameT2E/help')
                     }}

@@ -265,7 +265,7 @@ export default function Navbar() {
                     */}
 
                     
-                    <div className="flex w-[250px] items-center justify-center text-white text-l font-bold">
+                    <div className="flex w-[250px] items-center justify-center text-white text-base font-bold">
                         CRACLE X2E
                     </div>
             
@@ -531,7 +531,7 @@ export default function Navbar() {
 
 
                   <button
-                    className={` w-full pt-3 items-left text-l text-white`}
+                    className={` w-full pt-3 items-left text-base text-white`}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/depositRequests')
                     }}
@@ -540,7 +540,7 @@ export default function Navbar() {
                   </button>
 
                   <button
-                    className={`w-full pt-1 items-left text-l text-white `}
+                    className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/withdrawRequests')
                     }}
@@ -549,7 +549,7 @@ export default function Navbar() {
                   </button>
 
                   <button
-                    className={`w-full pt-1 items-left text-l text-white `}
+                    className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/betHistory')
                     }}
@@ -558,7 +558,7 @@ export default function Navbar() {
                   </button>
 
                   <button
-                    className={` disabled pt-1 w-full items-left text-l text-[#A9A9A9]  `}
+                    className={` disabled pt-1 w-full items-left text-base text-[#A9A9A9]  `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing')
                     }}
@@ -567,7 +567,7 @@ export default function Navbar() {
                   </button>
 
                   <div
-                    className={` pt-5 w-full items-left text-l text-white `}
+                    className={` pt-5 w-full items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/gameT2E/help')
                     }}

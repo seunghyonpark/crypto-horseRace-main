@@ -611,7 +611,7 @@ startTime=1611619200000
                     h-full md:px-60 mt-5">
 
                     <div
-                        className={`flex items-center justify-center text-l  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] mt-3`}
+                        className={`flex items-center justify-center text-base  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] mt-3`}
                     >
                         <span className="text-[#ffffff] text-sm">PRICE (CRA):</span>&nbsp;&nbsp;&nbsp;
                         <span className="text-sm">{Number(craUsdt).toFixed(2)}&nbsp;&nbsp;&nbsp;</span>
@@ -652,7 +652,7 @@ startTime=1611619200000
                 Officially Released!
               </div>
 
-              <div className="w-full flex flex-col ml-5 items-left gap-0 text-l text-white">
+              <div className="w-full flex flex-col ml-5 items-left gap-0 text-base text-white">
               A new highly profitable<br></br>
               betting game is<br></br>
               coming to you soon.

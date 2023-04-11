@@ -597,7 +597,7 @@ export default function Deposit() {
               Deposit <span className="text-sm text-red-500">(CRA)</span>{" "}
             </h4>
 
-            <div className='w-full max-w-xs  relative  '>
+            <div className='w-full max-w-xs   '>
               <input
                 ///type="number"
                 //disabled="true"
@@ -610,9 +610,12 @@ export default function Deposit() {
                 }}
                 className="input input-bordered w-full max-w-xs text-gray-800"
               />
-              <div className='absolute right-5 mt-3 z-10 btn btn-xs '>
-                <CC content={wallet} />
-              </div>
+
+            </div>
+
+
+            <div className='w-full flex flex-row items-center justify-center centent-center'>
+                <CC content={user?.walletAddress} />
             </div>
 
 

@@ -272,25 +272,27 @@ export default function DepositRequestList() {
                 
                 <div className="w-full border rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-10">
 
-                <div className='w-full max-w-xs md:w-1/2 relative '>
-                    <input
-                    ///type="number"
-                    //disabled="true"
-                    placeholder="Wallet Address"
-                    id="deposit"
-                    ///value={depositCount}
-                    value={user?.walletAddress}
+                    <div className='w-full max-w-xs md:w-1/2 '>
+                        <input
+                        ///type="number"
+                        //disabled="true"
+                        placeholder="Wallet Address"
+                        id="deposit"
+                        ///value={depositCount}
+                        value={user?.walletAddress}
 
-                    //onChange={(e) => {
-                    //    setDepositCount(e.target.value);
-                    //}}
+                        //onChange={(e) => {
+                        //    setDepositCount(e.target.value);
+                        //}}
 
-                    className="input input-bordered w-full max-w-xs text-gray-800"
+                        className="input input-bordered w-full max-w-xs text-gray-800"
                     />
-                        <div className='absolute right-5 mt-3 z-10 btn btn-xs '>
-                            <CC content={wallet} />
-                        </div>
-                </div>
+
+                    </div>
+
+                    <div className='w-full flex flex-row items-center justify-center centent-center'>
+                        <CC content={user?.walletAddress} />
+                    </div>
 
                     <span className="ml-5 mr-5 content-center text-sm text-green-500">
                     If you send coins to your wallet address, it will be processed automatically.

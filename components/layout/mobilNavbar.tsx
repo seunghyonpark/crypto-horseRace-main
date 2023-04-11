@@ -952,10 +952,9 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                      {
                         user && <div
                             
-                            className={`flex items-center shadow-xl  justify-center rounded-md p-1 gap-2  h-[38px] px-2 text-[#D4D1CB] text-[15px]`}
+                            className={`flex items-center shadow-xl  justify-center rounded-md p-1 gap-2  h-[38px] px-2 text-[#D4D1CB] text-[18px]`}
                             onClick={() => setShowModal(!showModal)}
                             
-
                         >
                           {user?.username}
 

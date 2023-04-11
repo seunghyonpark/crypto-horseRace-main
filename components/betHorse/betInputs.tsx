@@ -614,14 +614,14 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             setBetAmount(parseInt(betAmount) * 2)
                         }}
                         className=' btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[10px]'>x2</button>
+                          text-[13px]'>x2</button>
                     
                     <button
                         onClick={() => {
                             setBetAmount(parseInt(betAmount) / 2)
                         }}
                         className='  btn btn-circle bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black border
-                          text-[8px]'>/2</button>
+                          text-[13px]'>/2</button>
                     
             
                 </div>

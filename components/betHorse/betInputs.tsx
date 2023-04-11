@@ -574,11 +574,11 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                         type="number"
                         placeholder='100~50000 CRA'
                         className='input w-full pl-20 text-sm' />
-                    <button onClick={() => { setBetAmount(0) }} className='absolute right-5 z-10 btn btn-xs btn-outline border-gray-700'>Clear</button>
+                    <button onClick={() => { setBetAmount(0) }} className='absolute right-5 z-5 btn btn-xs btn-outline border-gray-700'>Clear</button>
                 </div>
 
                 {/* //? Miktar Selector Buttons */}
-                <div className='grid grid-cols-5 content-center md:flex w-full gap-5 items-center justify-center text-xs text-white border'>
+                <div className='grid grid-cols-5 content-center md:flex w-full gap-5 items-center justify-center text-xs text-white '>
                     
                     <button
                         onClick={() => {

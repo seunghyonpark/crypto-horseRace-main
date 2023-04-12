@@ -811,6 +811,11 @@ export default function Mynft() {
 }
 
 
+            <div className='mt-5 text-xl text-yellow-400'>
+              Connecting Service will be updated soon!
+            </div>
+
+
             {nfts?.map((asset:any) => (
               <div key={asset.token_uri}>
                 <div>
@@ -839,7 +844,7 @@ export default function Mynft() {
                 */}
                 
 
-                hello....
+      
 
             </div>
 

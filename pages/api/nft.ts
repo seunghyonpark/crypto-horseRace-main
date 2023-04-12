@@ -131,12 +131,12 @@ export default async function handler(
       chain,
     });
   
-    console.log(response.toJSON());
+    ///console.log(response.toJSON());
 
     const nfts = response.toJSON().result;
 
 
-    console.log("nfts", nfts);
+    ///console.log("nfts", nfts);
 
 
     ////setNfts(response.toJSON().result);

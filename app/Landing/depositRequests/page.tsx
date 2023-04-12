@@ -11,6 +11,8 @@ import React, { useEffect, useState } from 'react';
 import { format } from "date-fns";
 import { IUser } from "@/libs/interface/user";
 
+import { Stack, Snackbar, Alert } from "@mui/material";
+
 import { useQRCode } from 'next-qrcode';
 
 
@@ -32,12 +34,20 @@ const Transition = React.forwardRef(function Transition(
 
 
 export default function DepositRequestList() {
+
+
     const [requests, setRequests] = useState<any>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedUser, setSelectedUser] = useState<any>();
 
     const [wallet, setWallet] = useState<any>(null);
     const [user, setUser] = useState<IUser>();
+
+
+    const [succ, setSucc] = React.useState(false);
+    const [err, setErr] = React.useState(false);
+    const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
+    const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
 
 
     const columns: GridColDef[] = [
@@ -268,6 +278,73 @@ export default function DepositRequestList() {
 
     const { Canvas } = useQRCode();
 
+    const handleClickSucc = () => {
+        setSucc(true);
+      };
+    
+      const handleCloseSucc = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+      ) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setSucc(false);
+      };
+    
+      const handleClickErr = () => {
+        setErr(true);
+      };
+    
+      const handleCloseErr = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+      ) => {
+        if (reason === "clickaway") {
+          return;
+        }
+    
+        setErr(false);
+      };
+
+
+
+    const updateWalletAddress = async () => {
+
+
+        console.log("updateWalletAddress");
+    
+        const formInput = {
+            method: 'updateWalletAddress',
+            API_KEY: process.env.API_KEY,
+            userToken: getCookie("user"),
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.user) {
+    
+              getUser();
+    
+              setSucc(data.message);
+              handleClickSucc();
+    
+            } else {
+    
+              setErrMsg(data.message);
+              handleClickErr()
+    
+            }
+    
+        });
+    
+      }
+
 
 
     return (
@@ -421,6 +498,35 @@ export default function DepositRequestList() {
                     </DialogActions>
                 </Dialog>
             )}
+
+
+
+    <Stack spacing={2} sx={{ width: "100%" }}>
+        <Snackbar
+          open={succ}
+          autoHideDuration={6000}
+          onClose={handleCloseSucc}
+        >
+          <Alert
+            onClose={handleCloseSucc}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {successMsgSnackbar}
+          </Alert>
+        </Snackbar>
+        <Snackbar open={err} autoHideDuration={6000} onClose={handleCloseErr}>
+          <Alert
+            onClose={handleCloseErr}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            {errMsgSnackbar}
+          </Alert>
+        </Snackbar>
+      </Stack>
+
+
         </>
     )
 }

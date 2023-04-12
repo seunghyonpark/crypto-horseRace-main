@@ -7,7 +7,9 @@ import Web3 from "web3";
 import abi from "@/public/abi.json";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
 import { Stack, Snackbar, Alert } from "@mui/material";
+
 import Coin from "@/libs/enums/coin.enum";
 import API from "@/libs/enums/API_KEY";
 import { IUser } from "@/libs/interface/user";
@@ -43,10 +45,12 @@ export default function Deposit() {
   const [depositCount, setDepositCount] = useState<any>(0);
   const [metamaskview, setMetamaskView] = useState<boolean>(false);
   const router = useRouter();
+
   const [succ, setSucc] = React.useState(false);
   const [err, setErr] = React.useState(false);
   const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
   const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
+
   const [waiting, setWaiting] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>();
   const [settings, setSettings] = useState<any>();
@@ -858,6 +862,8 @@ export default function Deposit() {
           </Alert>
         </Snackbar>
       </Stack>
+
+
     </>
   )
 }

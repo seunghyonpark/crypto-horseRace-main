@@ -7,6 +7,7 @@ import {
   newUser,
   updateUser,
   updateUserProfileImage,
+  updateUserWalletAddress,
 } from "@/libs/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -220,6 +221,57 @@ export default async function handler(
       return;
     }
     res.status(200).json({ message: "User updated", user: user });
+  }
+
+
+  if (method === "updateWalletAddress") {
+
+    const {
+      userToken,
+    } = req.body;
+
+
+    var depositWallet = "";
+
+
+  /*
+  {"result":"ok","walletaddress":{"walletaddress":"0x52b148e597D131A955B6dE042e75E002bD95B2ED"}}
+  */
+
+
+    const response = await fetch(`http://wallet.treasureverse.io/cracle`);
+
+    
+    
+    if (response.ok) {
+
+      const json = await response.json();
+      
+      console.log("login wallet json",json);
+
+      if (json) {
+        //nftsGlobal.stakingCountGlobal = json.stakingCountGlobal;
+        //nftsGlobal.miningAmountGlobal = json.miningAmountGlobal;
+
+        depositWallet = json.walletaddress;
+
+      }
+
+    } else {
+      console.log("HTTP-Error: " + response.status);
+    }    
+    
+
+    const user = await updateUserWalletAddress(
+      userToken,
+      depositWallet,
+    );
+    
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+    res.status(200).json({ message: "User wallet address updated", user: user });
   }
 
 

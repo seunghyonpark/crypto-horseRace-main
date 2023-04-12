@@ -180,13 +180,35 @@ export const updateUserProfileImage = async (
 ) => {
 
 
-  console.log("updateUserProfileImage userToken: ", userToken);
-  console.log("updateUserProfileImage img: ", img);
+  //console.log("updateUserProfileImage userToken: ", userToken);
+  //console.log("updateUserProfileImage img: ", img);
 
   const updatedUser: IUser = (await User.findOneAndUpdate(
     { userToken: userToken },
     {
       img: img,
+    },
+    { new: true }
+  )) as IUser;
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+  return { success: false, message: "User not found" };
+};
+
+
+export const updateUserWalletAddress = async (
+  userToken: string,
+  walletAddress: string,
+) => {
+
+
+  ///console.log("updateUserWalletAddress userToken: ", userToken);
+
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { userToken: userToken },
+    {
+      walletAddress: walletAddress,
     },
     { new: true }
   )) as IUser;

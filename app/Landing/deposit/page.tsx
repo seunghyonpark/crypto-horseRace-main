@@ -544,6 +544,42 @@ export default function Deposit() {
   */
 
 
+  const updateWalletAddress = async () => {
+
+
+    console.log("updateWalletAddress");
+
+    const formInput = {
+        method: 'updateWalletAddress',
+        API_KEY: process.env.API_KEY,
+        userToken: getCookie("user"),
+    };
+    fetch("/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formInput),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        if (data.user) {
+
+          getUser();
+
+          setSucc(data.message);
+          handleClickSucc();
+
+        } else {
+
+          setErrMsg(data.message);
+          handleClickErr()
+
+        }
+
+    });
+
+  }
+
+
 
 
 
@@ -620,9 +656,12 @@ export default function Deposit() {
                 id="deposit"
                 ///value={depositCount}
                 value={user?.walletAddress}
-                onChange={(e) => {
-                  setDepositCount(e.target.value);
-                }}
+
+
+                //onChange={(e) => {
+                //  setDepositCount(e.target.value);
+                //}}
+
                 className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
               />
 
@@ -633,6 +672,9 @@ export default function Deposit() {
                 className=" w-full "
                 onClick={() => {
                     ///setShowModal(false), router.push('/gameT2E/help')
+
+                    updateWalletAddress()
+
                 }}
                 >
                 Open an Account

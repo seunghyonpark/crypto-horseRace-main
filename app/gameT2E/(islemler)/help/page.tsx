@@ -521,24 +521,30 @@ export default function Help() {
         <div className="p-2 grid grid-cols-1 lg:grid-cols-1 w-full lg:w-2/3 gap-5 ">
 
           {/* //? Matic Deposit  */}
-          <div className="w-full  rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-0">
+          <div className="w-full  rounded-lg flex flex-col items-left justify-left gap-5 py-0">
 
 
+            <div
+                className="max-w-xs w-2/3 text-xl bg-gray-600
+                text-white text-center font-bold py-2 px-4 rounded-md border-2 border-color-white"
+              >
+                HOW TO PLAY
+            </div>
 
             <div className=" text-xl text-gray-100">
-              <span className="text-4xl text-red-500">T2E</span><br></br>
+              <span className="text-4xl text-red-500 font-bold">T2E</span><br></br>
               GAME IS…
             </div>
 
-            <div className=" text-sm text-gray-100">
-            1. Connect the MetaMask Wallet.<br></br>
+            <div className=" text-sm text-gray-200">
+              
+            1. Connect the MetaMask Wallet.<br></br><br></br>
+              
+            2. Enter Betting amount. (Range 200~2,000 cra)<br></br><br></br>
 
-            2. Enter Betting amount.<br></br>
-                (Range 200~2,000 cra)<br></br>
+            3. Select a Long or Short Position.<br></br><br></br>
 
-            3. Select a Long or Short Position.<br></br>
-
-            4. Press the ‘Place Bet’ Button.<br></br>
+            4. Press the ‘Place Bet’ Button.<br></br><br></br>
 
             5. Transfer the Betting money
 

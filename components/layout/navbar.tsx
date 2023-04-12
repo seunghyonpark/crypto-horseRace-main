@@ -536,7 +536,7 @@ export default function Navbar() {
                         setShowModal(false), router.push('/Landing/depositRequests')
                     }}
                     >
-                      Deposit
+                    Deposit
                   </button>
 
                   <button

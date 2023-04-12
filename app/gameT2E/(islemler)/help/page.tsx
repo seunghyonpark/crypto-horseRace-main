@@ -17,7 +17,7 @@ import DomainEnum from "@/libs/enums/domain";
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from "@mui/material";
-import { HelpCenter } from "@mui/icons-material";
+import { HelpCenter, KeyboardBackspace } from "@mui/icons-material";
 
 
 
@@ -569,14 +569,17 @@ export default function Help() {
 
 
 
+
+
             <button
               onClick={() => {
                 ////paraYatir();
                 push( '/gameT2E' );
               }}
-              className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-full"
+              className="max-w-xs w-full text-xl bg-color-black hover:bg-color-red
+               text-white font-bold py-2 px-4 rounded-md border-2 border-color-white"
             >
-              GO BET
+              <KeyboardBackspace/> BACK TO THE GAME
             </button>
 
 

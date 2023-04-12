@@ -28,7 +28,7 @@ export default async function handler(
 
   if (method === "create") {
 
-    const { username, email, pass1, pass2, userToken, walletAddress, nftWalletAddress } =
+    const { username, email, pass1, pass2, userToken, nftWalletAddress } =
       req.body;
 
     if (
@@ -37,7 +37,6 @@ export default async function handler(
       !pass1 ||
       !pass2 ||
       !userToken ||
-      !walletAddress || 
       !nftWalletAddress
     ) {
       res.status(400).json({ status: false, message: "Missing data" });
@@ -61,13 +60,13 @@ export default async function handler(
 
 
 
-    var depositWallet = "";
+    ///var depositWallet = "";
 
-    
+
+    /*
     const response = await fetch(`http://wallet.treasureverse.io/cracle?userid=${email}`);
 
     
-
     if (response.ok) {
 
       const json = await response.json();
@@ -88,6 +87,7 @@ export default async function handler(
     
 
     ////depositWallet = "0x0000000";
+    */
 
 
     const user = await newUser(
@@ -96,7 +96,7 @@ export default async function handler(
       pass1,
       pass2,
       userToken,
-      depositWallet,
+      ///depositWallet,
       nftWalletAddress
     );
 

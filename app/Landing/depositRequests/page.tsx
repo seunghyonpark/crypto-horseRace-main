@@ -2,6 +2,9 @@
 import API from '@/libs/enums/API_KEY';
 import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
+
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+
 import { GridColDef, GridValueGetterParams, DataGrid, GridApi, GridCellValue } from '@mui/x-data-grid';
 import { hasCookie, getCookie } from 'cookies-next';
 import React, { useEffect, useState } from 'react';
@@ -261,6 +264,8 @@ export default function DepositRequestList() {
         }
     })
 
+
+
     return (
         <>
             <div className='flex flex-col p-10 mt-0 text-gray-200'>
@@ -272,27 +277,48 @@ export default function DepositRequestList() {
                 
                 <div className="w-full border rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-10">
 
+
+
                     <div className='w-full max-w-xs md:w-1/2 '>
+
                         <input
-                        ///type="number"
-                        //disabled="true"
-                        placeholder="Wallet Address"
-                        id="deposit"
-                        ///value={depositCount}
-                        value={user?.walletAddress}
+                            ///type="number"
+                            //disabled="true"
+                            placeholder="Wallet Address"
+                            id="deposit"
+                            ///value={depositCount}
+                            value={user?.walletAddress}
 
-                        //onChange={(e) => {
-                        //    setDepositCount(e.target.value);
-                        //}}
+                            //onChange={(e) => {
+                            //    setDepositCount(e.target.value);
+                            //}}
 
-                        className="input input-bordered w-full max-w-xs text-gray-800"
-                    />
+                            className="input input-bordered w-full max-w-xs text-gray-800"
+                        />
+
+
+                        {!user?.walletAddress &&
+
+                            <Button
+                            variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
+                            className=" w-full mt-5 "
+                            onClick={() => {
+                                ///setShowModal(false), router.push('/gameT2E/help')
+                            }}
+                            >
+                            Open an Account
+                            </Button>
+                        
+                        }
 
                     </div>
 
-                    <div className='w-full flex flex-row items-center justify-center centent-center'>
-                        <CC content={user?.walletAddress} />
-                    </div>
+
+                    {user?.walletAddress &&
+                        <div className='w-full flex flex-row items-center justify-center centent-center'>
+                            <CC content={user?.walletAddress}/>
+                        </div>
+                    }
 
                     <span className="ml-5 mr-5 content-center text-sm text-green-500">
                     If you send coins to your wallet address, it will be processed automatically.

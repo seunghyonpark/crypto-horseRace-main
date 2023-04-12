@@ -14,6 +14,9 @@ import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 import Link from 'next/link';
 
+import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField } from '@mui/material';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+
 import axios from 'axios';
 
 import dynamic from "next/dynamic";
@@ -605,19 +608,34 @@ export default function Deposit() {
                 placeholder="Wallet Address"
                 id="deposit"
                 ///value={depositCount}
-                value={user.walletAddress}
+                value={user?.walletAddress}
                 onChange={(e) => {
                   setDepositCount(e.target.value);
                 }}
                 className="input input-bordered w-full max-w-xs text-gray-800"
               />
 
+              {!user?.walletAddress &&
+
+              <Button
+              variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
+              className=" w-full mt-5 "
+              onClick={() => {
+                  ///setShowModal(false), router.push('/gameT2E/help')
+              }}
+              >
+              Open an Account
+              </Button>
+
+              }
+
             </div>
 
-
-            <div className='w-full flex flex-row items-center justify-center centent-center'>
-                <CC content={user?.walletAddress} />
-            </div>
+            {user?.walletAddress &&
+                <div className='w-full flex flex-row items-center justify-center centent-center'>
+                    <CC content={user?.walletAddress}/>
+                </div>
+            }
 
 
 {/*

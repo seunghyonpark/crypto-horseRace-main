@@ -63,12 +63,12 @@ const UserSchema = new Schema({
   },
   walletAddress: {
     type: String,
-    required: true,
+    required: false,
     default: "",
   },
   nftWalletAddress: {
     type: String,
-    required: true,
+    required: false,
     default: "",
   },
   status: {
@@ -85,7 +85,7 @@ export const newUser = async (
   pass1: string,
   pass2: string,
   userToken: string,
-  walletAddress: string,
+  ////walletAddress: string,
   nftWalletAddress: string
 ) => {
   
@@ -101,7 +101,7 @@ export const newUser = async (
     pass1: pass1,
     pass2: pass2,
     userToken: userToken,
-    walletAddress: walletAddress,
+    ////walletAddress: walletAddress,
     nftWalletAddress: nftWalletAddress,
     img: "/profile_default.gif"
   });

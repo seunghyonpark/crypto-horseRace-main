@@ -767,8 +767,10 @@ export default function Mynft() {
 */}
 
 
+<div className='flex flex-row itmes-center justify-center '>
 
-            <div className='flex flex-col p-10 mt-0 text-gray-200'>
+
+            <div className='w-full p-10 mt-0 text-gray-200 lg:w-[800px] itmes-center justify-center '>
 
 
 
@@ -996,7 +998,7 @@ export default function Mynft() {
 
             </div>
 
-        
+</div>
 
             <Stack spacing={2} sx={{ width: "100%" }}>
                 <Snackbar

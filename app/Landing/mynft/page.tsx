@@ -302,36 +302,43 @@ export default function Mynft() {
 
 
     useEffect(() => {
-        setMetaMask(isMetaMaskInstalled());
-        checkAccount();
 
-        const { ethereum }: any = window;
+      
+      setMetaMask(isMetaMaskInstalled());
 
-        if (metamusk == true) {
+      checkAccount();
 
-          ethereum.on("networkChanged", function (networkId: any) {
-            if (networkId == 97) {
-              setNetwork(true);
-            } else {
-              setNetwork(false);
-            }
-          });
-    
-          ethereum.on("accountsChanged", function (accounts: any) {
+      const { ethereum }: any = window;
 
-            console.log("accountsChanged", accounts);
+      if (metamusk == true) {
 
-            if (accounts.length !== 0) {
+        ethereum.on("networkChanged", function (networkId: any) {
 
-              setWallet(accounts[0]);
+          console.log("networkChanged networkId=", networkId);
+          
 
-            } else {
-              setWallet(null);
-            }
-          });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+          if (networkId == 97) {
+            setNetwork(true);
+          } else {
+            setNetwork(false);
+          }
+        });
+  
+        ethereum.on("accountsChanged", function (accounts: any) {
+
+          console.log("accountsChanged", accounts);
+
+          if (accounts.length !== 0) {
+
+            setWallet(accounts[0]);
+
+          } else {
+            setWallet(null);
+          }
+        });
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
   //? METAMASK
@@ -484,7 +491,7 @@ export default function Mynft() {
   }
 
   
-  /********************************************************** 
+
   useEffect(() => {
     if (isMetaMaskInstalled()) {
       wrongWallet();
@@ -496,7 +503,7 @@ export default function Mynft() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  */
+  
 
   
 
@@ -756,8 +763,11 @@ export default function Mynft() {
 </div>
 
 {/* //todo BU KISIMA METAMASK EKLENİCEK */}
+
 {metamusk == true ? (
+
     network == true ? (
+
         wallet ? (
             <Button
               className="w-full text-white text-center justify-center h-500 p-5 items-center bg-[#24252f] hover:bg-[#141111] rounded-md flex flex-col"

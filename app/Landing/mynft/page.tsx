@@ -673,7 +673,7 @@ export default function Mynft() {
     };
     */
 
-    if (nftWallet) {
+    if (nftWallet !== "0x") {
       getNFTs();
     }
 

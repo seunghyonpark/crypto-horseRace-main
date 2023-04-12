@@ -612,14 +612,14 @@ export default function Deposit() {
                 onChange={(e) => {
                   setDepositCount(e.target.value);
                 }}
-                className="input input-bordered w-full max-w-xs text-gray-800"
+                className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
               />
 
               {!user?.walletAddress &&
 
               <Button
               variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
-              className=" w-full mt-5 "
+              className=" w-full "
               onClick={() => {
                   ///setShowModal(false), router.push('/gameT2E/help')
               }}

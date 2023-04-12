@@ -100,6 +100,8 @@ export default async function handler(
 
 
 
+
+
   if (method === "getNftsByWalletAddress") {
     const { walletAddress } = req.body;
     if (!walletAddress) {
@@ -150,50 +152,51 @@ export default async function handler(
     }));
     */
 
-    const list = nfts?.map((asset:any) => {
+
+    var list = new Array();
+
+    
+    nfts?.map((asset:any) => {
       
+      /////console.log("asset.token_uri===", asset.token_uri)
 
-      console.log("asset.token_uri", asset.token_uri)
+      list.push(asset.token_uri);
 
-      /*
-      async () => {
-        const response = await fetch(asset.token_uri);
+      /////const response = await fetch(`http://wallet.treasureverse.io/cracle?userid=${email}`);
 
-        console.log("response", response)
-
-        if (response.ok) {
-
-          const jsonTokenUri = await response.json();
-
-          console.log("jsonTokenUri", jsonTokenUri);
-
-        }
-      }
-      */
-     
-      
-
-
+    
     });
 
-   
+    ///////console.log("list", list);
 
-    /*
+    var data = new Array();
+    
     for(let idx=0; idx < list.length; idx++){
 
-      const response = await fetch(list[idx].token_uri);
+      const response = await fetch(list[idx]);
 
       if (response.ok) {
 
         const jsonTokenUri = await response.json();
 
+        /////console.log("jsonTokenUri image===", jsonTokenUri.image);
+
+
+        const imageUrl = "https://cloudflare-ipfs.com/ipfs/" + jsonTokenUri.image.substring(7, jsonTokenUri.image.length);
+
+        ///////console.log("imageUrl===", imageUrl);
+
+        data.push(imageUrl);
+
       }
 
     }
-    */
+    
+    
 	
 
-    return res.status(200).json({ message: "Success", list });
+    return res.status(200).json({ message: "Success", data });
+    ///return res.status(200).json({ message: "Success", nfts });
  
   }
 

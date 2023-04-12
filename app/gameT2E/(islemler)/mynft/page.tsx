@@ -629,7 +629,7 @@ export default function Mynft() {
               walletAddress: nftWallet,
           })
       })
-      const data = await res.json()
+      const nfts = await res.json()
 
      
       ///setGame(data.game)

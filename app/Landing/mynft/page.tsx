@@ -591,8 +591,11 @@ export default function Mynft() {
       })
       const data = await res.json()
 
+      ////console.log("NFT message", data.message);
+      ////console.log("NFT data", data.data);
      
-      ///setGame(data.game)
+      setNfts(data.data);
+
     }
 
     /*
@@ -811,20 +814,37 @@ export default function Mynft() {
 }
 
 
-            <div className='mt-5 text-xl text-yellow-400'>
+            {!nfts &&
+
+              <div className='mt-5 text-xl text-yellow-400'>
               Connecting Service will be updated soon!
+              </div>
+                
+            } 
+
+
+            <div className="mt-4 grid justify-center gap-5 grid-cols-3 lg:grid-cols-5 ">
+
+              {nfts?.map((asset:any) => (
+
+                <div key={asset}>
+
+                  <Image
+                    src={asset}
+                    alt="nft"
+                    width={100} height={100}  className="rounded-md">
+                    
+                  </Image>
+                </div>
+
+              ))}
+            
             </div>
 
 
-            {nfts?.map((asset:any) => (
-              <div key={asset.token_uri}>
-                <div>
-                 <div>{asset?.token_uri}</div>
 
 
-                </div>
-              </div>
-            ))}
+
 
                 
                 {/*

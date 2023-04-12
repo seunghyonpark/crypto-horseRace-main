@@ -61,6 +61,10 @@ const BetHistorySchema = new Schema({
     type: Number,
     required: true,
   },
+  prizeFee: {
+    type: Number,
+    required: false,
+  },
   depositBefore: {
     type: Number,
     required: true,

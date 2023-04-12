@@ -89,6 +89,18 @@ export default function BetHistoryList() {
             },
             
         },
+        {
+            field: "prizeFee",
+            type: "number",
+            headerName: "Fee",
+            flex: 0.1,
+            minWidth: 50,
+            align: "right",
+            headerAlign: "center",
+            valueFormatter: (params) => {
+                return new Number(params.value).toFixed(0);
+            },
+        },
     
         {
             field: "selectedSide",
@@ -321,6 +333,7 @@ export default function BetHistoryList() {
             basePrice: item.basePrice,
             prizeAmount: item.prizeAmount,
             resultAmount: item.prizeAmount - item.betAmount,
+            prizeFee: item.prizeFee,
             selectedSide: item.selectedSide,
             closePrice: item.closePrice,
             winnerHorse: item.winnerHorse,

@@ -49,6 +49,7 @@ export default function DepositRequestList() {
     const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
     const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
 
+    const [mobileNumber, setMobileNumber] = useState<any>(null);
 
     const columns: GridColDef[] = [
         {
@@ -312,6 +313,12 @@ export default function DepositRequestList() {
 
     const updateWalletAddress = async () => {
 
+        if (!mobileNumber) {
+            setErrMsgSnackbar("Mobile Number is required");
+            handleClickErr();
+
+            return;
+        }
 
         console.log("updateWalletAddress");
     
@@ -331,13 +338,13 @@ export default function DepositRequestList() {
     
               getUser();
     
-              setSucc(data.message);
+              setSuccessMsgSnackbar(data.message);
               handleClickSucc();
     
             } else {
     
-              setErr(data.message);
-              handleClickErr()
+              setErrMsgSnackbar(data.message);
+              handleClickErr();
     
             }
     
@@ -380,16 +387,47 @@ export default function DepositRequestList() {
 
                         {!user?.walletAddress &&
 
+                        <>
+
+                            <div>
+                                <span className="text-sm text-red-500">You need to authorize your phone number.</span>
+
+                               
+                                    <input
+                                        type="number"
+                                        //disabled="true"
+                                        placeholder="Mobile Phone Number"
+                                        id="mobileNumber"
+                                        onChange={(e) => {
+                                            setMobileNumber(e.target.value);
+                                        }}
+                                        className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
+                                    />
+
+                                    <Button
+                                        variant="contained" color="primary" 
+                                        className=" w-full "
+                                        onClick={() => {
+                                            ///updateWalletAddress();
+                                        }}
+                                    >
+                                        Send Code
+                                    </Button>
+                                
+
+                            </div>
+
                             <Button
-                            variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
-                            className=" w-full "
-                            onClick={() => {
-                                updateWalletAddress();
-                            }}
+                                variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
+                                className=" w-full "
+                                onClick={() => {
+                                    updateWalletAddress();
+                                }}
                             >
-                            Open an Account
+                                Open an Account
                             </Button>
-                        
+                        </>
+
                         }
 
                     </div>

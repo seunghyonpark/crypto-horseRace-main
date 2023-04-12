@@ -569,12 +569,12 @@ export default function Deposit() {
 
           getUser();
 
-          setSucc(data.message);
+          setSuccessMsgSnackbar(data.message);
           handleClickSucc();
 
         } else {
 
-          setErr(data.message);
+          setErrMsgSnackbar(data.message);
           handleClickErr()
 
         }

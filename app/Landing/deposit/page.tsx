@@ -574,7 +574,7 @@ export default function Deposit() {
 
         } else {
 
-          setErrMsg(data.message);
+          setErr(data.message);
           handleClickErr()
 
         }

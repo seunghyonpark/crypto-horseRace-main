@@ -336,7 +336,7 @@ export default function DepositRequestList() {
     
             } else {
     
-              setErrMsg(data.message);
+              setErr(data.message);
               handleClickErr()
     
             }
@@ -384,7 +384,7 @@ export default function DepositRequestList() {
                             variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
                             className=" w-full "
                             onClick={() => {
-                                ///setShowModal(false), router.push('/gameT2E/help')
+                                updateWalletAddress();
                             }}
                             >
                             Open an Account

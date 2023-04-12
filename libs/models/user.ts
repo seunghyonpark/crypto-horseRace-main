@@ -136,6 +136,7 @@ export const getAllUsers = async () => {
   }
 };
 
+
 export const updateUser = async (
   userToken: string,
   username: string,
@@ -170,6 +171,31 @@ export const updateUser = async (
   }
   return { success: false, message: "User not found" };
 };
+
+
+
+export const updateUserProfileImage = async (
+  userToken: string,
+  img: string,
+) => {
+
+
+  console.log("updateUserProfileImage userToken: ", userToken);
+  console.log("updateUserProfileImage img: ", img);
+
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { userToken: userToken },
+    {
+      img: img,
+    },
+    { new: true }
+  )) as IUser;
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+  return { success: false, message: "User not found" };
+};
+
 
 export const deleteUser = async (userToken: string) => {
   const pasifUser: IUser = (await User.findOneAndUpdate(

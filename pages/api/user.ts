@@ -6,6 +6,7 @@ import {
   loginUser,
   newUser,
   updateUser,
+  updateUserProfileImage,
 } from "@/libs/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -162,7 +163,10 @@ export default async function handler(
     res.status(200).json({ message: "Users found", users: users });
   }
 
+
+
   if (method === "update") {
+
     const {
       userToken,
       username,
@@ -176,6 +180,7 @@ export default async function handler(
       maticBalance,
       walletAddress,
     } = req.body;
+
     const user = await updateUser(
       userToken,
       username,
@@ -189,6 +194,7 @@ export default async function handler(
       maticBalance,
       walletAddress
     );
+
     if (!user.success) {
       res.status(400).json({ message: user.message });
       return;
@@ -197,33 +203,18 @@ export default async function handler(
   }
 
 
-  if (method === "update") {
+  if (method === "updateProfileImage") {
+
     const {
       userToken,
-      username,
-      email,
-      pass1,
-      pass2,
-      deposit,
-      img,
-      admin,
-      newPassToken,
-      maticBalance,
-      walletAddress,
+      img
     } = req.body;
-    const user = await updateUser(
+
+    const user = await updateUserProfileImage(
       userToken,
-      username,
-      email,
-      pass1,
-      pass2,
-      deposit,
       img,
-      admin,
-      newPassToken,
-      maticBalance,
-      walletAddress
     );
+    
     if (!user.success) {
       res.status(400).json({ message: user.message });
       return;

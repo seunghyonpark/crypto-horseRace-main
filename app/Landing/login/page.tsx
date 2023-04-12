@@ -50,6 +50,7 @@ export default function LoginPage() {
         })
             .then((res) => res.json())
             .then((data) => {
+
                 if (!data.user) {
                     setErrMsg(data.message);
                     handleClickErr()
@@ -59,6 +60,7 @@ export default function LoginPage() {
                     setCookie("username", data.user.user.username);
                     router.push("/Landing");
                 }
+                
             });
     };
     

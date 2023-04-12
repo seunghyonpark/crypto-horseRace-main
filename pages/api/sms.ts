@@ -23,6 +23,7 @@ export default async function handler(
     return;
   }
 
+  
 
   if (method === "setNftWalletAddress") {
     const { userToken, walletAddress } = req.body;
@@ -101,6 +102,7 @@ export default async function handler(
 
 
   if (method === "getNftsByWalletAddress") {
+    
     const { walletAddress } = req.body;
     if (!walletAddress) {
       res.status(400).json({ message: "Bad Request" });
@@ -189,13 +191,68 @@ export default async function handler(
       }
 
     }
-    
-    
 	
 
     return res.status(200).json({ message: "Success", data });
     ///return res.status(200).json({ message: "Success", nfts });
  
+  }
+
+
+
+
+  if (method === "sendAuthCode") {
+
+    const {
+      userToken,
+      mobileNumber,
+    } = req.body;
+
+    if (!userToken || !mobileNumber) {
+      res.status(400).json({ message: "Bad Request" });
+      return;
+    }
+
+
+
+  /*
+{"result":"ok","mobile_auth_code":79590}
+  */
+
+
+    let authCode = "";
+
+    const response = await fetch(`http://wallet.treasureverse.io/cracle_sms?mobile=${mobileNumber}`);
+
+  
+    if (response.ok) {
+
+      const json = await response.json();
+
+      if (json) {
+
+        authCode = json.mobile_auth_code;
+
+      }
+
+    } else {
+      console.log("HTTP-Error: " + response.status);
+    }    
+    
+
+    /*
+    const user = await updateUserWalletAddress(
+      userToken,
+      authCode,
+    );
+    
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+    */
+
+    res.status(200).json({ message: "Send Auth Code", data: authCode });
   }
 
 

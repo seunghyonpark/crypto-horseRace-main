@@ -125,9 +125,6 @@ export default async function handler(
       return;
     }
 
-
-
-
     res.status(200).json({ message: "User logged in", user: user });
 
   }
@@ -228,6 +225,7 @@ export default async function handler(
 
     const {
       userToken,
+      authCode,
     } = req.body;
 
 

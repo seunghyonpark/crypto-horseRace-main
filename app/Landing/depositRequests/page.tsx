@@ -50,6 +50,9 @@ export default function DepositRequestList() {
     const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
 
     const [mobileNumber, setMobileNumber] = useState<any>(null);
+    const [authCodeState, setAuthCodeState] = React.useState(false);
+    const [authCode, setAuthCode] = useState<any>(null);
+
 
     const columns: GridColDef[] = [
         {
@@ -311,6 +314,48 @@ export default function DepositRequestList() {
 
 
 
+      const sendAuthCode = async () => {
+
+        if (!mobileNumber) {
+            setErrMsgSnackbar("Mobile Number is required");
+            handleClickErr();
+
+            return;
+        }
+    
+        const formInput = {
+            method: 'sendAuthCode',
+            API_KEY: process.env.API_KEY,
+            userToken: getCookie("user"),
+            mobileNumber: mobileNumber,
+        };
+        fetch("/api/sms", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.data) {
+    
+              setSuccessMsgSnackbar(data.message);
+              handleClickSucc();
+
+                setAuthCodeState(true);
+    
+            } else {
+    
+              setErrMsgSnackbar(data.message);
+              handleClickErr();
+    
+            }
+    
+        });
+    
+      }
+
+
+
     const updateWalletAddress = async () => {
 
         if (!mobileNumber) {
@@ -320,12 +365,18 @@ export default function DepositRequestList() {
             return;
         }
 
-        console.log("updateWalletAddress");
+        if (!authCode) {
+            setErrMsgSnackbar("Auth Code is required");
+            handleClickErr();
+
+            return;
+        }
     
         const formInput = {
             method: 'updateWalletAddress',
             API_KEY: process.env.API_KEY,
             userToken: getCookie("user"),
+            authCode: authCode,
         };
         fetch("/api/user", {
             method: "POST",
@@ -369,9 +420,9 @@ export default function DepositRequestList() {
 
                     <div className='w-full max-w-xs md:w-1/2 '>
 
+
                         <input
                             ///type="number"
-                            //disabled="true"
                             placeholder="Wallet Address"
                             id="deposit"
                             ///value={depositCount}
@@ -381,13 +432,11 @@ export default function DepositRequestList() {
                             //    setDepositCount(e.target.value);
                             //}}
 
-                            className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
+                            className="input input-bordered w-full max-w-xs text-gray-800 text-xl font-bold mb-5"
                         />
 
 
                         {!user?.walletAddress &&
-
-                        <>
 
                             <div>
                                 <span className="text-sm text-red-500">You need to authorize your phone number.</span>
@@ -404,29 +453,35 @@ export default function DepositRequestList() {
                                         className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
                                     />
 
-                                    <Button
-                                        variant="contained" color="primary" 
-                                        className=" w-full "
-                                        onClick={() => {
-                                            ///updateWalletAddress();
-                                        }}
-                                    >
-                                        Send Code
-                                    </Button>
-                                
+                                    {authCodeState ?
+
+                                        <div className=" w-full flex flex-row ">
+                                            <input type="number" placeholder="Auth Code" id="authCode" onChange={(e) => {
+                                                setAuthCode(e.target.value);
+                                            }} className="input input-bordered w-full max-w-xs text-gray-800 mb-5" />
+
+                                            <Button variant="contained" color="primary" className=" w-full " onClick={() => {
+                                                updateWalletAddress();
+                                            }}> Verify Auth Code </Button>
+                                        </div>
+
+                                        :
+                                    
+                                        <Button
+                                            variant="contained" color="primary" 
+                                            className=" w-full "
+                                            onClick={() => {
+                                                sendAuthCode();
+
+                                            }}
+                                        >
+                                            Send Auth Code
+                                        </Button>
+
+                                    } 
 
                             </div>
 
-                            <Button
-                                variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
-                                className=" w-full "
-                                onClick={() => {
-                                    updateWalletAddress();
-                                }}
-                            >
-                                Open an Account
-                            </Button>
-                        </>
 
                         }
 

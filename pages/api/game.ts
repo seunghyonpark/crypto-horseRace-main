@@ -41,12 +41,6 @@ export default async function handler(
       return;
     }
 
-    console.log("userToken", userToken);
-    console.log("username", username);
-    console.log("img", img);
-    console.log("betAmount", betAmount);
-    console.log("selectedSide", selectedSide);
-
     const addedGame = await newGame(
       userToken,
       username,

@@ -550,13 +550,12 @@ export default function Help() {
 
             </div>
 
-            <div className="mt-5 text-xl text-yellow-400">
+            <div className="mt-5 text-xl font-bold text-yellow-400">
               CAUTION
             </div>
 
             <div className=" text-sm text-yellow-400">
-            1. After press the ‘Place Bet’ button, <br></br>
-              you should transfer CRA token within 10 sec. <br></br>
+            1. After press the ‘Place Bet’ button, you should transfer CRA token within 10 sec. <br></br>
 
             2. Refund is not possible if time is exceeded.<br></br>
 

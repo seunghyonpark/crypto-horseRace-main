@@ -404,7 +404,7 @@ export default function Navbar() {
                             }
 
                             {    
-                                !waiting && !user && <Link
+                                !user && <Link
                                     href={"/Landing/login"}
                                     className={`text-[13px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                                 >
@@ -412,13 +412,13 @@ export default function Navbar() {
                                 </Link>
                             }
 
-                            {
+                            {/*
                                 waiting && <div
                                     className="flex flex-row items-center justify-center  bg-black rounded-md h-[36px] text-center px-2 text-[#BA8E09] border border-[#BA8E09] ">
                                     Loading Your Profile...
                                     </div>
 
-                            }
+                        */}
 
 
                             {

@@ -25,6 +25,7 @@ const nextConfig = {
       "ipfs.moralis.io",
       "ipfs.infura.io",
       "qrcodeutils.p.rapidapi.com",
+      "cloudflare-ipfs.com",
     ],
   },
 

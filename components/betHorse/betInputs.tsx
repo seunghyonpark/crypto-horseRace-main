@@ -221,7 +221,8 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                 return;
             }
 
-            if (betAmount < 100) {
+            /////if (betAmount < 100) {
+              if (betAmount < 1) {
                 //alert("You can't bet less than 100");
                 setErrMsgSnackbar("You can't bet less than 100");
                 setErr(true);
@@ -579,7 +580,8 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                           betAmount === 0 ? '' : betAmount
                         }
                         type="number"
-                        placeholder='100~50000 CRA'
+                        /////placeholder='100~50000 CRA'
+                        placeholder='1~50000 CRA'
                         className='input w-full pl-20 text-base' />
                     <button onClick={() => { setBetAmount(0) }} className='absolute right-5 z-5 btn btn-xs btn-outline border-gray-700'>Clear</button>
                 </div>

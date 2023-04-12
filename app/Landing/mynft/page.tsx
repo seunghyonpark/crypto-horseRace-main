@@ -27,6 +27,8 @@ import { EvmChain } from "@moralisweb3/common-evm-utils";
 import { updateNftWalletAddress } from '@/libs/models/user';
 
 
+
+
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
         children: React.ReactElement<any, any>;
@@ -64,6 +66,8 @@ export default function Mynft() {
     const [selectedPunk, setSelectedPunk] = useState(0);
 
     const [nfts, setNfts] = useState<any>();
+
+    const [waiting, setWaiting] = useState<boolean>(false);
 
     const columns: GridColDef[] = [
         {
@@ -579,6 +583,9 @@ export default function Mynft() {
 
 
     const getNFTs = async () => {
+
+      setWaiting(true);
+
       const res = await fetch('/api/nft', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -595,6 +602,8 @@ export default function Mynft() {
       ////console.log("NFT data", data.data);
      
       setNfts(data.data);
+
+      setWaiting(false);
 
     }
 
@@ -821,6 +830,37 @@ export default function Mynft() {
               </div>
                 
             } 
+
+
+
+{waiting ? (
+  
+      <>
+        <div
+          className="flex mt-10 min-w-full min-h-full justify-center items-center
+            text-white text-2xl font-bold"
+        >
+          Loading NFTs ...
+
+
+        </div>
+        <div
+        className="flex mt-5 min-w-full min-h-full justify-center items-center
+          text-white text-2xl font-bold"
+      >
+
+        <Image
+          src="/rabbit_Loading.gif"
+          width={100}
+          height={100}
+          alt="Metamask"
+        />
+
+      </div>
+        </>
+
+      ) : null}
+
 
 
             <div className="mt-4 grid justify-center gap-5 grid-cols-3 lg:grid-cols-5 ">

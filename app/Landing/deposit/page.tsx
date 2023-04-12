@@ -14,6 +14,8 @@ import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 import Link from 'next/link';
 
+import { useQRCode } from 'next-qrcode';
+
 import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField } from '@mui/material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
@@ -53,6 +55,10 @@ export default function Deposit() {
 
   const [input, setInput] = useState(null);
 	const [response, setResponse] = useState(null);
+
+
+  const { Canvas } = useQRCode();
+
 
   const getUser = async () => {
     const inputs = {
@@ -524,6 +530,7 @@ export default function Deposit() {
 	/**
 	 * Fetches QR Code of the text input
 	 */
+  /*
 	const getQrcode = async () => {
 		try {
 			const res = await axios.get('api/qrcode/', {
@@ -534,6 +541,10 @@ export default function Deposit() {
 			console.log(error);
 		}
 	};
+  */
+
+
+
 
 
   return (
@@ -617,24 +628,42 @@ export default function Deposit() {
 
               {!user?.walletAddress &&
 
-              <Button
-              variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
-              className=" w-full "
-              onClick={() => {
-                  ///setShowModal(false), router.push('/gameT2E/help')
-              }}
-              >
-              Open an Account
-              </Button>
+                <Button
+                variant="contained" color="primary" startIcon={<AccountBalanceIcon />}
+                className=" w-full "
+                onClick={() => {
+                    ///setShowModal(false), router.push('/gameT2E/help')
+                }}
+                >
+                Open an Account
+                </Button>
 
               }
 
             </div>
 
             {user?.walletAddress &&
-                <div className='w-full flex flex-row items-center justify-center centent-center'>
-                    <CC content={user?.walletAddress}/>
-                </div>
+                <>
+                    <div className='w-full flex flex-row items-center justify-center centent-center'>
+                        <CC content={user?.walletAddress}/>
+                    </div>
+
+                    <div className='w-full flex flex-row items-center justify-center centent-center'>
+                        <Canvas
+                        text={user?.walletAddress}
+                        options={{
+                        level: 'M',
+                        margin: 3,
+                        scale: 4,
+                        width: 200,
+                        color: {
+                            dark: '#010599FF',
+                            light: '#FFBF60FF',
+                        },
+                        }}
+                        />
+                    </div>
+                </>
             }
 
 
@@ -660,7 +689,7 @@ export default function Deposit() {
             </button>
             */}
 
-            <span className="ml-5 mr-5 content-center text-sm text-green-500">
+            <span className="ml-5 mr-5 content-center text-sm text-green-500 text-center">
               If you send coins to your wallet address, it will be processed automatically.
             </span>
 

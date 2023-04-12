@@ -11,6 +11,8 @@ import React, { useEffect, useState } from 'react';
 import { format } from "date-fns";
 import { IUser } from "@/libs/interface/user";
 
+import { useQRCode } from 'next-qrcode';
+
 
 import dynamic from "next/dynamic";
 
@@ -146,7 +148,7 @@ export default function DepositRequestList() {
             _id: selectedUser.kayitId,
             userToken: selectedUser.userToken,
             txHash: hash,
-            status: hash.length > 3 && isPay ? "Accepted and Paid" : isPay ? "Accepted" : "Waiting",
+            status: hash?.length > 3 && isPay ? "Accepted and Paid" : isPay ? "Accepted" : "Waiting",
             gonderildi: isPay,
             API_KEY: process.env.API_KEY,
         }
@@ -248,7 +250,7 @@ export default function DepositRequestList() {
         
     }, [user])
 
-    const rows = requests.map((item: any, i: number) => {
+    const rows = requests?.map((item: any, i: number) => {
         return {
             kayitId: item._id,
             id: i,
@@ -263,6 +265,8 @@ export default function DepositRequestList() {
             gonderildi: item.gonderildi,
         }
     })
+
+    const { Canvas } = useQRCode();
 
 
 
@@ -315,9 +319,27 @@ export default function DepositRequestList() {
 
 
                     {user?.walletAddress &&
-                        <div className='w-full flex flex-row items-center justify-center centent-center'>
-                            <CC content={user?.walletAddress}/>
-                        </div>
+                        <>
+                            <div className='w-full flex flex-row items-center justify-center centent-center'>
+                                <CC content={user?.walletAddress}/>
+                            </div>
+
+                            <div className='w-full flex flex-row items-center justify-center centent-center'>
+                                <Canvas
+                                text={user?.walletAddress}
+                                options={{
+                                level: 'M',
+                                margin: 3,
+                                scale: 4,
+                                width: 200,
+                                color: {
+                                    dark: '#010599FF',
+                                    light: '#FFBF60FF',
+                                },
+                                }}
+                                />
+                            </div>
+                        </>
                     }
 
                     <span className="ml-5 mr-5 content-center text-sm text-green-500">

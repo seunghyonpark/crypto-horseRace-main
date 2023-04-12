@@ -221,12 +221,29 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
 
         });
 
+        socket.on("prizeAmount", (data: any) => {
+
+            if (parseInt(data) > 0) { // You win
+
+                push( '/Landing/winner?bet=' + selectedSide + '&betAmount=' + betAmount );
+
+            } else { // You lose
+
+                push( '/Landing/loser?bet=' + selectedSide + '&betAmount=' + betAmount );
+            }
+
+        });
+
+
+
 
         socket.on("winner", (data: any) => {
             console.log("raceGame winner", data);
 
             setWinner(data);
 
+
+            /*
             let textResult = "";
             let imageUrl = "";
 
@@ -242,6 +259,7 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
 
                 push( '/Landing/loser?bet=' + selectedSide + '&betAmount=' + betAmount );
             }
+            */
 
         })
 

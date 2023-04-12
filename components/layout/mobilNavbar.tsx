@@ -312,6 +312,8 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
     const [settings, setSettings] = useState<any>()
     */
 
+  
+
 
     const [wallet, setWallet] = useState<any>(null);
 

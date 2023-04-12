@@ -42,6 +42,8 @@ export default function Navbar() {
 
     const [craUsdt, setCraUsdt] = useState<any>();
 
+    const [waiting, setWaiting] = useState<boolean>(true);
+
 
 
     useEffect(() => socketInitializer(), []);
@@ -163,6 +165,7 @@ export default function Navbar() {
 
 
     const getUser = async () => {
+
         const inputs = {
             method: 'getOne',
             API_KEY: process.env.API_KEY,
@@ -178,6 +181,8 @@ export default function Navbar() {
         console.log("=====navbar getUser", data);
 
         setUser(data?.user?.user);
+
+        setWaiting(false);
         
     }
 
@@ -399,12 +404,20 @@ export default function Navbar() {
                             }
 
                             {    
-                                !user && <Link
+                                !waiting && !user && <Link
                                     href={"/Landing/login"}
                                     className={`text-[13px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                                 >
                                     Login
                                 </Link>
+                            }
+
+                            {
+                                waiting && <div
+                                    className="flex flex-row items-center justify-center  bg-black rounded-md h-[36px] text-center px-2 text-[#BA8E09] border border-[#BA8E09] ">
+                                    Loading Your Profile...
+                                    </div>
+
                             }
 
 

@@ -1067,14 +1067,14 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   </div>
 
 
-                  <button
-                    className={` w-full pt-3 items-left text-base text-white`}
+                  <div
+                    className={` w-full pt-3 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/depositRequests')
                     }}
                     >
                      Deposit
-                  </button>
+                  </div>
 
                   <div
                     className={`w-full pt-1 items-left text-base text-white `}

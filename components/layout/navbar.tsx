@@ -530,41 +530,41 @@ export default function Navbar() {
                   </div>
 
 
-                  <button
+                  <div
                     className={` w-full pt-3 items-left text-base text-white`}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/depositRequests')
                     }}
                     >
                     Deposit
-                  </button>
+                  </div>
 
-                  <button
+                  <div
                     className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/withdrawRequests')
                     }}
                     >
                       Withdrawal
-                  </button>
+                  </div>
 
-                  <button
+                  <div
                     className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing/betHistory')
                     }}
                     >
                       Bet History
-                  </button>
+                  </div>
 
-                  <button
+                  <div
                     className={` disabled pt-1 w-full items-left text-base text-[#A9A9A9]  `}
                     onClick={() => {
                         setShowModal(false), router.push('/Landing')
                     }}
                     >
                       Game Ranking
-                  </button>
+                  </div>
 
                   <div
                     className={` pt-5 w-full items-left text-base text-white `}

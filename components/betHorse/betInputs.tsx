@@ -229,16 +229,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                 return;
             }
 
-    
-
-
-            console.log("user img", user?.img);
-            console.log("user username", user?.username);
-            console.log("betAmount", betAmount);
-            console.log("secilenAt", secilenAt);
-
-            //user.username = "creath.park@gmail.com";
-
+  
            
             
             const formInputs = {
@@ -554,7 +545,9 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
 
                 {/* //? Input amount manuel */}
                 <div className='flex items-center w-full md:w-1/2 relative'>
-                    <div className='absolute left-3 z-10'> <FaCoins className='fill-yellow-500' /> </div>
+
+
+                    <div className='absolute left-3 z-5'> <FaCoins className='fill-yellow-500' /> </div>
 
 
                     {user && <button
@@ -566,6 +559,21 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                         </button>}
                     
                     <input onChange={(e: any) => {
+
+                        e.target.value = e.target.value.replace(/[^0-9]/g, "");
+
+                      /*
+                        var regex = /^\d+(?:\d{1,2})?$/;
+                        if (regex.test(e.target.value)) {
+                        
+                        } else {
+                          //e.preventDefault();
+                          ///e.target.value = e.target.value.slice(0, -1);
+                          ///e.target.value = e.target.value.slice(0, e.target.value.length - 1);
+                        }
+                        */
+
+
 
                         if (e.target.value > 50000) {
                           setBetAmount(50000);

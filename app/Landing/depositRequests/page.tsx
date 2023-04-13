@@ -462,7 +462,7 @@ export default function DepositRequestList() {
 
                                             <Button variant="contained" color="primary" className=" w-full " onClick={() => {
                                                 updateWalletAddress();
-                                            }}> Verify Auth Code </Button>
+                                            }}> Verify </Button>
                                         </div>
 
                                         :

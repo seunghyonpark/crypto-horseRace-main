@@ -2,6 +2,8 @@ import { IUser } from "./../../libs/interface/user";
 import {
   deleteUser,
   getAllUsers,
+  getUserByEmail,
+  getUserByUsername,
   getUser,
   loginUser,
   newUser,
@@ -28,6 +30,27 @@ export default async function handler(
   //console.log("api user method", method);
 
 
+  if (method === "checkDuplicationEmail") {
+    const { email } = req.body;
+
+    const user = await getUserByEmail(email);
+
+
+    if (!user.success) {
+      res.status(400).json({ message: "User not found" });
+      return;
+    }
+
+    //console.log("api user", user);
+
+    //const users = await getAllUsers();
+    //console.log("api users", users);
+
+    res.status(200).json({ message: "User found", user: true });
+  }
+
+
+
   if (method === "create") {
 
     const { username, email, pass1, pass2, userToken, nftWalletAddress } =
@@ -45,6 +68,26 @@ export default async function handler(
       return;
     }
 
+
+    /*
+    const checkDuplicationEmail = await getUserByEmail(email);
+
+    console.log("checkDuplicationEmail", checkDuplicationEmail)
+
+    if (checkDuplicationEmail.success) {
+      res.status(400).json({ message: "Email is duplicated" });
+      return;
+    }
+
+    const checkDuplicationUsername = await getUserByUsername(username);
+    if (checkDuplicationUsername.success) {
+      res.status(400).json({ message: "Nick Name is duplicated" });
+      return;
+    }
+    */
+
+
+
     if (pass1 !== pass2) {
       res
         .status(400)
@@ -61,37 +104,6 @@ export default async function handler(
     }
 
 
-
-    ///var depositWallet = "";
-
-
-    /*
-    const response = await fetch(`http://wallet.treasureverse.io/cracle?userid=${email}`);
-
-    
-    if (response.ok) {
-
-      const json = await response.json();
-      
-      console.log("login wallet json",json);
-
-      if (json) {
-        //nftsGlobal.stakingCountGlobal = json.stakingCountGlobal;
-        //nftsGlobal.miningAmountGlobal = json.miningAmountGlobal;
-
-        depositWallet = json.wallet;
-
-      }
-
-    } else {
-      ///console.log("HTTP-Error: " + response.status);
-    }    
-    
-
-    ////depositWallet = "0x0000000";
-    */
-
-
     const user = await newUser(
       username,
       email,
@@ -102,11 +114,20 @@ export default async function handler(
       nftWalletAddress
     );
 
+    console.log("newUser user", user)
+
+
 
     if (!user) {
-      res.status(400).json({ status: false, message: "Action Failed" });
+      res.status(400).json({ status: false, message: user.message });
       return;
     }
+
+    if (user.success === false) {
+      res.status(400).json({ status: false, message: user.message });
+      return;
+    }
+
     res.status(200).json({ status: true, message: "User created", user: user });
   }
 
@@ -128,6 +149,10 @@ export default async function handler(
     res.status(200).json({ message: "User logged in", user: user });
 
   }
+
+
+
+
 
 
   if (method === "getOne") {

@@ -79,6 +79,31 @@ const UserSchema = new Schema({
 
 export const User = models.User || model("User", UserSchema);
 
+
+
+export const getUserByEmail = async (email: string) => {
+
+  console.log("getUserByEmail email", email);
+
+  const user: IUser = (await User.findOne({ email1: email })) as IUser;
+  if (user) {
+    return { success: true, user };
+  } else {
+    return { success: false, message: "User not found" };
+  }
+};
+
+export const getUserByUsername = async (username: string) => {
+  const user: IUser = (await User.findOne({ username: username })) as IUser;
+  if (user) {
+    return { success: true, user };
+  } else {
+    return { success: false, message: "User not found" };
+  }
+};
+
+
+
 export const newUser = async (
   username: string,
   email: string,
@@ -89,12 +114,21 @@ export const newUser = async (
   nftWalletAddress: string
 ) => {
   
-  const checkUser = await User.find({ email: email });
+  const checkUserByEmail = await User.find({ email: email });
 
-
-  if (checkUser.length > 0) {
-    return { success: false, message: "User already exists" };
+  if (checkUserByEmail.length > 0) {
+    return { success: false, message: "User email already exists" };
   }
+
+
+  const checkUserByUsername = await User.find({ username: username });
+
+  if (checkUserByUsername.length > 0) {
+    return { success: false, message: "User nick name already exists" };
+  }
+
+
+
   const user = new User({
     username: username,
     email: email,
@@ -105,6 +139,7 @@ export const newUser = async (
     nftWalletAddress: nftWalletAddress,
     img: "/profile_default.gif"
   });
+  
   return await user.save();
 };
 

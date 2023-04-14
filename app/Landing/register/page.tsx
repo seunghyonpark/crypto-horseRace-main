@@ -25,7 +25,7 @@ const schema = Yup.object().shape({
     email: Yup.string().required().email(),
     pass1: Yup.string().required().min(7),
     pass2: Yup.string().required().min(7),
-    username: Yup.string().required().min(5),
+    username: Yup.string().required().min(5).max(10),
 });
 
 
@@ -386,6 +386,7 @@ export default function RegisterPage() {
         onChange={handleChange}
         id="email"
         className="input w-full bg-gray-200 rounded-md"
+        
       />
       {errors.email && touched.email && <span>{errors.email}</span>}
 

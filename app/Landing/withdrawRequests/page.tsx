@@ -55,7 +55,7 @@ export default function WithdrawRequestList() {
 
     const [isDisabled, setIsDisabled] = useState(true);
   
-    function onCheck(e) {
+    function onCheck(e: any) {
     const checked = e.target.checked;
     if (checked) {
         setIsDisabled(false)

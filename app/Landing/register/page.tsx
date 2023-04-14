@@ -376,7 +376,7 @@ export default function RegisterPage() {
 
         <label
             className="label"
-            htmlFor="email">
+            htmlFor="Email">
                 <span className="label-text">Email</span>
         </label>
       <input
@@ -391,7 +391,7 @@ export default function RegisterPage() {
 
 
       <label
-        htmlFor="pass1"
+        htmlFor="Password"
         className="label">
             <span className="label-text">Password</span>
         </label>
@@ -406,7 +406,7 @@ export default function RegisterPage() {
       {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
 
       <label
-        htmlFor="pass2"
+        htmlFor="Password"
         className="label">
             <span className="label-text">Re-enter your Password</span>
         </label>
@@ -421,7 +421,7 @@ export default function RegisterPage() {
       {errors.pass2 && touched.pass2 && <span>{errors.pass2}</span>}
 
       <label
-        htmlFor="username"
+        htmlFor="Nick Name"
         className="label">
             <span className="label-text">Nick Name</span>
         </label>

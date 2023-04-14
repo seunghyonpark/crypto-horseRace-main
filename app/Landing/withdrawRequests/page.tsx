@@ -52,6 +52,22 @@ export default function WithdrawRequestList() {
 
     const [showModal, setShowModal] = useState(false);
 
+
+    const [isDisabled, setIsDisabled] = useState(true);
+  
+    function onCheck(e) {
+    const checked = e.target.checked;
+    if (checked) {
+        setIsDisabled(false)
+    }
+    if (!checked) {
+        setIsDisabled(true)   
+    }
+    }
+
+
+
+
     const columns: GridColDef[] = [
         {
             field: "id",
@@ -594,28 +610,44 @@ export default function WithdrawRequestList() {
 
                 </div>
 
-                <div className='flex items-center font-white'>
+                <div className='flex flex-row items-center font-white'>
                     <input
                         type="checkbox"
-                        defaultChecked={selectedUser?.gonderildi}
+                        //defaultChecked={selectedUser?.gonderildi}
                         id='isPay'
-                        className="checkbox checkbox-primary" />
-                    <p>I Agree with the Policy</p>
+                        className="checkbox checkbox-primary"
+                        onChange={(e) => onCheck(e)}
+                        />
+                    <p className="pl-3 text-sm text-white">I Agree with the Policy</p>
                 </div>
 
                 <button
+                    //disabled={isDisabled}
                     onClick={() => {
-                        ////paraYatir();
-                        //push( '/gameT2E' );
+                        if (isDisabled) {
+                            setErrMsgSnackbar("Please check the box to continue");
+                            setErr(true);
 
-                        setShowModal(false);
-
-                        paraCek();
-                        
+                        } else {
+                            setShowModal(false);
+                            paraCek();
+                        }
                     }}
                     className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-md"
                 >
                 WITHDRAW
+                </button>
+                <button
+                    onClick={() => {
+
+
+                        setShowModal(false);
+
+                        
+                    }}
+                    className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-md"
+                >
+                CANCEL
                 </button>
 
 

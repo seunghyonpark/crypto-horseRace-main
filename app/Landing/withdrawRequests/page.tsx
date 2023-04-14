@@ -616,7 +616,7 @@ export default function WithdrawRequestList() {
                         //defaultChecked={selectedUser?.gonderildi}
                         id='isPay'
                         className="checkbox checkbox-primary"
-                        onChange={(e) => onCheck(e)}
+                        onChange={(e:any) => onCheck(e)}
                         />
                     <p className="pl-3 text-sm text-white">I Agree with the Policy</p>
                 </div>

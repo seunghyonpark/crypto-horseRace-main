@@ -607,7 +607,7 @@ export default function WithdrawRequestList() {
                         ////paraYatir();
                         //push( '/gameT2E' );
 
-                        paraCek;
+                        paraCek();
 
                         setShowModal(false);
                     }}

@@ -410,10 +410,10 @@ export default function DepositRequestList() {
 
     return (
         <>
-            <div className='flex flex-col p-10 mt-0 text-gray-200'>
+            <div className='flex flex-col p-10 mt-0 text-gray-800'>
 
 
-                <h1 className='font-bold italic text-2xl'>Deposit Wallet Address{" "}
+                <h1 className='font-bold italic text-2xl text-gray-200'>Deposit Wallet Address{" "}
                 <span className="text-sm text-red-500">(CRA)</span>{" "}
                 </h1>
                 
@@ -442,7 +442,7 @@ export default function DepositRequestList() {
 
                         {!user?.walletAddress &&
 
-                            <div className="w-full items-center justify-center">
+                            <div className="w-full items-center justify-center text-gray-800">
                                 <span className="text-sm text-red-500">You need to authorize your phone number.</span>
 
                                
@@ -494,7 +494,7 @@ export default function DepositRequestList() {
                                         </Button>
 
                                     } 
-                                    
+
 
                             </div>
 

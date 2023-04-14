@@ -735,7 +735,7 @@ const updateWalletAddress = async () => {
 
               {!user?.walletAddress &&
 
-                  <div>
+                    <div className="w-full items-center justify-center text-gray-800">
                       <span className="text-sm text-red-500">You need to authorize your phone number.</span>
 
                     
@@ -748,7 +748,7 @@ const updateWalletAddress = async () => {
 
                         {authCodeState ?
 
-                        <div className=" w-full flex flex-row gap-5 mt-5">
+                        <div className=" w-full flex flex-row gap-5 mt-5 ">
                             <input type="number" placeholder="Auth Code" id="authCode" onChange={(e) => {
                                 setAuthCode(e.target.value);
                             }} className="input input-bordered w-full max-w-xs text-gray-800 mb-5" />

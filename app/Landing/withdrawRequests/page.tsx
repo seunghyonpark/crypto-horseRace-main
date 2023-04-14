@@ -285,6 +285,7 @@ export default function WithdrawRequestList() {
             withdrawAmount: miktar,
             walletTo: wallet,
             type: settings?.requestType
+            
           })
         });
     
@@ -607,9 +608,10 @@ export default function WithdrawRequestList() {
                         ////paraYatir();
                         //push( '/gameT2E' );
 
-                        paraCek();
-
                         setShowModal(false);
+
+                        paraCek();
+                        
                     }}
                     className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-md"
                 >

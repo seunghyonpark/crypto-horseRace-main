@@ -521,23 +521,6 @@ export default function Winner() {
           <div className="w-full  rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-0">
 
 
-{/*
-            <h4 className=" ">
-              Deposit <span className="text-xs ">(BNB)</span>{" "}
-            </h4>
-    */}
-
-{/*
-            <h3>
-            You Earned {betAmount} $CRA
-            </h3>
-            <h4>
-              You Betted {bet}
-            </h4>
-  */}
-
-            
-
             <Image
                 //src={`/rabbit${horse.id}.gif`}
                 src={`/rabbit_winner_${bet}.gif`}

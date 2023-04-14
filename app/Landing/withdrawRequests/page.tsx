@@ -11,10 +11,11 @@ import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 import { Stack, Snackbar, Alert } from "@mui/material";
 
+import ModalAlert from '@/components/ModalAlert';
+
 import dynamic from "next/dynamic";
 
  const CC = dynamic(() => import("@/components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
-
 
 
 
@@ -49,7 +50,7 @@ export default function WithdrawRequestList() {
     const [succ, setSucc] = React.useState(false);
     const [err, setErr] = React.useState(false);
 
-
+    const [showModal, setShowModal] = useState(false);
 
     const columns: GridColDef[] = [
         {
@@ -255,6 +256,8 @@ export default function WithdrawRequestList() {
         handleClose()
         getAll()
     }
+
+
 
 
     const paraCek = async () => {
@@ -471,7 +474,12 @@ export default function WithdrawRequestList() {
 
                     */}
 
-                    <button onClick={paraCek} className="btn btn-accent max-w-xs w-full">Withdraw</button>
+                    <button
+                        onClick={
+                            //paraCek
+                            () => setShowModal(!showModal)
+                        }
+                        className="btn btn-accent max-w-xs w-full">Withdraw</button>
 
                 </div>
 
@@ -548,6 +556,75 @@ export default function WithdrawRequestList() {
                     </DialogActions>
                 </Dialog>
             )}
+
+
+
+
+
+            <ModalAlert
+              
+              show={showModal}
+              onClose={() => setShowModal(false)}
+                
+            >
+
+            <div className="w-full flex flex-col items-center justify-center gap-1 ">
+
+
+            <div className="w-full  rounded-lg flex flex-col items-center justify-center p-4 gap-5 py-0">
+
+
+
+                <h3 className="mt-5 text-red-600">NOTICE</h3>
+
+                <div className="text-sm">
+                    <div className='text-white'>
+                    Requested CRA withdrawal is processed sequentially once a week.
+                    </div>
+
+                    <br></br>
+
+                    <div className="text-yellow-400 text-left">
+                    (Platform Withdrawal fee Policy 
+                    </div>
+                    <div className="text-yellow-400 text-right">
+                    = Charged a fee)
+                    </div>
+
+                </div>
+
+                <div className='flex items-center font-white'>
+                    <input
+                        type="checkbox"
+                        defaultChecked={selectedUser?.gonderildi}
+                        id='isPay'
+                        className="checkbox checkbox-primary" />
+                    <p>I Agree with the Policy</p>
+                </div>
+
+                <button
+                    onClick={() => {
+                        ////paraYatir();
+                        //push( '/gameT2E' );
+
+                        paraCek;
+
+                        setShowModal(false);
+                    }}
+                    className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-md"
+                >
+                WITHDRAW
+                </button>
+
+
+                </div>
+
+
+
+            </div>
+
+            </ModalAlert>
+
 
 
 

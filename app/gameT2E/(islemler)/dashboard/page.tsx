@@ -105,7 +105,7 @@ export default function Dashboard() {
     
     
   
-/*
+
     useEffect(() => {
 
         const getGames = async () => {
@@ -132,8 +132,8 @@ export default function Dashboard() {
       
         }
       
-    }, []);
-    */
+    }, [games]);
+    
 
     const getGames = async () => {
         const res = await fetch('/api/game', {

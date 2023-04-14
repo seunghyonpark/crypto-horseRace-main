@@ -15,6 +15,20 @@ import { useRouter } from 'next/navigation';
 import DomainEnum from "@/libs/enums/domain";
 
 
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+
+
+// Yup schema to validate the form
+const schema = Yup.object().shape({
+    email: Yup.string().required().email(),
+    pass1: Yup.string().required().min(7),
+    pass2: Yup.string().required().min(7),
+    username: Yup.string().required().min(5),
+});
+
+
 
 export default function RegisterPage() {
     const MySwal = withReactContent(Swal);
@@ -26,6 +40,64 @@ export default function RegisterPage() {
     const [networkName, setNetworkName] = useState<any>(null);
     const [network, setNetwork] = useState<any>(false);
     const router = useRouter();
+
+
+    // Formik hook to handle the form state
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            pass1: "",
+            pass2: "",
+            username: "",
+        },
+
+        // Pass the Yup schema to validate the form
+        validationSchema: schema,
+
+        // Handle form submission
+        onSubmit: async ({ email, pass1, pass2, username }) => {
+        // Make a request to your backend to store the data
+
+        let userToken = crypto.randomUUID();
+
+        const formInput = {
+            method: 'create',
+            API_KEY: process.env.API_KEY,
+            username: username,
+            email: email,
+            pass1: pass1,
+            pass2: pass2,
+            userToken: userToken,
+            walletAddress: wallet,
+            nftWalletAddress: wallet,
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.status) {
+                    handleClickSucc();
+                    router.push("/Landing/login");
+                }
+                else {
+                    setErrMsg(data.message);
+                    handleClickErr();
+                }
+                //todo
+                // handleClickSucc();
+            });
+
+
+        },
+    });
+
+    // Destructure the formik object
+    const { errors, touched, values, handleChange, handleSubmit } = formik;
+
+
 
 
     const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -198,6 +270,7 @@ export default function RegisterPage() {
         }
     }
 
+    
     const formSubmit = () => {
         let username = (document.getElementById("username") as HTMLInputElement)
             .value;
@@ -268,73 +341,112 @@ export default function RegisterPage() {
     };
 
 
+
+
+
+
     return (
         <>
             <div className="flex flex-col items-center justify-center py-10 h-full text-black gap-4">
+
+
                 <div className="flex flex-col md:flex-row justify-center w-full h-full gap-10 p-10">
-                    
+
+
+
+ <div className="flex flex-col  justify-center h-full md:w-1/3 bg-white rounded-lg shadow-md p-4">
+
+    <div className="pb-0 space-y-3">
+        <div className="flex gap-2 items-center pl-4">
+            <VscGear className="fill-red-500 w-5 h-5" />
+            <h2 className="text-gray-500 text-lg">
+                Personal Information
+            </h2>
+        </div>
+        <div className="w-full relative h-[1px] border flex items-center justify-center">
+            <div className="absolute bg-red-500 left-0 w-1/3 h-[1px] z-40"></div>
+            <div className="absolute left-1/3  w-2 h-2 rounded-full bg-red-500 z-50"></div>
+        </div>
+    </div>
+
                 
-                    <div className="flex flex-col  justify-center h-full md:w-1/2 bg-white rounded-lg shadow-md p-4">
-                        <div className="pb-10 space-y-3">
-                            <div className="flex gap-2 items-center pl-4">
-                                <VscGear className="fill-red-500 w-5 h-5" />
-                                <h2 className="text-gray-500 text-lg">
-                                    Personal Information
-                                </h2>
-                            </div>
-                            <div className="w-full relative h-[1px] border flex items-center justify-center">
-                                <div className="absolute bg-red-500 left-0 w-1/3 h-[1px] z-40"></div>
-                                <div className="absolute left-1/3  w-2 h-2 rounded-full bg-red-500 z-50"></div>
-                            </div>
-                        </div>
+    <form
+        className="mt-5"
+        onSubmit={handleSubmit} method="POST">
 
-                        <label className="label">
-                            <span className="label-text">ID (Email Address):</span>
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            className="input w-full  bg-gray-200 rounded-md"
-                        />
-                        <label className="label">
-                            <span className="label-text">Password:</span>
-                        </label>
-                        <input
-                            type="password"
-                            id="pass1"
-                            className="input w-full  bg-gray-200 rounded-md"
-                        />
-                        <label className="label">
-                            <span className="label-text">Re-enter your password:</span>
-                        </label>
-                        <input
-                            type="password"
-                            id="pass2"
-                            className="input w-full bg-gray-200 rounded-md"
-                        />
+        <label
+            className="label"
+            htmlFor="email">
+                <span className="label-text">Email</span>
+        </label>
+      <input
+        type="email"
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        id="email"
+        className="input w-full bg-gray-200 rounded-md"
+      />
+      {errors.email && touched.email && <span>{errors.email}</span>}
 
-                        <label className="label">
-                            <span className="label-text">Nick Name:</span>
-                        </label>
-                        <input
-                            type="text"
-                            id="username"
-                            className="input w-full bg-gray-200 rounded-md"
-                        />
 
-                    </div>
-                </div>
+      <label
+        htmlFor="pass1"
+        className="label">
+            <span className="label-text">Password</span>
+        </label>
+      <input
+        type="password"
+        name="pass1"
+        value={values.pass1}
+        onChange={handleChange}
+        id="pass1"
+        className="input w-full bg-gray-200 rounded-md"
+      />
+      {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
 
-                <Button
-                    onClick={() => {
-                        formSubmit();
-                    }}
-                    variant="contained"
-                    color="secondary"
-                    className="bg-green-500 hover:bg-green-600 text-white text-center justify-center h-500 p-5 rounded-md "
-                >
-                    Sign Up
-                </Button>
+      <label
+        htmlFor="pass2"
+        className="label">
+            <span className="label-text">Re-enter your Password</span>
+        </label>
+      <input
+        type="password"
+        name="pass2"
+        value={values.pass2}
+        onChange={handleChange}
+        id="pass2"
+        className="input w-full bg-gray-200 rounded-md"
+      />
+      {errors.pass2 && touched.pass2 && <span>{errors.pass2}</span>}
+
+      <label
+        htmlFor="username"
+        className="label">
+            <span className="label-text">Nick Name</span>
+        </label>
+      <input
+        type="text"
+        name="username"
+        value={values.username}
+        onChange={handleChange}
+        id="username"
+        className="input w-full bg-gray-200 rounded-md"
+      />
+      {errors.username && touched.username && <span>{errors.username}</span>}
+
+
+      <button
+        type="submit"
+        className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
+            SIGN UP
+        </button>
+    </form>
+</div>
+
+
+</div>
+
 
                 <Stack spacing={2} sx={{ width: "100%" }}>
                     <Snackbar

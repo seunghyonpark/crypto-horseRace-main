@@ -43,6 +43,7 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
+    "react-phone-input-2": "^2.15.1",
     "socket.io-client": "^4.6.0",
     "styled-components": "^5.3.9",
     "sweetalert2": "^11.7.1",

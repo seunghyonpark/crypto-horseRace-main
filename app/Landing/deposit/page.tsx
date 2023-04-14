@@ -18,6 +18,11 @@ import Link from 'next/link';
 
 import { useQRCode } from 'next-qrcode';
 
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+
+
+
 import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField } from '@mui/material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 
@@ -734,43 +739,41 @@ const updateWalletAddress = async () => {
                       <span className="text-sm text-red-500">You need to authorize your phone number.</span>
 
                     
-                          <input
-                              type="number"
-                              //disabled="true"
-                              placeholder="Mobile Phone Number"
-                              id="mobileNumber"
-                              onChange={(e) => {
-                                  setMobileNumber(e.target.value);
-                              }}
-                              className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
-                          />
 
-                          {authCodeState ?
+                      <PhoneInput
+                        country={'us'}
+                        value={mobileNumber}
+                        onChange={phone => setMobileNumber(phone)}
+                        />
 
-                              <div className=" w-full flex flex-row ">
-                                  <input type="number" placeholder="Auth Code" id="authCode" onChange={(e) => {
-                                      setAuthCode(e.target.value);
-                                  }} className="input input-bordered w-full max-w-xs text-gray-800 mb-5" />
+                        {authCodeState ?
 
-                                  <Button variant="contained" color="primary" className=" w-full " onClick={() => {
-                                      updateWalletAddress();
-                                  }}> Verify </Button>
-                              </div>
+                        <div className=" w-full flex flex-row gap-5 mt-5">
+                            <input type="number" placeholder="Auth Code" id="authCode" onChange={(e) => {
+                                setAuthCode(e.target.value);
+                            }} className="input input-bordered w-full max-w-xs text-gray-800 mb-5" />
 
-                              :
-                          
-                              <Button
-                                  variant="contained" color="primary" 
-                                  className=" w-full "
-                                  onClick={() => {
-                                      sendAuthCode();
+                            <Button variant="contained" color="primary" className=" l " onClick={() => {
+                                updateWalletAddress();
+                            }}> Verify </Button>
+                        </div>
 
-                                  }}
-                              >
-                                  Send Auth Code
-                              </Button>
+                        :
 
-                          } 
+                        <Button
+                            variant="contained" color="primary" 
+                            className=" mt-5"
+                            onClick={() => {
+                                sendAuthCode();
+
+                            }}
+                        >
+                            Send Auth Code
+                        </Button>
+
+                        } 
+
+
 
                   </div>
 

@@ -30,7 +30,7 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
     const MySwal = withReactContent(Swal);
 
 
-    const [status, setStatus] = useState<any>();
+    ////const [status, setStatus] = useState<any>();
 
     const [basePrice, setBasePrice] = useState<any>(0);
 
@@ -101,6 +101,9 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
     useEffect(() => {
 
         const getGame = async () => {
+            
+            console.log("raceGame getGame()");
+
        
           const res = await fetch('/api/game', {
               method: 'POST',
@@ -207,7 +210,7 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
 
             console.log("raceGame status", data);
 
-            setStatus(data);
+            ///setStatus(data);
 
             
         });

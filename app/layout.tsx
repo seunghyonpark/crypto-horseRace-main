@@ -1,12 +1,12 @@
 'use client';
 
 import './globals.css';
-import { Bebas_Neue } from '@next/font/google';
+///import { Bebas_Neue } from '@next/font/google';
 import { Inter } from '@next/font/google';
 
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+//import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
-import { MetamaskProvider } from "../hooks/useMetamask";
+//import { MetamaskProvider } from "../hooks/useMetamask";
 
 
 
@@ -15,7 +15,7 @@ import RootProvider from "./providers";
 */
 
 
-const activeChainId = ChainId.BinanceSmartChainTestnet;
+///const activeChainId = ChainId.BinanceSmartChainTestnet;
 
 //////const activeChainId = 4002;
 
@@ -50,14 +50,8 @@ export default function RootLayout({
   */}
 
 
-<MetamaskProvider>
-
-            <ThirdwebProvider  activeChain={activeChainId}>
             {children}
-            </ThirdwebProvider>
 
-          
-</MetamaskProvider>
 
 
 {/*

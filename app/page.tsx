@@ -594,21 +594,15 @@ startTime=1611619200000
     return (
         <>
 
-<header>
-                    <Navbar />
-                </header>
+          <header>
+              <Navbar />
+          </header>
 
 
           <div className='flex flex-col w-full h-full items-center justify-center relative
-         
           p-5
-
-
           bg-[url(/landing_background.jpg)] bg-repeat bg-contain 
-
           '>
-
-
 
 
 {/*

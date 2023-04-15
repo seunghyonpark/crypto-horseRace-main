@@ -252,7 +252,7 @@ export default async function handler(
     }
     */
 
-    res.status(200).json({ message: "Send Auth Code", data: authCode });
+    res.status(200).json({ message: "Sent Auth Code", data: authCode });
   }
 
 

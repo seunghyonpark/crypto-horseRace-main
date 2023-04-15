@@ -531,7 +531,7 @@ export default function Dashboard() {
     >
     </div>
 
-    <ul className='flex flex-col list-disc'>
+    <ul className='flex flex-col list-disc min-h-[400px] '>
 
     {
         games?.map((game: IGame, i: number) => {
@@ -541,49 +541,37 @@ export default function Dashboard() {
 
                 <li key={i} >
 
+                    <div className="w-full h-20 mt-0 ">
 
-
-
-                <div className="w-full h-20 mt-0 ">
-
-                    <div
-                        className="flex min-w-[150px] items-end justify-end -mt-10"
-                        style={{
-                            width: `${progress1}%`,
-                        }}
-                    >
-                        <Image
-                            src={
-                                imageRabbit1
-                            }
-                            width={100}
-                            height={100}
-                            alt={"at"}
-                        />
                         <div
-                        className="font-bold text-sm text-white mb-6"
+                            className="flex min-w-[250px] items-end justify-end -mt-10 ml-5"
+                            style={{
+                                width: `${progress1}%`,
+                            }}
                         >
-                                            {`${game.username}`}
-                            &nbsp;<span className='text-yellow-500'>{game.betAmount}</span>
-                            &nbsp;<span className='text-yellow-500'>{game.selectedSide}</span>
-
-
+                            <Image
+                                src={
+                                    game.selectedSide === "Long" ? imageRabbit1 : imageRabbit2
+                                }
+                                width={50}
+                                height={50}
+                                alt={"at"}
+                            />
+                            <div
+                            className="flex flex-row gap-2 text-xs text-white w-full ml-2 mb-2"
+                            >
+                                <div>Better: {`${game.username}`}</div>
+                                {/*<li className='text-yellow-500'>Entry: {game.entry}</li>*/}
+                                <div className='text-yellow-400'>Side: {game.selectedSide}</div>
+                                <div className='text-yellow-400'>Bet: {game.betAmount}</div>
+                                
+                            </div>
                         </div>
+
                     </div>
-
-
-
-
-                </div>
-
-
-
-
           
                 </li>
 
-
-    
 
             )
 
@@ -595,7 +583,7 @@ export default function Dashboard() {
 
 
     <div
-                        className="w-full h-14 mt-0 "
+                        className="w-full h-14 mt-10 "
                         style={{
                             backgroundImage: `url('/fence4.png')`,
                             backgroundSize: "120px",

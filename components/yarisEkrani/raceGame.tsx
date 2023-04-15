@@ -264,7 +264,7 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
         })
 
         socket.on("horse1", (data: any) => {
-            ////console.log("Race socketInitializer horse1", data);
+            ///console.log("Race socketInitializer horse1", data);
             setProgress1(data);
 
             

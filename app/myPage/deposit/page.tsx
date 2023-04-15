@@ -768,7 +768,7 @@ const updateWalletAddress = async () => {
 
                             }}
                         >
-                            Send Auth Code
+                            Sent Auth Code
                         </Button>
 
                         } 

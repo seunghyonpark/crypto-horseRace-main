@@ -223,7 +223,7 @@ export default function Navbar() {
             setInterval(() => {
                 getUser()
                 ///getGame()
-            }, 20 * 1000)
+            }, 10 * 1000)
             
         }
     })

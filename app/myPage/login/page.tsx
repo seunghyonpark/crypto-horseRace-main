@@ -34,7 +34,6 @@ export default function LoginPage() {
 
     const formSubmit = () => {
 
-
         let email = (document.getElementById("email") as HTMLInputElement).value;
         let pass = (document.getElementById("password") as HTMLInputElement).value;
         const formInputs = {

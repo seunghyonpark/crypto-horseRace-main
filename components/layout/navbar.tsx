@@ -198,9 +198,13 @@ export default function Navbar() {
 
     useEffect(() => {
         if (hasCookie("user") && !user) {
+
+            //getUser()
+            
             setInterval(() => {
                 getUser()
-            }, 5 * 1000)
+            }, 10 * 1000)
+            
         }
     })
 
@@ -630,11 +634,15 @@ export default function Navbar() {
 
 
 
+
+
             {/* //? Mobil Navbar */}
+
+        
             
             <MobilNavbar user={user} game={game} />
                         
-
+                    
 
         </>
     )

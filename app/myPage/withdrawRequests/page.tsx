@@ -52,7 +52,6 @@ export default function WithdrawRequestList() {
 
     const [showModal, setShowModal] = useState(false);
 
-
     const [isDisabled, setIsDisabled] = useState(true);
   
     function onCheck(e: any) {
@@ -279,21 +278,21 @@ export default function WithdrawRequestList() {
     const paraCek = async () => {
 
         let miktar = (document.getElementById("withdraw") as HTMLInputElement).value;
-    
+
         if (parseInt(miktar) < 1000) {
-          setErrMsgSnackbar("Please enter a value greater than 1000");
-          setErr(true);
-          return;
+            setErrMsgSnackbar("Please enter a value greater than 1000");
+            setErr(true);
+            return;
         } else if (parseInt(miktar) > 10000) {
-          setErrMsgSnackbar("Please enter a value less than 10000");
-          setErr(true);
-          return;
+            setErrMsgSnackbar("Please enter a value less than 10000");
+            setErr(true);
+            return;
         }
         setWaiting(true);
         const res = await fetch('/api/paymentRequests', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
             method: "new",
             API_KEY: process.env.API_KEY,
             userToken: getCookie("user"),
@@ -302,27 +301,27 @@ export default function WithdrawRequestList() {
             walletTo: wallet,
             type: settings?.requestType
             
-          })
+            })
         });
-    
-        
-    
-        const data = await res.json();
-    
-        if (data.status === false) {
-          setErrMsgSnackbar(data.message);
-          setWaiting(false);
-          setErr(true);
-        } else {
-          getUser();
-          setWaiting(false);
-          setSucc(true);
-          setSuccessMsgSnackbar("Your request has been sent successfully");
 
-          getAll();
-        }
     
-      };
+
+        const data = await res.json();
+
+        if (data.status === false) {
+            setErrMsgSnackbar(data.message);
+            setWaiting(false);
+            setErr(true);
+        } else {
+            getUser();
+            setWaiting(false);
+            setSucc(true);
+            setSuccessMsgSnackbar("Your request has been sent successfully");
+
+            getAll();
+        }
+
+    };
 
      
       
@@ -496,7 +495,9 @@ export default function WithdrawRequestList() {
                             //paraCek
                             () => setShowModal(!showModal)
                         }
-                        className="btn btn-accent max-w-xs w-full">Withdraw</button>
+                        className="btn btn-accent max-w-xs w-full">
+                            Withdraw
+                    </button>
 
                 </div>
 

@@ -562,8 +562,8 @@ export default function Dashboard() {
                             >
                                 <div>Better: {`${game.username}`}</div>
                                 {/*<li className='text-yellow-500'>Entry: {game.entry}</li>*/}
-                                <div className='text-yellow-400'>Side: {game.selectedSide}</div>
-                                <div className='text-yellow-400'>Bet: {game.betAmount}</div>
+                                <div className=' text-yellow-500  '>Position: {game.selectedSide}</div>
+                                <div className='text-yellow-500'>Bet: {game.betAmount}</div>
                                 
                             </div>
                         </div>

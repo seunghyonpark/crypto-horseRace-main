@@ -124,7 +124,7 @@ export default function LoginPage() {
                     <div className=""> If you have not an account  </div>
                     <Link
                         className="p-2 px-4 rounded-md bg-[#FFD369] text-gray-500  "
-                        href={"/gameT2E/register"}
+                        href={"/myPage/register"}
                     >
                         Sign Up Now
                     </Link>

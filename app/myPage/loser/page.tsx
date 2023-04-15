@@ -168,7 +168,7 @@ export default function Loser() {
             <button
               onClick={() => {
                 ////paraYatir();
-                push( '/myPage/betHistory' );
+                push( '/Landing/betHistory' );
               }}
               className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-full"
             >

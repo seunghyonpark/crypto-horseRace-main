@@ -261,7 +261,7 @@ export default function Navbar() {
                 <div className="flex flex-col pt-2 gap-3 items-center justify-center w-[200px] absolute bg-[#000000] rounded-lg h-full z-50 
                      
                      ">
-                    <Link href={"/Landing"} className="hover:opacity-50">
+                    <Link href={"/"} className="hover:opacity-50">
                         <Image src={"/cracle_ci.png"} alt="" width={20} height={20} />
                     </Link>
 
@@ -389,7 +389,7 @@ export default function Navbar() {
 
                                 <Link
                                     className="pr-5 hover:opacity-50"
-                                    href={"/Landing/deposit"}
+                                    href={"/myPage/deposit"}
                                 >
                                     <Image src={"/wallet-icon-white.png"} width={20} height={20} alt="logo" />
                                 </Link>
@@ -405,7 +405,7 @@ export default function Navbar() {
 
                             {    
                                 !user && <Link
-                                    href={"/Landing/login"}
+                                    href={"/myPage/login"}
                                     className={`text-[13px] text-[#9293A6]  border-t-2 border-green-500 p-1`}
                                 >
                                     Login
@@ -457,7 +457,7 @@ export default function Navbar() {
                   <button
                     className="w-full text-white text-center justify-left pl-3 p-2 items-left bg-red-900 hover:bg-[#141111] flex flex-row"
                     onClick={() => {
-                      setShowModal(false), router.push('/Landing/mynft')
+                      setShowModal(false), router.push('/myPage/mynft')
                   }}
                   >
                       <Image
@@ -478,7 +478,7 @@ export default function Navbar() {
                     <button
                       className="w-full text-white text-center justify-center p-5 items-center bg-red-900 hover:bg-[#141111] flex flex-row"
                       onClick={() => {
-                        setShowModal(false), router.push('/Landing/mynft')
+                        setShowModal(false), router.push('/myPage/mynft')
                       }}
                       >
                         <Image
@@ -532,7 +532,7 @@ export default function Navbar() {
                             setShowModal(false);
                             deleteCookie('user');
                             getUser();
-                            router.push('/Landing');
+                            router.push('/myPage');
                           }}
                       >
                           Log Out
@@ -546,7 +546,7 @@ export default function Navbar() {
                   <div
                     className={` w-full pt-3 items-left text-base text-white`}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing/depositRequests')
+                        setShowModal(false), router.push('/myPage/depositRequests')
                     }}
                     >
                     Deposit
@@ -555,7 +555,7 @@ export default function Navbar() {
                   <div
                     className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing/withdrawRequests')
+                        setShowModal(false), router.push('/myPage/withdrawRequests')
                     }}
                     >
                       Withdrawal
@@ -564,7 +564,7 @@ export default function Navbar() {
                   <div
                     className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing/betHistory')
+                        setShowModal(false), router.push('/myPage/betHistory')
                     }}
                     >
                       Bet History
@@ -573,7 +573,7 @@ export default function Navbar() {
                   <div
                     className={` disabled pt-1 w-full items-left text-base text-[#A9A9A9]  `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing')
+                        setShowModal(false), router.push('/')
                     }}
                     >
                       Game Ranking

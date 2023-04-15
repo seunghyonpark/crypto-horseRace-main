@@ -212,7 +212,7 @@ export default function RegisterPage() {
             .then((data) => {
                 if (data.status) {
                     handleClickSucc();
-                    router.push("/gameP2E/login");
+                    router.push("/myPage/login");
                 }
                 else {
                     setErrMsg(data.message);

@@ -1,4 +1,3 @@
-
 import Chat from "@/components/layout/chat";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
@@ -17,6 +16,7 @@ export default function RootLayout({
                 <header>
                     <Navbar />
                 </header>
+                
                 <div className="bg-[#1f2029] relative font-bebasNeue">
 
                     {/*

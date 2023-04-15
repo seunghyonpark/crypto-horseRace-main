@@ -91,6 +91,7 @@ export default function Landing() {
 
     const [craUsdt, setCraUsdt] = useState<any>();
 
+    const { push } = useRouter();
 
     
     useEffect(() => {
@@ -601,267 +602,34 @@ startTime=1611619200000
 
           '>      
 
+          <h3 className='text-xl text-green-500 mb-10'>Sorry. This page has been moved.</h3>
 
-{/*
+          <button
+            onClick={() => {
+              ////paraYatir();
 
-              <div className="bg-center bg-no-repeat bg-contain bg-[url(/back.svg)] h-full w-full ">
-                  <div className=" flex flex-col items-center justify-center
-                    md:gap-14 md:py-10 bg-gradient-radial
-                    from-transparent via-[#0C0E1A] to-transparent bg-blend-difference
-                    h-full md:px-60 mt-5">
+              push( '/' );
+            }}
+            className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-full"
+          >
+            GO HOME
+          </button>
 
-                    <div
-                        className={`flex items-center justify-center text-base  bg-black rounded-md h-[36px] text-center px-5 text-[#BA8E09] border border-[#BA8E09] mt-3`}
-                    >
-                        <span className="text-[#ffffff] text-sm">PRICE (CRA):</span>&nbsp;&nbsp;&nbsp;
-                        <span className="text-sm">{Number(craUsdt).toFixed(2)}&nbsp;&nbsp;&nbsp;</span>
-                        <span className="text-[#ffffff] text-sm">USDT</span>
-                    </div>
-                </div>
+          <Image
+            src="/rabbit1.gif"
+            alt="Picture of the author"
+            width={100}
+            height={100}
+            className='mt-10'
+          />
+          <Image
+            src="/rabbit2.gif"
+            alt="Picture of the author"
+            width={100}
+            height={100}
+            className='mt-10'
+          />
 
-            </div>
-
-            */}
-
-
-
-
-<div className="
-  w-[350px]
-  lg:w-[800px]
-
-  items-center justify-top
-  bg-black
-  ">
-
-          <div className="
-            w-[350px]
-            lg:w-[800px] 
-            relative ">
-
-            <div className="
-              w-[350px]
-              lg:w-[800px]
-              h-[220px] flex flex-col items-left justify-start
-              rounded-b-xl
-              bg-[#D62339]
-              ">
-
-              <div className="w-full flex flex-col m-5 items-left  gap-0 text-2xl text-white font-bold ">
-                CRACLE X2E Game<b></b>
-                Officially Released!
-              </div>
-
-              <div className="w-full flex flex-col ml-5 items-left gap-0 text-base text-white">
-              A new highly profitable<br></br>
-              betting game is<br></br>
-              coming to you soon.
-              </div>
-
-            </div>
-
-            <div className='w-[190px] h-[120px]  bg-[url(/landing_cracle.png)] bg-contain bg-no-repeat content-right       
-              absolute right-1 bottom-0
-              z-1
-              lg:w-[250px] lg:h-[150px]
-              '>
-            </div>
-
-            <div className='w-[250px] h-[300px] bg-[url(/landing_mobile.png)] bg-contain bg-no-repeat content-right
-              
-              absolute right-0 top-[50px]
-              z-2
-              lg:mr-5
-              '>
-            </div>
-          
-
-          </div>
-
-
-          <div className="w-[350px] mt-16 p-5 items-left justify-end
-            rounded-b-xl text-2xl font-bold text-white text-left
-            h-[60px]
-            bg-black
-            ">
-
-            GAMES
-          </div>
-
-</div>
-
-
-
-
-<div className="
-  w-[350px] grid grid-cols-2 gap-4 
-  md:w-[350px] md:grid-cols-2 
-  lg:w-[800px] lg:grid-cols-3 
-  items-center justify-top
-  bg-black
-  p-5
-  ">
-
-          <div className='w-full h-[350px] flex flex-col mb-5
-            '>
-
-            <span className="
-              text-white text-center w-full text-xs font-bold
-              lg:text-xl">
-              T2E Game
-            </span>
-
-            <div className="bg-[#333333] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 h-full
-              text-[#939393]
-              hover:text-white
-              hover:bg-[#D62339]
-            ">
-
-              <Image
-                className=" w-[282px] h=[220px]"
-                src="/gameT2E.png" width={500} height={500} alt="gameT2E" />
-
-              <p className=' text-center w-full text-xs mt-5 text-white'>
-                CRACLE T2E is a Long/Short trading game.<br></br>You can earn more $CRA by winning this game.
-              </p>
-
-            </div>
-
-            <div className='w-full flex flex-row p-2'>
-              <Link
-                href={"/"}
-                className="m-1 w-full h-10 bg-[#D62339] rounded-lg flex items-center justify-center disabled">
-                <span className="text-gray-200 text-sm ">DEMO</span>
-              </Link>
-              <button
-                onClick={() => {
-                  getCookie('user') ? router.push('/gameT2E') : router.push('/Landing/login');
-                }}
-                className=" m-1 w-full h-10 bg-[#05B168] rounded-lg flex items-center justify-center">
-                <span className="text-gray-200 text-sm ">START</span>
-              </button>
-
-
-            </div>
-
-          </div>
-
-
-
-          <div className='w-full h-[350px] flex flex-col mb-5'>
-
-            <span className="
-            text-white text-center w-full text-xs font-bold
-              lg:text-xl">
-              Horse Race Game
-            </span>
-
-            <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 h-full
-              text-[#939393]
-              hover:text-white
-              hover:bg-[#D62339]
-              
-            ">
-              <Image
-                className=" w-[282px] h=[220px]"
-                src="/game_horse.gif" width={500} height={500} alt="gameP2E" />
-
-              <p className=' text-center w-full text-xs mt-5 '>
-                CRACLE P2E is a Horse Race Game. 
-                You can earn more $CRA by playing this game.
-              </p>
-
-            </div>
-
-            <div className='w-full flex flex-row p-2'>
-              <Link href={"/"} className="m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm ">DEMO</span>
-              </Link>
-              <Link href={"/"} className=" m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm ">START</span>
-              </Link>
-            </div>
-
-          </div>
-
-
-          <div className='w-full h-[350px] flex flex-col mb-5'>
-            <span className="
-              text-white text-center w-full text-xs font-bold
-              lg:text-xl">
-            Poker Game
-            </span>
-
-            <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 h-full
-              text-[#939393]
-              hover:text-white
-              hover:bg-[#D62339]
-            ">
-              <Image
-                className=" w-[282px] h=[220px]"
-                src="/game_poker.gif" width={500} height={500} alt="gameP2E" />
-
-              <p className=' text-center w-full text-xs mt-5 '>
-            Play CRACLE Poker Games and Earn CRA.
-Place a bet with your tokens based on how strong you think your hand is.
-            </p>
-
-            </div>
-
-            <div className='w-full flex flex-row p-2'>
-              <Link href={"/"} className="m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm ">DEMO</span>
-              </Link>
-              <Link href={"/"} className=" m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm ">START</span>
-              </Link>
-            </div>
-
-          </div>
-
-                
-
-
-          <div className='w-full h-[350px] flex flex-col mb-5'>
-            <span className="
-              text-white text-center w-full text-xs font-bold
-              lg:text-xl">
-            Coming Soon
-            </span>
-
-            <div className="bg-[#1B1A1B] rounded-md p-2 mt-2
-              flex flex-col items-center justify-top gap-2 h-full
-              text-[#939393]
-              hover:text-white
-              hover:bg-[#D62339]
-            ">
-              <Image
-                className=" w-[282px] h=[220px]"
-                src="/game_comingsoon.gif" width={500} height={500} alt="gameP2E" />
-
-              <p className='
-                text-center w-full text-xs mt-5
-                '>
-              Get ready for more X2E fun and even bigger rewards with CRACLE!
-              Stay tuned for new varieties and exciting updates.
-            </p>
-
-            </div>
-
-            <div className='w-full flex flex-row p-2 '>
-              <div className="m-1 w-full h-10 rounded-lg flex items-center justify-center">
-                <span className="text-[#939393] text-xs text-center">More Games To Come!</span>
-              </div>
-
-            </div>
-
-          </div>
-
-
-      </div>
 
 
         </div>

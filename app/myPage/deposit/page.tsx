@@ -4,24 +4,43 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Web3 from "web3";
-import abi from "../../../public/abi.json";
+import abi from "@/public/abi.json";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { Stack, Snackbar, Alert } from "@mui/material";
+
 import Coin from "@/libs/enums/coin.enum";
 import API from "@/libs/enums/API_KEY";
 import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
+import Link from 'next/link';
+
+import { useQRCode } from 'next-qrcode';
+
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 
-import { useRouter, useSearchParams } from 'next/navigation';
+
+import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide, TextField } from '@mui/material';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+
+import axios from 'axios';
+
+import dynamic from "next/dynamic";
+
+const CC = dynamic(() => import("@/components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
 
 
 
-export default function Winner() {
+
+export default function Deposit() {
   let Abifile: any = abi;
   let contractAddress = "0x46aA314E5ee3c0E5E945B238075d2B5eB2AAA317";
+
   const MySwal = withReactContent(Swal);
+
   const [errMsg, setErrMsg] = useState<String>();
   const [metamusk, setMetaMask] = useState<boolean>(false);
   const [wallet, setWallet] = useState<any>(null);
@@ -30,27 +49,28 @@ export default function Winner() {
   const [contract, setContract] = useState<any>();
   const [depositCount, setDepositCount] = useState<any>(0);
   const [metamaskview, setMetamaskView] = useState<boolean>(false);
- 
+  const router = useRouter();
+
   const [succ, setSucc] = React.useState(false);
   const [err, setErr] = React.useState(false);
   const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
   const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
+
   const [waiting, setWaiting] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>();
   const [settings, setSettings] = useState<any>();
-
-
-  //const router = useRouter();
-  //const queries = router.query;
-
-  const { push } = useRouter();
-
-  const searchParams = useSearchParams();
-
-  const bet = searchParams.get('bet');
-  const betAmount = searchParams.get('betAmount');
-
   
+  const [mobileNumber, setMobileNumber] = useState<any>(null);
+  const [authCodeState, setAuthCodeState] = React.useState(false);
+  const [authCode, setAuthCode] = useState<any>(null);
+
+
+  const [input, setInput] = useState(null);
+	const [response, setResponse] = useState(null);
+
+
+  const { Canvas } = useQRCode();
+
 
   const getUser = async () => {
     const inputs = {
@@ -66,12 +86,7 @@ export default function Winner() {
     const user = await res.json()
     setUser(user.user.user)
   }
-
-  useEffect(() => {
-    getUser();
-    getSettings();
-  }, [])
-
+  
   const getSettings = async () => {
     const res = await fetch(DomainEnum.address + '/api/settings', {
       method: 'POST',
@@ -91,6 +106,12 @@ export default function Winner() {
       setSettings(data.settings[0]);
     }
   }
+
+
+  useEffect(() => {
+    getUser();
+    getSettings();
+  }, [])
 
   /*
   useEffect(() => {
@@ -117,6 +138,7 @@ export default function Winner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   */
+
 
   //? METAMASK
   const isMetaMaskInstalled = () => {
@@ -211,7 +233,7 @@ export default function Winner() {
           }
         });
 
-        
+
       } else {
         const accounts = await ethereum.request({
           method: "eth_requestAccounts",
@@ -243,6 +265,7 @@ export default function Winner() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  */
 
   async function checkAccount() {
     const { ethereum }: any = window;
@@ -257,7 +280,8 @@ export default function Winner() {
     }
   }
 
-  
+
+  /*
   useEffect(() => {
     if (wallet) {
       //@ts-ignore
@@ -268,6 +292,8 @@ export default function Winner() {
     }
   }, [Abifile, contractAddress, wallet]);
   */
+
+
 
   const paraYatir = async () => {
     if (depositCount == 0) {
@@ -293,7 +319,9 @@ export default function Winner() {
       .on("receipt", (receipt: any) => {
       })
       .on("confirmation", (confirmationNumber: any, receip: any) => {
+
         if (confirmationNumber == 1) {
+
           fetch("/api/deposit", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -316,7 +344,9 @@ export default function Winner() {
                 setErr(true);
               }
             })
+
         }
+
       })
       .on("error", (error: any) => {
         console.error(error);
@@ -328,16 +358,17 @@ export default function Winner() {
   };
 
   const paraCek = async () => {
-    let miktar = (document.getElementById("withdraw") as HTMLInputElement)
-      .value;
+
+    let miktar = (document.getElementById("withdraw") as HTMLInputElement).value;
+
     if (miktar == "0") {
       setErrMsgSnackbar("Please enter a value greater than 0");
       setErr(true);
-      return
+      return;
     } else if (miktar < "0") {
       setErrMsgSnackbar("Please enter a value greater than 0");
       setErr(true);
-      return
+      return;
     }
     setWaiting(true);
     const res = await fetch('/api/paymentRequests', {
@@ -352,20 +383,26 @@ export default function Winner() {
         walletTo: wallet,
         type: settings?.requestType
       })
-    })
-    const data = await res.json()
+    });
+
+    
+
+    const data = await res.json();
+
     if (data.status === false) {
       setErrMsgSnackbar(data.message);
       setWaiting(false);
       setErr(true);
-      return
     } else {
       getUser();
       setWaiting(false);
       setSucc(true);
       setSuccessMsgSnackbar("Your request has been sent successfully");
     }
+
   };
+
+  
 
   const swapToCoin = async () => {
     if (user) {
@@ -500,8 +537,138 @@ export default function Winner() {
 
 
 
+
+
+	/**
+	 * Fetches QR Code of the text input
+	 */
+  /*
+	const getQrcode = async () => {
+		try {
+			const res = await axios.get('api/qrcode/', {
+				params: {input}
+			});
+			setResponse(res.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+  */
+
+
+  const sendAuthCode = async () => {
+
+    if (!mobileNumber) {
+        setErrMsgSnackbar("Mobile Number is required");
+        handleClickErr();
+
+        return;
+    }
+
+    const formInput = {
+        method: 'sendAuthCode',
+        API_KEY: process.env.API_KEY,
+        userToken: getCookie("user"),
+        mobileNumber: mobileNumber,
+    };
+    fetch("/api/sms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formInput),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        if (data.data) {
+
+          setSuccessMsgSnackbar(data.message);
+          handleClickSucc();
+
+            setAuthCodeState(true);
+
+        } else {
+
+          setErrMsgSnackbar(data.message);
+          handleClickErr();
+
+        }
+
+    });
+
+  }
+
+
+
+const updateWalletAddress = async () => {
+
+    if (!mobileNumber) {
+        setErrMsgSnackbar("Mobile Number is required");
+        handleClickErr();
+
+        return;
+    }
+
+    if (!authCode) {
+        setErrMsgSnackbar("Auth Code is required");
+        handleClickErr();
+
+        return;
+    }
+
+    const formInput = {
+        method: 'updateWalletAddress',
+        API_KEY: process.env.API_KEY,
+        userToken: getCookie("user"),
+        authCode: authCode,
+    };
+    fetch("/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formInput),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        if (data.user) {
+
+          getUser();
+
+          setSuccessMsgSnackbar(data.message);
+          handleClickSucc();
+
+        } else {
+
+          setErrMsgSnackbar(data.message);
+          handleClickErr();
+
+        }
+
+    });
+
+  }
+
+
+
+
+
+
   return (
     <>
+
+    
+      {metamaskview ? (
+        <div
+          onClick={() => {
+            setMetamaskView(false);
+          }}
+          className="flex absolute min-w-full min-h-full bg-black/70 justify-center items-center "
+        >
+          <Image
+            src="/metamask-fox.svg"
+            width={100}
+            height={100}
+            alt="Metamask"
+          />
+        </div>
+      ) : null}
 
 
       {waiting ? (
@@ -512,51 +679,259 @@ export default function Winner() {
       ) : null}
 
 
-      <div className="flex flex-col items-center justify-center min-h-[75vh] gap-3 p-5 text-gray-100">
-       
+      <div className="flex flex-col items-center justify-center min-h-[75vh] gap-3 p-10 text-gray-100">
+        <h3 className="text-center">Deposit And Withdraw</h3>
 
-        <div className="p-2 grid grid-cols-1 lg:grid-cols-1 w-full lg:w-2/3 gap-5 ">
+{/*
+        <p className="text-center">
+          Swap your BNB to {Coin.name} and start earning
+        </p>
+      */}
 
-          {/* //? Matic Deposit  */}
-          <div className="w-full  rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-0">
 
+        <p className=" text-lg text-center">
+          
+          {/*
+          Dear <span className="text-amber-500">{user.username}</span> you have{" "}
+      */}
 
-            <Image
-                //src={`/rabbit${horse.id}.gif`}
-                src={`/rabbit_winner_${bet}.gif`}
-                width="500"
-                height="500"
-                alt={"at"}
-            />
+          <span className="text-[#BA8E09]">{Number(user?.deposit).toFixed(0)}</span>{" "}
+          <span className="text-red-500  ">{Coin.name} </span>
+          
+          {/*
+          and
+          <span className="text-pink-500"> {((user.maticBalance).toString()).slice(0, 6)} BNB </span>
+          */}
+          
+          in your account
+        </p>
+        <div className="p-2 grid grid-cols-1 lg:grid-cols-2 w-full lg:w-2/3 gap-5">
 
           
+          {/* //? Matic Deposit  */}
+          <div className="w-full border rounded-lg flex flex-col items-center justify-top p-2 gap-5 py-10">
+
+            <h4 className=" ">
+              Deposit <span className="text-sm text-red-500">(CRA)</span>{" "}
+            </h4>
+
+            <div className='w-full max-w-xs md:w-1/2 '>
 
 
+              <input
+                  ///type="number"
+                  placeholder="Wallet Address"
+                  id="deposit"
+                  ///value={depositCount}
+                  value={user?.walletAddress}
+
+                  //onChange={(e) => {
+                  //    setDepositCount(e.target.value);
+                  //}}
+
+                  className="input input-bordered w-full max-w-xs text-gray-800 text-xl font-bold mb-5"
+              />
+
+
+              {!user?.walletAddress &&
+
+                    <div className="w-full items-center justify-center text-gray-800">
+                      <span className="text-sm text-red-500">You need to authorize your phone number.</span>
+
+                    
+
+                      <PhoneInput
+                        country={'us'}
+                        value={mobileNumber}
+                        onChange={phone => setMobileNumber(phone)}
+                        />
+
+                        {authCodeState ?
+
+                        <div className=" w-full flex flex-row gap-5 mt-5 ">
+                            <input type="number" placeholder="Auth Code" id="authCode" onChange={(e) => {
+                                setAuthCode(e.target.value);
+                            }} className="input input-bordered w-full max-w-xs text-gray-800 mb-5" />
+
+                            <Button variant="contained" color="primary" className=" l " onClick={() => {
+                                updateWalletAddress();
+                            }}> Verify </Button>
+                        </div>
+
+                        :
+
+                        <Button
+                            variant="contained" color="primary" 
+                            className=" mt-5"
+                            onClick={() => {
+                                sendAuthCode();
+
+                            }}
+                        >
+                            Send Auth Code
+                        </Button>
+
+                        } 
+
+
+
+                  </div>
+
+
+              }
+
+            </div>
+
+            {user?.walletAddress &&
+                <>
+                    <div className='w-full flex flex-row items-center justify-center centent-center'>
+                        <CC content={user?.walletAddress}/>
+                    </div>
+
+                    <div className='w-full flex flex-row items-center justify-center centent-center'>
+                        <Canvas
+                        text={user?.walletAddress}
+                        options={{
+                        level: 'M',
+                        margin: 3,
+                        scale: 4,
+                        width: 200,
+                        color: {
+                            dark: '#010599FF',
+                            light: '#FFBF60FF',
+                        },
+                        }}
+                        />
+                    </div>
+                </>
+            }
+
+
+{/*
+			<button
+				className="mt-6 p-4 bg-active hover:opacity-90 rounded text-primary font-bold inline-flex"
+				onClick={() => getQrcode()}
+			>
+				Generate QR Code
+			</button>
+
+              */}
+
+
+{/*
             <button
               onClick={() => {
-                ////paraYatir();
-                push( '/gameT2E' );
+                paraYatir();
               }}
-              className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-full"
+              className="btn btn-success max-w-xs w-full "
             >
-              GO BET
+              Deposit
             </button>
+            */}
 
-            <button
-              onClick={() => {
-                ////paraYatir();
-                push( '/myPage/betHistory' );
-              }}
-              className="btn btn-success max-w-xs w-full text-xl bg-color-#66CDAA hover:bg-color-#66CDAA  text-white font-bold py-2 px-4 rounded-full"
-            >
-              BET RESULT
-            </button>
+            <span className="ml-5 mr-5 content-center text-sm text-green-500 text-center">
+              If you send coins to your wallet address, it will be processed automatically.
+            </span>
+
+
+      
+            <Link 
+              href={"/Landing/depositRequests"}
+              className="  hover:opacity-50 ">
+                List of Deposit Requests
+            </Link>
+  
+
 
 
           </div>
 
+          
+
+          {/* //? Matic Withdraw */}
+          <div className="w-full border rounded-lg flex flex-col items-center p-2 justify-center gap-5 py-10">
+            <h4 className=" ">
+              Withdraw <span className="text-sm text-red-500">(CRA)</span>
+
+            {/*  
+              <span className="text-sm text-green-500">{`(${settings?.requestType === 'Matic' ? "BNB" : Coin.name})`}</span>{" "}
+*/}
+            </h4>
+
+
+            <input
+              placeholder="Wallet Address"
+              onChange={(e) => {
+                setWallet(e.target.value);
+              }}
+              className="input input-bordered w-full max-w-xs text-gray-800"
+            />
+
+
+            <input
+              type="number"
+              placeholder="Minimum 1,000"
+              id="withdraw"
+              className="input input-bordered w-full max-w-xs text-gray-800"
+            />
+
+
+            <span className="ml-5 mr-5 content-center text-sm text-green-500">
+                Withdraw amount is at least <br></br>1,000 ~ maximum 10,000 CRA at a time
+            </span>
+
+            <span className="ml-5 mr-5 content-center text-sm text-white">
+                Withdraw Fee 100 CRA
+            </span>
+ 
+
+            <button onClick={paraCek} className="btn btn-accent max-w-xs w-full">Withdraw</button>
+
+
+            <Link href={"/Landing/withdrawRequests"} className="hover:opacity-50">
+                List of Withdraw Requests
+            </Link>
+
+          </div>
+
+          {/* //? Swap Matic to Coin */}
+          {/*
+          <div className="w-full border rounded-lg flex flex-col items-center p-2 justify-center gap-5 py-10">
+            <h4 className=" ">
+              Swap <span className="text-xs ">(BNB to {Coin.name})</span>{" "}
+            </h4>
+            <p className="text-xs "> 1 MATIC = x{Coin.katSayi} {Coin.name} </p>
+            <input
+              type="number"
+              placeholder="Type here"
+              id="swapToCoin"
+              className="input input-bordered w-full max-w-xs text-gray-800"
+            />
+            <button onClick={swapToCoin} className="btn btn-primary max-w-xs w-full">Swap to {Coin.name}</button>
+          </div>
+          */}
+
+
+          {/* //? Swap Coin to Matic */}
+          {/*
+          <div className="w-full border rounded-lg flex flex-col items-center p-2 justify-center gap-5 py-10">
+            <h4 className=" ">
+              Swap <span className="text-xs ">({Coin.name} to MATIC)</span>{" "}
+            </h4>
+            <p className="text-xs "> 1 {Coin.katSayi} {Coin.name} = 1/{Coin.katSayi} BNB </p>
+            <input
+              type="number"
+              placeholder="Type here"
+              id="swapToMatic"
+              className="input input-bordered w-full max-w-xs text-gray-800"
+            />
+            <button onClick={swapToMatic} className="btn btn-secondary max-w-xs w-full">Swap to BNB</button>
+          </div>
+          */}
+
         </div>
       </div>
+
       <Stack spacing={2} sx={{ width: "100%" }}>
         <Snackbar
           open={succ}
@@ -581,6 +956,8 @@ export default function Winner() {
           </Alert>
         </Snackbar>
       </Stack>
+
+
     </>
   )
 }

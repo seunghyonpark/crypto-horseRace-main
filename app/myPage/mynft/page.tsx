@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { AiOutlineUser } from "react-icons/ai";
 
 import axios from 'axios';
-import Punklist from "../../../../components/Punklist/Punklist";
+import Punklist from "@/components/Punklist/Punklist";
 
 
 import Swal from "sweetalert2";
@@ -25,6 +25,20 @@ import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/common-evm-utils";
 
 import { updateNftWalletAddress } from '@/libs/models/user';
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+
+import { useRouter } from "next/navigation";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 
 const Transition = React.forwardRef(function Transition(
@@ -42,6 +56,7 @@ const Transition = React.forwardRef(function Transition(
 
 
 export default function Mynft() {
+
     const [requests, setRequests] = useState<any>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedUser, setSelectedUser] = useState<any>();
@@ -64,6 +79,46 @@ export default function Mynft() {
     const [selectedPunk, setSelectedPunk] = useState(0);
 
     const [nfts, setNfts] = useState<any>();
+    const [selectedNft, setSelectedNft] = useState<any>();
+
+    const [waiting, setWaiting] = useState<boolean>(false);
+
+
+    const [succ, setSucc] = useState(false);
+    const [err, setErr] = useState(false);
+    const [errMsg, setErrMsg] = useState<String>("");
+    const router = useRouter();
+
+    const handleClickSucc = () => {
+      setSucc(true);
+    };
+
+    const handleCloseSucc = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setSucc(false);
+    };
+
+    const handleClickErr = () => {
+        setErr(true);
+    };
+
+    const handleCloseErr = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setErr(false);
+    };
+
 
     const columns: GridColDef[] = [
         {
@@ -298,36 +353,43 @@ export default function Mynft() {
 
 
     useEffect(() => {
-        setMetaMask(isMetaMaskInstalled());
-        checkAccount();
 
-        const { ethereum }: any = window;
+      
+      setMetaMask(isMetaMaskInstalled());
 
-        if (metamusk == true) {
+      checkAccount();
 
-          ethereum.on("networkChanged", function (networkId: any) {
-            if (networkId == 97) {
-              setNetwork(true);
-            } else {
-              setNetwork(false);
-            }
-          });
-    
-          ethereum.on("accountsChanged", function (accounts: any) {
+      const { ethereum }: any = window;
 
-            console.log("accountsChanged", accounts);
+      if (metamusk == true) {
 
-            if (accounts.length !== 0) {
+        ethereum.on("networkChanged", function (networkId: any) {
 
-              setWallet(accounts[0]);
+          console.log("networkChanged networkId=", networkId);
+          
 
-            } else {
-              setWallet(null);
-            }
-          });
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, []);
+          if (networkId == 97) {
+            setNetwork(true);
+          } else {
+            setNetwork(false);
+          }
+        });
+  
+        ethereum.on("accountsChanged", function (accounts: any) {
+
+          console.log("accountsChanged", accounts);
+
+          if (accounts.length !== 0) {
+
+            setWallet(accounts[0]);
+
+          } else {
+            setWallet(null);
+          }
+        });
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
   //? METAMASK
@@ -480,7 +542,7 @@ export default function Mynft() {
   }
 
   
-  /********************************************************** 
+
   useEffect(() => {
     if (isMetaMaskInstalled()) {
       wrongWallet();
@@ -492,7 +554,7 @@ export default function Mynft() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  */
+  
 
   
 
@@ -510,46 +572,6 @@ export default function Mynft() {
       }
     }
   }
-
-
-
-
-  /*
-    const updateUserNftWallet = async () => {
-      console.log("updateUserNftWallet");
-
-      const formInput = {
-          method: 'updateNftWallet',
-          API_KEY: process.env.API_KEY,
-          userToken: getCookie("user"),
-          nftWalletAddress: nftWallet,
-      };
-      fetch("/api/user", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formInput),
-      })
-      .then((res) => res.json())
-      .then((data) => {
-          if (data.status) {
-  
-            alert("NFT Wallet Address Updated");
-              //handleClickSucc();
-              //router.push("/myPage/login");
-          }
-          else {
-
-            alert("NFT Wallet Address Update Failed");
-              //setErrMsg(data.message);
-              //handleClickErr();
-          }
-          //todo
-          // handleClickSucc();
-      });
-  
-    }
-
-    */
 
 
 
@@ -619,6 +641,9 @@ export default function Mynft() {
 
 
     const getNFTs = async () => {
+
+      setWaiting(true);
+
       const res = await fetch('/api/nft', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -629,79 +654,22 @@ export default function Mynft() {
               walletAddress: nftWallet,
           })
       })
-      const nfts = await res.json()
+      const data = await res.json()
 
+      ////console.log("NFT message", data.message);
+      ////console.log("NFT data", data.data);
      
-      ///setGame(data.game)
-    }
+      if (data.data?.length > 0) {
+        setNfts(data.data);
 
-    /*
-    const getNFTs = async () => {
-      await Moralis.start({
-        apiKey: "9NN866AniB6YJfboJlS3uOSY9vouXnilnqaz2jH7K7fVjKd0poxLr4Hs8BwyF9UV",
-        // ...and any other configuration
-      });
+        setSelectedNft(data.data[0]);
+      }
 
-      console.log("Moralis nftWallet====", nftWallet)
-    
-      const address = nftWallet;
-    
-      ///const chain = EvmChain.ETHEREUM;
-      const chain = EvmChain.BSC_TESTNET;
-    
-      const response = await Moralis.EvmApi.nft.getWalletNFTs({
-        address,
-        chain,
-      });
-    
-      console.log(response.toJSON());
-
-      ///const nfts = response.toJSON();
-
-      setNfts(response.toJSON().result);
+      setWaiting(false);
 
     }
-    */
 
-
-    /*
-    https://api.bscscan.com/api
-   ?module=account
-   &action=addresstokennftinventory
-   &address=0x99817ce62abf5b17f58e71071e590cf958e5a1bf
-   &contractaddress=0x5e74094cd416f55179dbd0e45b1a8ed030e396a1
-   &page=1
-   &offset=100
-   &apikey=PYSG4QII57SQD87QESCZXJZ1NC84PBDUVZ 
-   
-    
-    const getNFTs = async () => {
-      const options = {
-        method: "GET",
-        url: "https://testnets-api.opensea.io/api/v1/assets",
-        params: {
-          order_direction: "asc",
-          offset: "0",
-          limit: "20",
-          asset_contract_address: "0xEb9278Ff741c67880cbD61852A31f4f5BE7B5F46",
-        },
-      };
-
-      axios
-        .request(options)
-        .then(function (response) {
-          
-          console.log("response", response.data.assets);
-
-          setPunkListData(response.data.assets);
-        })
-        .catch(function (error) {
-          console.error("err: ", error);
-        });
-    };
-    */
-
-    if (nftWallet) {
+    if (nftWallet !== "0x") {
       getNFTs();
     }
 
@@ -724,6 +692,57 @@ export default function Mynft() {
             userToken: item.userToken,
         }
     })
+
+
+    const selectNFT = async (asset: any) => {
+
+      setSelectedNft(asset);
+	
+    };
+
+
+    const updateProfileImage = async () => {
+      console.log("updateProfileImage");
+
+      const formInput = {
+          method: 'updateProfileImage',
+          API_KEY: process.env.API_KEY,
+          userToken: getCookie("user"),
+          img: selectedNft,
+      };
+      fetch("/api/user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formInput),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+          if (data.user) {
+
+            getUser();
+  
+            ///alert("Profile image Updated");
+       
+
+            setSucc(data.message);
+            handleClickSucc();
+
+          } else {
+
+            setErrMsg(data.message);
+            handleClickErr()
+
+            ////alert("Profile image Update Failed");
+              //setErrMsg(data.message);
+              //handleClickErr();
+          }
+          //todo
+          // handleClickSucc();
+      });
+  
+    }
+
+
     
 
     return (
@@ -748,15 +767,27 @@ export default function Mynft() {
 */}
 
 
-
-            <div className='flex flex-col p-10 mt-0 text-gray-200'>
-
+<div className='flex flex-row itmes-center justify-center '>
 
 
-                <div className="w-full border rounded-lg flex flex-col items-center justify-center p-2 gap-1 py-5">
-                    <h4 className="  text-red-500 text-xl font-bold">
-                        My NFT
+            <div className='w-full p-10 mt-0 text-gray-200 lg:w-[800px] itmes-center justify-center '>
+
+
+
+                <div className="w-full border rounded-lg flex flex-col items-center justify-center gap-1 py-5">
+                    <h4 className="  text-white text-xl font-bold">
+                        My Profile
                     </h4>
+
+                    {user &&
+                    <Image
+                      src={user?.img}
+                      alt="nft"
+                      width={200} height={200}
+                      className="rounded-md"
+                    >
+                    </Image>
+                    }
 
                 </div>
 
@@ -765,27 +796,27 @@ export default function Mynft() {
 
 
 
+                <div className=" flex flex-col items-center justify-center md:w-1/3 bg-white rounded-lg shadow-md p-4 m-5">
 
-
-
-                <div className="flex flex-col justify-center h-full md:w-1/3 bg-white rounded-lg shadow-md p-4 m-5">
-
-<div className="pb-10 space-y-3">
-    <div className="flex gap-2 items-center pl-4">
-        <AiOutlineUser className="fill-green-500 w-5 h-5" />
-        <h2 className="text-gray-500 text-lg">
-            Connect Wallet
-        </h2>
-    </div>
-    <div className="w-full relative h-[1px] border flex items-center justify-center">
-        <div className="absolute bg-green-500 left-0 w-1/3 h-[1px] z-40"></div>
-        <div className="absolute left-1/3  w-2 h-2 rounded-full bg-green-500 z-50"></div>
-    </div>
-</div>
+                  <div className="pb-10 space-y-3">
+                      <div className="flex gap-2 items-center pl-4">
+                          <AiOutlineUser className="fill-green-500 w-5 h-5" />
+                          <h2 className="text-gray-500 text-lg">
+                              Connect Wallet
+                          </h2>
+                      </div>
+                      <div className="w-full relative h-[1px] border flex items-center justify-center">
+                          <div className="absolute bg-green-500 left-0 w-1/3 h-[1px] z-40"></div>
+                          <div className="absolute left-1/3  w-2 h-2 rounded-full bg-green-500 z-50"></div>
+                      </div>
+                  </div>
 
 {/* //todo BU KISIMA METAMASK EKLENİCEK */}
+
 {metamusk == true ? (
+
     network == true ? (
+
         wallet ? (
             <Button
               className="w-full text-white text-center justify-center h-500 p-5 items-center bg-[#24252f] hover:bg-[#141111] rounded-md flex flex-col"
@@ -850,20 +881,97 @@ export default function Mynft() {
 
 }
 
-            <div className='mt-5 text-xl text-yellow-500'>
+
+            {!nfts &&
+
+              <div className='mt-5 text-xl text-yellow-400'>
               Connecting Service will be updated soon!
+              </div>
+                
+            } 
+
+
+          <div className="w-full border rounded-lg flex flex-col items-center justify-center gap-1 py-5 mt-5">
+                    <h4 className="  text-yellow-400 text-xl font-bold">
+                        My NFTs
+                    </h4>
+
+          </div>
+
+
+{waiting ? (
+  
+      <>
+        <div
+          className="flex mt-10 min-w-full min-h-full justify-center items-center
+            text-white text-2xl font-bold"
+        >
+          Loading NFTs ...
+
+
+        </div>
+
+        <div
+        className="flex mt-5 min-w-full min-h-full justify-center items-center
+          text-white text-2xl font-bold"
+      >
+
+        <Image
+          src="/rabbit_Loading.gif"
+          width={100}
+          height={100}
+          alt="Metamask"
+        />
+
+      </div>
+        </>
+
+      ) : null}
+
+
+
+            <div className="mt-4 grid justify-center gap-5 grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mb-5">
+
+              {nfts?.map((asset:any) => (
+
+                <div key={asset}
+                  onClick={() => selectNFT(asset)}
+                  className={
+                    `${ selectedNft === asset ? 
+                      "w-20 h-20 rounded-md border-2 border-yellow-400" : "w-20 h-20 border-2 border-transparent"
+                    }`
+                  }
+                >
+
+                  <Image
+                    src={asset}
+                    alt="nft"
+                    width={200} height={200}
+                    className="rounded-md">
+                    
+                  </Image>
+                </div>
+
+              ))}
+            
             </div>
 
-            {nfts?.map((asset:any) => (
-              <div key={asset.token_uri}>
-                <div>
-                 <div>{asset?.token_uri}</div>
+            {nfts &&
+              <Button
+                variant="contained" color="primary" startIcon={<AccountBoxIcon />}
+                className=" w-full "
+                onClick={() => {
+                    ///setShowModal(false), router.push('/gameT2E/help')
+
+                    updateProfileImage()
+                }}
+                >
+                Update My Profile Image
+              </Button>
+            }
 
 
 
-                </div>
-              </div>
-            ))}
 
                 
                 {/*
@@ -883,13 +991,36 @@ export default function Mynft() {
                 */}
                 
 
-                
+      
 
             </div>
 
-        
+</div>
 
-
+            <Stack spacing={2} sx={{ width: "100%" }}>
+                <Snackbar
+                    open={succ}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSucc}
+                >
+                    <Alert
+                        onClose={handleCloseSucc}
+                        severity="success"
+                        sx={{ width: "100%" }}
+                    >
+                        You have successfully updated your profile image!
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={err} autoHideDuration={6000} onClose={handleCloseErr}>
+                    <Alert
+                        onClose={handleCloseErr}
+                        severity="error"
+                        sx={{ width: "100%" }}
+                    >
+                        {errMsg}
+                    </Alert>
+                </Snackbar>
+            </Stack>
 
 
 

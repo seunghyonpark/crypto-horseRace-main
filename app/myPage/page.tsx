@@ -32,8 +32,6 @@ import StockTools from "highcharts/modules/stock-tools.js";
 import HollowCandleStick from "highcharts/modules/hollowcandlestick.js";
 
 
-import Footer from "@/components/layout/footer";
-import Navbar from "@/components/layout/navbar";
 
 
 // code for web3
@@ -50,9 +48,9 @@ import {
     Web3Button,
   } from "@thirdweb-dev/react";
   import { BigNumber, utils } from "ethers";
-  import { parseIneligibility } from "@/utils/parseIneligibility";
+  import { parseIneligibility } from "../../utils/parseIneligibility";
   
-  ///import Modal from '@/components/Modal';
+  import Modal from '../../components/Modal';
 
 
   // Put Your NFT Drop Contract address from the dashboard here
@@ -67,7 +65,7 @@ import {
 // Bebas Neue
 
 
-export default function Home() {
+export default function MyPage() {
 
     const [status, setStatus] = useState<any>();
 
@@ -594,11 +592,6 @@ startTime=1611619200000
     return (
         <>
 
-<header>
-                    <Navbar />
-                </header>
-
-
           <div className='flex flex-col w-full h-full items-center justify-center relative
          
           p-5
@@ -606,9 +599,7 @@ startTime=1611619200000
 
           bg-[url(/landing_background.jpg)] bg-repeat bg-contain 
 
-          '>
-
-
+          '>      
 
 
 {/*
@@ -873,14 +864,7 @@ Place a bet with your tokens based on how strong you think your hand is.
       </div>
 
 
-
-
-
         </div>
-
-        <footer>
-            <Footer />
-        </footer>
 
 
         </>

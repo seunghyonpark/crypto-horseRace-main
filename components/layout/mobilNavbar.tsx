@@ -822,7 +822,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
           
                 <Link className='ml-3'
-                  href={"/Landing"}>
+                  href={"/"}>
                     <Image src={"/cracle_ci.png"} width={25} height={25} alt="logo" />
                 </Link>
 
@@ -925,7 +925,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                         >
 
                           <Link
-                              href={"/Landing/deposit"}
+                              href={"/myPage/deposit"}
                               className={"pr-3 "}
                           >
                               <Image src={"/wallet-icon-white.png"} width={15} height={50} alt="logo" />
@@ -943,7 +943,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
 
                     {!user && <Link
-                            href={"/Landing/login"}
+                            href={"/myPage/login"}
                             className={`text-[15px] text-[#9293A6]  border-t-2 border-green-500 p-2`}
                         >
                             Login
@@ -985,7 +985,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   <div
                     className="w-full text-white text-center justify-left pl-3 p-2 items-left bg-red-900 hover:bg-[#141111] flex flex-row"
                     onClick={() => {
-                      setShowModal(false), router.push('/Landing/mynft')
+                      setShowModal(false), router.push('/myPage/mynft')
                   }}
                   >
                       <Image
@@ -1006,7 +1006,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                     <div
                       className="w-full text-white text-center justify-center p-5 items-center bg-red-900 hover:bg-[#141111] flex flex-row"
                       onClick={() => {
-                        setShowModal(false), router.push('/Landing/mynft')
+                        setShowModal(false), router.push('/myPage/mynft')
                       }}
                       >
                         <Image
@@ -1058,7 +1058,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                             setShowModal(false);
                             deleteCookie('user');
                             //////getUser();
-                            router.push('/Landing');
+                            router.push('/');
                           }}
                       >
                           Log Out
@@ -1072,7 +1072,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   <div
                     className={` w-full pt-3 items-left text-base text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing/depositRequests')
+                        setShowModal(false), router.push('/myPage/depositRequests')
                     }}
                     >
                      Deposit
@@ -1081,7 +1081,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   <div
                     className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing/withdrawRequests')
+                        setShowModal(false), router.push('/myPage/withdrawRequests')
                     }}
                     >
                       Withdrawal
@@ -1090,7 +1090,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   <div
                     className={`w-full pt-1 items-left text-base text-white `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing/betHistory')
+                        setShowModal(false), router.push('/myPage/betHistory')
                     }}
                     >
                       Bet History
@@ -1099,7 +1099,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
                   <div
                     className={` disabled pt-1 w-full items-left text-base text-[#A9A9A9] `}
                     onClick={() => {
-                        setShowModal(false), router.push('/Landing')
+                        setShowModal(false), router.push('/')
                     }}
                     >
                       Game Ranking

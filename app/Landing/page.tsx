@@ -580,8 +580,14 @@ startTime=1611619200000
 ///const [chartData, setChartData] = useState<any>();
 
 
+  useEffect(() => {
 
+    
+    setTimeout(() => {
+      push( '/' );
+    }, 10000);
 
+  });
 
 
 
@@ -602,7 +608,13 @@ startTime=1611619200000
 
           '>      
 
-          <h3 className='text-xl text-green-500 mb-10'>Sorry. This page has been moved.</h3>
+          <h3 className='text-xl text-green-500 mb-10'>
+          The main address of the website is
+to https://craclegamez.io/
+moved.
+It moves automatically after 10 seconds.
+            
+          </h3>
 
           <button
             onClick={() => {

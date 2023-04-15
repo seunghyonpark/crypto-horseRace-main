@@ -228,11 +228,11 @@ export default function Race({socket, username, currentPrice, betPrice}: {socket
 
             if (parseInt(data) > 0) { // You win
 
-                push( '/Landing/winner?bet=' + selectedSide + '&betAmount=' + betAmount );
+                push( '/gameT2E/winner?bet=' + selectedSide + '&betAmount=' + betAmount );
 
             } else { // You lose
 
-                push( '/Landing/loser?bet=' + selectedSide + '&betAmount=' + betAmount );
+                push( '/gameT2E/loser?bet=' + selectedSide + '&betAmount=' + betAmount );
             }
 
         });

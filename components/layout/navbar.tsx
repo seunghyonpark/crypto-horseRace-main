@@ -278,6 +278,7 @@ export default function Navbar() {
             getGame();
         }
         */
+        getGame();
 
         setInterval(() => {
             if (hasCookie("user") && user?.username) {

@@ -46,6 +46,8 @@ export default function Navbar() {
 
     const [status, setStatus] = useState<any>();
 
+    const [socket, setSocket] = useState<any>();
+
 
 
     useEffect(() => socketInitializer(), []);
@@ -55,6 +57,8 @@ export default function Navbar() {
       const socket = io(`${SocketEnum.id}`, {
           transports: ["websocket"],
       });
+
+      setSocket(socket);
 
       socket.on("connect", () => {
           console.log("mobileNavbar connect");
@@ -124,6 +128,17 @@ export default function Navbar() {
     }
 
 
+    useEffect(() => {
+
+        return (() => {
+          if (socket) {
+            socket.disconnect();
+          }
+        });
+  
+    }, [socket]);
+
+
 
     const [succ, setSucc] = useState(false);
     const [err, setErr] = useState(false);
@@ -163,6 +178,7 @@ export default function Navbar() {
 
         setErr(false);
     };
+
 
 
 
@@ -211,48 +227,14 @@ export default function Navbar() {
             
         }
     })
+    
 
-
-
-    const getGame = async () => {
-
-        const res = await fetch('/api/game', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            cache: 'no-store',
-            body: JSON.stringify({
-                method: "getGameByUsername",
-                API_KEY: process.env.API_KEY,
-                username: user?.username,
-            })
-        })
-        const data = await res.json()
-
-        console.log("=====navbar getGame", data);
-
-        setGame(data.game)
-    }
 
 
     
     useEffect(() => {
 
-        /*
-        if (hasCookie("user") && user?.username) {
-            //getGame();
-        }
-        */
-
-        /*
-        setInterval(() => {
-            if (hasCookie("user") && user?.username) {
-                getGame();
-            }
-        }, 10 * 1000)
-        */
-
         const getGame = async () => {
-
 
             const res = await fetch('/api/game', {
                 method: 'POST',
@@ -267,18 +249,14 @@ export default function Navbar() {
             const data = await res.json()
     
             console.log("=====navbar getGame", data);
-    
-            if (data.game) {
-                setGame(data.game)
-            }
+
+            setGame(data.game)
+
         }
 
-        /*
         if (hasCookie("user") && user?.username) {
             getGame();
         }
-        */
-        getGame();
 
         setInterval(() => {
             if (hasCookie("user") && user?.username) {
@@ -288,7 +266,7 @@ export default function Navbar() {
         
 
     },[status, user?.username]);
-
+    
 
 
     useEffect(() => {

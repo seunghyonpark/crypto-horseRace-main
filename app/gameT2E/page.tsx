@@ -89,6 +89,8 @@ export default function GameT2E() {
     const [socket, setSocket] = useState<any>();
 
     const [username, setUsername] = useState<any>();
+
+    const [user, setUser] = useState<IUser>();
     
     const MySwal = withReactContent(Swal);
 
@@ -125,6 +127,8 @@ export default function GameT2E() {
                 body: JSON.stringify(inputs)
               })
               const user = await res.json();
+
+              setUser(user);
               
               setUsername(user.user.user.username);
 
@@ -701,6 +705,44 @@ useEffect(() => {
 
 
   const [showModal, setShowModal] = useState(false);
+
+
+
+
+  useEffect(() => {
+
+    const getGame = async () => {
+
+
+        const res = await fetch('/api/game', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            cache: 'no-store',
+            body: JSON.stringify({
+                method: "getGameByUsername",
+                API_KEY: process.env.API_KEY,
+                username: user?.username,
+            })
+        })
+        const data = await res.json()
+
+        console.log("=====navbar getGame", data);
+
+        if (data.game) {
+          setStatus(true);
+        } else {
+          setStatus(false);
+        }
+    }
+
+    if (hasCookie("user") && user?.username) {
+      getGame();
+    }
+
+    
+
+  },[user?.username]);
+
 
 
 

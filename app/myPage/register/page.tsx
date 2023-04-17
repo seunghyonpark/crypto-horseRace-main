@@ -22,12 +22,28 @@ import * as Yup from "yup";
 
 // Yup schema to validate the form
 const schema = Yup.object().shape({
-    email: Yup.string().required().email(),
-    pass1: Yup.string().required().min(7),
-    pass2: Yup.string().required().min(7),
-    username: Yup.string().required().min(5).max(10),
+    email: Yup.string()
+        .required('Email is required')
+        .email(),
+    pass1: Yup.string()
+        .required()
+        .min(7),
+    pass2: Yup.string()
+        .required()
+        .min(7),
+    username: Yup.string()
+        .required("Nick name is required")
+        .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
+        .min(5, "Nick name must be at least 5 characters")
+        .max(10),
+
 });
 
+/*
+    username: Yup.string().required().min(5).max(10).matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name"),
+// Match only letters
+'Lüdenscheid'.match(/[\p{Letter}\p{Mark}]+/gu)
+*/
 
 
 export default function RegisterPage() {

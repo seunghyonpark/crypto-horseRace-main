@@ -34,21 +34,41 @@ export default function UserList() {
       headerAlign: "center",
     },
     {
-      field: "username",
-      headerName: "Username",
+      field: "email",
+      headerName: "Email",
       flex: 0.2,
-      minWidth: 150,
+      minWidth: 120,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "username",
+      headerName: "Nick Name",
+      flex: 0.2,
+      minWidth: 80,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "coin",
-      headerName: "Coin balance",
+      headerName: "Balance (CRA)",
       flex: 0.1,
-      minWidth: 150,
+      minWidth: 100,
+      align: "center",
+      headerAlign: "center",
+      valueFormatter: (params) => {
+        return new Number(params.value).toFixed(2);
+      } ,
+    },
+    {
+      field: "walletAddress",
+      headerName: "Deposit Address",
+      flex: 0.2,
+      minWidth: 200,
       align: "center",
       headerAlign: "center",
     },
+
 
     {
       field: "admin",
@@ -62,6 +82,8 @@ export default function UserList() {
         return <Chip label={`${params.value ? "Admin" : "User"}`} color={`${params.value ? "success" : "info"}`} />;
       },
     },
+
+    /*
     {
       field: "action",
       headerName: "Edit",
@@ -92,6 +114,7 @@ export default function UserList() {
         );
       },
     },
+    */
 
 
   ];
@@ -144,14 +167,16 @@ export default function UserList() {
       username: username,
       email: email,
       walletAddress: walletAddress,
-      deposit: coinBalance,
-      maticBalance: maticBalance,
+      ////deposit: coinBalance,
+      ////maticBalance: maticBalance,
       admin: admin,
       pass1: selectedUser.pass1,
       pass2: selectedUser.pass2,
       img: selectedUser.img,
     }
+
     handleClose();
+
     Swal.fire({
       title: 'Do you want to saved changes?',
       confirmButtonText: 'Save',
@@ -223,17 +248,17 @@ export default function UserList() {
     return {
       kayitId: item._id,
       id: i + 1,
-      email1: item.email,
+      email: item.email,
       img: item.img,
       admin: item.admin,
       status: item.status,
-      wallet: item.walletAddress,
+      walletAddress: item.walletAddress,
       username: item.username,
-      pass1: item.pass1,
-      pass2: item.pass2,
-      userToken: item.userToken,
+      //pass1: item.pass1,
+      //pass2: item.pass2,
+      //userToken: item.userToken,
       coin: item.deposit,
-      matic: item.maticBalance,
+      //matic: item.maticBalance,
 
     }
   })
@@ -273,61 +298,6 @@ export default function UserList() {
           >
             <DialogTitle> User Edit Form</DialogTitle>
             <DialogContent className='space-y-3'>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="username"
-                label="Username"
-                type="text"
-                fullWidth
-                defaultValue={selectedUser?.username}
-                color='secondary'
-                variant="standard"
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="email"
-                label="E-Mail"
-                type="text"
-                fullWidth
-                defaultValue={selectedUser?.email1}
-                color='secondary'
-                variant="standard"
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="walletAddress"
-                label="Wallet Address"
-                type="text"
-                fullWidth
-                defaultValue={selectedUser?.wallet}
-                color='secondary'
-                variant="standard"
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="coinBalance"
-                label="Coin Balance"
-                type="number"
-                fullWidth
-                defaultValue={selectedUser?.coin}
-                color='secondary'
-                variant="standard"
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="maticBalance"
-                label="BNB Balance"
-                type="number"
-                fullWidth
-                defaultValue={selectedUser?.matic}
-                color='secondary'
-                variant="standard"
-              />
 
               <div className='flex gap-1 items-center'>
                 <input type="checkbox" defaultChecked={selectedUser?.admin} id='admin' className="checkbox checkbox-primary" />
@@ -336,7 +306,7 @@ export default function UserList() {
 
             </DialogContent>
             <DialogActions>
-              <Button color='error' onClick={deleteUser}>Delete</Button>
+
               <Button onClick={handleClose}>Close</Button>
               <Button color='success' onClick={updateUser}>Save</Button>
             </DialogActions>

@@ -785,7 +785,27 @@ const updateWalletAddress = async () => {
             {user?.walletAddress &&
                 <>
                     <div className='w-full flex flex-row items-center justify-center centent-center'>
+
+                      
                         <CC content={user?.walletAddress}/>
+                    
+
+{/*
+                        <Button
+                          color="success" variant='contained' className='bg-green-500'
+                          onClick={() =>
+                            {
+                              navigator.clipboard.writeText(user?.walletAddress);
+                              setSucc(true);
+                              setSuccessMsgSnackbar("Your wallet address copied to clipboard");
+                            }
+                          }
+                      >
+                          Copy
+                      </Button>
+
+                      */}
+
                     </div>
 
                     <div className='w-full flex flex-row items-center justify-center centent-center'>

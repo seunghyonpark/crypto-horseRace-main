@@ -555,12 +555,17 @@ export default function Help() {
             </div>
 
             <div className=" text-sm text-yellow-400">
-            1. After press the ‘Place Bet’ button, you should transfer CRA token within 10 sec. <br></br>
+            • After press the ‘Place Bet’ button, you should transfer CRA token within 10 sec. <br></br>
 
-            2. Refund is not possible if time is exceeded.<br></br>
+            • Refund is not possible if time is exceeded.<br></br>
 
-            3. Virtual assets are not legal tender, so their value is not guaranteed by a specific entity
+            • Virtual assets are not legal tender, so their value is not guaranteed by a specific entity<br></br>
+
+            • If the Entry Price and Now Price(Included the second decimal point) are the same, it is treated as LOSE.
             </div>
+
+
+
   
 
 {/*

@@ -29,7 +29,7 @@ export default function AdminUsers() {
     return (
         <>
             <div className='flex flex-col items-center gap-3  border rounded-lg p-4 w-full h-full'>
-                <h4>Users</h4>
+                <div className='text-xl'> Users</div>
                 <p>Current: <span className='text-blue-500'>{data}</span></p>
                 <Link href="/admin/dashboard/users" className='btn btn-md btn-primary'>See All</Link>
             </div>

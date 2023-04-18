@@ -27,7 +27,7 @@ export default function RootLayout({
             body: JSON.stringify(inputs)
         })
         const user = await res.json()
-        setUser(user.user.user.admin)
+        setUser(user.user.user)
     }
 
     useEffect(() => {

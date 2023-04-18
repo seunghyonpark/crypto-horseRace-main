@@ -5,6 +5,9 @@ import { GridColDef, GridApi, GridCellValue, DataGrid } from '@mui/x-data-grid';
 import { getCookie } from 'cookies-next';
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
+import { IUser } from "@/libs/interface/user";
+
+import ModalAlert from '@/components/ModalAlert';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -19,15 +22,59 @@ const Transition = React.forwardRef(function Transition(
 
 
 export default function UserList() {
+
   const [users, setUsers] = useState<any>([]);
   const [open, setOpen] = React.useState(false);
+
   const [selectedUser, setSelectedUser] = useState<any>();
+
+  const [selectedUserToken, setSelectedUserToken] = useState<any>();
+  const [userAdmin, setUserAdmin] = useState<any>();
+
+  ///const [showModal, setShowModal] = useState(false);
+
+
+
+  const [user, setUser] = useState<IUser>();
+
+  const getUser = async () => {
+    const inputs = {
+        method: 'getOne',
+        API_KEY: process.env.API_KEY,
+        userToken: getCookie('admin')
+    }
+    const res = await fetch('/api/user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(inputs)
+    })
+    const user = await res.json()
+    setUser(user.user.user)
+
+    console.log(user.user.user);
+
+  }
+
+  useEffect(() => {
+
+    getUser();
+
+  }, []);
+
 
 
   const columns: GridColDef[] = [
     {
       field: "id",
       headerName: "ID",
+      flex: 0.01,
+      minWidth: 50,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "userToken",
+      headerName: "User Token",
       flex: 0.01,
       minWidth: 50,
       align: "center",
@@ -78,12 +125,15 @@ export default function UserList() {
       type: "number",
       flex: 0.1,
       minWidth: 75,
+
       renderCell(params) {
         return <Chip label={`${params.value ? "Admin" : "User"}`} color={`${params.value ? "success" : "info"}`} />;
       },
     },
 
-    /*
+
+   
+    
     {
       field: "action",
       headerName: "Edit",
@@ -91,10 +141,70 @@ export default function UserList() {
       headerAlign: "center",
       sortable: false,
       width: 125,
+
+
       renderCell: (params) => {
+
+        const onClick = (e:any) => {
+          e.stopPropagation(); // don't select this row after clicking
+  
+          const api: GridApi = params.api;
+          const thisRow: Record<string, GridCellValue> = {};
+  
+          api
+            .getAllColumns()
+            .filter((c) => c.field !== "__check__" && !!c)
+            .forEach(
+              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+            );
+  
+
+          setSelectedUserToken(thisRow.userToken);
+
+          setUserAdmin(thisRow.admin);
+
+          console.log("selectedUserToken: ", selectedUserToken);
+          console.log("userAdmin: ", userAdmin);
+
+      
+
+          //handleClickOpen()
+
+
+          alert(JSON.stringify(thisRow, null, 4));
+
+
+          //setShowModal(!showModal);
+
+
+          return;
+
+        };
+  
+        return (
+          <></>
+
+        /*
+          <Button
+            color="success" variant='contained' className='bg-green-500'
+            onClick={onClick }>Edit
+        
+          </Button>
+        */
+
+        )
+      }
+
+
+/*
+      renderCell: (params) => {
+
         const onClick = (e: any) => {
+
           e.stopPropagation(); // don't select this row after clicking
 
+
+          
           const api: GridApi = params.api;
           const thisRow: Record<string, GridCellValue> = {};
 
@@ -104,25 +214,52 @@ export default function UserList() {
             .forEach(
               (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
             );
+          
+
+          ///console.log("params.row: ", params.row);
+
 
           return duzenle(params.row);
         };
-        return (
-          <Button onClick={onClick} color="success" variant='contained' className='bg-green-500'>
-            Edit
-          </Button>
-        );
+
+
+        if (user?.email === 'craclepro@gmail.com') {
+          return (
+            <Button
+              //onClick={onClick}
+              onClick={
+                (e) => { setSelectedUser(params.row); handleClickOpen() }
+              }
+              color="success" variant='contained' className='bg-green-500'>
+              Edit
+            </Button>
+          )
+        }
+        
+
       },
+*/
+
+
     },
-    */
+    
+  
 
 
   ];
 
   function duzenle(e: any) {
-    setSelectedUser(e)
+
+    console.log("duzenle e: ", e);
+
+    setSelectedUser(e);
+
+    console.log("selectedUser: ", selectedUser);
+
+    
     handleClickOpen()
   }
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -153,26 +290,32 @@ export default function UserList() {
   }
 
   const updateUser = async () => {
-    let username = (document.getElementById("username") as HTMLInputElement).value
-    let email = (document.getElementById("email") as HTMLInputElement).value
-    let walletAddress = (document.getElementById("walletAddress") as HTMLInputElement).value
-    let coinBalance = (document.getElementById("coinBalance") as HTMLInputElement).value
-    let maticBalance = (document.getElementById("maticBalance") as HTMLInputElement).value
+    //let username = (document.getElementById("username") as HTMLInputElement).value
+    //let email = (document.getElementById("email") as HTMLInputElement).value
+    //let walletAddress = (document.getElementById("walletAddress") as HTMLInputElement).value
+    //let coinBalance = (document.getElementById("coinBalance") as HTMLInputElement).value
+    //let maticBalance = (document.getElementById("maticBalance") as HTMLInputElement).value
     let admin = (document.getElementById("admin") as HTMLInputElement).checked
+
+
+    console.log("selectedUser.userToken: ", selectedUser?.userToken)
 
     const formInputs = {
       method: "update",
       API_KEY: process.env.API_KEY,
-      userToken: selectedUser.userToken,
-      username: username,
-      email: email,
-      walletAddress: walletAddress,
+      
+      //userToken: selectedUser.userToken,
+      userToken: selectedUserToken,
+
+      //username: username,
+      //email: email,
+      //walletAddress: walletAddress,
       ////deposit: coinBalance,
       ////maticBalance: maticBalance,
       admin: admin,
-      pass1: selectedUser.pass1,
-      pass2: selectedUser.pass2,
-      img: selectedUser.img,
+      //pass1: selectedUser.pass1,
+      //pass2: selectedUser.pass2,
+      //img: selectedUser.img,
     }
 
     handleClose();
@@ -221,7 +364,8 @@ export default function UserList() {
         const formInputs = {
           method: "delete",
           API_KEY: process.env.API_KEY,
-          userToken: selectedUser.userToken,
+          ///userToken: selectedUser.userToken,
+          userToken: selectedUserToken,
         }
         fetch('/api/user', {
           method: "POST",
@@ -256,7 +400,7 @@ export default function UserList() {
       username: item.username,
       //pass1: item.pass1,
       //pass2: item.pass2,
-      //userToken: item.userToken,
+      userToken: item.userToken,
       coin: item.deposit,
       //matic: item.maticBalance,
 
@@ -288,7 +432,7 @@ export default function UserList() {
           </div>
         </div>
 
-        {selectedUser && (
+        {selectedUserToken && (
           <Dialog
             open={open}
             TransitionComponent={Transition}
@@ -296,22 +440,30 @@ export default function UserList() {
             onClose={handleClose}
             aria-describedby="alert-dialog-slide-description"
           >
-            <DialogTitle> User Edit Form</DialogTitle>
+            <DialogTitle> User Edit Form  </DialogTitle>
             <DialogContent className='space-y-3'>
 
               <div className='flex gap-1 items-center'>
-                <input type="checkbox" defaultChecked={selectedUser?.admin} id='admin' className="checkbox checkbox-primary" />
+                <input type="checkbox" defaultChecked={userAdmin} id='admin' className="checkbox checkbox-primary" />
                 <p>Admin?</p>
               </div>
 
             </DialogContent>
             <DialogActions>
 
+            {user?.email === 'craclepro@gmail.com' && (
+              <Button onClick={deleteUser}>DELETE</Button>
+            )}
+
               <Button onClick={handleClose}>Close</Button>
               <Button color='success' onClick={updateUser}>Save</Button>
             </DialogActions>
           </Dialog>
         )}
+
+
+
+
       </>
     </>
   )

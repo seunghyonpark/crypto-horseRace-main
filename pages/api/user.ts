@@ -192,30 +192,32 @@ export default async function handler(
 
     const {
       userToken,
-      username,
-      email,
-      pass1,
-      pass2,
-      deposit,
-      img,
+      //username,
+      //email,
+      //pass1,
+      //pass2,
+      //deposit,
+      //img,
       admin,
-      newPassToken,
-      maticBalance,
-      walletAddress,
+      //newPassToken,
+      //maticBalance,
+      //walletAddress,
     } = req.body;
+
+    console.log("update userToken", userToken)
 
     const user = await updateUser(
       userToken,
-      username,
-      email,
-      pass1,
-      pass2,
-      deposit,
-      img,
+      //username,
+      //email,
+      //pass1,
+      //pass2,
+      //deposit,
+      //img,
       admin,
-      newPassToken,
-      maticBalance,
-      walletAddress
+      //newPassToken,
+      //maticBalance,
+      //walletAddress
     );
 
     if (!user.success) {

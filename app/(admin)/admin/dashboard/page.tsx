@@ -12,7 +12,7 @@ export default async function Admin() {
 
     return (
         <div className='flex flex-col w-full h-full items-center justify-center gap-3'>
-            <h1>Admin Panel Dashboard</h1>
+            <h1>Dashboard</h1>
             <div className='flex flex-col content-center gap-3 place-items-center w-full md:w-1/2'>
                 
                 {/*

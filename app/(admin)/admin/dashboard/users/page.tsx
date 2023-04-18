@@ -171,7 +171,7 @@ export default function UserList() {
           //handleClickOpen()
 
 
-          alert(JSON.stringify(thisRow, null, 4));
+          //alert(JSON.stringify(thisRow, null, 4));
 
 
           //setShowModal(!showModal);

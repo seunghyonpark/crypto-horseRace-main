@@ -786,11 +786,11 @@ const updateWalletAddress = async () => {
                 <>
                     <div className='w-full flex flex-row items-center justify-center centent-center'>
 
-                      
+                      {/*
                         <CC content={user?.walletAddress}/>
-                    
+            */}
 
-{/*
+
                         <Button
                           color="success" variant='contained' className='bg-green-500'
                           onClick={() =>
@@ -804,7 +804,7 @@ const updateWalletAddress = async () => {
                           Copy
                       </Button>
 
-                      */}
+                      
 
                     </div>
 

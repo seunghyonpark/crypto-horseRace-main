@@ -370,7 +370,7 @@ export default function Deposit() {
                   //    setDepositCount(e.target.value);
                   //}}
 
-                  className="input input-bordered w-full max-w-xs text-gray-800 text-xl font-bold mb-3"
+                  className="input input-bordered w-full max-w-xs text-gray-800 text-xl font-bold mb-1"
               />
 
 
@@ -426,7 +426,24 @@ export default function Deposit() {
             {user?.walletAddress &&
                 <>
                     <div className='w-full flex flex-row items-center justify-center centent-center'>
+                      {/*
                         <CC content={user?.walletAddress}/>
+*/}
+
+                        <Button
+                          color="success" variant='contained' className='bg-green-500'
+                          onClick={() =>
+                            {
+                              navigator.clipboard.writeText(user?.walletAddress);
+                              setSucc(true);
+                              setSuccessMsgSnackbar("Your deposit wallet address [" + user?.walletAddress + "] copied to clipboard");
+                            }
+                          }
+                      >
+                          Copy
+                      </Button>
+
+
                     </div>
 
                     <div className='w-full flex flex-row items-center justify-center centent-center'>

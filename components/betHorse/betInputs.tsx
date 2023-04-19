@@ -550,15 +550,18 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                     <div className='absolute left-3 z-5'> <FaCoins className='fill-yellow-500' /> </div>
 
 
-                    {user && <button
+                    {user &&
+                      <button
                         onClick={() => {
                             ////setBetAmount(user?.deposit - 0.00001)
                             setBetAmount(50000)
                         }}
                         className=' w-8 btn-circle absolute left-10 z-10 bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black text-[10px]'> Max
-                        </button>}
+                      </button>
+                    }
                     
-                    <input onChange={(e: any) => {
+                    <input
+                      onChange={(e: any) => {
 
                         e.target.value = e.target.value.replace(/[^0-9]/g, "");
 
@@ -581,16 +584,19 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                           setBetAmount(e.target.value);
                         }
 
-                    }}
-                        value={
-                          ///betAmount < 100 ? 100 : (betAmount > 50000 ? 50000 : betAmount)
+                      }}
 
-                          betAmount === 0 ? '' : betAmount
-                        }
-                        type="number"
-                        /////placeholder='100~50000 CRA'
-                        placeholder='1~50000 CRA'
-                        className='input w-full pl-20 text-base' />
+                      value={
+                        ///betAmount < 100 ? 100 : (betAmount > 50000 ? 50000 : betAmount)
+
+                        betAmount === 0 ? '' : betAmount
+                      }
+                      type="number"
+                      /////placeholder='100~50000 CRA'
+                      placeholder='1~50000 CRA'
+                      className='input w-full pl-20 text-base'
+                    />
+
                     <button onClick={() => { setBetAmount(0) }} className='absolute right-5 z-5 btn btn-xs btn-outline border-gray-700'>Clear</button>
                 </div>
 

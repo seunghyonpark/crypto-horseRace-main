@@ -55,14 +55,17 @@ export default function WithdrawRequestList() {
     const [isDisabled, setIsDisabled] = useState(true);
   
     function onCheck(e: any) {
-    const checked = e.target.checked;
-    if (checked) {
-        setIsDisabled(false)
+        const checked = e.target.checked;
+        if (checked) {
+            setIsDisabled(false)
+        }
+        if (!checked) {
+            setIsDisabled(true)   
+        }
     }
-    if (!checked) {
-        setIsDisabled(true)   
-    }
-    }
+
+
+    const [miktar, setMiktar] = useState<any>("");
 
 
 
@@ -277,7 +280,7 @@ export default function WithdrawRequestList() {
 
     const paraCek = async () => {
 
-        let miktar = (document.getElementById("withdraw") as HTMLInputElement).value;
+        ////let miktar = (document.getElementById("withdraw") as HTMLInputElement).value;
 
         if (parseInt(miktar) < 1000) {
             setErrMsgSnackbar("Please enter a value greater than 1000");
@@ -313,6 +316,7 @@ export default function WithdrawRequestList() {
             setWaiting(false);
             setErr(true);
         } else {
+            setMiktar("");
             getUser();
             setWaiting(false);
             setSucc(true);
@@ -465,20 +469,43 @@ export default function WithdrawRequestList() {
 
                     
 
-                    <input
-                    type="number"
-                    placeholder="Minimum 1,000"
-                    id="withdraw"
-                    className="input input-bordered w-full max-w-xs text-gray-800"
-                    />
+                    <div className='flex items-center w-full relative'>
 
-                    <span className="ml-5 mr-5 content-center text-sm text-green-500">
-                        Withdraw amount is at least <br></br>1,000 ~ maximum 10,000 CRA at a time
-                    </span>
+                        <input
+                            type="number"
+                            placeholder="Minimum 1,000"
+                            id="withdraw"
+                            value={miktar}
+                            className="input input-bordered w-full max-w-xs text-gray-800"
+                            onChange={(e) => {
+                                setMiktar(e.target.value);
+                            }}
+                        />
 
-                    <span className="ml-5 mr-5 content-center text-sm text-white">
-                        Withdraw Fee 100 CRA
-                    </span>
+                        <span className='absolute right-20 z-5 text-red-500'>CRA</span>
+
+                        <button
+                            onClick={() => {
+                                user?.deposit && user?.deposit > 10000 ? setMiktar("10000") : setMiktar(user?.deposit)
+                            }}
+                            className='absolute right-5 z-5 btn btn-xs text-yellow-500 border-yellow-500 hover:bg-white bg-white '
+                        >
+                            Max
+                        </button>
+
+                    </div>
+
+
+                    <div className="ml-5 mr-5 content-center text-sm text-green-500">
+                        Withdraw amount is at least <br></br>1,000 ~ maximum 10,000 <span className="text-red-500">CRA</span> at a time
+                    </div>
+
+                    <div className="ml-5 mr-5 content-center text-sm text-white">
+                        * Withdraw Fee <span className="text-lg font-bold">100</span> <span className="text-red-500">CRA</span>
+                    </div>
+                    <div className="ml-5 mr-5 content-center text-sm text-white">
+                        Receive Amount <span className="text-lg font-bold">{ miktar === "" || miktar < 1000 ? 0 : miktar - 100 }</span> <span className="text-red-500">CRA</span>
+                    </div>
 
 
 

@@ -815,7 +815,7 @@ Place a bet with your tokens based on how strong you think your hand is.
             </div>
 
             <div className='w-full flex flex-row p-2'>
-              <Link href={"/"} className="m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
+              <Link href={"https://demo.craclegamez.io/gameT2E/"} className="m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">
                 <span className="text-gray-500 text-sm ">DEMO</span>
               </Link>
               <Link href={"/"} className=" m-1 w-full h-10 bg-[#1B1A1B] rounded-lg flex items-center justify-center">

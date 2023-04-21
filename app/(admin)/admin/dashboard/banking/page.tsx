@@ -12,7 +12,7 @@ import React from 'react'
 
 
 
-export default async function Admin() {
+export default async function Banking() {
 
     return (
         <div className='flex flex-col w-full h-full items-center justify-center gap-3'>
@@ -25,12 +25,6 @@ export default async function Admin() {
 
                 <div className='flex gap-5 justify-center w-full h-full'>
 
-                    <AdminUsers />
-                    <AdminWithdrawRequests />
-
-                </div>
-                <div className='flex gap-5 justify-center w-full h-full'>
-
                     <AdminDeposit />
                     <AdminWithdraw />
 
@@ -41,7 +35,6 @@ export default async function Admin() {
                     <AdminFee />
 
                 </div>
-
             </div>
         </div >
     )

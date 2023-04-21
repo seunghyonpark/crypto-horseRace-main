@@ -47,6 +47,11 @@ const UserSchema = new Schema({
     required: false,
     default: false,
   },
+  adminLevel: {
+    type: Number,
+    required: false,
+    default: false,
+  },
   newPassToken: {
     type: String,
     required: false,

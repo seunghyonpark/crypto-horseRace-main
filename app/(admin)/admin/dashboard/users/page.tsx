@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { IUser } from "@/libs/interface/user";
 
 import ModalAlert from '@/components/ModalAlert';
+import { useTransferToken } from '@thirdweb-dev/react';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -28,7 +29,6 @@ export default function UserList() {
 
   const [selectedUser, setSelectedUser] = useState<any>();
 
-  const [selectedUserToken, setSelectedUserToken] = useState<any>();
   const [userAdmin, setUserAdmin] = useState<any>();
 
   ///const [showModal, setShowModal] = useState(false);
@@ -124,16 +124,28 @@ export default function UserList() {
       headerAlign: "center",
       type: "number",
       flex: 0.1,
-      minWidth: 75,
+      minWidth: 100,
 
       renderCell(params) {
         return <Chip label={`${params.value ? "Admin" : "User"}`} color={`${params.value ? "success" : "info"}`} />;
       },
     },
+    {
+      field: "adminLevel",
+      headerName: "Admin Level",
+      align: "center",
+      headerAlign: "center",
+      type: "number",
+      flex: 0.1,
+      minWidth: 150,
 
+      renderCell(params) {
+        return <Chip label={`${params.row.admin === true && params.value === 1 ? "Super Admin" : "NaN"}`} color={`${params.value ? "success" : "info"}`} />;
+      },
+    },
 
-   
     
+
     {
       field: "action",
       headerName: "Edit",
@@ -141,124 +153,48 @@ export default function UserList() {
       headerAlign: "center",
       sortable: false,
       width: 125,
-
-
       renderCell: (params) => {
+          const onClick = (e: any) => {
+              e.stopPropagation(); // don't select this row after clicking
 
-        const onClick = (e:any) => {
-          e.stopPropagation(); // don't select this row after clicking
-  
-          const api: GridApi = params.api;
-          const thisRow: Record<string, GridCellValue> = {};
-  
-          api
-            .getAllColumns()
-            .filter((c) => c.field !== "__check__" && !!c)
-            .forEach(
-              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-            );
-  
+              const api: GridApi = params.api;
+              const thisRow: Record<string, GridCellValue> = {};
 
-          setSelectedUserToken(thisRow.userToken);
+              api
+                  .getAllColumns()
+                  .filter((c) => c.field !== "__check__" && !!c)
+                  .forEach(
+                      (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+                  );
 
-          setUserAdmin(thisRow.admin);
-
-          console.log("selectedUserToken: ", selectedUserToken);
-          console.log("userAdmin: ", userAdmin);
-
-      
-
-          //handleClickOpen()
-
-
-          //alert(JSON.stringify(thisRow, null, 4));
-
-
-          //setShowModal(!showModal);
-
-
-          return;
-
-        };
-  
-        return (
-          <></>
-
-        /*
-          <Button
-            color="success" variant='contained' className='bg-green-500'
-            onClick={onClick }>Edit
-        
-          </Button>
-        */
-
-        )
-      }
-
-
-/*
-      renderCell: (params) => {
-
-        const onClick = (e: any) => {
-
-          e.stopPropagation(); // don't select this row after clicking
-
-
-          
-          const api: GridApi = params.api;
-          const thisRow: Record<string, GridCellValue> = {};
-
-          api
-            .getAllColumns()
-            .filter((c) => c.field !== "__check__" && !!c)
-            .forEach(
-              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-            );
-          
-
-          ///console.log("params.row: ", params.row);
-
-
-          return duzenle(params.row);
-        };
-
-
-        if (user?.email === 'craclepro@gmail.com') {
+              return duzenle(params.row);
+          };
           return (
-            <Button
-              //onClick={onClick}
-              onClick={
-                (e) => { setSelectedUser(params.row); handleClickOpen() }
-              }
-              color="success" variant='contained' className='bg-green-500'>
-              Edit
-            </Button>
-          )
-        }
-        
-
+              <Button color="success" variant='contained' className='bg-green-500' onClick={onClick}>
+                  Edit
+              </Button>
+          );
       },
-*/
-
 
     },
+
+
+
+
+
     
   
 
 
   ];
 
+
+
   function duzenle(e: any) {
-
-    console.log("duzenle e: ", e);
-
-    setSelectedUser(e);
-
-    console.log("selectedUser: ", selectedUser);
-
-    
+    setSelectedUser(e)
     handleClickOpen()
-  }
+}
+
 
 
   const handleClickOpen = () => {
@@ -297,15 +233,11 @@ export default function UserList() {
     //let maticBalance = (document.getElementById("maticBalance") as HTMLInputElement).value
     let admin = (document.getElementById("admin") as HTMLInputElement).checked
 
-
-    console.log("selectedUser.userToken: ", selectedUser?.userToken)
-
     const formInputs = {
       method: "update",
       API_KEY: process.env.API_KEY,
-      
-      //userToken: selectedUser.userToken,
-      userToken: selectedUserToken,
+
+      userToken: selectedUser?.userToken,
 
       //username: username,
       //email: email,
@@ -353,37 +285,78 @@ export default function UserList() {
 
   const deleteUser = async () => {
     handleClose()
-    Swal.fire({
-      title: 'Do you want to delete user?',
-      confirmButtonText: 'Delete!',
-      showCloseButton: true,
-      showCancelButton: true,
-      icon: 'warning',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const formInputs = {
-          method: "delete",
-          API_KEY: process.env.API_KEY,
-          ///userToken: selectedUser.userToken,
-          userToken: selectedUserToken,
-        }
-        fetch('/api/user', {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formInputs),
-        }).then(res => res.json()).then(data => {
-          if (data.status) {
-            Swal.fire('Deleted!', '', 'success')
-            getAll();
-          } else {
-            Swal.fire('Error!', '', 'error')
-            getAll();
+
+    if (selectedUser.coin > 0) {
+      Swal.fire({
+        title: 'User has balance!',
+        ////confirmButtonText: 'Delete!',
+        showCloseButton: true,
+        showCancelButton: false,
+        icon: 'warning',
+      }).then((result) => {
+        /*
+        if (result.isConfirmed) {
+          const formInputs = {
+            method: "delete",
+            API_KEY: process.env.API_KEY,
+            userToken: selectedUser.userToken,
           }
-        })
-      } else if (result.isDismissed) {
-        Swal.fire('Changes are not saved', '', 'info')
-      }
-    })
+          fetch('/api/user', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formInputs),
+          }).then(res => res.json()).then(data => {
+            if (data.status) {
+              Swal.fire('Deleted!', '', 'success')
+              getAll();
+            } else {
+              Swal.fire('Error!', '', 'error')
+              getAll();
+            }
+          })
+          
+        } else if (result.isDismissed) {
+          // do something
+        }
+        */
+
+      })
+
+    } else {
+
+      Swal.fire({
+        title: 'Do you want to delete user?',
+        confirmButtonText: 'Delete!',
+        showCloseButton: true,
+        showCancelButton: true,
+        icon: 'warning',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const formInputs = {
+            method: "delete",
+            API_KEY: process.env.API_KEY,
+            userToken: selectedUser.userToken,
+          }
+          fetch('/api/user', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formInputs),
+          }).then(res => res.json()).then(data => {
+            if (data.status) {
+              Swal.fire('Deleted!', '', 'success')
+              getAll();
+            } else {
+              Swal.fire('Error!', '', 'error')
+              getAll();
+            }
+          })
+        } else if (result.isDismissed) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+
+    }
+
   }
 
 
@@ -395,6 +368,7 @@ export default function UserList() {
       email: item.email,
       img: item.img,
       admin: item.admin,
+      adminLevel: item.adminLevel,
       status: item.status,
       walletAddress: item.walletAddress,
       username: item.username,
@@ -442,7 +416,69 @@ export default function UserList() {
           </div>
         </div>
 
-        {selectedUserToken && (
+
+{/*
+        {selectedUser && (
+                <Dialog
+                    open={open}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={handleClose}
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle> Withdraw Request from {selectedUser?.email1}</DialogTitle>
+                    <DialogContent className='space-y-3'>
+                        <DialogContentText>
+                            ID(E-mail): <span className='font-bold italic'> {selectedUser?.email1} </span>
+                        </DialogContentText>
+                        <DialogContentText>
+                            Request Amount: <span className='font-bold italic'> {selectedUser?.requestAmount} </span>
+                        </DialogContentText>
+                        <DialogContentText>
+                            Type: <span className='font-bold italic'> {selectedUser?.type} </span>
+                        </DialogContentText>
+                        <DialogContentText>
+                            Status: <span className='font-bold italic'> {selectedUser?.status} </span>
+                        </DialogContentText>
+                        <DialogContentText>
+                            Wallet Address: <span className='font-bold italic'> {selectedUser?.wallet} </span>
+                        </DialogContentText>
+                        <DialogContentText>
+                            Created At: <span className='font-bold italic'> {selectedUser?.createdAt} </span>
+                        </DialogContentText>
+                        <DialogContentText>
+                            Transaction Hash: <span className='font-bold italic'> {selectedUser?.txHash} </span>
+                        </DialogContentText>
+                        <div className='flex gap-1 items-center'>
+                            <input type="checkbox" defaultChecked={selectedUser?.gonderildi} id='isPay' className="checkbox checkbox-primary" />
+                            <p>Payment Send?</p>
+                        </div>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="hash"
+                            label="Transaction Hash"
+                            type="hash"
+                            fullWidth
+                            defaultValue={selectedUser?.txHash}
+                            color='secondary'
+                            variant="standard"
+                        />
+                    </DialogContent>
+                    <DialogContentText className='text-center text-xs italic'>If you reject the request than request amount will be refund to user!</DialogContentText>
+                    <DialogActions>
+                        <Button color='error' onClick={deleteRequest}>Delete</Button>
+                        <Button color='error' onClick={requestRejected}>Reject</Button>
+                        <Button onClick={handleClose}>Close</Button>
+                        <Button color='success' onClick={requestAccepted}>Save</Button>
+                    </DialogActions>
+                </Dialog>
+            )}
+        */}
+
+
+            
+        {selectedUser && (
           <Dialog
             open={open}
             TransitionComponent={Transition}
@@ -451,17 +487,48 @@ export default function UserList() {
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle> User Edit Form  </DialogTitle>
+
             <DialogContent className='space-y-3'>
 
+            {user?.admin && user?.adminLevel === 0 && (
+
               <div className='flex gap-1 items-center'>
-                <input type="checkbox" defaultChecked={userAdmin} id='admin' className="checkbox checkbox-primary" />
+                <input
+                  type="checkbox"
+                  defaultChecked={selectedUser?.admin}
+                  id='admin'
+                  className="checkbox checkbox-primary"
+                />
                 <p>Admin?</p>
               </div>
+            )}
+
+              <DialogContentText>
+                ID(E-mail): <span className='font-bold italic'> {selectedUser?.email} </span>
+              </DialogContentText>
+
+              <DialogContentText>
+                Nick Name: <span className='font-bold italic'> {selectedUser?.username} </span>
+              </DialogContentText>
+
+              <DialogContentText>
+                Balance (CRA): <span className='font-bold italic'> {selectedUser?.coin} </span>
+              </DialogContentText>
+
+              <DialogContentText>
+                Deposit Address: <span className='font-bold italic'> {selectedUser?.walletAddress} </span>
+              </DialogContentText>
+
+
 
             </DialogContent>
+
+
+
+
             <DialogActions>
 
-            {user?.email === 'craclepro@gmail.com' && (
+            {user?.admin && user?.adminLevel === 1 && (
               <Button onClick={deleteUser}>DELETE</Button>
             )}
 
@@ -471,6 +538,7 @@ export default function UserList() {
           </Dialog>
         )}
 
+        
 
 
 

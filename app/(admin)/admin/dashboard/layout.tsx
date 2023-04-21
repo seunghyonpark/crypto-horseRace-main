@@ -74,6 +74,11 @@ export default function RootLayout({
                                 <Link className={`${pathName === '/admin/dashboard/users' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/users">
                                     Users
                                 </Link>
+                                {/*
+                                <Link className={`${pathName === '/admin/dashboard/deposits' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/deposits">
+                                    Deposits
+                                </Link>
+                                */}
                                 <Link className={`${pathName === '/admin/dashboard/withdrawRequests' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/withdrawRequests">
                                     Withdraw Requests
                                 </Link>

@@ -17,7 +17,7 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-export default function WithdrawRequests() {
+export default function Deposits() {
     const [requests, setRequests] = useState<any>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedUser, setSelectedUser] = useState<any>();
@@ -146,10 +146,7 @@ export default function WithdrawRequests() {
                     </Button>
                 );
             },
-
         },
-
-        
     ];
 
     function duzenle(e: any) {
@@ -265,10 +262,12 @@ export default function WithdrawRequests() {
         }
     })
 
+
+
     return (
         <>
             <div className='flex flex-col p-10 mt-5 text-gray-200'>
-                <h1 className='font-bold italic text-2xl'>Withdraw Requests</h1>
+                <h1 className='font-bold italic text-2xl'>Deposits</h1>
                 <div style={{ width: "100%", height: 2710, color: "white" }}>
                     <DataGrid
                         rows={rows}
@@ -291,8 +290,6 @@ export default function WithdrawRequests() {
                     />
                 </div>
             </div>
-
-
             {selectedUser && (
                 <Dialog
                     open={open}
@@ -349,10 +346,6 @@ export default function WithdrawRequests() {
                     </DialogActions>
                 </Dialog>
             )}
-
-
-
-
         </>
     )
 }

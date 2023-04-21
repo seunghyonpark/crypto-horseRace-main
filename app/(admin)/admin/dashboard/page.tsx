@@ -18,6 +18,8 @@ export default async function Admin() {
         <div className='flex flex-col w-full h-full items-center justify-center gap-3'>
             <h1>Dashboard</h1>
             <div className='flex flex-col content-center gap-3 place-items-center w-full md:w-1/2'>
+
+
                 
                 {/*
                 <WithdrawType />

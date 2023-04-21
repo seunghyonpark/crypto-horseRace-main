@@ -9,6 +9,7 @@ export interface IUser {
   deposit: number;
   img: string;
   admin: boolean;
+  adminLevel: number;
   newPassToken: string;
   userToken: string;
   maticBalance: number;

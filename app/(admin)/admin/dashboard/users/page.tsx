@@ -68,7 +68,7 @@ export default function UserList() {
       field: "id",
       headerName: "ID",
       flex: 0.01,
-      minWidth: 50,
+      minWidth: 80,
       align: "center",
       headerAlign: "center",
     },
@@ -76,7 +76,7 @@ export default function UserList() {
       field: "userToken",
       headerName: "User Token",
       flex: 0.01,
-      minWidth: 50,
+      minWidth: 100,
       align: "center",
       headerAlign: "center",
     },
@@ -84,7 +84,7 @@ export default function UserList() {
       field: "email",
       headerName: "Email",
       flex: 0.2,
-      minWidth: 120,
+      minWidth: 200,
       align: "center",
       headerAlign: "center",
     },
@@ -92,7 +92,7 @@ export default function UserList() {
       field: "username",
       headerName: "Nick Name",
       flex: 0.2,
-      minWidth: 80,
+      minWidth: 120,
       align: "center",
       headerAlign: "center",
     },
@@ -100,8 +100,8 @@ export default function UserList() {
       field: "coin",
       headerName: "Balance (CRA)",
       flex: 0.1,
-      minWidth: 100,
-      align: "center",
+      minWidth: 120,
+      align: "right",
       headerAlign: "center",
       valueFormatter: (params) => {
         return new Number(params.value).toFixed(2);
@@ -111,7 +111,7 @@ export default function UserList() {
       field: "walletAddress",
       headerName: "Deposit Address",
       flex: 0.2,
-      minWidth: 200,
+      minWidth: 400,
       align: "center",
       headerAlign: "center",
     },
@@ -286,7 +286,7 @@ export default function UserList() {
       }),
     })
     const data = await res.json()
-    setUsers(data.users.users)
+    setUsers(data?.users?.users)
   }
 
   const updateUser = async () => {
@@ -414,17 +414,27 @@ export default function UserList() {
 
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
           <h1 className='font-bold italic text-2xl'>Users</h1>
-          <div style={{ width: "100%", height: 1200, color: "white" }}>
+          <div style={{ width: "100%", height: 2710, color: "white" }}>
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={20}
+              pageSize={50}
               rowsPerPageOptions={[10]}
               hideFooterSelectedRowCount
               sx={{
+
+                bgcolor: "white", //table background color
+                boxShadow: 2,
+                border: 2,
+                borderColor: 'primary.light',
+                '& .MuiDataGrid-cell:hover': {
+                  color: 'primary.main',
+                },
                
+                /*
                 color: "white",
-                bgcolor: "black",
+                bgcolor: "gray.800",
+                */
 
               }}
               

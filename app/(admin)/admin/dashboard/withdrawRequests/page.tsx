@@ -28,63 +28,9 @@ export default function MaticWithdrawRequestList() {
             field: "id",
             headerName: "ID",
             flex: 0.01,
-            minWidth: 50,
-            align: "center",
-            headerAlign: "center",
-        },
-        {
-            field: "email1",
-            headerName: "E-Mail",
-            flex: 0.2,
-            minWidth: 150,
-            align: "center",
-            headerAlign: "center",
-        },
-        {
-            field: "wallet",
-            headerName: "Wallet",
-            flex: 0.1,
-            minWidth: 150,
-            align: "center",
-            headerAlign: "center",
-        },
-        {
-            field: "requestAmount",
-            headerName: "Request Amount",
-            align: "center",
-            headerAlign: "center",
-            type: "number",
-            flex: 0.2,
-            minWidth: 120,
-            renderCell(params) {
-                return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
-            },
-
-        },
-        {
-            field: "withdrawFee",
-            headerName: "Fee",
-            align: "center",
-            headerAlign: "center",
-            type: "number",
-            flex: 0.2,
             minWidth: 80,
-            renderCell(params) {
-                return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
-            },
-
-        },
-        {
-            field: "status",
-            headerName: "Status",
             align: "center",
             headerAlign: "center",
-            description: "This column has a value getter and is not sortable.",
-            flex: 0.1,
-            minWidth: 70,
-            renderCell(params) {
-                return <Chip label={params.value} color={params.value === "Rejected" ? "error" : params.value === "Accepted" ? "info" : params.value === "Waiting" ? "warning" : "success"} />;
-            },
         },
         {
             field: "createdAt",
@@ -98,6 +44,79 @@ export default function MaticWithdrawRequestList() {
                 return new Date(params.value).toLocaleString();
             }, // burada tarih formatı değiştirilebilir.
         },
+        {
+            field: "email1",
+            headerName: "E-Mail",
+            flex: 0.2,
+            minWidth: 200,
+            align: "center",
+            headerAlign: "center",
+        },
+        {
+            field: "wallet",
+            headerName: "Wallet",
+            flex: 0.1,
+            minWidth: 400,
+            align: "center",
+            headerAlign: "center",
+        },
+        {
+            field: "requestAmount",
+            headerName: "Request Amount",
+            align: "right",
+            headerAlign: "center",
+            type: "number",
+            flex: 0.2,
+            minWidth: 150,
+            /*
+            renderCell(params) {
+                /////return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+
+                return <Chip label={`${params.value}`} color="primary" />;
+            },
+            */
+
+        },
+        {
+            field: "withdrawFee",
+            headerName: "Fee",
+            align: "right",
+            headerAlign: "center",
+            type: "number",
+            flex: 0.2,
+            minWidth: 100,
+            /*
+            renderCell(params) {
+                return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+            },
+            */
+
+        },
+        {
+            field: "lastAmount",
+            headerName: "Withdraw Amount",
+            align: "right",
+            headerAlign: "center",
+            type: "number",
+            flex: 0.2,
+            minWidth: 150,            
+
+        },
+
+
+        {
+            field: "status",
+            headerName: "Status",
+            align: "center",
+            headerAlign: "center",
+            description: "This column has a value getter and is not sortable.",
+            flex: 0.1,
+            minWidth: 100,
+            renderCell(params) {
+                return <Chip label={params.value} color={params.value === "Rejected" ? "error" : params.value === "Accepted" ? "info" : params.value === "Waiting" ? "warning" : "success"} />;
+            },
+        },
+
         {
             field: "action",
             headerName: "Edit",
@@ -232,6 +251,7 @@ export default function MaticWithdrawRequestList() {
             email1: item.email1,
             requestAmount: item.withdrawAmount,
             withdrawFee: item.withdrawFee,
+            lastAmount: item.withdrawAmount - item.withdrawFee,
             type: item.type,
             status: item.status,
             wallet: item.walletTo,
@@ -246,15 +266,24 @@ export default function MaticWithdrawRequestList() {
         <>
             <div className='flex flex-col p-10 mt-5 text-gray-200'>
                 <h1 className='font-bold italic text-2xl'>Withdraw Requests</h1>
-                <div style={{ width: "100%", height: 600, color: "white" }}>
+                <div style={{ width: "100%", height: 2710, color: "white" }}>
                     <DataGrid
                         rows={rows}
                         columns={columns}
-                        pageSize={9}
+                        pageSize={50}
                         rowsPerPageOptions={[10]}
                         hideFooterSelectedRowCount
                         sx={{
-                            color: "white",
+                            bgcolor: "white", //table background color
+                            boxShadow: 2,
+                            border: 2,
+                            borderColor: 'primary.light',
+                            '& .MuiDataGrid-cell:hover': {
+                              color: 'primary.main',
+                            },
+
+                            
+                            ///color: "white",
                         }}
                     />
                 </div>

@@ -84,7 +84,7 @@ export const getPaymentRequest = async (_id: string) => {
 };
 
 export const getAllPaymentRequests = async () => {
-  const requests = await PaymentRequest.find();
+  const requests = await PaymentRequest.find().sort({createdAt: -1});
   if (requests) {
     return requests;
   } else {

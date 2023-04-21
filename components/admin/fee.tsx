@@ -28,7 +28,10 @@ export default function AdminFee() {
             <div className='flex flex-col items-center gap-3  border rounded-lg p-4 w-full h-full'>
                 <div className="text-xl">Total Platform Fee Amount</div>
                 <p>Current: <span className='text-pink-500'>{42.5234}</span> CRA</p>
+                {/*
                 <Link href="/" className='btn btn-md btn-primary'>See All</Link>
+                */}
+                
             </div>
         </>
     )

@@ -28,7 +28,9 @@ export default function AdminWithdraw() {
             <div className='flex flex-col items-center gap-3  border rounded-lg p-4 w-full h-full'>
                 <div className="text-xl">Total Withdraw Amount</div>
                 <p>Current: <span className='text-pink-500'>{634}</span> CRA</p>
+                {/*
                 <Link href="/" className='btn btn-md btn-primary'>See All</Link>
+                */}
             </div>
         </>
     )

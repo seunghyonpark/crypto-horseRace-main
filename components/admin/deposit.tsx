@@ -28,7 +28,9 @@ export default function AdminDeposit() {
             <div className='flex flex-col items-center gap-3  border rounded-lg p-4 w-full h-full'>
                 <div className="text-xl">Total Deposit Amount</div>
                 <p>Current: <span className='text-pink-500'>{45352.3633}</span> CRA</p>
+                {/*
                 <Link href="/" className='btn btn-md btn-primary'>See All</Link>
+                */}
             </div>
         </>
     )

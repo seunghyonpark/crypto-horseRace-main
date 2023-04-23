@@ -6,7 +6,7 @@ import { Container, Spacer } from '@/components/LayoutNew';
 import Wrapper from '@/components/LayoutNew/Wrapper';
 import { fetcher } from '@/libs/fetch';
 import { useCurrentUser } from '@/libs/user';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Settings.module.css';

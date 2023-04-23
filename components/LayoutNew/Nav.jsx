@@ -4,7 +4,7 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { fetcher } from '@/libs/fetch';
 import { useCurrentUser } from '@/libs/user';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import Container from './Container';

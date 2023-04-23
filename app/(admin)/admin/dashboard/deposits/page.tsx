@@ -17,7 +17,8 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-export default function Deposits() {
+export default function DepositList() {
+    
     const [requests, setRequests] = useState<any>([]);
     const [open, setOpen] = React.useState(false);
     const [selectedUser, setSelectedUser] = useState<any>();

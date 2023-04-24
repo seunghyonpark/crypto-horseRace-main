@@ -4,7 +4,9 @@ import React from 'react'
 
 
 export default function WithdrawType() {
+
     const [data, setData] = React.useState<any>();
+
     async function getData() {
         const res = await fetch(DomainEnum.address + '/api/settings', {
             method: 'POST',
@@ -26,7 +28,11 @@ export default function WithdrawType() {
         }
     }
 
-    if (!data) getData();
+    React.useEffect(() => {
+        getData();
+    }, [])
+
+    ///if (!data) getData();
 
     const changeWithdrawType = async () => {
         const res = await fetch(DomainEnum.address + '/api/settings', {
@@ -35,8 +41,8 @@ export default function WithdrawType() {
             body: JSON.stringify({
                 method: "update",
                 API_KEY: process.env.API_KEY,
-                _id: data[0]._id,
-                requestType: data[0].requestType === "Coin" ? "Matic" : "Coin",
+                _id: data[0]?._id,
+                requestType: data[0]?.requestType === "Coin" ? "Matic" : "Coin",
                 chat: true
             }),
         });
@@ -64,6 +70,7 @@ export default function WithdrawType() {
             }
         </>
     )
+
 }
 
 

@@ -19,9 +19,10 @@ export default async function Banking() {
             <h1>Dashboard</h1>
             <div className='flex flex-col content-center gap-3 place-items-center w-full md:w-1/2'>
                 
+                
                 {/*
                 <WithdrawType />
-                */}
+    */}
 
                 <div className='flex gap-5 justify-center w-full h-full'>
 

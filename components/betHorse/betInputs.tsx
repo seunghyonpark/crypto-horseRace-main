@@ -106,7 +106,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
             body: JSON.stringify(inputs)
         })
         const user = await res.json()
-        setUser(user.user.user)
+        setUser(user?.user?.user)
     }
 
 

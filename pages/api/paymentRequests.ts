@@ -56,7 +56,8 @@ export default async function handler(
       });
     }
 
-    const withdrawFee = 100;
+    const withdrawFee = 50;
+
     ////const lastWithdrawAmount = withdrawAmount - withdrawFee;
 
     const newPayment = await newPaymentRequest(

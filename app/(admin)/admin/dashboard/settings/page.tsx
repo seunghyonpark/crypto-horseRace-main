@@ -3,6 +3,7 @@ import { Tooltip } from '@mui/material'
 import React from 'react'
 
 export default function GeneralSettings() {
+    
     return (
         <>
             <div className='flex flex-col items-center p-5 w-full h-full gap-10'>

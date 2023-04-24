@@ -130,11 +130,11 @@ export default function GameT2E() {
 
               setUser(user);
               
-              setUsername(user.user.user.username);
+              setUsername(user?.user?.user?.username);
 
               /////console.log("gameT2E user", user.user.user.username);
 
-              socketIo.emit("user", user.user.user.username);
+              socketIo.emit("user", user?.user?.user?.username);
 
           })();
 

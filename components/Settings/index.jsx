@@ -205,8 +205,8 @@ export const Settings = () => {
   const router = useRouter();
   useEffect(() => {
     if (!data && !error) return;
-    if (!data.user) {
-      router.replace('/login');
+    if (!data?.user) {
+      router.replace('/myPage/login');
     }
   }, [router, data, error]);
 

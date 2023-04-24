@@ -125,9 +125,9 @@ export default function Home() {
               })
               const user = await res.json();
               
-              setUsername(user.user.user.username);
+              setUsername(user?.user?.user?.username);
 
-              socketIo.emit("user", user.user.user.username);
+              socketIo.emit("user", user?.user?.user?.username);
 
           })();
 

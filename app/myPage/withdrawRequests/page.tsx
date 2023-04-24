@@ -452,16 +452,14 @@ export default function WithdrawRequestList() {
                     <div className='w-full max-w-xs md:w-1/2 relative'>
                         
                         <input
-                        placeholder="Wallet Address"
-                        onChange={(e) => {
-                            setWallet(e.target.value);
-                        }}
-                        className="input input-bordered w-full max-w-xs text-gray-800"
+                            placeholder="Wallet Address"
+                            onChange={(e) => {
+                                setWallet(e.target.value);
+                            }}
+                            className="input input-bordered w-full max-w-xs text-gray-800"
                         />
 
                     </div>
-
-                    
 
                     <span className="ml-5 mr-5 content-center text-sm text-green-500">
                         Only BNB Smart Chain (BEP20) Available
@@ -469,10 +467,9 @@ export default function WithdrawRequestList() {
 
                     
 
-                    <div className='flex items-center w-full relative'>
+                    <div className='w-full max-w-xs md:w-1/2 relative'>
 
                         <input
-                            type="number"
                             placeholder="Minimum 1,000"
                             id="withdraw"
                             value={miktar}
@@ -482,13 +479,13 @@ export default function WithdrawRequestList() {
                             }}
                         />
 
-                        <span className='absolute right-20 z-5 text-red-500'>CRA</span>
+                        <span className='absolute top-3 right-20 z-5 text-red-500'>CRA</span>
 
                         <button
                             onClick={() => {
                                 user?.deposit && user?.deposit > 10000 ? setMiktar("10000") : setMiktar(user?.deposit)
                             }}
-                            className='absolute right-5 z-5 btn btn-xs text-yellow-500 border-yellow-500 hover:bg-white bg-white '
+                            className='absolute top-3 right-5 z-5 btn btn-xs text-yellow-500 border-yellow-500 hover:bg-white bg-white '
                         >
                             Max
                         </button>
@@ -501,10 +498,10 @@ export default function WithdrawRequestList() {
                     </div>
 
                     <div className="ml-5 mr-5 content-center text-sm text-white">
-                        * Withdraw Fee <span className="text-lg font-bold">100</span> <span className="text-red-500">CRA</span>
+                        * Withdraw Fee <span className="text-lg font-bold">50</span> <span className="text-red-500">CRA</span>
                     </div>
                     <div className="ml-5 mr-5 content-center text-sm text-white">
-                        Receive Amount <span className="text-lg font-bold">{ miktar === "" || miktar < 1000 ? 0 : miktar - 100 }</span> <span className="text-red-500">CRA</span>
+                        Receive Amount <span className="text-lg font-bold">{ miktar === "" || miktar < 1000 ? 0 : miktar - 50 }</span> <span className="text-red-500">CRA</span>
                     </div>
 
 

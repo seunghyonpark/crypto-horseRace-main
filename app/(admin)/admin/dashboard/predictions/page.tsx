@@ -395,7 +395,7 @@ export default function PredictionList() {
           .then(data => {
             if (data.user.success) {
               Swal.fire('Saved!', '', 'success')
-              getAll()
+              ///getAll()
             } else {
               Swal.fire('Error!', '', 'error')
             }

@@ -101,6 +101,14 @@ export default function UserList() {
       headerAlign: "center",
     },
     {
+      field: "referral",
+      headerName: "Referral",
+      flex: 0.2,
+      minWidth: 120,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
       field: "coin",
       headerName: "Balance (CRA)",
       flex: 0.1,
@@ -412,6 +420,7 @@ const search = async () => {
       status: item.status,
       walletAddress: item.walletAddress,
       username: item.username,
+      referral: item.referral,
       //pass1: item.pass1,
       //pass2: item.pass2,
       userToken: item.userToken,

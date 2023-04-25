@@ -10,12 +10,18 @@ const handler = nc(ncOpts);
 handler.use(...auths);
 
 handler.post(async (req, res) => {
+
+  console.log('goodusers email verify req.user', req.user)
+
   if (!req.user) {
     res.json(401).end();
     return;
   }
 
   const db = await getMongoDb();
+
+
+
 
   const token = await createToken(db, {
     creatorId: req.user._id,

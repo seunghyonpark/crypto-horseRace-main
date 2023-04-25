@@ -85,9 +85,15 @@ export default function RootLayout({
                                 <Link className={`${pathName === '/admin/dashboard/banking' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/banking">
                                     Banking
                                 </Link>
+                                <Link className={`${pathName === '/admin/dashboard/predictions' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/predictions">
+                                    Predictions
+                                </Link>
+
+                                {/*
                                 <Link className={`${pathName === '/admin/dashboard/settings' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/settings">
                                     General Settings
                                 </Link>
+                                */}
                             </div>
                         </div>
                         <div className={`w-full`}>{children}</div>

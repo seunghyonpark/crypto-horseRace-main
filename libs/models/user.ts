@@ -20,6 +20,11 @@ const UserSchema = new Schema({
     trim: true,
     minlength: 3,
   },
+  emailVerified: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   pass1: {
     type: String,
     required: true,
@@ -98,14 +103,21 @@ export const getUserByEmail = async (email: string) => {
   }
 };
 
+
 export const getUserByUsername = async (username: string) => {
+
+  console.log("getUserByUsername username", username);
+
   const user: IUser = (await User.findOne({ username: username })) as IUser;
   if (user) {
     return { success: true, user };
   } else {
     return { success: false, message: "User not found" };
   }
+
 };
+
+
 
 
 

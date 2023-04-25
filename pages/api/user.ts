@@ -11,6 +11,12 @@ import {
   updateUserProfileImage,
   updateUserWalletAddress,
 } from "@/libs/models/user";
+
+
+import { createToken } from "@/libs/models/token";
+
+import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
+
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -301,6 +307,60 @@ export default async function handler(
 
 
 
+  if (method === "verifyEmail") {
+
+    const {
+      userToken,
+    } = req.body;
+
+    const user = await getUser(userToken);
+
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+
+    
+    const token = await createToken(
+      userToken,
+      'emailVerify',
+      new Date(Date.now() + 1000 * 60 * 60 * 24),
+    );
+
+    if (!token.success) {
+      res.status(400).json({ message: token.message });
+      return;
+    }
+
+
+
+    const mail = await sendMail({
+      to: user?.user?.email,
+      from: MAIL_CONFIG.from,
+      subject: `Verification Email for ${process.env.WEB_URI}`,
+      html: `
+        <div>
+          <p>Hello, ${user?.user?.username}</p>
+          <p>Please follow <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
+        </div>
+        `,
+    });
+
+    console.log("mail", mail);
+
+    /*
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+    */
+
+    res.status(200).json({ message: "verify email", user: user });
+  }
+
+
+
+
 
   if (method === "delete") {
     const { userToken } = req.body;
@@ -310,6 +370,7 @@ export default async function handler(
       return;
     }
     let resUser = user.pasifUser;
+
     return res.status(200).json({ status: true, user: resUser });
   }
 

@@ -45,23 +45,31 @@ export default async function handler(
   }
 
   if (method === "getAll") {
+    
+    /*
     const { userToken } = req.body;
     if (!userToken) {
       return res.status(400).json({ message: "Missing required fields" });
     }
+    */
+
     const betHistory = await getAllBetHistory();
+
     if (!betHistory) {
       return res.status(200).json({
         status: false,
         message: "Bet histories request failed",
       });
     }
+
+
     return res.status(200).json({
       status: true,
       message: "Bet histories request successful",
       betHistory,
     });
   }
+
 
 
   if (method === "getAllforUser") {
@@ -82,12 +90,48 @@ export default async function handler(
         message: "Bet histories request failed",
       });
     }
+
+
+    console.log("username", user.username);
+
+
     return res.status(200).json({
       status: true,
       message: "Bet histories request successful",
       betHistory,
     });
-  }  
+  }
+
+
+
+  if (method === "getAllforUsername") {
+
+    const { username } = req.body;
+    if (!username) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+
+    const user = await User.findOne({ username: username });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const betHistory = await getAllBetHistoryforUser(user.username);
+    if (!betHistory) {
+      return res.status(200).json({
+        status: false,
+        message: "Bet histories request failed",
+      });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: "Bet histories request successful",
+      betHistory,
+    });
+  }
+
 
   return res.status(400).json({ message: "Missing required fields" });
 }

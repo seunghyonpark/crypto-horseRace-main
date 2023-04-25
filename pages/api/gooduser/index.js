@@ -28,9 +28,16 @@ if (process.env.CLOUDINARY_URL) {
 handler.use(...auths);
 
 handler.get(async (req, res) => {
-  if (!req.user) return res.json({ user: null });
+
+  console.log('goodusers req.user', req.user)
+
+  if (!req.user) {
+    return res.json({ user: null });
+  }
+
   return res.json({ user: req.user });
 });
+
 
 handler.patch(
   upload.single('profilePicture'),

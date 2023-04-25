@@ -115,7 +115,6 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
         if (hasCookie('user')) {
             getUser()
         }
-
       
     }, [])
     

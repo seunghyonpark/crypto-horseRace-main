@@ -92,6 +92,7 @@ export const getBetHistory = async (_id: string) => {
   }
 };
 
+
 export const getAllBetHistory = async () => {
   const requests = await Bethistory.find().sort( { date: -1 } );
   if (requests) {

@@ -1,15 +1,26 @@
 'use client';
 import { Avatar } from '@/components/Avatar';
-import { Button } from '@/components/Button';
+
+///import { Button } from '@/components/Button';
+import Button from "@mui/material/Button";
+
 import { Input, Textarea } from '@/components/Input';
 import { Container, Spacer } from '@/components/LayoutNew';
+
 import Wrapper from '@/components/LayoutNew/Wrapper';
+
 import { fetcher } from '@/libs/fetch';
+
 import { useCurrentUser } from '@/libs/user';
+
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import styles from './Settings.module.css';
+
+//import { IUser } from '@/libs/interface/user';
+import { getCookie, hasCookie } from 'cookies-next';
+
 
 const EmailVerify = ({ user }) => {
 
@@ -29,14 +40,20 @@ const EmailVerify = ({ user }) => {
     }
   }, []);
 
-  if (user.emailVerified) return null;
+
+  console.log("emailVerified=============", user?.emailVerified);
+
+
+  /////if (user?.emailVerified) return null;
+
 
   return (
+
     <Container className={styles.note}>
       <Container flex={1}>
         <p>
           <strong>Note:</strong> <span>Your email</span> (
-          <span className={styles.link}>{user.email}</span>) is unverified.
+          <span className={styles.link}>{user?.email}</span>) is unverified.
         </p>
       </Container>
       <Spacer size={1} axis="horizontal" />
@@ -49,8 +66,11 @@ const EmailVerify = ({ user }) => {
         Verify
       </Button>
     </Container>
+
   );
+
 };
+
 
 const Auth = () => {
   const oldPasswordRef = useRef();
@@ -110,6 +130,7 @@ const Auth = () => {
     </section>
   );
 };
+
 
 const AboutYou = ({ user, mutate }) => {
   const usernameRef = useRef();
@@ -200,20 +221,103 @@ const AboutYou = ({ user, mutate }) => {
   );
 };
 
+
 export const Settings = () => {
-  const { data, error, mutate } = useCurrentUser();
+  const [user, setUser] = useState(null);
+
+
+  ////const { data, error, mutate } = useCurrentUser();
+  
   const router = useRouter();
+
+
+  const [status, setStatus] = useState();
+
+  const verify = useCallback(async () => {
+
+    try {
+      setStatus('loading');
+      await fetcher('/api/gooduser/email/verify', { method: 'POST' });
+
+      toast.success(
+        'An email has been sent to your mailbox. Follow the instruction to verify your email.'
+      );
+      setStatus('success');
+
+    } catch (e) {
+      toast.error(e.message);
+      setStatus('');
+    }
+
+  }, []);
+  
+
+  useEffect(() => {
+
+    const getUser = async () => {
+      const inputs = {
+          method: 'getOne',
+          API_KEY: process.env.API_KEY,
+          userToken: getCookie('user')
+      }
+      const res = await fetch('/api/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(inputs)
+      })
+      const user = await res.json();
+      setUser(user?.user?.user);
+
+      console.log("user======", user?.user?.user);
+
+    }
+
+
+      if (hasCookie('user')) {
+          getUser()
+      }
+    
+  }, [setUser])
+
+
+
+  /*
   useEffect(() => {
     if (!data && !error) return;
     if (!data?.user) {
       router.replace('/myPage/login');
     }
   }, [router, data, error]);
+  */
+
 
   return (
 
-    <Wrapper className={styles.wrapper}>
-      <Spacer size={2} axis="vertical" />
+    <>
+      <div className='flex flex-col items-center justify-center gap-5 w-full lg:w-2/3 text-white '>
+
+          <p>
+            <strong>Note:</strong> <span>Your email</span> (
+            <span className="text-xl text-white">{user?.email}</span>) is unverified.
+          </p>
+
+
+
+          <Button
+              onClick={() => {
+                verify();
+              }}
+              variant="contained"
+              color="secondary"
+              className="bg-green-500 hover:bg-green-600 text-white text-center justify-center h-500 p-5 rounded-md "
+              //loading={status === 'loading'}
+              //disabled={status === 'success'}
+          >
+              Verify
+          </Button>
+
+
+{/*
       {data?.user ? (
         <>
           <EmailVerify user={data.user} />
@@ -224,6 +328,11 @@ export const Settings = () => {
 
         </>
       ) : null}
-    </Wrapper>
+
+*/}
+
+      </div>
+    </>
+
   );
 };

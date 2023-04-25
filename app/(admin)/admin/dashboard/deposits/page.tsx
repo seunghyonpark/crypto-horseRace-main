@@ -23,11 +23,12 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-export default function PredictionList() {
+export default function DepositList() {
 
 
+  const [requests, setRequests] = useState<any>([]);
 
-  const [predictions, setPredictions] = useState<any>([]);
+  const [deposits, setDeposits] = useState<any>([]);
 
 
   const [open, setOpen] = React.useState(false);
@@ -44,6 +45,7 @@ export default function PredictionList() {
 
 
   const [username, setUsername] = useState<string>('');
+
   
 
 
@@ -72,183 +74,66 @@ export default function PredictionList() {
   }, []);
 
 
-
-/*
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  userToken: {
-    type: String,
-    required: true,
-  },
-  username: {
-    type: String,
-    required: true,
-  },
-  img: {
-    type: String,
-    required: true,
-  },
-  betAmount: {
-    type: Number,
-    required: true,
-  },
-  basePrice: {
-    type: Number,
-    required: true,
-  },
-  selectedSide: {
-    type: String,
-    required: true,
-  },
-  closePrice: {
-    type: Number,
-    required: true,
-  },
-  winnerHorse: {
-    type: String,
-    required: true,
-  },
-  placements: {
-    type: Array,
-    line: {
-      type: Number,
-      required: true,
-    },
-    horse: {
-      type: String,
-      required: true,
-    },
-  },
-
-  prizeAmount: {
-    type: Number,
-    required: true,
-  },
-  resultAmount: {
-    type: Number,
-    required: true,
-  },
-  prizeFee: {
-    type: Number,
-    required: false,
-  },
-  depositBefore: {
-    type: Number,
-    required: true,
-  },
-  depositAfter: {
-    type: Number,
-    required: true,
-  },
-*/
-
-
-
   const columns: GridColDef[] = [
     {
-      field: "id",
-      headerName: "ID",
-      flex: 0.01,
-      minWidth: 80,
-      align: "center",
-      headerAlign: "center",
+        field: "id",
+        headerName: "ID",
+        flex: 0.01,
+        minWidth: 80,
+        align: "center",
+        headerAlign: "center",
     },
     {
-      field: "date",
-      headerName: "DATE",
-      align: "center",
-      headerAlign: "center",
-      width: 150,
-      type: "dateTime",
-      minWidth: 250,
-      valueFormatter: (params) => {
-          return new Date(params.value).toLocaleString();
-      }, // burada tarih formatı değiştirilebilir.
+        field: "createdAt",
+        headerName: "DATE",
+        align: "center",
+        headerAlign: "center",
+        width: 150,
+        type: "dateTime",
+        minWidth: 250,
+        valueFormatter: (params) => {
+            return new Date(params.value).toLocaleString();
+        }, // burada tarih formatı değiştirilebilir.
     },
     {
-      field: "username",
-      headerName: "Nick Name",
+        field: "email1",
+        headerName: "E-Mail",
+        flex: 0.2,
+        minWidth: 200,
+        align: "center",
+        headerAlign: "center",
+    },
+    {
+      field: "depositAmount",
+      headerName: "Amount",
+      align: "right",
+      headerAlign: "center",
+      type: "number",
       flex: 0.2,
-      minWidth: 120,
-      align: "center",
-      headerAlign: "center",
+      minWidth: 150,
+      /*
+      renderCell(params) {
+          /////return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+
+          return <Chip label={`${params.value}`} color="primary" />;
+      },
+      */
+
     },
     {
-      field: "betAmount",
-      headerName: "betAmount",
-      flex: 0.1,
-      minWidth: 120,
-      align: "right",
-      headerAlign: "center",
-      valueFormatter: (params) => {
-        return new Number(params.value).toFixed(2);
-      } ,
-    },
-    {
-      field: "selectedSide",
-      headerName: "SELECT",
-      flex: 0.2,
-      minWidth: 120,
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "basePrice",
-      headerName: "ENTRY",
-      flex: 0.1,
-      minWidth: 120,
-      align: "right",
-      headerAlign: "center",
-      valueFormatter: (params) => {
-        return new Number(params.value).toFixed(2);
-      } ,
-    },
-    {
-      field: "closePrice",
-      headerName: "LAST",
-      flex: 0.1,
-      minWidth: 120,
-      align: "right",
-      headerAlign: "center",
-      valueFormatter: (params) => {
-        return new Number(params.value).toFixed(2);
-      } ,
-    },
-    {
-      field: "winnerHorse",
-      headerName: "END",
-      flex: 0.2,
-      minWidth: 120,
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "prizeFee",
-      headerName: "FEE",
-      flex: 0.1,
-      minWidth: 120,
-      align: "right",
-      headerAlign: "center",
-      valueFormatter: (params) => {
-        return new Number(params.value).toFixed(2);
-      } ,
-    },
-    {
-      field: "resultAmount",
-      headerName: "RESULT",
-      flex: 0.1,
-      minWidth: 120,
-      align: "right",
-      headerAlign: "center",
-      valueFormatter: (params) => {
-        return new Number(params.value).toFixed(2);
-      } ,
+        field: "walletFrom",
+        headerName: "Wallet From",
+        flex: 0.1,
+        minWidth: 400,
+        align: "center",
+        headerAlign: "center",
     },
 
-  ];
 
+
+
+
+];
 
 
   const search = async () => {
@@ -262,7 +147,7 @@ export default function PredictionList() {
     }
 
 
-    const res = await fetch('/api/bethistory', {
+    const res = await fetch('/api/depositRequests', {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -271,9 +156,10 @@ export default function PredictionList() {
         username: username,
       }),
     })
+
     const data = await res.json();
 
-    setPredictions(data?.betHistory);
+    setRequests(data?.depositRequests);
   }
 
 
@@ -298,27 +184,23 @@ export default function PredictionList() {
   useEffect(() => {
 
     const getAll = async () => {
-
-      const res = await fetch('/api/bethistory', {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          method: "getAllforUser",
-          API_KEY: process.env.API_KEY,
-          userToken: user?.userToken,
-        }),
+      const res = await fetch('/api/depositRequests', {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              method: "getAllforUsername",
+              API_KEY: process.env.API_KEY,
+              username: username,
+          }),
       })
-      const data = await res.json();
-  
-      console.log("bethistory data", data);
-  
-      setPredictions(data?.betHistory);
+      const data = await res.json()
+      setRequests(data.deposits)
 
     }
 
     getAll();
 
-  }, [user?.userToken]);
+  }, [username]);
   */
 
 
@@ -475,25 +357,18 @@ export default function PredictionList() {
   }
 
 
-  const rows = predictions?.map((item: any, i: number) => {
-
+  const rows = requests?.map((item: any, i: number) => {
     return {
-      kayitId: item._id,
-      id: i + 1,
-      date: item.date,
-      userToken: item.userToken,
-      username: item.username,
-      betAmount: item.betAmount,
-      basePrice: item.basePrice,
-      closePrice: item.closePrice,
-      selectedSide: item.selectedSide,
-      winnerHorse: item.winnerHorse,
-      prizeFee: item.prizeFee,
-      resultAmount: item.resultAmount - item.prizeFee,
-
+        kayitId: item._id,
+        id: i,
+        email1: item.email1,
+        depositAmount: item.depositAmount,
+        walletFrom: item.walletFrom,
+        status: item.status,
+        createdAt: item.createdAt,
+        txHash: item.txHash,
     }
-
-  })
+})
   
 
 
@@ -502,7 +377,7 @@ export default function PredictionList() {
 
 
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
-          <h1 className='font-bold italic text-2xl'>Predictions</h1>
+          <h1 className='font-bold italic text-2xl'>Deposits</h1>
 
 
           <div className='flex flex-row  justify-left mt-5 mb-5'>

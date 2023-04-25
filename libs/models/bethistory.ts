@@ -105,9 +105,6 @@ export const getAllBetHistory = async () => {
 export const getAllBetHistoryforUser = async (username: string) => {
   const requests = await Bethistory.find({ username: username }).sort( { date: -1 } );
   if (requests) {
-
-///console.log("getAllBetHistoryforUser requests", requests)
-
     return requests;
   } else {
     return null;

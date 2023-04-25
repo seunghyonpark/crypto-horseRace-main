@@ -1,5 +1,6 @@
 import mongoose, { model, models, Schema } from "mongoose";
 import connectMongo from "../services/database";
+import { User } from "./user";
 
 connectMongo();
 
@@ -86,14 +87,25 @@ export const getAllDepositRequests = async () => {
 };
 
 
-export const getAllDepositRequestsforUser = async (email1: string) => {
-  const requests = await DepositRequest.find({ email1: email1}).sort( { createdAt: -1 } );
+export const getAllDepositRequestsforUser = async (username: string) => {
+
+  const user = await User.findOne({ username: username });
+  if (!user) {
+    return null;
+  }
+
+  const requests = await DepositRequest.find({ userToken: user.userToken}).sort( { createdAt: -1 } );
+
+  //////console.log("getAllDepositRequestsforUser requests", requests);
+
   if (requests) {
     return requests;
   } else {
     return null;
   }
 };
+
+
 
 export const updateDepositRequest = async (
   _id: string,

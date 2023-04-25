@@ -196,8 +196,6 @@ export default function Navbar() {
         })
         const data = await res.json();
 
-        console.log("=====navbar getUser", data);
-
         setUser(data?.user?.user);
 
         setWaiting(false);
@@ -305,57 +303,50 @@ export default function Navbar() {
             
                 </div>
 
-
                 <div className="flex flex-col items-center justify-center w-full h-full ">
-
 
                     <div className="flex items-center justify-center w-full h-full bg-[#000000] px-3 ">
                         
                         <button className="hover:opacity-50">
+                            {user && game?.selectedSide === "Long" &&
+                                <Image
+                                src={'/rabbit1.gif'}
+                                width={35}
+                                height={35}
+                                alt="game"
+                                className="rounded-md"
+                                onClick={() => {
+                                    router.push('/gameT2E')
+                                }}
+                                />
+                            }
 
+                            {user && game?.selectedSide === "Short" &&
+                                <Image
+                                src={'/rabbit2.gif'}
+                                width={35}
+                                height={35}
+                                alt="game"
+                                className="rounded-md"
+                                onClick={() => {
+                                    router.push('/gameT2E')
+                                }}
+                                />
+                            }
 
-                        {user && game?.selectedSide === "Long" &&
-                            <Image
-                            src={'/rabbit1.gif'}
-                            width={35}
-                            height={35}
-                            alt="game"
-                            className="rounded-md"
-                            onClick={() => {
-                                router.push('/gameT2E')
-                            }}
-                            />
-                        }
-
-                        {user && game?.selectedSide === "Short" &&
-                            <Image
-                            src={'/rabbit2.gif'}
-                            width={35}
-                            height={35}
-                            alt="game"
-                            className="rounded-md"
-                            onClick={() => {
-                                router.push('/gameT2E')
-                            }}
-                            />
-                        }
-
-                        {user && !game &&
-                            <Image
-                            src={user?.img}
-                            width={30}
-                            height={30}
-                            alt="pfp"
-                            className="rounded-md"
-                            onClick={() => {
-                                router.push('/gameT2E')
-                            }}
-                            />
-                        }
-
+                            {user && !game &&
+                                <Image
+                                src={user?.img}
+                                width={30}
+                                height={30}
+                                alt="pfp"
+                                className="rounded-md"
+                                onClick={() => {
+                                    router.push('/gameT2E')
+                                }}
+                                />
+                            }
                         </button>
-
-
 
                         <div className="flex items-center w-full justify-end gap-4">
 

@@ -91,10 +91,6 @@ export default async function handler(
       });
     }
 
-
-    console.log("username", user.username);
-
-
     return res.status(200).json({
       status: true,
       message: "Bet histories request successful",

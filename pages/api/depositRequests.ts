@@ -143,6 +143,7 @@ export default async function handler(
       return res.status(400).json({ message: "Missing required fields" });
     }
 
+    /*
     const user = await User.findOne({ userToken: userToken });
     if (!user) {
       return res.status(400).json({ message: "User not found" });
@@ -155,12 +156,65 @@ export default async function handler(
         message: "Deposits request failed",
       });
     }
+    */
+
+
+    const deposits = await getAllDepositRequestsforUser(userToken);
+    if (!deposits) {
+      return res.status(200).json({
+        status: false,
+        message: "Deposits request failed",
+      });
+    }
+
+
+
     return res.status(200).json({
       status: true,
       message: "Deposits request successful",
       deposits,
     });
+  }
+
+
+
+  if (method === "getAllforUsername") {
+
+    const { username } = req.body;
+
+
+    console.log("getAllforUsername username", username);
+
+
+
+    if (!username) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const user = await User.findOne({ username: username });
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const depositRequests = await getAllDepositRequestsforUser(user.username);
+    if (!depositRequests) {
+      return res.status(200).json({
+        status: false,
+        message: "Deposit requests failed",
+      });
+    }
+
+    console.log("getAllforUsername depositRequests", depositRequests[0]);
+
+
+    return res.status(200).json({
+      status: true,
+      message: "Deposits request successful",
+      depositRequests,
+    });
+
   }  
+
 
 
   if (method === "update") {

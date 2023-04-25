@@ -151,7 +151,7 @@ export const newUser = async (
 
   const checkReferralByUsername = await User.find({ username: referral });
   if (checkReferralByUsername.length === 0) {
-    return { success: false, message: "Referral already exists" };
+    return { success: false, message: "Referral does not exist" };
   }
 
 

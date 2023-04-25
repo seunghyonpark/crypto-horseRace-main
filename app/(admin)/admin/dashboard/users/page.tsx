@@ -37,6 +37,10 @@ export default function UserList() {
 
   const [user, setUser] = useState<IUser>();
 
+  const [username, setUsername] = useState<string>('');
+
+
+
   const getUser = async () => {
     const inputs = {
         method: 'getOne',
@@ -178,21 +182,57 @@ export default function UserList() {
 
     },
 
-
-
-
-
-    
-  
-
-
   ];
-
 
 
   function duzenle(e: any) {
     setSelectedUser(e)
     handleClickOpen()
+}
+
+
+
+
+
+const search = async () => {
+  if (!username) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Please enter a username!',
+    });
+    return;
+  }
+
+
+  const res = await fetch('/api/user', {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      method: "getOneByUsername",
+      API_KEY: process.env.API_KEY,
+      username: username,
+    }),
+  })
+  const data = await res.json();
+
+  console.log("user data", data);
+
+  ////setUser(data?.user?.user);
+
+  if (data?.user?.user) {
+    ///setUsers(array(data?.user?.user));
+    setUsers([data?.user?.user]);
+
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'User not found!',
+    });
+  }
+
+
 }
 
 
@@ -206,11 +246,11 @@ export default function UserList() {
   };
 
 
+  /*
   useEffect(() => {
     getAll()
   }, [])
-
-
+  */
 
   const getAll = async () => {
     const res = await fetch('/api/user', {
@@ -388,6 +428,29 @@ export default function UserList() {
 
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
           <h1 className='font-bold italic text-2xl'>Users</h1>
+
+          <div className='flex flex-row  justify-left mt-5 mb-5'>
+            <input
+                placeholder="Nick Name"
+                onChange={(e) => {
+                    setUsername(e.target.value);
+                }}
+                className="input input-bordered w-full max-w-xs text-white"
+            />
+
+            <button
+                onClick={() => {
+                    //user?.deposit && user?.deposit > 10000 ? setMiktar("10000") : setMiktar(user?.deposit)
+
+                    search();
+                }}
+                className='btn btn-xs h-12 ml-2 text-yellow-500 border-yellow-500 hover:bg-white bg-white '
+            >
+                Search
+            </button>
+          </div>
+
+          
           <div style={{ width: "100%", height: 2710, color: "white" }}>
             <DataGrid
               rows={rows}

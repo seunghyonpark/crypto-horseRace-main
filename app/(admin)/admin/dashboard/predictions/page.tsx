@@ -252,14 +252,6 @@ export default function PredictionList() {
 
 
   const search = async () => {
-
-    /*
-    console.log("search", username);
-    const filtered = predictions.filter((prediction: any) => prediction.username === username);
-    console.log("filtered", filtered);
-    setPredictions(filtered);
-    */
-
     if (!username) {
       Swal.fire({
         icon: 'error',
@@ -284,8 +276,6 @@ export default function PredictionList() {
     console.log("bethistory data", data);
 
     setPredictions(data?.betHistory);
-    
-
   }
 
 
@@ -536,6 +526,7 @@ export default function PredictionList() {
                 Search
             </button>
           </div>
+
 
           <div style={{ width: "100%", height: 2710, color: "white" }}>
 

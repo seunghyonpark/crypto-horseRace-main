@@ -183,6 +183,27 @@ export default async function handler(
   }
 
 
+
+  if (method === "getOneByUsername") {
+
+    const { username } = req.body;
+
+    const user = await getUserByUsername(username);
+
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+
+    //console.log("api user", user);
+
+    //const users = await getAllUsers();
+    //console.log("api users", users);
+
+    res.status(200).json({ message: "User found", user: user });
+  }
+
+
   if (method === "getAll") {
     const users = await getAllUsers();
     if (!users.success) {

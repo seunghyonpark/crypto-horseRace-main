@@ -36,6 +36,11 @@ const schema = Yup.object().shape({
         .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
         .min(5, "Nick name must be at least 5 characters")
         .max(10),
+    referral: Yup.string()
+        .required("Nick name is required")
+        .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
+        .min(5, "Referral must be at least 5 characters")
+        .max(10),
 
 });
 
@@ -65,13 +70,14 @@ export default function RegisterPage() {
             pass1: "",
             pass2: "",
             username: "",
+            referral: "",
         },
 
         // Pass the Yup schema to validate the form
         validationSchema: schema,
 
         // Handle form submission
-        onSubmit: async ({ email, pass1, pass2, username }) => {
+        onSubmit: async ({ email, pass1, pass2, username, referral }) => {
         // Make a request to your backend to store the data
 
         let userToken = crypto.randomUUID();
@@ -86,6 +92,7 @@ export default function RegisterPage() {
             userToken: userToken,
             walletAddress: wallet,
             nftWalletAddress: wallet,
+            referral: referral,
         };
         fetch("/api/user", {
             method: "POST",
@@ -451,6 +458,22 @@ export default function RegisterPage() {
         className="input w-full bg-gray-200 rounded-md"
       />
       {errors.username && touched.username && <span>{errors.username}</span>}
+
+
+      <label
+        htmlFor="Referral Code"
+        className="label">
+            <span className="label-text">Referral</span>
+      </label>
+      <input
+        type="text"
+        name="referral"
+        value={values.referral}
+        onChange={handleChange}
+        id="referral"
+        className="input w-full bg-gray-200 rounded-md"
+      />
+      {errors.referral && touched.referral && <span>{errors.referral}</span>}
 
 
       <button

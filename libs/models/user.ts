@@ -85,6 +85,11 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  referral: {
+    type: String,
+    required: false,
+    default: "root",
+  },
 });
 
 export const User = models.User || model("User", UserSchema);
@@ -128,22 +133,26 @@ export const newUser = async (
   pass2: string,
   userToken: string,
   ////walletAddress: string,
-  nftWalletAddress: string
+  nftWalletAddress: string,
+  referral: string,
 ) => {
   
   const checkUserByEmail = await User.find({ email: email });
-
   if (checkUserByEmail.length > 0) {
     return { success: false, message: "User email already exists" };
   }
 
 
   const checkUserByUsername = await User.find({ username: username });
-
   if (checkUserByUsername.length > 0) {
     return { success: false, message: "User nick name already exists" };
   }
 
+
+  const checkReferralByUsername = await User.find({ username: referral });
+  if (checkReferralByUsername.length === 0) {
+    return { success: false, message: "Referral already exists" };
+  }
 
 
   const user = new User({
@@ -154,7 +163,8 @@ export const newUser = async (
     userToken: userToken,
     ////walletAddress: walletAddress,
     nftWalletAddress: nftWalletAddress,
-    img: "/profile_default.gif"
+    img: "/profile_default.gif",
+    referral: referral,
   });
   
   return await user.save();

@@ -36,11 +36,11 @@ const schema = Yup.object().shape({
         .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
         .min(5, "Nick name must be at least 5 characters")
         .max(10),
-    referral: Yup.string()
+    referral: Yup.string(),
         //.required("Nick name is required")
-        .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
-        .min(5, "Referral must be at least 5 characters")
-        .max(10),
+        //.matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
+        //.min(5, "Referral must be at least 5 characters")
+        //.max(10),
 
     terms: Yup.boolean()
         .required("Accept Terms & Conditions is required")
@@ -66,12 +66,16 @@ export default function RegisterPage() {
     const [network, setNetwork] = useState<any>(false);
     const router = useRouter();
 
+   
+
     
 
 
     const searchParams = useSearchParams();
 
-    const referral = searchParams.get('referral');
+    const referralCode = searchParams.get('referral');
+
+ 
 
     ////console.log("referral=", referral);
 
@@ -83,7 +87,7 @@ export default function RegisterPage() {
             pass1: "",
             pass2: "",
             username: "",
-            referral: referral,
+            referral: referralCode,
             terms: false,
         },
 
@@ -478,7 +482,7 @@ export default function RegisterPage() {
       <input
         type="text"
         name="referral"
-        value={values.referral}
+        value={ (!referralCode) ? "" : referralCode }
         onChange={handleChange}
         id="referral"
         className="input w-full bg-gray-200 rounded-md"

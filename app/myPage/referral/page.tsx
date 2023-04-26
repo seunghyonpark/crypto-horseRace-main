@@ -418,7 +418,6 @@ export default function ReferralList() {
                 
                 <div className="w-full border rounded-lg flex flex-col items-center justify-center p-2 gap-5 py-10">
 
-
                     <h4 className="text-white">Referral Code</h4>
 
                     <div className='w-full max-w-xs md:w-1/2 '>
@@ -428,7 +427,7 @@ export default function ReferralList() {
                             placeholder="Referral Code"
                             id="deposit"
                             ///value={depositCount}
-                            value={user?.referral}
+                            value={user?.referralCode}
 
                             //onChange={(e) => {
                             //    setDepositCount(e.target.value);
@@ -440,7 +439,7 @@ export default function ReferralList() {
                     </div>
 
 
-                    {user?.referral &&
+                    {user?.referralCode &&
                         <>
                             <div className='w-full flex flex-row items-center justify-center centent-center'>
                                 {/*
@@ -451,9 +450,9 @@ export default function ReferralList() {
                                     color="success" variant='contained' className='bg-green-500'
                                     onClick={() =>
                                         {
-                                        navigator.clipboard.writeText(user?.referral);
+                                        navigator.clipboard.writeText(user?.referralCode);
                                         setSucc(true);
-                                        setSuccessMsgSnackbar("Your deposit wallet address [" + user?.referral + "] copied to clipboard");
+                                        setSuccessMsgSnackbar("Your referral code is [" + user?.referralCode + "] copied to clipboard");
                                         }
                                     }
                                 >
@@ -464,12 +463,61 @@ export default function ReferralList() {
                         </>
                     }
 
- 
+
+
+<h4 className="text-white">Custom Promotion Link</h4>
+
+<div className='w-full max-w-xs md:w-1/2 '>
+
+    <input
+        ///type="number"
+        placeholder="Promotion Link"
+        id="deposit"
+        ///value={depositCount}
+        value={"https://craclegamez.io/myPage/register?referral=" + user?.referralCode}
+
+
+
+        //onChange={(e) => {
+        //    setDepositCount(e.target.value);
+        //}}
+
+        className="input input-bordered w-full max-w-xs text-gray-800 text-xl font-bold mb-1"
+    />
+
+</div>
+
+
+{user?.referralCode &&
+    <>
+        <div className='w-full flex flex-row items-center justify-center centent-center'>
+            {/*
+            <CC content={user?.walletAddress}/>
+            */}
+
+            <Button
+                color="success" variant='contained' className='bg-green-500'
+                onClick={() =>
+                    {
+                    navigator.clipboard.writeText("https://craclegamez.io/myPage/register?referral=" + user?.referralCode);
+                    setSucc(true);
+                    setSuccessMsgSnackbar("Your promotion link is copied to clipboard");
+                    }
+                }
+            >
+                Copy
+            </Button>
+        </div>
+
+    </>
+}
 
                 </div>
-                
 
-                <h1 className='mt-5 font-bold italic text-2xl'>My Referrals</h1>
+
+
+                
+                <h1 className='mt-5 font-bold italic text-2xl text-white'>My Referrals</h1>
                 <div style={{ width: "100%", height: 600, color: "white" }}>
 
                 {rows && (

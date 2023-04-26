@@ -73,7 +73,7 @@ export default function RegisterPage() {
 
     const referral = searchParams.get('referral');
 
-    console.log("referral=", referral);
+    ////console.log("referral=", referral);
 
 
     // Formik hook to handle the form state
@@ -83,7 +83,7 @@ export default function RegisterPage() {
             pass1: "",
             pass2: "",
             username: "",
-            referral: "",
+            referral: referral,
             terms: false,
         },
 

@@ -122,7 +122,7 @@ export default async function handler(
       referral,
     );
 
-    console.log("newUser user", user)
+    /////console.log("newUser user", user)
 
 
 

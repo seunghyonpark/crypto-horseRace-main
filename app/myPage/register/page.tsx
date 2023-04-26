@@ -369,10 +369,6 @@ export default function RegisterPage() {
     };
 
 
-
-
-
-
     return (
         <>
             <div className="flex flex-col items-center justify-center py-5 h-full text-black gap-4">
@@ -481,23 +477,22 @@ export default function RegisterPage() {
       {errors.referral && touched.referral && <span>{errors.referral}</span>}
 
 
+        <div className="flex flex-row">
 
-            
+
+
+        </div>
+
 
         <div className="flex flex-row">
             <input
                 type="checkbox"
                 name="terms"
-                
                 ////value={values.terms}
-
-
                 onChange={handleChange}
                 id="terms"
                 className="checkbox checkbox-sm checkbox-primary mt-2"
             />
-
-
             <label
                 htmlFor="Terms and Conditions"
                 className="label ml-3">
@@ -509,7 +504,7 @@ export default function RegisterPage() {
         </div>
         {errors.terms && touched.terms && <span>{errors.terms}</span>}
 
-        
+
 
       <button
         type="submit"

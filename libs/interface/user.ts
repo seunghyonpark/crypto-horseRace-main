@@ -15,4 +15,6 @@ export interface IUser {
   maticBalance: number;
   walletAddress: string;
   nftWalletAddress: string;
+  referralCode: string;
+  referral: string;
 }

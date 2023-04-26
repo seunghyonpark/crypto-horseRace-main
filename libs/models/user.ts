@@ -85,6 +85,11 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  referralCode: {
+    type: String,
+    required: false,
+    default: "",
+  },
   referral: {
     type: String,
     required: false,
@@ -157,6 +162,16 @@ export const newUser = async (
   */
 
 
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let referralCode = '';
+    for (let i = 0; i < 5; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        referralCode += chars[randomIndex];
+    }
+
+    console.log("referralCode", referralCode);
+
+
   const user = new User({
     username: username,
     email: email,
@@ -166,6 +181,7 @@ export const newUser = async (
     ////walletAddress: walletAddress,
     nftWalletAddress: nftWalletAddress,
     img: "/profile_default.gif",
+    referralCode: referralCode,
     referral: referral,
   });
   

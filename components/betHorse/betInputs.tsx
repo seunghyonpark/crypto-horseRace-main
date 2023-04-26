@@ -555,7 +555,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
                             ////setBetAmount(user?.deposit - 0.00001)
                             setBetAmount(50000)
                         }}
-                        className=' w-8 btn-circle absolute left-10 z-10 bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black text-[10px]'> Max
+                        className=' w-8 btn-circle absolute left-10 z-5 bg-[url(/cion.webp)] bg-contain bg-center bg-no-repeat text-black text-[10px]'> Max
                       </button>
                     }
                     

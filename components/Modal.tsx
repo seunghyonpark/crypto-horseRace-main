@@ -18,7 +18,7 @@ const Modal = ({ show, onClose, title, children } : any) => {
 
     <div
       className="
-        modal-backdrop pt-[80px] pr-[10px] opacity-100 fixed top-0 left-0 w-full h-full flex flex-row justify-right items-top bg-black bg-opacity-50
+        modal-backdrop pt-[80px] pr-[10px] opacity-100 fixed top-0 left-0 w-full h-full flex flex-row justify-center items-top bg-black bg-opacity-50
         "
       onClick={() => {
         // close modal when outside of modal is clicked

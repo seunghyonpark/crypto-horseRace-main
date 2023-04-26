@@ -28,6 +28,8 @@ export default function RootLayout({
                         {children}
                         
                     </div>
+
+                    
                     <footer>
                         <Footer />
                     </footer>

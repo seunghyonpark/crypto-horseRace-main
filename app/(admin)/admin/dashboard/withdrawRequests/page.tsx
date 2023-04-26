@@ -34,7 +34,7 @@ export default function WithdrawRequests() {
         },
         {
             field: "createdAt",
-            headerName: "Created At",
+            headerName: "DATE",
             align: "center",
             headerAlign: "center",
             width: 150,

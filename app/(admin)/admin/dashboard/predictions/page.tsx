@@ -502,7 +502,7 @@ export default function PredictionList() {
 
 
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
-          <h1 className='font-bold italic text-2xl'>Predictions</h1>
+          <h1 className='font-bold italic text-2xl'>Bet History</h1>
 
 
           <div className='flex flex-row  justify-left mt-5 mb-5'>

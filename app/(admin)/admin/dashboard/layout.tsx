@@ -84,7 +84,7 @@ export default function RootLayout({
                                     Banking
                                 </Link>
                                 <Link className={`${pathName === '/admin/dashboard/predictions' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/predictions">
-                                    Predictions
+                                    Bet History
                                 </Link>
 
                                 {/*

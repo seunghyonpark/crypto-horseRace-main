@@ -27,6 +27,9 @@ export default function MyPage() {
 
     // Formik hook to handle the form state
     const formik = useFormik({
+        
+        ////console.log("useFormik===========");
+
         initialValues: {
             pass1: "",
             pass2: "",
@@ -40,6 +43,13 @@ export default function MyPage() {
             // Make a request to your backend to store the data
 
             let userToken = getCookie("admin");
+
+
+            console.log("pass1: " + pass1)
+            console.log("pass2: " + pass2)
+            console.log("userToken: " + userToken)
+
+
 
             const formInput = {
                 method: 'updatePassword',
@@ -95,27 +105,42 @@ export default function MyPage() {
                                 <label className='mt-5'>New password</label>
                                 <input
                                     type="password"
+                                    name="pass1"
                                     id='pass1'
                                     className='input border-white border placeholder:text-gray-500 italic'
                                     value={values.pass1}
+                                    onChange={handleChange}
                                 />
+                                {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
+
 
                                 <label className='mt-5'>Re-enter your new password</label>
                                 <input
                                     type="password"
+                                    name="pass2"
                                     id='pass2'
                                     className='input border-white border placeholder:text-gray-500 italic'
                                     value={values.pass2}
+                                    onChange={handleChange}
                                 />
+                                {errors.pass2 && touched.pass2 && <span>{errors.pass2}</span>}
 
                             </div>
 
                         </form>
 
+
 {/*
                         <Tooltip title="DEMO" arrow>
-*/}
+
                             <button className='btn w-full btn-success'>Submit</button>
+*/}
+
+                            <button
+                                type="submit"
+                                className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
+                                    Submit
+                            </button>
 
 {/*
                         </Tooltip>

@@ -149,10 +149,12 @@ export const newUser = async (
   }
 
 
+  /*
   const checkReferralByUsername = await User.find({ username: referral });
   if (checkReferralByUsername.length === 0) {
     return { success: false, message: "Referral does not exist" };
   }
+  */
 
 
   const user = new User({
@@ -248,15 +250,35 @@ export const updateUserProfileImage = async (
   userToken: string,
   img: string,
 ) => {
-
-
-  //console.log("updateUserProfileImage userToken: ", userToken);
-  //console.log("updateUserProfileImage img: ", img);
-
   const updatedUser: IUser = (await User.findOneAndUpdate(
     { userToken: userToken },
     {
       img: img,
+    },
+    { new: true }
+  )) as IUser;
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+  return { success: false, message: "User not found" };
+};
+
+
+export const updateUserPassword = async (
+  userToken: string,
+  pass1: string,
+  pass2: string,
+) => {
+
+  console.log("updateUserPassword userToken: ", userToken);
+  console.log("updateUserPassword pass1: ", pass1);
+  console.log("updateUserPassword pass2: ", pass2);
+
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { userToken: userToken },
+    {
+      pass1: pass1,
+      pass2: pass2,
     },
     { new: true }
   )) as IUser;

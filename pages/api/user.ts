@@ -10,6 +10,7 @@ import {
   updateUser,
   updateUserProfileImage,
   updateUserWalletAddress,
+  updateUserPassword,
 } from "@/libs/models/user";
 
 
@@ -68,8 +69,7 @@ export default async function handler(
       !pass1 ||
       !pass2 ||
       !userToken ||
-      !nftWalletAddress ||
-      !referral
+      !nftWalletAddress
     ) {
       res.status(400).json({ status: false, message: "Missing data" });
       return;
@@ -275,6 +275,59 @@ export default async function handler(
     }
     res.status(200).json({ message: "User updated", user: user });
   }
+
+
+  if (method === "updatePassword") {
+
+    const {
+      userToken,
+      pass1,
+      pass2,
+    } = req.body;
+
+    console.log("updatePassword userToken", userToken);
+
+
+    if (
+      !pass1 ||
+      !pass2 ||
+      !userToken
+    ) {
+      res.status(400).json({ status: false, message: "Missing data" });
+      return;
+    }
+
+    if (pass1 !== pass2) {
+      res
+        .status(400)
+        .json({ status: false, message: "Passwords do not match" });
+      return;
+    }
+
+    if (pass1.length < 6) {
+      res.status(400).json({
+        status: false,
+        message: "Password must be at least 6 characters",
+      });
+      return;
+    }
+
+
+    const user = await updateUserPassword(
+      userToken,
+      pass1,
+      pass2,
+    );
+    
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+    res.status(200).json({ message: "User updated", user: user });
+  }
+
+
+  
 
 
   if (method === "updateWalletAddress") {

@@ -37,7 +37,7 @@ const schema = Yup.object().shape({
         .min(5, "Nick name must be at least 5 characters")
         .max(10),
     referral: Yup.string()
-        .required("Nick name is required")
+        //.required("Nick name is required")
         .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for nick name")
         .min(5, "Referral must be at least 5 characters")
         .max(10),

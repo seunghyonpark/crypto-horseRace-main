@@ -2,15 +2,49 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-
-import { deleteCookie } from 'cookies-next';
+import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { IUser } from '@/libs/interface/user';
 
-export default function Footer({user} : {user: any}) {
+import { deleteCookie, getCookie, hasCookie } from 'cookies-next';
 
+
+///export default function Footer({user} : {user: any}) {
+
+export default function Footer() {
+
+
+
+    const [user, setUser] = useState<IUser>();
+
+
+    const getUser = async () => {
+
+      const inputs = {
+          method: 'getOne',
+          API_KEY: process.env.API_KEY,
+          userToken: getCookie('user')
+      }
+      const res = await fetch('/api/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(inputs)
+      })
+      const data = await res.json();
+
+      setUser(data?.user?.user);
+      
+  }
+
+  useEffect(() => {
+    if (hasCookie("user") && !user) {
+
+        getUser()
+        
+    }
+  }, [user]);
 
 
     const router = useRouter();

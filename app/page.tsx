@@ -902,7 +902,7 @@ Place a bet with your tokens based on how strong you think your hand is.
         </div>
 
         <footer>
-            <Footer user={user} />
+            <Footer />
         </footer>
 
 

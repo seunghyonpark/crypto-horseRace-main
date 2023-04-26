@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Footer({user} : {user: any}) {
 
-    
+
 
     const router = useRouter();
 
@@ -48,7 +48,14 @@ export default function Footer({user} : {user: any}) {
 
 
 
-                        &nbsp;&nbsp;<p>Terms of Services</p>
+                        &nbsp;&nbsp;
+
+
+                        <Link href="/gameT2E/terms">
+                            Terms of Services
+                        </Link>
+
+
                     </div>
 
 

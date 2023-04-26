@@ -42,6 +42,10 @@ const schema = Yup.object().shape({
         .min(5, "Referral must be at least 5 characters")
         .max(10),
 
+    terms: Yup.boolean()
+        .required("Accept Terms & Conditions is required")
+        .oneOf([true], "Accept Terms & Conditions is required"),
+
 });
 
 /*
@@ -71,6 +75,7 @@ export default function RegisterPage() {
             pass2: "",
             username: "",
             referral: "",
+            terms: false,
         },
 
         // Pass the Yup schema to validate the form
@@ -370,10 +375,10 @@ export default function RegisterPage() {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center py-10 h-full text-black gap-4">
+            <div className="flex flex-col items-center justify-center py-5 h-full text-black gap-4">
 
 
-                <div className="flex flex-col md:flex-row justify-center w-full h-full gap-10 p-10">
+                <div className="flex flex-col md:flex-row justify-center w-full h-full gap-10 pl-5 pr-5 ">
 
 
 
@@ -463,7 +468,7 @@ export default function RegisterPage() {
       <label
         htmlFor="Referral Code"
         className="label">
-            <span className="label-text">Referral</span>
+            <span className="label-text">Referral Code</span>
       </label>
       <input
         type="text"
@@ -475,6 +480,36 @@ export default function RegisterPage() {
       />
       {errors.referral && touched.referral && <span>{errors.referral}</span>}
 
+
+
+            
+
+        <div className="flex flex-row">
+            <input
+                type="checkbox"
+                name="terms"
+                
+                ////value={values.terms}
+
+
+                onChange={handleChange}
+                id="terms"
+                className="checkbox checkbox-sm checkbox-primary mt-2"
+            />
+
+
+            <label
+                htmlFor="Terms and Conditions"
+                className="label ml-3">
+                    <span className="label-text">
+                    I have read and agree to the User Agreement and Privacy Policy.
+                    &nbsp;<Link  href="/gameT2E/terms"><span className="text-bold text-blue-500">(See Details)</span></Link>
+                    </span>
+            </label>
+        </div>
+        {errors.terms && touched.terms && <span>{errors.terms}</span>}
+
+        
 
       <button
         type="submit"

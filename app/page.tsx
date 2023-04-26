@@ -93,6 +93,35 @@ export default function Home() {
 
     const [craUsdt, setCraUsdt] = useState<any>();
 
+    const [user, setUser] = useState<IUser>();
+
+
+    const getUser = async () => {
+
+      const inputs = {
+          method: 'getOne',
+          API_KEY: process.env.API_KEY,
+          userToken: getCookie('user')
+      }
+      const res = await fetch('/api/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(inputs)
+      })
+      const data = await res.json();
+
+      setUser(data?.user?.user);
+      
+  }
+
+  useEffect(() => {
+    if (hasCookie("user") && !user) {
+
+        getUser()
+        
+    }
+  }, [user]);
+
 
     
     useEffect(() => {
@@ -873,7 +902,7 @@ Place a bet with your tokens based on how strong you think your hand is.
         </div>
 
         <footer>
-            <Footer />
+            <Footer user={user} />
         </footer>
 
 

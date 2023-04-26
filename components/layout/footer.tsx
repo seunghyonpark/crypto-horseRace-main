@@ -1,14 +1,26 @@
 'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-export default function Footer() {
+import { deleteCookie } from 'cookies-next';
+
+import { useRouter } from 'next/navigation';
+
+
+export default function Footer({user} : {user: any}) {
+
+    
+
+    const router = useRouter();
+
+
     return (
         <>
 
-            <div className=" items-center justify-center w-full h-20 bg-black sticky top-0 z-50 
+            <div className="
+                items-center justify-center w-full h-20 bg-black sticky top-0 z-50 
                 lg:flex
                 ">
 
@@ -18,6 +30,28 @@ export default function Footer() {
                         <Image src={"/logo.png"} width="100" height="50" alt="logo" />
                     </Link>
                     */}
+
+
+                    <div className='w-full flex flex-row'>
+ 
+                        {user &&
+                            <button
+                                className={`text-[10px] text-red-500`}
+                                onClick={() => {
+                                    deleteCookie('user');
+                                    router.push('/');
+                                }}
+                            >
+                                Log Out
+                            </button>
+                        }
+
+
+
+                        &nbsp;&nbsp;<p>Terms of Services</p>
+                    </div>
+
+
                     <div className="w-full">
                         <Image src={"/logo.png"} width="100" height="50" alt="logo" />
                     </div>

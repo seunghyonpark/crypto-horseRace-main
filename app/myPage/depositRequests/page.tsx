@@ -552,6 +552,8 @@ export default function DepositRequestList() {
 
                 <h1 className='mt-5 font-bold italic text-2xl'>Lists</h1>
                 <div style={{ width: "100%", height: 600, color: "white" }}>
+
+                {rows && (
                     <DataGrid
                         rows={rows}
                         columns={columns}
@@ -562,6 +564,8 @@ export default function DepositRequestList() {
                             color: "white",
                         }}
                     />
+                )}
+
                 </div>
 
             </div>

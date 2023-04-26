@@ -462,6 +462,9 @@ const search = async () => {
 
           
           <div style={{ width: "100%", height: 2710, color: "white" }}>
+
+          {rows && (
+            
             <DataGrid
               rows={rows}
               columns={columns}
@@ -483,9 +486,11 @@ const search = async () => {
                 bgcolor: "gray.800",
                 */
 
-              }}
-              
+              }}      
             />
+
+          )}
+
           </div>
         </div>
 

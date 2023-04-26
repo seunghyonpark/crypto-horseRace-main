@@ -11,7 +11,7 @@ import withReactContent from "sweetalert2-react-content";
 import Image from "next/image";
 import Link from "next/link";
 import API from "@/libs/enums/API_KEY";
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import DomainEnum from "@/libs/enums/domain";
 
 
@@ -65,6 +65,15 @@ export default function RegisterPage() {
     const [networkName, setNetworkName] = useState<any>(null);
     const [network, setNetwork] = useState<any>(false);
     const router = useRouter();
+
+    
+
+
+    const searchParams = useSearchParams();
+
+    const referral = searchParams.get('referral');
+
+    console.log("referral=", referral);
 
 
     // Formik hook to handle the form state

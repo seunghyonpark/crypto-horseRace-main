@@ -270,6 +270,9 @@ export default function WithdrawRequests() {
             <div className='flex flex-col p-10 mt-5 text-gray-200'>
                 <h1 className='font-bold italic text-2xl'>Withdraw Requests</h1>
                 <div style={{ width: "100%", height: 2710, color: "white" }}>
+
+                {rows && (
+
                     <DataGrid
                         rows={rows}
                         columns={columns}
@@ -289,6 +292,8 @@ export default function WithdrawRequests() {
                             ///color: "white",
                         }}
                     />
+                )}
+
                 </div>
             </div>
 

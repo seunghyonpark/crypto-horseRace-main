@@ -435,6 +435,8 @@ export default function BetHistoryList() {
 
                 <h1 className='text-sm mt-5'>YOUR BET HISTORY</h1>
                 <div className="mt-5" style={{ width: "100%", height: 600, color: "white" }}>
+
+                {rows && (
                     <DataGrid
                         rows={rows}
                         columns={columns}
@@ -446,6 +448,8 @@ export default function BetHistoryList() {
                             ///bgcolor: "#343a40",
                         }}
                     />
+                )}
+
                 </div>
             </div>
             {selectedUser && (

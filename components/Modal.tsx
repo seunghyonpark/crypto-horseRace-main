@@ -83,7 +83,7 @@ const StyledModalBody = styled.div`
 const StyledModal = styled.div`
   background: #24252F;
   width: 250px;
-  height: 430px;
+  height: 480px;
   border-radius: 15px;
   padding: 0px;
   vertical-align: top;

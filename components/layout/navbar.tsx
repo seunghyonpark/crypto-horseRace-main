@@ -540,6 +540,15 @@ export default function Navbar() {
                   </div>
 
                   <div
+                    className={`w-full pt-1 items-left text-base text-white `}
+                    onClick={() => {
+                        setShowModal(false), router.push('/myPage/referral')
+                    }}
+                    >
+                      Referrals
+                  </div>
+
+                  <div
                     className={` disabled pt-1 w-full items-left text-base text-[#A9A9A9]  `}
                     onClick={() => {
                         setShowModal(false), router.push('/')

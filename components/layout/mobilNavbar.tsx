@@ -972,10 +972,8 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
 
             <Modal
-              
               show={showModal}
               onClose={() => setShowModal(false)}
-                
             >
 
             <div className="w-full flex flex-row items-center justify-left gap-1 bg-red-900 ">

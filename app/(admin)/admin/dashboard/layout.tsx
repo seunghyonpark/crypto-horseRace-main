@@ -66,6 +66,9 @@ export default function RootLayout({
                             <div className="flex flex-col items-center gap-3">
                                 <Image src="/logo.png" width={100} height={100} alt="logo" />
                                 <div className="text-xl font-bold">Admin Panel</div>
+
+                                <div className="text-xl font-bold">{user?.username}</div>
+
                             </div>
                             <div className="flex md:flex-col gap-2 overflow-x-auto">
                                 <Link className={`${pathName === '/admin/dashboard' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard">
@@ -92,6 +95,9 @@ export default function RootLayout({
                                     General Settings
                                 </Link>
                                 */}
+                                <Link className={`${pathName === '/admin/dashboard/mypage' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/mypage">
+                                    My Page
+                                </Link>
                             </div>
                         </div>
                         <div className={`w-full`}>{children}</div>

@@ -480,8 +480,10 @@ export default function RegisterPage() {
         type="submit"
         className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
             SIGN UP
-        </button>
+      </button>
+
     </form>
+    
 </div>
 
 

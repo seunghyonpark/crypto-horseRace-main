@@ -201,6 +201,34 @@ export default function DepositList() {
     getAll();
 
   }, []);
+
+
+
+  const [depositSum, setDepositSum] = React.useState(0)
+
+  const getAllSum = async () => {
+      const res = await fetch('/api/depositRequests', {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              method: "getAllAmount",
+              API_KEY: process.env.API_KEY,
+              userToken: getCookie("admin")
+          }),
+      })
+      const data = await res.json()
+
+      console.log(data)
+
+      setDepositSum(data.sum)
+      
+      //if (data.payments.length == 0) return setRequests(0)
+      //setRequests(data.payments.length)
+  }
+
+  React.useEffect(() => {
+      getAllSum()
+  }, [])
   
 
 
@@ -379,6 +407,9 @@ export default function DepositList() {
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
           <h1 className='font-bold italic text-2xl'>Deposits</h1>
 
+
+          <h1 className='font-bold italic text-2xl'>Total Deposit Amount: {Number(depositSum).toFixed(2)}</h1>
+          
 
           <div className='flex flex-row  justify-left mt-5 mb-5'>
             <input

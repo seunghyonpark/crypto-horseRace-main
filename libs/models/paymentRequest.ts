@@ -92,6 +92,15 @@ export const getAllPaymentRequests = async () => {
   }
 };
 
+export const getAllpaymentRequestsSum = async () => {
+  const response = await PaymentRequest.aggregate([ { $group: { _id: null, total: { $sum: "$withdrawAmount" } } } ]);
+  if (response) {
+    return response[0].total;
+  } else {
+    return null;
+  }
+};
+
 export const getAllPaymentRequestsforUser = async (email1: string) => {
   const requests = await PaymentRequest.find({ email1: email1}).sort({createdAt: -1});
   if (requests) {

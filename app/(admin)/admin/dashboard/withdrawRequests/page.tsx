@@ -247,6 +247,34 @@ export default function WithdrawRequests() {
         getAll()
     }, [])
 
+
+    const [withdrawSum, setWithdrawSum] = React.useState(0)
+
+    const getAllSum = async () => {
+        const res = await fetch('/api/paymentRequests', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                method: "getAllAmount",
+                API_KEY: process.env.API_KEY,
+                userToken: getCookie("admin")
+            }),
+        })
+        const data = await res.json()
+
+        console.log(data)
+
+        setWithdrawSum(data.sum)
+        
+        //if (data.payments.length == 0) return setRequests(0)
+        //setRequests(data.payments.length)
+    }
+
+    React.useEffect(() => {
+        getAllSum()
+    }, [])
+
+
     const rows = requests.map((item: any, i: number) => {
         return {
             kayitId: item._id,
@@ -269,6 +297,11 @@ export default function WithdrawRequests() {
         <>
             <div className='flex flex-col p-10 mt-5 text-gray-200'>
                 <h1 className='font-bold italic text-2xl'>Withdraw Requests</h1>
+
+                <h1 className='font-bold italic text-2xl'>Total Withdraw Amount: {Number(withdrawSum).toFixed(2)}</h1>
+
+
+
                 <div style={{ width: "100%", height: 2710, color: "white" }}>
 
                 {rows && (

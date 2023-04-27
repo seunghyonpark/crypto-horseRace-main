@@ -26,7 +26,7 @@ export default function AdminGas() {
     return (
         <>
             <div className='flex flex-col items-center gap-3  border rounded-lg p-4 w-full h-full'>
-                <div className="text-xl">Total BNB Amount</div>
+                <div className="text-ml">Total BNB Amount</div>
                 <p>Current: <span className='text-pink-500'>{0.6234}</span> BNB</p>
                 {/*
                 <Link href="/" className='btn btn-md btn-primary'>See All</Link>

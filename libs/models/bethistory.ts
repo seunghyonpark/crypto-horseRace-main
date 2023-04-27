@@ -94,13 +94,35 @@ export const getBetHistory = async (_id: string) => {
 
 
 export const getAllBetHistory = async () => {
-  const requests = await Bethistory.find().sort( { date: -1 } );
+  const requests = await Bethistory.find().sort( { date: -1 } ).limit(100);
   if (requests) {
     return requests;
   } else {
     return null;
   }
 };
+
+export const getAllBetHistoryBetSum = async () => {
+  const response = await Bethistory.aggregate([ { $group: { _id: null, total: { $sum: "$betAmount" } } } ]);
+
+  console.log("getAllBetHistoryBetSum======", response);
+
+  if (response) {
+    return response[0].total;
+  } else {
+    return null;
+  }
+};
+
+export const getAllBetHistoryPrizeSum = async () => {
+  const response = await Bethistory.aggregate([ { $group: { _id: null, total: { $sum: "$prizeAmount" } } } ]);
+  if (response) {
+    return response[0].total;
+  } else {
+    return null;
+  }
+};
+
 
 export const getAllBetHistoryforUser = async (username: string) => {
   const requests = await Bethistory.find({ username: username }).sort( { date: -1 } );

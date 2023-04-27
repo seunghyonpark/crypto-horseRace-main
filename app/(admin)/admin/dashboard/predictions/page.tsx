@@ -294,7 +294,7 @@ export default function PredictionList() {
   };
 
 
-  /*
+  
   useEffect(() => {
 
     const getAll = async () => {
@@ -303,14 +303,11 @@ export default function PredictionList() {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          method: "getAllforUser",
+          method: "getAll",
           API_KEY: process.env.API_KEY,
-          userToken: user?.userToken,
         }),
       })
       const data = await res.json();
-  
-      console.log("bethistory data", data);
   
       setPredictions(data?.betHistory);
 
@@ -318,8 +315,51 @@ export default function PredictionList() {
 
     getAll();
 
-  }, [user?.userToken]);
-  */
+  }, []);
+
+
+  const [betSum, setBetSum] = React.useState(0)
+  const [prizeSum, setPrizeSum] = React.useState(0)
+
+  const getAllBetSum = async () => {
+      const res = await fetch('/api/betHistory', {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              method: "getAllBetAmount",
+              API_KEY: process.env.API_KEY,
+          }),
+      })
+      const data = await res.json()
+
+      setBetSum(data.sum)
+      
+      //if (data.payments.length == 0) return setRequests(0)
+      //setRequests(data.payments.length)
+  }
+
+  const getAllPrizeSum = async () => {
+    const res = await fetch('/api/betHistory', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            method: "getAllPrizeAmount",
+            API_KEY: process.env.API_KEY,
+        }),
+    })
+    const data = await res.json()
+
+    setPrizeSum(data.sum)
+    
+    //if (data.payments.length == 0) return setRequests(0)
+    //setRequests(data.payments.length)
+}
+
+  React.useEffect(() => {
+      getAllBetSum()
+      getAllPrizeSum()
+  }, [])
+  
 
 
   /*
@@ -503,6 +543,9 @@ export default function PredictionList() {
 
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
           <h1 className='font-bold italic text-2xl'>Bet History</h1>
+
+          <h1 className='font-bold italic text-2xl'>Total Bet Amount: {Number(betSum).toFixed(2)}</h1>
+          <h1 className='font-bold italic text-2xl'>Total Prize Amount: {Number(prizeSum/2).toFixed(2)}</h1>
 
 
           <div className='flex flex-row  justify-left mt-5 mb-5'>

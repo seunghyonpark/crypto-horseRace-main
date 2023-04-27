@@ -2,6 +2,7 @@ import {
   newPaymentRequest,
   getPaymentRequest,
   getAllPaymentRequests,
+  getAllpaymentRequestsSum,
   getAllPaymentRequestsforUser,
   updatePaymentRequest,
   deletePaymentRequest,
@@ -143,6 +144,29 @@ export default async function handler(
       payments,
     });
   }
+
+
+  if (method === "getAllAmount") {
+    /*
+    const { userToken } = req.body;
+    if (!userToken) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+    */
+    const sum = await getAllpaymentRequestsSum();
+    if (!sum) {
+      return res.status(200).json({
+        status: false,
+        message: "Sum request failed",
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      message: "Sum request successful",
+      sum,
+    });
+  }
+
 
 
   if (method === "getAllforUser") {

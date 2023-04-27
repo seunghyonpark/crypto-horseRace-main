@@ -87,6 +87,18 @@ export const getAllDepositRequests = async () => {
 };
 
 
+export const getAllDepositRequestsSum = async () => {
+  const response = await DepositRequest.aggregate([ { $group: { _id: null, total: { $sum: "$depositAmount" } } } ]);
+  if (response) {
+    return response[0].total;
+  } else {
+    return null;
+  }
+};
+
+
+
+
 export const getAllDepositRequestsforUser = async (username: string) => {
 
   const user = await User.findOne({ username: username });

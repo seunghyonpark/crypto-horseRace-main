@@ -1,6 +1,8 @@
 import {
   getBetHistory,
   getAllBetHistory,
+  getAllBetHistoryBetSum,
+  getAllBetHistoryPrizeSum,
   getAllBetHistoryforUser,
 } from "@/libs/models/bethistory";
 
@@ -67,6 +69,48 @@ export default async function handler(
       status: true,
       message: "Bet histories request successful",
       betHistory,
+    });
+  }
+
+  
+
+  if (method === "getAllBetAmount") {
+
+    console.log("getAllBetAmount=============")
+
+    const sum = await getAllBetHistoryBetSum();
+    if (!sum) {
+      return res.status(200).json({
+        status: false,
+        message: "Sum request failed",
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      message: "Sum request successful",
+      sum,
+    });
+  }
+
+
+  if (method === "getAllPrizeAmount") {
+    /*
+    const { userToken } = req.body;
+    if (!userToken) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+    */
+    const sum = await getAllBetHistoryPrizeSum();
+    if (!sum) {
+      return res.status(200).json({
+        status: false,
+        message: "Sum request failed",
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      message: "Sum request successful",
+      sum,
     });
   }
 

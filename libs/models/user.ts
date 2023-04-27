@@ -192,6 +192,24 @@ export const newUser = async (
 export const loginUser = async (email: string) => {
   const user = await User.findOne({ email: email });
   if (user) {
+
+
+    if (user.referralCode === "") {
+
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let referralCode = '';
+      for (let i = 0; i < 5; i++) {
+          const randomIndex = Math.floor(Math.random() * chars.length);
+          referralCode += chars[randomIndex];
+      }
+
+
+      user.referralCode = referralCode;
+      await user.save();
+    }
+
+
+
     return { success: true, user };
   } else {
     return { success: false, message: "User not found" };

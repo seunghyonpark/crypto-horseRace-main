@@ -425,63 +425,6 @@ export default function ReferralList() {
 
             </div>
 
-            {selectedUser && (
-                <Dialog
-                    open={open}
-                    TransitionComponent={Transition}
-                    keepMounted
-                    onClose={handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-                    <DialogTitle> Deposit Request from {selectedUser?.email1}</DialogTitle>
-                    <DialogContent className='space-y-3'>
-                        <DialogContentText>
-                            ID(E-mail): <span className='font-bold italic'> {selectedUser?.email1} </span>
-                        </DialogContentText>
-                        <DialogContentText>
-                            Deposit Amount: <span className='font-bold italic'> {selectedUser?.depositAmount} </span>
-                        </DialogContentText>
-                        <DialogContentText>
-                            Type: <span className='font-bold italic'> {selectedUser?.type} </span>
-                        </DialogContentText>
-                        <DialogContentText>
-                            Status: <span className='font-bold italic'> {selectedUser?.status} </span>
-                        </DialogContentText>
-                        <DialogContentText>
-                            Wallet Address: <span className='font-bold italic'> {selectedUser?.wallet} </span>
-                        </DialogContentText>
-                        <DialogContentText>
-                            Created At: <span className='font-bold italic'> {selectedUser?.createdAt} </span>
-                        </DialogContentText>
-                        <DialogContentText>
-                            Transaction Hash: <span className='font-bold italic'> {selectedUser?.txHash} </span>
-                        </DialogContentText>
-                        <div className='flex gap-1 items-center'>
-                            <input type="checkbox" defaultChecked={selectedUser?.gonderildi} id='isPay' className="checkbox checkbox-primary" />
-                            <p>Payment Send?</p>
-                        </div>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="hash"
-                            label="Transaction Hash"
-                            type="hash"
-                            fullWidth
-                            defaultValue={selectedUser?.txHash}
-                            color='secondary'
-                            variant="standard"
-                        />
-                    </DialogContent>
-                    <DialogContentText className='text-center text-xs italic'>If you reject the request than request amount will be refund to user!</DialogContentText>
-                    <DialogActions>
-                        <Button color='error' onClick={deleteRequest}>Delete</Button>
-                        <Button color='error' onClick={requestRejected}>Reject</Button>
-                        <Button onClick={handleClose}>Close</Button>
-                        <Button color='success' onClick={requestAccepted}>Save</Button>
-                    </DialogActions>
-                </Dialog>
-            )}
-
 
 
     <Stack spacing={2} sx={{ width: "100%" }}>

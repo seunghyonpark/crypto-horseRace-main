@@ -27,6 +27,7 @@ export default async function handler(
     });
   }
 
+
   if (method === "getOne") {
     const { _id } = req.body;
     if (!_id) {
@@ -75,8 +76,6 @@ export default async function handler(
   
 
   if (method === "getAllBetAmount") {
-
-    console.log("getAllBetAmount=============")
 
     const sum = await getAllBetHistoryBetSum();
     if (!sum) {

@@ -105,10 +105,8 @@ export const getAllBetHistory = async () => {
 export const getAllBetHistoryBetSum = async () => {
   const response = await Bethistory.aggregate([ { $group: { _id: null, total: { $sum: "$betAmount" } } } ]);
 
-  console.log("getAllBetHistoryBetSum======", response);
-
   if (response) {
-    return response[0].total;
+    return response[0].total / 1000000000000000;
   } else {
     return null;
   }
@@ -117,7 +115,7 @@ export const getAllBetHistoryBetSum = async () => {
 export const getAllBetHistoryPrizeSum = async () => {
   const response = await Bethistory.aggregate([ { $group: { _id: null, total: { $sum: "$prizeAmount" } } } ]);
   if (response) {
-    return response[0].total;
+    return response[0].total / 1000000000000000;
   } else {
     return null;
   }

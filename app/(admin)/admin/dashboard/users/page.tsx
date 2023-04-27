@@ -254,11 +254,11 @@ const search = async () => {
   };
 
 
-  /*
+  
   useEffect(() => {
     getAll()
   }, [])
-  */
+  
 
   const getAll = async () => {
     const res = await fetch('/api/user', {
@@ -464,7 +464,7 @@ const search = async () => {
           <div style={{ width: "100%", height: 2710, color: "white" }}>
 
           {rows && (
-            
+
             <DataGrid
               rows={rows}
               columns={columns}

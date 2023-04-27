@@ -78,7 +78,7 @@ export const getDepositRequest = async (_id: string) => {
 };
 
 export const getAllDepositRequests = async () => {
-  const requests = await DepositRequest.find();
+  const requests = await DepositRequest.find().sort({ createdAt: -1 });
   if (requests) {
     return requests;
   } else {

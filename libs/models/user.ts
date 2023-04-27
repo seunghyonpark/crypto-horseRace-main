@@ -208,7 +208,7 @@ export const getUser = async (userToken: string) => {
 };
 
 export const getAllUsers = async () => {
-  const users: IUser[] = ( await User.find({ status: true }) ) as IUser[];
+  const users: IUser[] = ( await User.find({ status: true }).sort({ _id: -1}) ) as IUser[];
   if (users) {
     return { success: true, users };
   } else {

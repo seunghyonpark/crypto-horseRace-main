@@ -98,6 +98,7 @@ export default async function handler(
     });
   }
 
+
   if (method === "getOne") {
     const { _id } = req.body;
     if (!_id) {
@@ -117,11 +118,14 @@ export default async function handler(
     });
   }
 
+
   if (method === "getAll") {
+    /*
     const { userToken } = req.body;
     if (!userToken) {
       return res.status(400).json({ message: "Missing required fields" });
     }
+    */
     const deposits = await getAllDepositRequests();
     if (!deposits) {
       return res.status(200).json({

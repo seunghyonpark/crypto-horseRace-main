@@ -180,7 +180,7 @@ export default function DepositList() {
   };
 
 
-  /*
+  
   useEffect(() => {
 
     const getAll = async () => {
@@ -188,20 +188,20 @@ export default function DepositList() {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-              method: "getAllforUsername",
+              method: "getAll",
               API_KEY: process.env.API_KEY,
-              username: username,
           }),
       })
-      const data = await res.json()
-      setRequests(data.deposits)
+      const data = await res.json();
+
+      setRequests(data.deposits);
 
     }
 
     getAll();
 
-  }, [username]);
-  */
+  }, []);
+  
 
 
   /*

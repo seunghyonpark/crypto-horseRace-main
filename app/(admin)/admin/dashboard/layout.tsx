@@ -32,9 +32,9 @@ export default function RootLayout({
 
     useEffect(() => {
         if (hasCookie("admin") && !user) {
-            setInterval(() => {
+            //setInterval(() => {
                 getUser()
-            }, 5000)
+            //}, 5000)
         } else if (!hasCookie("admin" || !user)) {
             router.push('/')
         }

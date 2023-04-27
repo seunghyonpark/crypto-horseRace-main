@@ -310,13 +310,24 @@ export const updateUserProfileImage = async (
 
 export const updateUserPassword = async (
   userToken: string,
+  currentPassword: string,
   pass1: string,
   pass2: string,
 ) => {
 
-  console.log("updateUserPassword userToken: ", userToken);
-  console.log("updateUserPassword pass1: ", pass1);
-  console.log("updateUserPassword pass2: ", pass2);
+  ////console.log("updateUserPassword userToken: ", userToken);
+
+  const user = await User.findOne({ userToken: userToken });
+
+  ////console.log("updateUserPassword user: ", user);
+
+  if (!user) {
+    return { success: false, message: "User not found" };
+  }
+  if (user.pass1 !== currentPassword) {
+    return { success: false, message: `Wrong password` };
+  }
+
 
   const updatedUser: IUser = (await User.findOneAndUpdate(
     { userToken: userToken },
@@ -326,9 +337,14 @@ export const updateUserPassword = async (
     },
     { new: true }
   )) as IUser;
+
+  ////console.log("updateUserPassword updatedUser: ", updatedUser);
+
+
   if (updatedUser) {
     return { success: true, updatedUser };
   }
+
   return { success: false, message: "User not found" };
 };
 

@@ -300,14 +300,16 @@ export default async function handler(
 
     const {
       userToken,
+      currentPassword,
       pass1,
       pass2,
     } = req.body;
 
-    console.log("updatePassword userToken", userToken);
+    //console.log("updatePassword userToken", userToken);
 
 
     if (
+      !currentPassword ||
       !pass1 ||
       !pass2 ||
       !userToken
@@ -315,6 +317,9 @@ export default async function handler(
       res.status(400).json({ status: false, message: "Missing data" });
       return;
     }
+
+
+
 
     if (pass1 !== pass2) {
       res
@@ -334,14 +339,18 @@ export default async function handler(
 
     const user = await updateUserPassword(
       userToken,
+      currentPassword,
       pass1,
       pass2,
     );
+
+    ////console.log("updatePassword user", user);
     
     if (!user.success) {
       res.status(400).json({ message: user.message });
       return;
     }
+
     res.status(200).json({ message: "User updated", user: user });
   }
 

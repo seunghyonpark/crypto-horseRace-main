@@ -93,6 +93,14 @@ export default function UserList() {
       headerAlign: "center",
     },
     {
+      field: "emailVerified",
+      headerName: "Email Verified",
+      flex: 0.2,
+      minWidth: 130,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
       field: "username",
       headerName: "Nick Name",
       flex: 0.2,
@@ -414,6 +422,7 @@ const search = async () => {
       kayitId: item._id,
       id: i + 1,
       email: item.email,
+      emailVerified: item.emailVerified,
       img: item.img,
       admin: item.admin,
       adminLevel: item.adminLevel,

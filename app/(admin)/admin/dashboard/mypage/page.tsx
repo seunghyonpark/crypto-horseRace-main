@@ -3,6 +3,7 @@ import { Tooltip } from '@mui/material';
 import React from 'react';
 import { hasCookie, getCookie } from 'cookies-next';
 import { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 import { useFormik } from "formik";
@@ -12,17 +13,20 @@ import * as Yup from "yup";
 // Yup schema to validate the form
 const schema = Yup.object().shape({
 
+    currentPassword: Yup.string()
+        .required(),
+        ///.min(7),
     pass1: Yup.string()
         .required()
         .min(7),
     pass2: Yup.string()
         .required()
         .min(7),
-
-
 });
 
 export default function MyPage() {
+
+    const router = useRouter();
 
 
     // Formik hook to handle the form state
@@ -31,6 +35,7 @@ export default function MyPage() {
         ////console.log("useFormik===========");
 
         initialValues: {
+            currentPassword: "",
             pass1: "",
             pass2: "",
         },
@@ -39,21 +44,22 @@ export default function MyPage() {
         validationSchema: schema,
 
         // Handle form submission
-        onSubmit: async ({ pass1, pass2}) => {
+        onSubmit: async ({ currentPassword, pass1, pass2}) => {
             // Make a request to your backend to store the data
 
             let userToken = getCookie("admin");
 
 
-            console.log("pass1: " + pass1)
-            console.log("pass2: " + pass2)
-            console.log("userToken: " + userToken)
+            //console.log("pass1: " + pass1)
+            //console.log("pass2: " + pass2)
+            //console.log("userToken: " + userToken)
 
 
 
             const formInput = {
                 method: 'updatePassword',
                 API_KEY: process.env.API_KEY,
+                currentPassword: currentPassword,
                 pass1: pass1,
                 pass2: pass2,
                 userToken: userToken,
@@ -65,11 +71,14 @@ export default function MyPage() {
             })
                 .then((res) => res.json())
                 .then((data) => {
-                    if (data.status) {
+                    if (data.user) {
+                        alert(data.message);
                         //handleClickSucc();
-                        //router.push("/myPage/login");
+                        router.push("/admin");
                     }
                     else {
+
+                        alert(data.message);
                         //setErrMsg(data.message);
                         //handleClickErr();
                     }
@@ -93,7 +102,7 @@ export default function MyPage() {
 
                     {/* //? Password Settings */}
                     <div className='flex flex-col p-4 border gap-5 rounded-lg w-full'>
-                        <h2 className='font-medium text-xl text-gray-200'>Password</h2>
+                        <h2 className='font-medium text-xl text-gray-200'>Change Password</h2>
 
 
                         <form
@@ -101,6 +110,18 @@ export default function MyPage() {
                             onSubmit={handleSubmit} method="POST">
 
                             <div className='flex flex-col gap-2'>
+
+                                <label className='mt-5'>Current password</label>
+                                <input
+                                    type="password"
+                                    name="currentPassword"
+                                    id='currentPassword'
+                                    className='input border-white border placeholder:text-gray-500 italic'
+                                    value={values.currentPassword}
+                                    onChange={handleChange}
+                                />
+                                {errors.currentPassword && touched.currentPassword && <span>{errors.currentPassword}</span>}
+
 
                                 <label className='mt-5'>New password</label>
                                 <input
@@ -114,7 +135,7 @@ export default function MyPage() {
                                 {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
 
 
-                                <label className='mt-5'>Re-enter your new password</label>
+                                <label className='mt-5'>Re-enter new password</label>
                                 <input
                                     type="password"
                                     name="pass2"
@@ -127,14 +148,6 @@ export default function MyPage() {
 
                             </div>
 
-                        </form>
-
-
-{/*
-                        <Tooltip title="DEMO" arrow>
-
-                            <button className='btn w-full btn-success'>Submit</button>
-*/}
 
                             <button
                                 type="submit"
@@ -142,7 +155,22 @@ export default function MyPage() {
                                     Submit
                             </button>
 
+                        </form>
+
+
 {/*
+                        <Tooltip title="DEMO" arrow>
+
+                            <button className='btn w-full btn-success'>Submit</button>
+
+
+                            <button
+                                type="submit"
+                                className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
+                                    Submit
+                            </button>
+
+
                         </Tooltip>
 */}
                     </div>

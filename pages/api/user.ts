@@ -2,6 +2,7 @@ import { IUser } from "./../../libs/interface/user";
 import {
   deleteUser,
   getAllUsers,
+  getAllUsersByReferral,
   getUserByEmail,
   getUserByUsername,
   getUser,
@@ -206,6 +207,7 @@ export default async function handler(
   }
 
 
+
   if (method === "getAll") {
     const users = await getAllUsers();
     if (!users.success) {
@@ -214,6 +216,23 @@ export default async function handler(
     }
     res.status(200).json({ message: "Users found", users: users });
   }
+
+
+  if (method === "getAllByReferral") {
+    const { referral } = req.body;
+
+    const users = await getAllUsersByReferral(referral);
+    if (!users.success) {
+      res.status(400).json({ message: users.message });
+      return;
+    }
+
+    console.log("api getAllByReferral", referral);
+    console.log("api getAllByReferral", users);
+
+    res.status(200).json({ message: "Users found", users: users });
+  }
+
 
 
 

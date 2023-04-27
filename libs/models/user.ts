@@ -217,6 +217,16 @@ export const getAllUsers = async () => {
 };
 
 
+export const getAllUsersByReferral = async (referral: string) => {
+  const users: IUser[] = ( await User.find({ status: true, referral: referral }) ) as IUser[];
+  if (users) {
+    return { success: true, users };
+  } else {
+    return { success: false, message: "Users not found" };
+  }
+};
+
+
 export const updateUser = async (
   userToken: string,
   //username: string,

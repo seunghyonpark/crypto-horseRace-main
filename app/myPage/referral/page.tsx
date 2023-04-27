@@ -20,6 +20,7 @@ import 'react-phone-input-2/lib/style.css';
 
 
 import dynamic from "next/dynamic";
+import { array } from 'yup';
 
 const CC = dynamic(() => import("@/components/copy-clipboard").then(mod => mod.CopyClipboard), { ssr: false })
 
@@ -39,7 +40,8 @@ const Transition = React.forwardRef(function Transition(
 export default function ReferralList() {
 
 
-    const [requests, setRequests] = useState<any>([]);
+    const [referrals, setReferrals] = useState<any>([]);
+
     const [open, setOpen] = React.useState(false);
     const [selectedUser, setSelectedUser] = useState<any>();
 
@@ -67,16 +69,16 @@ export default function ReferralList() {
             headerAlign: "center",
         },
         {
-            field: "wallet",
-            headerName: "From",
+            field: "email",
+            headerName: "Email",
             flex: 0.1,
-            minWidth: 80,
+            minWidth: 150,
             align: "center",
             headerAlign: "center",
         },
         {
-            field: "depositAmount",
-            headerName: "Amount",
+            field: "username",
+            headerName: "Nick Name",
             align: "center",
             headerAlign: "center",
             type: "number",
@@ -88,57 +90,6 @@ export default function ReferralList() {
             //},
 
         },
-
-        {
-            field: "createdAt",
-            headerName: "Date",
-            align: "center",
-            headerAlign: "center",
-            width: 150,
-            type: "dateTime",
-            minWidth: 120,
-            valueFormatter: (params) => {
-                //return new Date(params.value).toLocaleString();
-
-                var date = new Date(params.value);
-            
-                return format(date, "yy/MM/dd HH:mm:ss");
-
-            }, // burada tarih formatı değiştirilebilir.
-        },
-
-        /*
-        {
-            field: "action",
-            headerName: "Edit",
-            align: "center",
-            headerAlign: "center",
-            sortable: false,
-            width: 125,
-            renderCell: (params) => {
-                const onClick = (e: any) => {
-                    e.stopPropagation(); // don't select this row after clicking
-
-                    const api: GridApi = params.api;
-                    const thisRow: Record<string, GridCellValue> = {};
-
-                    api
-                        .getAllColumns()
-                        .filter((c) => c.field !== "__check__" && !!c)
-                        .forEach(
-                            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-                        );
-
-                    return duzenle(params.row);
-                };
-                return (
-                    <Button color="success" variant='contained' className='bg-green-500' onClick={onClick}>
-                        Edit
-                    </Button>
-                );
-            },
-        },
-        */
 
     ];
 
@@ -219,22 +170,32 @@ export default function ReferralList() {
         getAll()
     }
 
-    const getAll = async () => {
-        const res = await fetch('/api/depositRequests', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                method: "getAllforUser",
-                API_KEY: process.env.API_KEY,
-                userToken: getCookie("user")
-            }),
-        })
-        const data = await res.json();
 
-        ///console.log("deposits=>", data.deposits, "user=>", getCookie("user")  );
 
-        setRequests(data.deposits)
-    }
+    useEffect(() => {
+
+        const getAll = async () => {
+            const res = await fetch('/api/user', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    method: "getAllByReferral",
+                    API_KEY: process.env.API_KEY,
+                    referral: user?.referralCode,
+                }),
+            })
+            const data = await res.json();
+    
+            console.log("referrals=>", data.users.users );
+    
+            setReferrals(data.users.users);
+        }
+
+        if (user) {
+            getAll();
+        }
+        
+    }, [user])
 
 
     const getUser = async () => {
@@ -255,11 +216,8 @@ export default function ReferralList() {
         }
     }
 
- 
-
 
     useEffect(() => {
-        getAll();
 
         if (hasCookie("user") && !user) {
             getUser();
@@ -267,21 +225,16 @@ export default function ReferralList() {
         
     }, [user])
 
-    const rows = requests?.map((item: any, i: number) => {
+
+    const rows = referrals.map((item: any, i: number) => {
         return {
             kayitId: item._id,
             id: i,
-            email1: item.email1,
-            depositAmount: item.depositAmount,
-            type: item.type,
-            status: item.status,
-            wallet: item.walletFrom,
-            createdAt: item.createdAt,
-            txHash: item.txHash,
-            userToken: item.userToken,
-            gonderildi: item.gonderildi,
+            email: item.email,
+            username: item.username,
         }
     })
+
 
     const { Canvas } = useQRCode();
 
@@ -427,7 +380,7 @@ export default function ReferralList() {
                             placeholder="Referral Code"
                             id="deposit"
                             ///value={depositCount}
-                            value={user?.referralCode}
+                            defaultValue={user?.referralCode}
 
                             //onChange={(e) => {
                             //    setDepositCount(e.target.value);
@@ -474,7 +427,7 @@ export default function ReferralList() {
         placeholder="Promotion Link"
         id="deposit"
         ///value={depositCount}
-        value={"https://craclegamez.io/myPage/register?referral=" + user?.referralCode}
+        defaultValue={"https://craclegamez.io/myPage/register?referral=" + user?.referralCode}
 
 
 

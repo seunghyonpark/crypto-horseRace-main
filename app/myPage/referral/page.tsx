@@ -58,6 +58,8 @@ export default function ReferralList() {
     const [authCodeState, setAuthCodeState] = React.useState(false);
     const [authCode, setAuthCode] = useState<any>(null);
 
+    const [promitonLink, setPromotionLink] = useState<any>(null);
+
 
     const columns: GridColDef[] = [
         {
@@ -148,6 +150,7 @@ export default function ReferralList() {
             const user = await res.json()
             setUser(user.user.user)
             setWallet(user.user.user.walletAddress)
+            setPromotionLink("https://craclegamez.io/myPage/register?referral=" + user.user.user.referralCode);
         }
     }
 
@@ -313,7 +316,7 @@ export default function ReferralList() {
                         <input
                             ///type="number"
                             placeholder="Referral Code"
-                            id="deposit"
+                            id="referralCode"
                             ///value={depositCount}
                             defaultValue={user?.referralCode}
 
@@ -353,24 +356,24 @@ export default function ReferralList() {
 
 
 
-<h4 className="text-white">Custom Promotion Link</h4>
+<h4 className="text-white mt-2">Custom Promotion Link</h4>
 
 <div className='w-full max-w-xs md:w-1/2 '>
 
-    <input
+    <textarea
         ///type="number"
         placeholder="Promotion Link"
-        id="deposit"
+        id="promotionLink"
         ///value={depositCount}
-        defaultValue={"https://craclegamez.io/myPage/register?referral=" + user?.referralCode}
+        defaultValue={promitonLink}
 
 
 
         //onChange={(e) => {
         //    setDepositCount(e.target.value);
         //}}
-
-        className="input input-bordered w-full max-w-xs text-gray-800 text-xl font-bold mb-1"
+        rows={3}
+        className="block pt-1 input input-bordered w-full max-w-xs text-gray-800 text-sm mb-1"
     />
 
 </div>
@@ -387,7 +390,7 @@ export default function ReferralList() {
                 color="success" variant='contained' className='bg-green-500'
                 onClick={() =>
                     {
-                    navigator.clipboard.writeText("https://craclegamez.io/myPage/register?referral=" + user?.referralCode);
+                    navigator.clipboard.writeText(promitonLink);
                     setSucc(true);
                     setSuccessMsgSnackbar("Your promotion link is copied to clipboard");
                     }

@@ -9,8 +9,6 @@ import API from "@/libs/enums/API_KEY";
 import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 
-
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -85,8 +83,6 @@ export default function MyPage() {
 
     const verify = async () => {
 
-
-
       const inputs = {
         method: 'verifyEmail',
         API_KEY: API.key,
@@ -101,26 +97,6 @@ export default function MyPage() {
       
       console.log("verify user ", user);
 
-      
-
-
-
-      /*
-      try {
-        setStatus('loading');
-        await fetcher('/api/gooduser/email/verify', { method: 'POST' });
-  
-        toast.success(
-          'An email has been sent to your mailbox. Follow the instruction to verify your email.'
-        );
-        setStatus('success');
-  
-      } catch (e) {
-        toast.error(e.message);
-        setStatus('');
-      }
-      */
-  
     };
 
 
@@ -173,7 +149,6 @@ export default function MyPage() {
                         router.push("/admin");
                     }
                     else {
-
                         alert(data.message);
                         //setErrMsg(data.message);
                         //handleClickErr();
@@ -181,7 +156,6 @@ export default function MyPage() {
                     //todo
                     // handleClickSucc();
                 });
-
 
         },
     });

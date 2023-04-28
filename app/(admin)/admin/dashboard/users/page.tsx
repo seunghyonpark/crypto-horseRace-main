@@ -566,6 +566,7 @@ const search = async () => {
 
             
         {selectedUser && (
+
           <Dialog
             open={open}
             TransitionComponent={Transition}
@@ -577,17 +578,24 @@ const search = async () => {
 
             <DialogContent className='space-y-3'>
 
-            {user?.admin && user?.adminLevel === 0 && (
+            {user?.admin && user?.adminLevel === 1 && (
+
+             
 
               <div className='flex gap-1 items-center'>
+
                 <input
                   type="checkbox"
-                  defaultChecked={selectedUser?.admin}
+                  ////defaultChecked={selectedUser?.admin === true ? true : false}
+                  defaultChecked={
+                    selectedUser?.admin
+                  }
                   id='admin'
                   className="checkbox checkbox-primary"
                 />
                 <p>Admin?</p>
               </div>
+
             )}
 
               <DialogContentText>

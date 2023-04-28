@@ -4,6 +4,7 @@ export interface IUser {
   _id: mongoose.Types.ObjectId;
   username: string;
   email: string;
+  emailVerified: boolean;
   pass1: string | boolean;
   pass2: string;
   deposit: number;

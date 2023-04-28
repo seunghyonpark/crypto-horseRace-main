@@ -56,6 +56,7 @@ const schema = Yup.object().shape({
 
 
 export default function RegisterPage() {
+    
     const MySwal = withReactContent(Swal);
     const [succ, setSucc] = React.useState(false);
     const [err, setErr] = React.useState(false);

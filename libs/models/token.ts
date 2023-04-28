@@ -38,3 +38,15 @@ export const createToken = async (
   
   return await token.save();
 };
+
+
+
+export const getToken = async (emailToken: string) => {
+  const token = (await Token.findOne({ _id: emailToken })) ;
+  if (token) {
+    return { success: true, token };
+  } else {
+    return { success: false, message: "token not found" };
+  }
+};
+

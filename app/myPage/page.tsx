@@ -83,6 +83,47 @@ export default function MyPage() {
     }, [])
 
 
+    const verify = async () => {
+
+
+
+      const inputs = {
+        method: 'verifyEmail',
+        API_KEY: API.key,
+        userToken: getCookie('user')
+      }
+      const res = await fetch('/api/user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(inputs)
+      })
+      const user = await res.json()
+      
+      console.log("verify user ", user);
+
+      
+
+
+
+      /*
+      try {
+        setStatus('loading');
+        await fetcher('/api/gooduser/email/verify', { method: 'POST' });
+  
+        toast.success(
+          'An email has been sent to your mailbox. Follow the instruction to verify your email.'
+        );
+        setStatus('success');
+  
+      } catch (e) {
+        toast.error(e.message);
+        setStatus('');
+      }
+      */
+  
+    };
+
+
 
     // Formik hook to handle the form state
     const formik = useFormik({
@@ -157,6 +198,22 @@ export default function MyPage() {
 
                 <div className='flex flex-col p-4 border gap-5 rounded-lg w-full'>
                     <div className='font-medium text-sm text-gray-200'>Email: {user?.email}</div>
+
+
+                    <div className='font-medium text-sm text-gray-200'>Email Verified:
+                      {
+                        (user?.emailVerified === true) ?
+                        ( <span className='text-green-500'> Verified</span> ) :
+                        (
+                          <>
+                            <span className='text-red-500'> Not Verified</span>
+                            &nbsp;&nbsp;
+                            <button className='btn btn-primary' onClick={() => verify()}>Verify Email</button>
+                          </>
+                        )
+                      }
+                    </div>
+
                     <div className='font-medium text-sm text-gray-200'>Nick Name: {user?.username}</div>
                     <button className='btn btn-primary' onClick={() => router.push('/myPage/referral')}>Referrals</button>
                 </div>

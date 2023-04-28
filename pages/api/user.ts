@@ -9,13 +9,16 @@ import {
   loginUser,
   newUser,
   updateUser,
+  updateUserEmailVerified,
   updateUserProfileImage,
   updateUserWalletAddress,
   updateUserPassword,
 } from "@/libs/models/user";
 
 
-import { createToken } from "@/libs/models/token";
+
+
+import { createToken, getToken } from "@/libs/models/token";
 
 import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
 
@@ -276,6 +279,49 @@ export default async function handler(
   }
 
 
+
+  if (method === "updateEmailVerified") {
+
+    const {
+      userToken,
+      emailToken,
+    } = req.body;
+
+    ////console.log("updateEmailVerified userToken", userToken);
+    /////console.log("updateEmailVerified emailToken", emailToken);
+
+
+    const token = await getToken (
+      emailToken,
+    );
+
+    ////console.log("updateEmailVerified token", token);
+    
+    if (!token?.success) {
+      res.status(400).json({ message: token.message });
+      return;
+    }
+
+
+    const user = await updateUserEmailVerified(
+      userToken,
+    );
+
+
+    ////console.log("updateUserEmailVerified user", user);
+
+
+    if (!user.success) {
+      res.status(400).json({ message: user.message });
+      return;
+    }
+
+    res.status(200).json({ message: "User updated", user: user });
+  }
+
+
+
+
   if (method === "updateProfileImage") {
 
     const {
@@ -417,7 +463,13 @@ export default async function handler(
       userToken,
     } = req.body;
 
+    ///console.log("verifyEmail userToken", userToken);
+
+
     const user = await getUser(userToken);
+
+    ///console.log("verifyEmail user", user);
+
 
     if (!user.success) {
       res.status(400).json({ message: user.message });
@@ -431,10 +483,15 @@ export default async function handler(
       new Date(Date.now() + 1000 * 60 * 60 * 24),
     );
 
-    if (!token.success) {
+    ////console.log("verifyEmail token", token);
+
+
+    if (!token) {
       res.status(400).json({ message: token.message });
       return;
     }
+
+    console.log("user?.user?.email", user?.user?.email);
 
 
 
@@ -445,12 +502,12 @@ export default async function handler(
       html: `
         <div>
           <p>Hello, ${user?.user?.username}</p>
-          <p>Please follow <a href="${process.env.WEB_URI}/verify-email/${token._id}">this link</a> to confirm your email.</p>
+          <p>Please follow <a href="${process.env.WEB_URI}/verifyEmail?token=${token._id}">this link</a> to confirm your email.</p>
         </div>
         `,
     });
 
-    console.log("mail", mail);
+    ///console.log("mail", mail);
 
     /*
     if (!user.success) {

@@ -290,6 +290,24 @@ export const updateUser = async (
 
 
 
+export const updateUserEmailVerified = async (
+  userToken: string,
+) => {
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { userToken: userToken },
+    {
+      emailVerified: true,
+    },
+    { new: true }
+  )) as IUser;
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+  return { success: false, message: "User not found" };
+};
+
+
+
 export const updateUserProfileImage = async (
   userToken: string,
   img: string,

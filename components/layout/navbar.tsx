@@ -501,7 +501,7 @@ export default function Navbar() {
                             setShowModal(false);
                             deleteCookie('user');
                             getUser();
-                            router.push('/myPage');
+                            router.push('/');
                           }}
                       >
                           Log Out
@@ -511,6 +511,15 @@ export default function Navbar() {
                                                         
                   </div>
 
+
+                  <div
+                    className={`w-full pt-1 items-left text-base text-white `}
+                    onClick={() => {
+                        setShowModal(false), router.push('/myPage')
+                    }}
+                    >
+                      My Account
+                  </div>
 
                   <div
                     className={` w-full pt-3 items-left text-base text-white`}
@@ -537,15 +546,6 @@ export default function Navbar() {
                     }}
                     >
                       Bet History
-                  </div>
-
-                  <div
-                    className={`w-full pt-1 items-left text-base text-white `}
-                    onClick={() => {
-                        setShowModal(false), router.push('/myPage/referral')
-                    }}
-                    >
-                      Referrals
                   </div>
 
                   <div

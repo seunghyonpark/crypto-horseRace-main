@@ -158,8 +158,7 @@ export default function MyPage() {
                 <div className='flex flex-col p-4 border gap-5 rounded-lg w-full'>
                     <div className='font-medium text-sm text-gray-200'>Email: {user?.email}</div>
                     <div className='font-medium text-sm text-gray-200'>Nick Name: {user?.username}</div>
-                    <div className='font-medium text-sm text-gray-200'>Referral Code: {user?.referralCode}</div>
-
+                    <button className='btn btn-primary' onClick={() => router.push('/myPage/referral')}>Referrals</button>
                 </div>
 
                     {/* //? Password Settings */}
@@ -219,26 +218,56 @@ export default function MyPage() {
 
                         </form>
 
-
-{/*
-                        <Tooltip title="DEMO" arrow>
-
-                            <button className='btn w-full btn-success'>Submit</button>
+                    </div>
 
 
-                            <button
-                                type="submit"
-                                className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
-                                    Submit
-                            </button>
+
+                    {/* //? Password Settings */}
+                    <div className='flex flex-col p-4 border gap-5 rounded-lg w-full'>
+                      <h2 className='font-medium text-xl text-gray-200'>Change Nick Name</h2>
+
+                      <form
+                          className="mt-1"
+                          onSubmit={handleSubmit} method="POST">
+
+                          <div className='flex flex-col gap-2'>
+
+                              <label className='mt-5'>Current Nick Name</label>
+                              
+                              <div
+                                  className=' border-white placeholder:text-gray-500 italic'
+                              >
+                              {user?.username}
+
+                              </div>
+
+                              <label className='mt-5'>New Nick Name</label>
+                              <input
+                                  type="text"
+                                  name="username"
+                                  id='username'
+                                  className='input border-white border placeholder:text-gray-500 italic'
+                                  ///value={values.username}
+                                  onChange={handleChange}
+                              />
+                              {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
+
+                          </div>
 
 
-                        </Tooltip>
-*/}
+                          <button
+                              type="submit"
+                              className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
+                                  Submit
+                          </button>
+
+                      </form>
+
                     </div>
 
 
                 </div>
+
             </div>
         </>
     )

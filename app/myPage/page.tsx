@@ -146,7 +146,7 @@ export default function MyPage() {
                     if (data.user) {
                         alert(data.message);
                         //handleClickSucc();
-                        router.push("/admin");
+                        router.push("/");
                     }
                     else {
                         alert(data.message);
@@ -201,14 +201,14 @@ export default function MyPage() {
                             className="mt-1"
                             onSubmit={handleSubmit} method="POST">
 
-                            <div className='flex flex-col gap-2'>
+                            <div className='flex flex-col gap-2 '>
 
                                 <label className='mt-5'>Current password</label>
                                 <input
                                     type="password"
                                     name="currentPassword"
                                     id='currentPassword'
-                                    className='input border-white border placeholder:text-gray-500 italic'
+                                    className=' input text-black border-white border placeholder:text-gray-500 italic'
                                     value={values.currentPassword}
                                     onChange={handleChange}
                                 />
@@ -220,7 +220,7 @@ export default function MyPage() {
                                     type="password"
                                     name="pass1"
                                     id='pass1'
-                                    className='input border-white border placeholder:text-gray-500 italic'
+                                    className='input text-black border-white border placeholder:text-gray-500 italic'
                                     value={values.pass1}
                                     onChange={handleChange}
                                 />
@@ -232,7 +232,7 @@ export default function MyPage() {
                                     type="password"
                                     name="pass2"
                                     id='pass2'
-                                    className='input border-white border placeholder:text-gray-500 italic'
+                                    className='input text-black border-white border placeholder:text-gray-500 italic'
                                     value={values.pass2}
                                     onChange={handleChange}
                                 />
@@ -277,7 +277,7 @@ export default function MyPage() {
                                   type="text"
                                   name="username"
                                   id='username'
-                                  className='input border-white border placeholder:text-gray-500 italic'
+                                  className='input text-black border-white border placeholder:text-gray-500 italic'
                                   ///value={values.username}
                                   onChange={handleChange}
                               />

@@ -3,7 +3,8 @@ import { Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, 
 import { TransitionProps } from '@mui/material/transitions';
 import { GridColDef, GridValueGetterParams, DataGrid, GridApi, GridCellValue } from '@mui/x-data-grid';
 import { getCookie } from 'cookies-next';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -39,7 +40,7 @@ export default function WithdrawRequests() {
             headerAlign: "center",
             width: 150,
             type: "dateTime",
-            minWidth: 250,
+            minWidth: 220,
             valueFormatter: (params) => {
                 return new Date(params.value).toLocaleString();
             }, // burada tarih formatı değiştirilebilir.
@@ -62,12 +63,12 @@ export default function WithdrawRequests() {
         },
         {
             field: "requestAmount",
-            headerName: "Request Amount",
+            headerName: "Request",
             align: "right",
             headerAlign: "center",
             type: "number",
             flex: 0.2,
-            minWidth: 150,
+            minWidth: 100,
             /*
             renderCell(params) {
                 /////return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
@@ -94,12 +95,12 @@ export default function WithdrawRequests() {
         },
         {
             field: "lastAmount",
-            headerName: "Withdraw Amount",
+            headerName: "Amount",
             align: "right",
             headerAlign: "center",
             type: "number",
             flex: 0.2,
-            minWidth: 150,            
+            minWidth: 100,            
 
         },
 
@@ -111,9 +112,21 @@ export default function WithdrawRequests() {
             headerAlign: "center",
             description: "This column has a value getter and is not sortable.",
             flex: 0.1,
-            minWidth: 100,
+            minWidth: 220,
             renderCell(params) {
-                return <Chip label={params.value} color={params.value === "Rejected" ? "error" : params.value === "Accepted" ? "info" : params.value === "Waiting" ? "warning" : "success"} />;
+                return <>
+                    <Chip
+                        label={params.value}
+                        color={params.value === "Rejected" ? "error" : params.value === "Accepted and Paid" ? "info" : params.value === "Waiting" ? "warning" : "success"}
+                    />
+                    {params.value === "Accepted and Paid" && (
+                        <Link
+                            href={"https://bscscan.com/tx/"+params.row.txHash}
+                            className="ml-2 flex items-center justify-center">
+                            <span className="text-yellow-600 text-sm ">Tx Hash</span>
+                        </Link>
+                    )}
+                </>
             },
         },
 

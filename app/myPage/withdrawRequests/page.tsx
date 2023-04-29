@@ -132,16 +132,29 @@ export default function WithdrawRequestList() {
             headerAlign: "center",
             description: "This column has a value getter and is not sortable.",
             flex: 0.1,
-            minWidth: 80,
+            minWidth: 220,
             renderCell(params) {
-                return <Chip label={params.value} color={params.value === "Rejected" ? "error" : params.value === "Accepted" ? "info" : params.value === "Waiting" ? "warning" : "success"} />;
+                return <>
+                    <Chip
+                        label={params.value}
+                        color={params.value === "Rejected" ? "error" : params.value === "Accepted and Paid" ? "info" : params.value === "Waiting" ? "warning" : "success"}
+                    />
+                    {params.value === "Accepted and Paid" && (
+                        <Link
+                            href={"https://bscscan.com/tx/"+params.row.txHash}
+                            className="ml-2 flex items-center justify-center">
+                            <span className="text-yellow-600 text-sm ">Tx Hash</span>
+                        </Link>
+                    )}
+                </>
+                
             },
         },
         {
             field: "wallet",
             headerName: "To",
             flex: 0.1,
-            minWidth: 80,
+            minWidth: 100,
             align: "center",
             headerAlign: "center",
         },

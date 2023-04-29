@@ -6,6 +6,7 @@ import { getCookie } from 'cookies-next';
 import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import { IUser } from "@/libs/interface/user";
+import Link from 'next/link';
 
 import ModalAlert from '@/components/ModalAlert';
 import { useTransferToken } from '@thirdweb-dev/react';
@@ -95,6 +96,7 @@ export default function DepositList() {
             return new Date(params.value).toLocaleString();
         }, // burada tarih formatı değiştirilebilir.
     },
+    
     {
         field: "email1",
         headerName: "E-Mail",
@@ -103,6 +105,7 @@ export default function DepositList() {
         align: "center",
         headerAlign: "center",
     },
+    
     {
       field: "depositAmount",
       headerName: "Amount",
@@ -129,7 +132,30 @@ export default function DepositList() {
         headerAlign: "center",
     },
 
+    {
+      field: "status",
+      headerName: "Status",
+      align: "center",
+      headerAlign: "center",
+      description: "This column has a value getter and is not sortable.",
+      flex: 0.1,
+      minWidth: 170,
+      renderCell(params) {
+          return <>
+              <Chip
+                  label="Accepted"
+                  color={"info"}
+              />
+              <Link
+                  href={"https://bscscan.com/tx/"+params.row.txHash}
+                  className="ml-2 flex items-center justify-center">
+                  <span className="text-yellow-600 text-sm ">Tx Hash</span>
+              </Link>
 
+          </>
+          
+      },
+    },
 
 
 

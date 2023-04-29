@@ -10,6 +10,7 @@ import { hasCookie, getCookie } from 'cookies-next';
 import React, { useEffect, useState } from 'react';
 import { format } from "date-fns";
 import { IUser } from "@/libs/interface/user";
+import Link from 'next/link';
 
 import { Stack, Snackbar, Alert } from "@mui/material";
 
@@ -107,38 +108,30 @@ export default function DepositRequestList() {
             }, // burada tarih formatı değiştirilebilir.
         },
 
-        /*
         {
-            field: "action",
-            headerName: "Edit",
+            field: "status",
+            headerName: "Status",
             align: "center",
             headerAlign: "center",
-            sortable: false,
-            width: 125,
-            renderCell: (params) => {
-                const onClick = (e: any) => {
-                    e.stopPropagation(); // don't select this row after clicking
-
-                    const api: GridApi = params.api;
-                    const thisRow: Record<string, GridCellValue> = {};
-
-                    api
-                        .getAllColumns()
-                        .filter((c) => c.field !== "__check__" && !!c)
-                        .forEach(
-                            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-                        );
-
-                    return duzenle(params.row);
-                };
-                return (
-                    <Button color="success" variant='contained' className='bg-green-500' onClick={onClick}>
-                        Edit
-                    </Button>
-                );
+            description: "This column has a value getter and is not sortable.",
+            flex: 0.1,
+            minWidth: 170,
+            renderCell(params) {
+                return <>
+                    <Chip
+                        label="Accepted"
+                        color={"info"}
+                    />
+                    <Link
+                        href={"https://bscscan.com/tx/"+params.row.txHash}
+                        className="ml-2 flex items-center justify-center">
+                        <span className="text-yellow-600 text-sm ">Tx Hash</span>
+                    </Link>
+      
+                </>
+                
             },
-        },
-        */
+          },
 
     ];
 

@@ -110,7 +110,7 @@ export default function DepositList() {
       headerAlign: "center",
       type: "number",
       flex: 0.2,
-      minWidth: 150,
+      minWidth: 100,
       /*
       renderCell(params) {
           /////return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;

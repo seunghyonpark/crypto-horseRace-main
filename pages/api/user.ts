@@ -507,7 +507,7 @@ export default async function handler(
         `,
     });
 
-    ///console.log("mail", mail);
+    console.log("mail=======", mail);
 
     /*
     if (!user.success) {

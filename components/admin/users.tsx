@@ -5,7 +5,9 @@ import React from 'react'
 
 
 export default function AdminUsers() {
-    const [data, setData] = React.useState(0)
+
+    const [data, setData] = React.useState(0);
+    
     async function getData() {
         const res = await fetch(DomainEnum.address + '/api/user', {
             method: 'POST',
@@ -29,7 +31,7 @@ export default function AdminUsers() {
     return (
         <>
             <div className='flex flex-col items-center gap-3  border rounded-lg p-4 w-full h-full'>
-                <div className='text-xl'> Users</div>
+                <div className='text-ml'> Users</div>
                 <p>Current: <span className='text-blue-500'>{data}</span></p>
                 <Link href="/admin/dashboard/users" className='btn btn-md btn-primary'>See All</Link>
             </div>

@@ -355,10 +355,10 @@ export default async function handler(
 
 
     if (
+      !userToken ||
       !currentPassword ||
       !pass1 ||
-      !pass2 ||
-      !userToken
+      !pass2
     ) {
       res.status(400).json({ status: false, message: "Missing data" });
       return;

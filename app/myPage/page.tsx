@@ -119,22 +119,13 @@ export default function MyPage() {
         onSubmit: async ({ currentPassword, pass1, pass2}) => {
             // Make a request to your backend to store the data
 
-            let userToken = getCookie("admin");
-
-
-            //console.log("pass1: " + pass1)
-            //console.log("pass2: " + pass2)
-            //console.log("userToken: " + userToken)
-
-
-
             const formInput = {
                 method: 'updatePassword',
                 API_KEY: process.env.API_KEY,
+                userToken: getCookie('user'),
                 currentPassword: currentPassword,
                 pass1: pass1,
                 pass2: pass2,
-                userToken: userToken,
             };
             fetch("/api/user", {
                 method: "POST",

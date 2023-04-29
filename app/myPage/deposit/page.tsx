@@ -498,7 +498,7 @@ export default function Deposit() {
             </span>
       
             <Link 
-              href={"/Landing/depositRequests"}
+              href={"/myPage/depositRequests"}
               className="  hover:opacity-50 ">
                 List of Deposit Requests
             </Link>
@@ -584,7 +584,7 @@ export default function Deposit() {
             </button>
 
 
-            <Link href={"/Landing/withdrawRequests"} className="hover:opacity-50">
+            <Link href={"/myPage/withdrawRequests"} className="hover:opacity-50">
                 List of Withdraw Requests
             </Link>
 

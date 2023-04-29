@@ -99,7 +99,19 @@ export const getAllDepositRequestsSum = async () => {
 
 
 
-export const getAllDepositRequestsforUser = async (username: string) => {
+export const getAllDepositRequestsforUser = async (userToken: string) => {
+
+  const requests = await DepositRequest.find({ userToken: userToken}).sort( { createdAt: -1 } );
+
+  if (requests) {
+    return requests;
+  } else {
+    return null;
+  }
+};
+
+
+export const getAllDepositRequestsforUsername = async (username: string) => {
 
   const user = await User.findOne({ username: username });
   if (!user) {

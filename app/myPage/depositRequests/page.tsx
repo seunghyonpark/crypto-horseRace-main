@@ -231,9 +231,13 @@ export default function DepositRequestList() {
         })
         const data = await res.json();
 
-        ///console.log("deposits=>", data.deposits, "user=>", getCookie("user")  );
+        console.log("deposits=>", data, "user=>", getCookie("user")  );
 
-        setRequests(data.deposits)
+        if (data.status) {
+            setRequests(data.deposits)
+        } else {
+            setRequests([])
+        }
     }
 
 
@@ -252,6 +256,8 @@ export default function DepositRequestList() {
             const user = await res.json()
             setUser(user.user.user)
             setWallet(user.user.user.walletAddress)
+
+           
         }
     }
 
@@ -259,7 +265,10 @@ export default function DepositRequestList() {
 
 
     useEffect(() => {
-        getAll();
+
+        if (user) {
+            getAll();
+        }
 
         if (hasCookie("user") && !user) {
             getUser();

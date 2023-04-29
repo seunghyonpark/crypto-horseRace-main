@@ -4,6 +4,7 @@ import {
   getAllDepositRequests,
   getAllDepositRequestsSum,
   getAllDepositRequestsforUser,
+  getAllDepositRequestsforUsername,
   updateDepositRequest,
   deleteDepositRequest,
 } from "@/libs/models/depositRequest";
@@ -197,8 +198,6 @@ export default async function handler(
       });
     }
 
-
-
     return res.status(200).json({
       status: true,
       message: "Deposits request successful",
@@ -226,7 +225,7 @@ export default async function handler(
       return res.status(400).json({ message: "User not found" });
     }
 
-    const depositRequests = await getAllDepositRequestsforUser(user.username);
+    const depositRequests = await getAllDepositRequestsforUsername(user.username);
     if (!depositRequests) {
       return res.status(200).json({
         status: false,

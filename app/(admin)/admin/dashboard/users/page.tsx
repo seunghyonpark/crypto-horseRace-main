@@ -130,14 +130,6 @@ export default function UserList() {
       
     },
     {
-      field: "emailVerified",
-      headerName: "Email Verified",
-      flex: 0.2,
-      minWidth: 130,
-      align: "center",
-      headerAlign: "center",
-    },
-    {
       field: "username",
       headerName: "Nick Name",
       flex: 0.2,

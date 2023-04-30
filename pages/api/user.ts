@@ -163,6 +163,8 @@ export default async function handler(
       return;
     }
 
+    
+
 
     const min = Math.ceil(1000000);
     const max = Math.floor(9999999);

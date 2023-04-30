@@ -541,7 +541,7 @@ export default function RegisterPage() {
             value={values.email}
             onChange={handleChange}
             id="email"
-            className="input w-full bg-gray-200 rounded-md"
+            className="input w-full bg-gray-200 rounded-md mb-2"
             disabled={emailVerified}
             
         />

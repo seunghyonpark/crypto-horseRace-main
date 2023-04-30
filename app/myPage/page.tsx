@@ -9,6 +9,17 @@ import API from "@/libs/enums/API_KEY";
 import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 
+import Button from "@mui/material/Button";
+
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+
+import { VscGear, VscCheck } from "react-icons/vsc";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -38,6 +49,19 @@ export default function MyPage() {
 
     const [user, setUser] = useState<IUser>();
     const [settings, setSettings] = useState<any>();
+
+
+    const MySwal = withReactContent(Swal);
+
+    const [succ, setSucc] = React.useState(false);
+    const [err, setErr] = React.useState(false);
+    const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
+    const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
+
+    const [authCodeState, setAuthCodeState] = React.useState(false);
+    const [authCode, setAuthCode] = useState<any>(null);
+
+    const [emailVerified, setEmailVerified] = React.useState(false);
     
     const getUser = async () => {
       const inputs = {
@@ -52,6 +76,8 @@ export default function MyPage() {
       })
       const user = await res.json()
       setUser(user.user.user)
+
+      setEmailVerified(user.user.user.emailVerified)
     }
     
     const getSettings = async () => {
@@ -98,6 +124,114 @@ export default function MyPage() {
       console.log("verify user ", user);
 
     };
+
+
+
+    const sendAuthCodeByEmail = async () => {
+
+      let userToken = crypto.randomUUID();
+  
+      const formInput = {
+          method: 'sendAuthCodeByEmail',
+          API_KEY: process.env.API_KEY,
+          email: user?.email,
+          userToken: userToken,
+      };
+      fetch("/api/user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formInput),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+
+          if (data.data) {
+  
+              setSuccessMsgSnackbar(data.message);
+              handleClickSucc();
+
+              setAuthCodeState(true);
+  
+          } else {
+  
+              setErrMsgSnackbar(data.message);
+              handleClickErr();
+  
+          }
+  
+      });
+  
+    }
+
+
+    const verifyUserByEmail = async () => {
+    
+      const formInput = {
+          method: 'verifyUserByEmail',
+          API_KEY: process.env.API_KEY,
+          email: user?.email,
+          authCode: authCode,
+      };
+      fetch("/api/user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formInput),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+
+          console.log("verifyUserByEmail", data);
+
+          if (data?.status) {
+
+              ///alert("success");
+  
+              ////setSuccessMsgSnackbar(data.message);
+              ////handleClickSucc();
+
+              setEmailVerified(true);
+  
+          } else {
+
+              setErrMsgSnackbar("Invalid Auth Code");
+              handleClickErr();
+  
+          }
+  
+      });
+  
+    }
+
+
+
+    const handleClickSucc = () => {
+      setSucc(true);
+    };
+
+    const handleCloseSucc = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSucc(false);
+    };
+
+    const handleClickErr = () => {
+        setErr(true);
+    };
+
+    const handleCloseErr = (
+        event?: React.SyntheticEvent | Event,
+        reason?: string
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setErr(false);
+    };
+
 
 
 
@@ -155,6 +289,15 @@ export default function MyPage() {
     const { errors, touched, values, handleChange, handleSubmit } = formik;
 
     
+
+    const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+      props,
+      ref
+    ) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
+
     return (
         <>
             <div className='flex flex-col items-center p-5 w-full h-full gap-10 text-white'>
@@ -167,19 +310,49 @@ export default function MyPage() {
 
                     <div className='font-medium text-sm text-gray-200'>Email Verified:
                       {
-                        (user?.emailVerified === true) ?
-                        ( <span className='text-green-500'> Verified</span> ) :
+                        (emailVerified === true) ?
+                        ( <span className='text-green-500'> Verified</span> )
+                        :
                         (
                           <>
                             <span className='text-red-500'> Not Verified</span>
                             &nbsp;&nbsp;
+
+                            {/*
                             <button className='btn btn-primary' onClick={() => verify()}>Verify Email</button>
+                            */}
+
+                            {!authCodeState &&
+                              <button className='btn btn-primary' onClick={() => sendAuthCodeByEmail()}>Send Auth Code</button>
+                            }
                           </>
                         )
                       }
                     </div>
 
-                    <div className='font-medium text-sm text-gray-200'>Nick Name: {user?.username}</div>
+
+                    {authCodeState && !emailVerified &&
+
+                      <>
+                          <div className=" w-full flex flex-row gap-5 mt-2">
+                              <input
+                                  type="number"
+                                  placeholder="Auth Code"
+                                  id="authCode"
+                                  onChange={(e) => {
+                                      setAuthCode(e.target.value);
+                                  }}
+                                  className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
+                              />
+
+                              <Button variant="contained" color="primary" className=" w-full h-12 " onClick={() => {
+                                  verifyUserByEmail();
+                              }}> Verify </Button>
+                          </div>
+
+                      </>
+                    }
+
                     <button className='btn btn-primary' onClick={() => router.push('/myPage/referral')}>Referrals</button>
                 </div>
 
@@ -289,6 +462,33 @@ export default function MyPage() {
 
 
                 </div>
+
+
+                <Stack spacing={2} sx={{ width: "100%" }}>
+                    <Snackbar
+                        open={succ}
+                        autoHideDuration={6000}
+                        onClose={handleCloseSucc}
+                    >
+                        <Alert
+                            onClose={handleCloseSucc}
+                            severity="success"
+                            sx={{ width: "100%" }}
+                        >
+                            {successMsgSnackbar}
+                        </Alert>
+                    </Snackbar>
+                    <Snackbar open={err} autoHideDuration={6000} onClose={handleCloseErr}>
+                        <Alert
+                            onClose={handleCloseErr}
+                            severity="error"
+                            sx={{ width: "100%" }}
+                        >
+                            {errMsgSnackbar}
+                        </Alert>
+                    </Snackbar>
+                </Stack>
+
 
             </div>
         </>

@@ -480,7 +480,6 @@ export default function RegisterPage() {
         if (reason === "clickaway") {
             return;
         }
-
         setSucc(false);
     };
 
@@ -495,7 +494,6 @@ export default function RegisterPage() {
         if (reason === "clickaway") {
             return;
         }
-
         setErr(false);
     };
 
@@ -584,7 +582,6 @@ export default function RegisterPage() {
                 </div>
 
             </>
-
         }
     
         {!authCodeState &&
@@ -746,6 +743,7 @@ export default function RegisterPage() {
                         </Alert>
                     </Snackbar>
                 </Stack>
+
             </div>
         </>
     );

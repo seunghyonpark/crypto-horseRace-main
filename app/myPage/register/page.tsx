@@ -151,7 +151,7 @@ export default function RegisterPage() {
     
             } else {
 
-                setErrMsgSnackbar("Invalid auth code");
+                setErrMsgSnackbar("Invalid Auth Code");
                 handleClickErr();
     
             }
@@ -538,6 +538,11 @@ export default function RegisterPage() {
                 <span className="label-text">Email Address</span>
         </label>
 
+        {!emailVerified &&
+            <div className=" w-full flex flex-row gap-5 mt-2">
+                You have to verify your email address.
+            </div>
+        }
        
         <div className=" w-full flex flex-row gap-5 mt-2">
 
@@ -577,9 +582,7 @@ export default function RegisterPage() {
                         verifyUserByEmail();
                     }}> Verify </Button>
                 </div>
-                <div className=" w-full flex flex-row gap-5 mt-2">
-                    You have to verify your email address.
-                </div>
+
             </>
 
         }

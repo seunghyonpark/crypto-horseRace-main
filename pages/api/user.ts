@@ -195,7 +195,7 @@ export default async function handler(
       html: `
         <div>
           <p>Hello</p>
-          <p>auth code: ${authCode}</p>
+          <p>Your Auth Code: ${authCode}</p>
         </div>
         `,
     });
@@ -222,7 +222,7 @@ export default async function handler(
       authCode,
     );
 
-    //////console.log("verifyUserByEmail user", user)
+    console.log("verifyUserByEmail user", user)
 
 
 

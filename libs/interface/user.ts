@@ -18,4 +18,5 @@ export interface IUser {
   nftWalletAddress: string;
   referralCode: string;
   referral: string;
+  authCode: string;
 }

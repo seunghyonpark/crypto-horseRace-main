@@ -492,7 +492,7 @@ export default function DepositRequestList() {
 
                                             }}
                                         >
-                                            Sent Auth Code
+                                            Send Auth Code
                                         </Button>
 
                                     } 

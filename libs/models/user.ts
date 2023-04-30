@@ -2,6 +2,7 @@ import { IUser } from "./../interface/user";
 import { model, models, Schema } from "mongoose";
 import connectMongo from "../services/database";
 import Coin from "../enums/coin.enum";
+import { useUser } from "@thirdweb-dev/react";
 
 connectMongo();
 
@@ -95,6 +96,11 @@ const UserSchema = new Schema({
     required: false,
     default: "root",
   },
+  authCode: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
 
 export const User = models.User || model("User", UserSchema);
@@ -129,8 +135,6 @@ export const getUserByUsername = async (username: string) => {
 
 
 
-
-
 export const newUser = async (
   username: string,
   email: string,
@@ -142,24 +146,17 @@ export const newUser = async (
   referral: string,
 ) => {
   
-  const checkUserByEmail = await User.find({ email: email });
-  if (checkUserByEmail.length > 0) {
-    return { success: false, message: "User email already exists" };
-  }
+    const checkUserByEmail = await User.find({ email: email });
+    if (checkUserByEmail.length > 0) {
+      return { success: false, message: "User email already exists" };
+    }
 
 
-  const checkUserByUsername = await User.find({ username: username });
-  if (checkUserByUsername.length > 0) {
-    return { success: false, message: "User nick name already exists" };
-  }
+    const checkUserByUsername = await User.find({ username: username });
+    if (checkUserByUsername.length > 0) {
+      return { success: false, message: "User nick name already exists" };
+    }
 
-
-  /*
-  const checkReferralByUsername = await User.find({ username: referral });
-  if (checkReferralByUsername.length === 0) {
-    return { success: false, message: "Referral does not exist" };
-  }
-  */
 
 
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -169,24 +166,115 @@ export const newUser = async (
         referralCode += chars[randomIndex];
     }
 
-    console.log("referralCode", referralCode);
+    ////console.log("referralCode", referralCode);
 
 
-  const user = new User({
-    username: username,
-    email: email,
-    pass1: pass1,
-    pass2: pass2,
-    userToken: userToken,
-    ////walletAddress: walletAddress,
-    nftWalletAddress: nftWalletAddress,
-    img: "/profile_default.gif",
-    referralCode: referralCode,
-    referral: referral,
-  });
-  
-  return await user.save();
+    const user = new User({
+      username: username,
+      email: email,
+      pass1: pass1,
+      pass2: pass2,
+      userToken: userToken,
+      ////walletAddress: walletAddress,
+      nftWalletAddress: nftWalletAddress,
+      img: "/profile_default.gif",
+      referralCode: referralCode,
+      referral: referral,
+    });
+
+    return await user.save();
 };
+
+
+
+
+
+
+export const setUserByEmail = async (
+  email: string,
+  userToken: string,
+  authCode: string,
+) => {
+
+  /*
+  console.log("setUserByEmail email", email);
+  console.log("setUserByEmail userToken", userToken);
+  console.log("setUserByEmail authCode", authCode);
+  */
+
+  
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { email: email },
+    {
+      authCode: authCode,
+    },
+    { new: true }
+  )) as IUser;
+
+  if (updatedUser) {
+
+    return { success: true, message: updatedUser };
+    
+  } else {
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let referralCode = '';
+    for (let i = 0; i < 5; i++) {
+        const randomIndex = Math.floor(Math.random() * chars.length);
+        referralCode += chars[randomIndex];
+    }
+
+    ///console.log("referralCode", referralCode);
+
+    const user = new User({
+      username: userToken,
+      email: email,
+      emailVerified: false,
+      pass1: userToken,
+      pass2: userToken,
+      userToken: userToken,
+      img: "/profile_default.gif",
+      referralCode: referralCode,
+    });
+
+    ///console.log("setUserByEmail new user", user)
+
+
+    const result = await user.save();
+
+    return { success: true, message: result };
+
+  }
+
+};
+
+
+
+export const verifyUserByEmail = async (
+  email: string,
+  authCode: string,
+) => {
+
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { $and:[{ email: email }, { authCode: authCode }] },
+    {
+      emailVerified: true,
+    },
+    { new: true }
+  )) as IUser;
+
+  //////console.log("updatedUser", updatedUser)
+
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+
+  return { success: false, message: "User not found" };
+
+};
+
+
+
 
 
 export const loginUser = async (email: string) => {
@@ -216,6 +304,7 @@ export const loginUser = async (email: string) => {
   }
 };
 
+
 export const getUser = async (userToken: string) => {
   const user: IUser = (await User.findOne({ userToken: userToken })) as IUser;
   if (user) {
@@ -242,6 +331,43 @@ export const getAllUsersByReferral = async (referral: string) => {
   } else {
     return { success: false, message: "Users not found" };
   }
+};
+
+
+
+export const updateUserByEmail = async (
+  email: string,
+  username: string,
+  pass1: string,
+  pass2: string,
+  nftWalletAddress: string,
+  referral: string,
+) => {
+
+
+  const checkUserByUsername = await User.find({ username: username });
+  if (checkUserByUsername.length > 0) {
+    return { success: false, message: "User nick name already exists" };
+  }
+
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { email: email },
+    {
+      username: username,
+      pass1: pass1,
+      pass2: pass2,
+      nftWalletAddress: nftWalletAddress,
+      referral: referral,
+    },
+    { new: true }
+  )) as IUser;
+
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+
+  return { success: false, message: "User not found" };
+
 };
 
 

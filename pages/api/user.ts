@@ -8,7 +8,10 @@ import {
   getUser,
   loginUser,
   newUser,
+  setUserByEmail,
+  verifyUserByEmail,
   updateUser,
+  updateUserByEmail,
   updateUserEmailVerified,
   updateUserProfileImage,
   updateUserWalletAddress,
@@ -143,6 +146,159 @@ export default async function handler(
     res.status(200).json({ status: true, message: "User created", user: user });
 
   }
+
+
+
+
+
+  if (method === "sendAuthCodeByEmail") {
+
+    const {
+      email,
+      userToken,
+    } = req.body;
+
+    if ( !email || !userToken ) {
+      res.status(400).json({ message: "Bad Request" });
+      return;
+    }
+
+
+    const min = Math.ceil(1000000);
+    const max = Math.floor(9999999);
+    const authCode = Number(Math.floor(Math.random() * (max - min + 1) + min)).toFixed(0);
+
+
+    const user = await setUserByEmail(
+      email,
+      userToken,
+      authCode,
+    );
+
+    if (!user) {
+      res.status(400).json({ status: false, message: "error" });
+      return;
+    }
+
+    if (user.success === false) {
+      res.status(400).json({ status: false, message: user.message });
+      return;
+    }
+
+
+    const mail = await sendMail({
+      to: email,
+      from: MAIL_CONFIG.from,
+      subject: `Verification Email for ${process.env.WEB_URI}`,
+      html: `
+        <div>
+          <p>Hello</p>
+          <p>auth code: ${authCode}</p>
+        </div>
+        `,
+    });
+
+    res.status(200).json({ message: "Send Auth Code", data: user });
+  }
+
+
+
+  if (method === "verifyUserByEmail") {
+
+    const { email, authCode } = req.body;
+
+    if (
+      !email ||
+      !authCode
+    ) {
+      res.status(400).json({ status: false, message: "Missing data" });
+      return;
+    }
+
+    const user = await verifyUserByEmail(
+      email,
+      authCode,
+    );
+
+    //////console.log("verifyUserByEmail user", user)
+
+
+
+    if (!user) {
+      res.status(400).json({ status: false, message: "error" });
+      return;
+    }
+
+    if (user.success === false) {
+      res.status(400).json({ status: false, message: user.message });
+      return;
+    }
+
+    res.status(200).json({ status: true, message: user.message });
+
+  }
+
+
+
+
+
+
+
+  if (method === "signupByEmail") {
+
+    const { email, username, pass1, pass2, nftWalletAddress, referral } =
+      req.body;
+
+    if (
+      !email ||
+      !username ||
+      !pass1 ||
+      !pass2 ||
+      !nftWalletAddress
+    ) {
+      res.status(400).json({ status: false, message: "Missing data" });
+      return;
+    }
+
+    if (pass1 !== pass2) {
+      res
+        .status(400)
+        .json({ status: false, message: "Passwords do not match" });
+      return;
+    }
+
+    if (pass1.length < 6) {
+      res.status(400).json({
+        status: false,
+        message: "Password must be at least 6 characters",
+      });
+      return;
+    }
+
+    const user = await updateUserByEmail(
+      email,
+      username,
+      pass1,
+      pass2,
+      nftWalletAddress,
+      referral,
+    );
+
+
+    if (!user) {
+      res.status(400).json({ status: false, message: "error" });
+      return;
+    }
+
+    if (user.success === false) {
+      res.status(400).json({ status: false, message: user.message });
+      return;
+    }
+
+    res.status(200).json({ status: true, message: "User created", user: user });
+
+  }
+
 
 
   if (method === "login") {
@@ -507,7 +663,6 @@ export default async function handler(
         `,
     });
 
-    console.log("mail=======", mail);
 
     /*
     if (!user.success) {

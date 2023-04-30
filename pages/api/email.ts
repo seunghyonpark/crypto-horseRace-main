@@ -12,6 +12,9 @@ import { EvmChain } from "@moralisweb3/common-evm-utils";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
+import { CONFIG as MAIL_CONFIG, sendMail } from '@/api-lib/mail';
+
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -204,40 +207,30 @@ export default async function handler(
   if (method === "sendAuthCode") {
 
     const {
-      userToken,
-      mobileNumber,
+      email,
     } = req.body;
 
-    if (!userToken || !mobileNumber) {
+    if ( !email ) {
       res.status(400).json({ message: "Bad Request" });
       return;
     }
 
 
+    let authCode = "2343451";
 
-  /*
-{"result":"ok","mobile_auth_code":79590}
-  */
+    const mail = await sendMail({
+      to: email,
+      from: MAIL_CONFIG.from,
+      subject: `Verification Email for ${process.env.WEB_URI}`,
+      html: `
+        <div>
+          <p>Hello</p>
+          <p>auth code: ${authCode}</p>
+        </div>
+        `,
+    });
 
 
-    let authCode = "";
-
-    const response = await fetch(`http://wallet.treasureverse.io/cracle_sms?mobile=${mobileNumber}`);
-
-  
-    if (response.ok) {
-
-      const json = await response.json();
-
-      if (json) {
-
-        authCode = json.mobile_auth_code;
-
-      }
-
-    } else {
-      console.log("HTTP-Error: " + response.status);
-    }    
     
 
     /*

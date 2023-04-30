@@ -67,7 +67,10 @@ export default function RegisterPage() {
     const [network, setNetwork] = useState<any>(false);
     const router = useRouter();
 
-   
+    const [authCodeState, setAuthCodeState] = React.useState(false);
+    const [authCode, setAuthCode] = useState<any>(null);
+
+    const [emailVerified, setEmailVerified] = React.useState(false);
 
     
 
@@ -78,7 +81,88 @@ export default function RegisterPage() {
 
  
 
-    ////console.log("referral=", referral);
+    const sendAuthCodeByEmail = async () => {
+
+        let userToken = crypto.randomUUID();
+    
+        const formInput = {
+            method: 'sendAuthCodeByEmail',
+            API_KEY: process.env.API_KEY,
+            email: values.email,
+            userToken: userToken,
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+
+            if (data.data) {
+    
+                //setSuccessMsgSnackbar(data.message);
+                handleClickSucc();
+
+                setAuthCodeState(true);
+    
+            } else {
+    
+                //setErrMsgSnackbar(data.message);
+                handleClickErr();
+    
+            }
+    
+        });
+    
+    }
+
+
+
+    const verifyUserByEmail = async () => {
+    
+        const formInput = {
+            method: 'verifyUserByEmail',
+            API_KEY: process.env.API_KEY,
+            email: values.email,
+            authCode: authCode,
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+
+            /////console.log("verifyUserByEmail", data);
+
+            if (data?.status) {
+
+                ///alert("success");
+    
+                //setSuccessMsgSnackbar(data.message);
+                handleClickSucc();
+
+                ////setAuthCodeState(true);
+
+                setEmailVerified(true);
+    
+            } else {
+    
+
+                ////alert("fail");
+
+                //setErrMsgSnackbar(data.message);
+                handleClickErr();
+    
+            }
+    
+        });
+    
+    }
+
+    
 
 
     // Formik hook to handle the form state
@@ -99,6 +183,39 @@ export default function RegisterPage() {
         onSubmit: async ({ email, pass1, pass2, username, referral }) => {
         // Make a request to your backend to store the data
 
+        const formInput = {
+            method: 'signupByEmail',
+            API_KEY: process.env.API_KEY,
+            email: email,
+            username: username,
+            pass1: pass1,
+            pass2: pass2,
+            nftWalletAddress: wallet,
+            referral: referral,
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.status) {
+                    handleClickSucc();
+                    router.push("/myPage/login");
+                }
+                else {
+                    setErrMsg(data.message);
+                    handleClickErr();
+                }
+                //todo
+                // handleClickSucc();
+            });
+
+
+        },
+
+        /*
         let userToken = crypto.randomUUID();
 
         const formInput = {
@@ -134,12 +251,13 @@ export default function RegisterPage() {
 
 
         },
+        */
+
+
     });
 
     // Destructure the formik object
     const { errors, touched, values, handleChange, handleSubmit } = formik;
-
-
 
 
     const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -414,81 +532,121 @@ export default function RegisterPage() {
 
         <label
             className="label"
-            htmlFor="Email">
-                <span className="label-text">Email</span>
+            htmlFor="Email Address">
+                <span className="label-text">Email Address</span>
         </label>
-      <input
-        type="email"
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-        id="email"
-        className="input w-full bg-gray-200 rounded-md"
+        <input
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            id="email"
+            className="input w-full bg-gray-200 rounded-md"
+            disabled={emailVerified}
+            
+        />
+        {errors.email && touched.email && <span>{errors.email}</span>}
+
+        {authCodeState && !emailVerified &&
+
+            <div className=" w-full flex flex-row gap-5 mt-2">
+                <input
+                    type="number"
+                    placeholder="Auth Code"
+                    id="authCode"
+                    onChange={(e) => {
+                        setAuthCode(e.target.value);
+                    }}
+                    className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
+                />
+
+                <Button variant="contained" color="primary" className=" w-full h-12 " onClick={() => {
+                    verifyUserByEmail();
+                }}> Verify </Button>
+            </div>
+
+        }
+    
+        {!authCodeState &&
+
+            <Button
+                variant="contained" color="primary" 
+                className=" mt-2"
+                onClick={() => {
+                    sendAuthCodeByEmail();
+                }}
+            >
+                Send Auth Code
+            </Button>
+        }
+
+
+
+        {emailVerified ?
         
-      />
-      {errors.email && touched.email && <span>{errors.email}</span>}
+            <>
 
 
-      <label
-        htmlFor="Password"
-        className="label">
-            <span className="label-text">Password</span>
+        <label
+            htmlFor="Password"
+            className="label">
+                <span className="label-text">Password</span>
+            </label>
+        <input
+            type="password"
+            name="pass1"
+            value={values.pass1}
+            onChange={handleChange}
+            id="pass1"
+            className="input w-full bg-gray-200 rounded-md"
+        />
+        {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
+
+        <label
+            htmlFor="Password"
+            className="label">
+                <span className="label-text">Re-enter your Password</span>
+            </label>
+        <input
+            type="password"
+            name="pass2"
+            value={values.pass2}
+            onChange={handleChange}
+            id="pass2"
+            className="input w-full bg-gray-200 rounded-md"
+        />
+        {errors.pass2 && touched.pass2 && <span>{errors.pass2}</span>}
+
+        <label
+            htmlFor="Nick Name"
+            className="label">
+                <span className="label-text">Nick Name</span>
+            </label>
+        <input
+            type="text"
+            name="username"
+            value={values.username}
+            onChange={handleChange}
+            id="username"
+            className="input w-full bg-gray-200 rounded-md"
+        />
+        {errors.username && touched.username && <span>{errors.username}</span>}
+
+
+        <label
+            htmlFor="Referral Code"
+            className="label">
+                <span className="label-text">Referral Code</span>
         </label>
-      <input
-        type="password"
-        name="pass1"
-        value={values.pass1}
-        onChange={handleChange}
-        id="pass1"
-        className="input w-full bg-gray-200 rounded-md"
-      />
-      {errors.pass1 && touched.pass1 && <span>{errors.pass1}</span>}
-
-      <label
-        htmlFor="Password"
-        className="label">
-            <span className="label-text">Re-enter your Password</span>
-        </label>
-      <input
-        type="password"
-        name="pass2"
-        value={values.pass2}
-        onChange={handleChange}
-        id="pass2"
-        className="input w-full bg-gray-200 rounded-md"
-      />
-      {errors.pass2 && touched.pass2 && <span>{errors.pass2}</span>}
-
-      <label
-        htmlFor="Nick Name"
-        className="label">
-            <span className="label-text">Nick Name</span>
-        </label>
-      <input
-        type="text"
-        name="username"
-        value={values.username}
-        onChange={handleChange}
-        id="username"
-        className="input w-full bg-gray-200 rounded-md"
-      />
-      {errors.username && touched.username && <span>{errors.username}</span>}
-
-
-      <label
-        htmlFor="Referral Code"
-        className="label">
-            <span className="label-text">Referral Code</span>
-      </label>
-      <input
-        type="text"
-        name="referral"
-        value={ (!referralCode) ? "" : referralCode }
-        onChange={handleChange}
-        id="referral"
-        className="input w-full bg-gray-200 rounded-md"
-      />
-      {errors.referral && touched.referral && <span>{errors.referral}</span>}
+        <input
+            type="text"
+            name="referral"
+            value={ (!referralCode) ? "" : referralCode }
+            onChange={handleChange}
+            id="referral"
+            className="input w-full bg-gray-200 rounded-md"
+        />
+        {errors.referral && touched.referral && <span>{errors.referral}</span>}
 
 
         <div className="flex flex-row">
@@ -525,6 +683,12 @@ export default function RegisterPage() {
         className="bg-green-500 hover:bg-green-600 text-white text-center justify-center m-5 p-5 rounded-md ">
             SIGN UP
       </button>
+
+
+            </>
+            :
+            <></>
+        }
 
     </form>
     

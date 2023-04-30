@@ -549,6 +549,7 @@ export default function RegisterPage() {
 
         {authCodeState && !emailVerified &&
 
+            <>
             <div className=" w-full flex flex-row gap-5 mt-2">
                 <input
                     type="number"
@@ -564,6 +565,10 @@ export default function RegisterPage() {
                     verifyUserByEmail();
                 }}> Verify </Button>
             </div>
+            <div className=" w-full flex flex-row gap-5 mt-2">
+                You have to verify your email address.
+            </div>
+            </>
 
         }
     
@@ -709,7 +714,7 @@ export default function RegisterPage() {
                             severity="success"
                             sx={{ width: "100%" }}
                         >
-                            Account successfully created!
+                            Verify Code successfully created!
                         </Alert>
                     </Snackbar>
                     <Snackbar open={err} autoHideDuration={6000} onClose={handleCloseErr}>

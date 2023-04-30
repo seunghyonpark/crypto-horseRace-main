@@ -540,6 +540,7 @@ export default function RegisterPage() {
             <input
                 type="email"
                 name="email"
+                placeholder="Email Address"
                 value={values.email}
                 onChange={handleChange}
                 id="email"

@@ -170,7 +170,7 @@ export default function RegisterPage() {
             pass1: "",
             pass2: "",
             username: "",
-            referral: referralCode,
+            referral: "",
             terms: false,
         },
 
@@ -665,7 +665,10 @@ export default function RegisterPage() {
         <input
             type="text"
             name="referral"
-            value={ (!referralCode) ? "" : referralCode }
+            value={ (referralCode) ? referralCode : values.referral }
+            
+            ///value={ values.referral }
+
             onChange={handleChange}
             id="referral"
             className="input w-full bg-gray-200 rounded-md"

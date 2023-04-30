@@ -355,6 +355,16 @@ export const updateUserByEmail = async (
     return { success: false, message: "User nick name already exists" };
   }
 
+  if (referral && referral !== "") {
+    const checkUserByReferralCode = await User.find({ referralCode: referral });
+    if (checkUserByReferralCode.length === 0) {
+      return { success: false, message: "User referral code does not exists" };
+    }
+  }
+
+
+
+
   const updatedUser: IUser = (await User.findOneAndUpdate(
     { email: email },
     {

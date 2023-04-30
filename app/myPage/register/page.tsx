@@ -199,6 +199,7 @@ export default function RegisterPage() {
             .then((res) => res.json())
             .then((data) => {
                 if (data.status) {
+                    setSuccessMsgSnackbar(data.message);
                     handleClickSucc();
                     router.push("/myPage/login");
                 }

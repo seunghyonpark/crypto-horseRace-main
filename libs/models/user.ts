@@ -235,6 +235,7 @@ export const setUserByEmail = async (
       userToken: userToken,
       img: "/profile_default.gif",
       referralCode: referralCode,
+      authCode: authCode,
     });
 
     ///console.log("setUserByEmail new user", user)
@@ -255,9 +256,9 @@ export const verifyUserByEmail = async (
   authCode: string,
 ) => {
 
-  console.log("verifyUserByEmail email", email);
-  console.log("verifyUserByEmail authCode", authCode);
-  
+  ///console.log("verifyUserByEmail email", email);
+  ///console.log("verifyUserByEmail authCode", authCode);
+
 
   const updatedUser: IUser = (await User.findOneAndUpdate(
     { $and:[{ email: email }, { authCode: authCode }] },

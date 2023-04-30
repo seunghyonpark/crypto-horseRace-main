@@ -10,6 +10,8 @@ import { IUser } from "@/libs/interface/user";
 import ModalAlert from '@/components/ModalAlert';
 import { useTransferToken } from '@thirdweb-dev/react';
 
+import { VscGear, VscCheck } from "react-icons/vsc";
+
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -88,9 +90,44 @@ export default function UserList() {
       field: "email",
       headerName: "Email",
       flex: 0.2,
-      minWidth: 200,
+      minWidth: 300,
       align: "center",
       headerAlign: "center",
+      renderCell: (params) => {
+        const onClick = (e: any) => {
+            e.stopPropagation(); // don't select this row after clicking
+
+            /*
+            const api: GridApi = params.api;
+            const thisRow: Record<string, GridCellValue> = {};
+
+            api
+                .getAllColumns()
+                .filter((c) => c.field !== "__check__" && !!c)
+                .forEach(
+                    (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
+                );
+
+            return duzenle(params.row);
+            */
+            return;
+        };
+        return (
+          <>
+            <span className=" w-80 justify-right">{params.value}</span>
+            <div className='flex justify-center items-center '>
+              {params.row.emailVerified ?
+                <VscCheck className=" w-5 h-5 text-green-500" />
+                :
+              <Button color="success" variant='contained' className='text-xs bg-green-500' onClick={onClick}>
+                  Send Auth
+              </Button>
+              }
+            </div>
+          </>
+        );
+      },
+      
     },
     {
       field: "emailVerified",

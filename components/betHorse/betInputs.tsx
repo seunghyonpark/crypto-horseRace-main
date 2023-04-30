@@ -61,6 +61,7 @@ export default function BetInputs({ socket, horse1, horse2, currentPrice, setBas
 
     const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
     const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
+    
     const [succ, setSucc] = React.useState(false);
     const [err, setErr] = React.useState(false);
 

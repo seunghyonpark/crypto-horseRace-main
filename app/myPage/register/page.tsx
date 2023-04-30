@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { AiOutlineUser } from "react-icons/ai";
-import { VscGear } from "react-icons/vsc";
+import { VscGear, VscCheck } from "react-icons/vsc";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Image from "next/image";
@@ -58,9 +58,12 @@ const schema = Yup.object().shape({
 export default function RegisterPage() {
     
     const MySwal = withReactContent(Swal);
+
     const [succ, setSucc] = React.useState(false);
     const [err, setErr] = React.useState(false);
-    const [errMsg, setErrMsg] = useState<String>();
+    const [errMsgSnackbar, setErrMsgSnackbar] = useState<String>("");
+    const [successMsgSnackbar, setSuccessMsgSnackbar] = useState<String>("");
+
     const [metamusk, setMetaMask] = useState<boolean>(false);
     const [wallet, setWallet] = useState<any>(null);
     const [networkName, setNetworkName] = useState<any>(null);
@@ -101,14 +104,14 @@ export default function RegisterPage() {
 
             if (data.data) {
     
-                //setSuccessMsgSnackbar(data.message);
+                setSuccessMsgSnackbar(data.message);
                 handleClickSucc();
 
                 setAuthCodeState(true);
     
             } else {
     
-                //setErrMsgSnackbar(data.message);
+                setErrMsgSnackbar(data.message);
                 handleClickErr();
     
             }
@@ -141,19 +144,14 @@ export default function RegisterPage() {
 
                 ///alert("success");
     
-                //setSuccessMsgSnackbar(data.message);
-                handleClickSucc();
-
-                ////setAuthCodeState(true);
+                ////setSuccessMsgSnackbar(data.message);
+                ////handleClickSucc();
 
                 setEmailVerified(true);
     
             } else {
-    
 
-                ////alert("fail");
-
-                //setErrMsgSnackbar(data.message);
+                setErrMsgSnackbar("Invalid auth code");
                 handleClickErr();
     
             }
@@ -205,7 +203,7 @@ export default function RegisterPage() {
                     router.push("/myPage/login");
                 }
                 else {
-                    setErrMsg(data.message);
+                    setErrMsgSnackbar(data.message);
                     handleClickErr();
                 }
                 //todo
@@ -462,7 +460,7 @@ export default function RegisterPage() {
                     router.push("/myPage/login");
                 }
                 else {
-                    setErrMsg(data.message);
+                    setErrMsgSnackbar(data.message);
                     handleClickErr();
                 }
                 //todo
@@ -535,44 +533,55 @@ export default function RegisterPage() {
             htmlFor="Email Address">
                 <span className="label-text">Email Address</span>
         </label>
-        <input
-            type="email"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-            id="email"
-            className="input w-full bg-gray-200 rounded-md mb-2"
-            disabled={emailVerified}
-            
-        />
+
+       
+        <div className=" w-full flex flex-row gap-5 mt-2">
+
+            <input
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                id="email"
+                className=" input w-full bg-gray-200 rounded-md mb-2"
+                disabled={authCodeState}
+                
+            />
+
+            {emailVerified && <VscCheck className=" w-10 h-10 text-green-500" />}
+
+        </div>
+
         {errors.email && touched.email && <span>{errors.email}</span>}
 
         {authCodeState && !emailVerified &&
 
             <>
-            <div className=" w-full flex flex-row gap-5 mt-2">
-                <input
-                    type="number"
-                    placeholder="Auth Code"
-                    id="authCode"
-                    onChange={(e) => {
-                        setAuthCode(e.target.value);
-                    }}
-                    className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
-                />
+                <div className=" w-full flex flex-row gap-5 mt-2">
+                    <input
+                        type="number"
+                        placeholder="Auth Code"
+                        id="authCode"
+                        onChange={(e) => {
+                            setAuthCode(e.target.value);
+                        }}
+                        className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
+                    />
 
-                <Button variant="contained" color="primary" className=" w-full h-12 " onClick={() => {
-                    verifyUserByEmail();
-                }}> Verify </Button>
-            </div>
-            <div className=" w-full flex flex-row gap-5 mt-2">
-                You have to verify your email address.
-            </div>
+                    <Button variant="contained" color="primary" className=" w-full h-12 " onClick={() => {
+                        verifyUserByEmail();
+                    }}> Verify </Button>
+                </div>
+                <div className=" w-full flex flex-row gap-5 mt-2">
+                    You have to verify your email address.
+                </div>
             </>
 
         }
     
         {!authCodeState &&
+
+            <div className=" w-full flex flex-row gap-5 mt-2">
 
             <Button
                 variant="contained" color="primary" 
@@ -583,6 +592,8 @@ export default function RegisterPage() {
             >
                 Send Auth Code
             </Button>
+
+            </div>
         }
 
 
@@ -655,9 +666,6 @@ export default function RegisterPage() {
 
 
         <div className="flex flex-row">
-
-
-
         </div>
 
 
@@ -714,7 +722,7 @@ export default function RegisterPage() {
                             severity="success"
                             sx={{ width: "100%" }}
                         >
-                            Verify Code successfully created!
+                            {successMsgSnackbar}
                         </Alert>
                     </Snackbar>
                     <Snackbar open={err} autoHideDuration={6000} onClose={handleCloseErr}>
@@ -723,7 +731,7 @@ export default function RegisterPage() {
                             severity="error"
                             sx={{ width: "100%" }}
                         >
-                            {errMsg}
+                            {errMsgSnackbar}
                         </Alert>
                     </Snackbar>
                 </Stack>

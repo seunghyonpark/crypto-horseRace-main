@@ -163,7 +163,7 @@ export default async function handler(
       return;
     }
 
-    
+
 
 
     const min = Math.ceil(1000000);
@@ -200,7 +200,7 @@ export default async function handler(
         `,
     });
 
-    res.status(200).json({ message: "Send Auth Code", data: user });
+    res.status(200).json({ message: "Sent Auth Code", data: user });
   }
 
 

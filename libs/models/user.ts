@@ -255,6 +255,10 @@ export const verifyUserByEmail = async (
   authCode: string,
 ) => {
 
+  console.log("verifyUserByEmail email", email);
+  console.log("verifyUserByEmail authCode", authCode);
+  
+
   const updatedUser: IUser = (await User.findOneAndUpdate(
     { $and:[{ email: email }, { authCode: authCode }] },
     {

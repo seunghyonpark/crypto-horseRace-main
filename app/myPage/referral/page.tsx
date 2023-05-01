@@ -63,16 +63,22 @@ const columnsReferral: GridColDef[] = [
         flex: 0.2,
         minWidth: 80,
 
-        //renderCell(params) {
-        //    return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
-        //},
-
     },
 
 ];
 
 const columnsReward: GridColDef[] = [
 
+    {
+        field: "username",
+        headerName: "Nick Name",
+        align: "center",
+        headerAlign: "center",
+        type: "number",
+        flex: 0.2,
+        minWidth: 120,
+
+    },
 
     {
         field: "resultAmount",
@@ -431,6 +437,7 @@ export default function ReferralList() {
             closePrice: item.closePrice,
             winnerHorse: item.winnerHorse,
             date: item.date,
+            username: item.username,
             userToken: item.userToken,
             referral: item.referral,
             referralReward: item.referralReward,

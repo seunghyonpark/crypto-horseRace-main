@@ -18,6 +18,10 @@ const GameSchema = new Schema({
     type: String,
     required: true,
   },
+  referral: {
+    type: String,
+    required: false,
+  },
   betAmount: {
     type: Number,
     required: true,
@@ -48,24 +52,32 @@ export const newGame = async (
     return { success: false, message: "User already in game" };
   }
 
-  const game = new Game({
-    userToken: userToken,
-    username: username,
-    img: img,
-    betAmount: betAmount,
-    selectedSide: selectedSide,
-    basePrice: 0,
-  });
 
   const user = await User.findOne({ userToken: userToken });
   if (user) {
+
+    const game = new Game({
+      userToken: userToken,
+      username: username,
+      img: img,
+      referral: user.referral,
+      betAmount: betAmount,
+      selectedSide: selectedSide,
+      basePrice: 0,
+    });
+
+    await game.save();
+
     user.deposit -= betAmount;
     await user.save();
+
+    return { success: true, game };
+
   } else {
     return { success: false, message: "User not found" };
   }
-  await game.save();
-  return { success: true, game };
+
+
 };
 
 

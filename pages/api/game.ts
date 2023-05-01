@@ -16,8 +16,8 @@ export default async function handler(
 
   if (API_KEY !== process.env.API_KEY) {
 
-    console.log("API_KEY", API_KEY);
-    console.log("process.env.API_KEY", process.env.API_KEY);
+    //console.log("API_KEY", API_KEY);
+    //console.log("process.env.API_KEY", process.env.API_KEY);
 
     res.status(401).json({ message: "Unauthorized" });
     return;
@@ -29,12 +29,13 @@ export default async function handler(
   if (method === "newGame") {
     const { userToken, username, img, betAmount, selectedSide } = req.body;
 
+    /*
     console.log("api game newGame userToken", userToken);
     console.log("api game newGame username", username);
     console.log("api game newGame img", img);
     console.log("api game newGame betAmount", betAmount);
     console.log("api game newGame selectedSide", selectedSide);
-
+    */
 
     if (!userToken || !username || !img || !betAmount || !selectedSide) {
       res.status(400).json({ message: "Bad Request" });

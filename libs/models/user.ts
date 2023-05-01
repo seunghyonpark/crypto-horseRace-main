@@ -109,9 +109,10 @@ export const User = models.User || model("User", UserSchema);
 
 export const getUserByEmail = async (email: string) => {
 
-  console.log("getUserByEmail email", email);
+  ///console.log("getUserByEmail email", email);
 
   const user: IUser = (await User.findOne({ email1: email })) as IUser;
+
   if (user) {
     return { success: true, user };
   } else {
@@ -384,6 +385,31 @@ export const updateUserByEmail = async (
   return { success: false, message: "User not found" };
 
 };
+
+
+
+
+export const updatePasswordByEmail = async (
+  email: string,
+  pass1: string,
+  pass2: string,
+) => {
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { email: email },
+    {
+      pass1: pass1,
+      pass2: pass2,
+    },
+    { new: true }
+  )) as IUser;
+
+  if (updatedUser) {
+    return { success: true, updatedUser };
+  }
+
+  return { success: false, message: "User not found" };
+};
+
 
 
 export const updateUser = async (

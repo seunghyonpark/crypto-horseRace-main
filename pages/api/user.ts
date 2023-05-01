@@ -12,6 +12,7 @@ import {
   verifyUserByEmail,
   updateUser,
   updateUserByEmail,
+  updatePasswordByEmail,
   updateUserEmailVerified,
   updateUserProfileImage,
   updateUserWalletAddress,
@@ -48,7 +49,6 @@ export default async function handler(
     const { email } = req.body;
 
     const user = await getUserByEmail(email);
-
 
     if (!user.success) {
       res.status(400).json({ message: "User not found" });
@@ -222,7 +222,7 @@ export default async function handler(
       authCode,
     );
 
-    console.log("verifyUserByEmail user", user)
+    //////console.log("verifyUserByEmail user", user)
 
 
 
@@ -239,9 +239,6 @@ export default async function handler(
     res.status(200).json({ status: true, message: user.message });
 
   }
-
-
-
 
 
 
@@ -303,6 +300,60 @@ export default async function handler(
 
 
 
+  if (method === "recoveryByEmail") {
+
+    const {
+      email,
+      pass1,
+      pass2,
+    } =
+      req.body;
+
+    if (
+      !email ||
+      !pass1 ||
+      !pass2
+    ) {
+      res.status(400).json({ status: false, message: "Missing data" });
+      return;
+    }
+
+    if (pass1 !== pass2) {
+      res
+        .status(400)
+        .json({ status: false, message: "Passwords do not match" });
+      return;
+    }
+
+    if (pass1.length < 6) {
+      res.status(400).json({
+        status: false,
+        message: "Password must be at least 6 characters",
+      });
+      return;
+    }
+
+    const updateUser = await updatePasswordByEmail(
+      email,
+      pass1,
+      pass2,
+    );
+
+    if (!updateUser) {
+      res.status(400).json({ status: false, message: "error" });
+      return;
+    }
+
+    if (updateUser.success === false) {
+      res.status(400).json({ status: false, message: updateUser.message });
+      return;
+    }
+
+    res.status(200).json({ status: true, message: "User password updated", user: updateUser });
+  } 
+
+
+
   if (method === "login") {
 
     const { email, pass } = req.body;
@@ -326,6 +377,7 @@ export default async function handler(
 
 
   if (method === "getOne") {
+
     const { userToken } = req.body;
 
     const user = await getUser(userToken);

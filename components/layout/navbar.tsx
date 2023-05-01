@@ -496,7 +496,7 @@ export default function Navbar() {
 
                       {user &&
                       <button
-                          className={`text-[12px] text-red-500`}
+                          className={`text-sm text-red-500`}
                           onClick={() => {
                             setShowModal(false);
                             deleteCookie('user');

@@ -1051,7 +1051,7 @@ export default function MobilNavbar({user, game} : {user: any, game: any}) {
 
                       {user &&
                       <button
-                          className={`text-[10px] text-red-500`}
+                          className={`text-sm text-red-500`}
                           onClick={() => {
                             setShowModal(false);
                             deleteCookie('user');

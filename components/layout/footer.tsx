@@ -70,7 +70,7 @@ export default function Footer() {
  
                         {user &&
                             <button
-                                className={`text-[10px] text-red-500`}
+                                className={` text-red-500`}
                                 onClick={() => {
                                     deleteCookie('user');
                                     router.push('/');

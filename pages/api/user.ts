@@ -10,6 +10,7 @@ import {
   newUser,
   setUserByEmail,
   verifyUserByEmail,
+  setUserAuthCode,
   updateUser,
   updateUserByEmail,
   updatePasswordByEmail,
@@ -195,7 +196,9 @@ export default async function handler(
       html: `
         <div>
           <p>Hello</p>
-          <p>Your Auth Code: ${authCode}</p>
+          <p>
+            <h3>Your Auth Code: ${authCode}</h3>
+          </p>
         </div>
         `,
     });
@@ -354,6 +357,65 @@ export default async function handler(
 
     res.status(200).json({ status: true, message: "User password updated", user: updateUser });
   } 
+
+
+
+
+
+
+
+  if (method === "sendAuthCode") {
+
+    const {
+      userToken,
+    } = req.body;
+
+    if ( !userToken ) {
+      res.status(400).json({ message: "Bad Request" });
+      return;
+    }
+
+
+    const min = Math.ceil(1000000);
+    const max = Math.floor(9999999);
+    const authCode = Number(Math.floor(Math.random() * (max - min + 1) + min)).toFixed(0);
+
+
+    const user = await setUserAuthCode(
+      userToken,
+      authCode,
+    );
+
+    /////console.log("sendAuthCode user", user)
+
+
+    if (!user) {
+      res.status(400).json({ status: false, message: "error" });
+      return;
+    }
+
+    if (user.success === false) {
+      res.status(400).json({ status: false, message: "error" });
+      return;
+    }
+
+
+    const mail = await sendMail({
+      to: user.user?.email,
+      from: MAIL_CONFIG.from,
+      subject: `Verification Withdraw for ${process.env.WEB_URI}`,
+      html: `
+        <div>
+          <p>Hello</p>
+          <p>
+            <h3>Your Auth Code: ${authCode}</h3>
+          </p>
+        </div>
+        `,
+    });
+
+    res.status(200).json({ message: "Sent Auth Code", data: user.user });
+  }
 
 
 

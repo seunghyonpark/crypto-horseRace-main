@@ -24,11 +24,11 @@ export default async function handler(
   }
 
   if (method === "new") {
-    const { userToken, email1, withdrawAmount, walletTo, type } = req.body;
+    const { userToken, email1, withdrawAmount, walletTo, type, authCode, } = req.body;
 
     console.log(req.body);
 
-    if (!userToken || !email1 || !withdrawAmount || !walletTo || !type) {
+    if (!userToken || !email1 || !withdrawAmount || !walletTo || !type || !authCode) {
       return res
         .status(400)
         .json({ status: false, message: "Missing required fields" });
@@ -60,6 +60,11 @@ export default async function handler(
     const withdrawFee = 50;
 
     ////const lastWithdrawAmount = withdrawAmount - withdrawFee;
+
+
+    // check authCode
+    ////////
+
 
     const newPayment = await newPaymentRequest(
       userToken,

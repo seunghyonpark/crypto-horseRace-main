@@ -14,6 +14,11 @@ export const paymentRequestSchema = new Schema({
 
     required: true,
   },
+  emailVerified: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   withdrawAmount: {
     type: Number,
     required: true,
@@ -58,8 +63,10 @@ export const newPaymentRequest = async (
   withdrawAmount: number,
   withdrawFee: number,
   walletTo: string,
-  type: string
+  type: string,
 ) => {
+
+
   const newPaymentRequest = new PaymentRequest({
     userToken,
     email1,
@@ -67,12 +74,14 @@ export const newPaymentRequest = async (
     withdrawFee,
     walletTo,
     type,
+    emailVerified: true,
   });
   if (!newPaymentRequest) {
     return null;
   }
   return await newPaymentRequest.save();
 };
+
 
 export const getPaymentRequest = async (_id: string) => {
   const request = await PaymentRequest.find({ _id });

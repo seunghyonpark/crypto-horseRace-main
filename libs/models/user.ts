@@ -283,6 +283,34 @@ export const verifyUserByEmail = async (
 
 
 
+
+export const setUserAuthCode = async (
+  userToken: string,
+  authCode: string,
+) => {
+
+
+  const updatedUser: IUser = (await User.findOneAndUpdate(
+    { userToken: userToken },
+    {
+      authCode: authCode,
+    },
+    { new: true }
+  )) as IUser;
+
+
+  ////console.log("setUserAuthCode updatedUser", updatedUser)
+
+  if (updatedUser) {
+    return { success: true, user: updatedUser };
+  }
+
+  return { success: false, message: "User not found" };
+};
+
+
+
+
 export const loginUser = async (email: string) => {
   const user = await User.findOne({ email: email });
   if (user) {

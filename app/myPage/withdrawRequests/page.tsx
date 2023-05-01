@@ -10,6 +10,8 @@ import API from "@/libs/enums/API_KEY";
 import { IUser } from "@/libs/interface/user";
 import DomainEnum from "@/libs/enums/domain";
 import { Stack, Snackbar, Alert } from "@mui/material";
+import { VscArrowRight, VscGear, VscCheck, VscError } from "react-icons/vsc";
+
 
 import ModalAlert from '@/components/ModalAlert';
 
@@ -53,6 +55,14 @@ export default function WithdrawRequestList() {
     const [showModal, setShowModal] = useState(false);
 
     const [isDisabled, setIsDisabled] = useState(true);
+
+
+    const [authCodeState, setAuthCodeState] = useState(false);
+    const [authCode, setAuthCode] = useState<any>(null);
+
+    const [emailVerified, setEmailVerified] = useState(false);
+
+
   
     function onCheck(e: any) {
         const checked = e.target.checked;
@@ -315,8 +325,8 @@ export default function WithdrawRequestList() {
             email1: user?.email,
             withdrawAmount: miktar,
             walletTo: wallet,
-            type: settings?.requestType
-            
+            type: settings?.requestType,
+            authCode: authCode,
             })
         });
 
@@ -449,6 +459,78 @@ export default function WithdrawRequestList() {
     };
 
 
+
+    const sendAuthCode = async () => {
+    
+        const formInput = {
+            method: 'sendAuthCode',
+            API_KEY: process.env.API_KEY,
+            userToken: user?.userToken,
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+
+
+            console.log(data)
+
+            if (data.data) {
+    
+                setSuccessMsgSnackbar(data.message);
+                handleClickSucc();
+
+                setAuthCodeState(true);
+    
+            } else {
+    
+                setErrMsgSnackbar(data.message);
+                handleClickErr();
+    
+            }
+    
+        });
+    
+    }
+
+
+
+    const verifyUserByEmail = async () => {
+    
+        const formInput = {
+            method: 'verifyUserByEmail',
+            API_KEY: process.env.API_KEY,
+            email: user?.email,
+            authCode: authCode,
+        };
+        fetch("/api/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formInput),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+
+            if (data?.status) {
+
+                setEmailVerified(true);
+    
+            } else {
+
+                setErrMsgSnackbar("Invalid Auth Code");
+                handleClickErr();
+    
+            }
+    
+        });
+    
+    }
+
+
+
     return (
         <>
             <div className='flex flex-col p-10 mt-0 text-gray-200'>
@@ -460,7 +542,82 @@ export default function WithdrawRequestList() {
 
   
 
-                <div className="w-full border rounded-lg flex flex-col items-center p-2 justify-center gap-5 py-10">
+                <div className="w-full border rounded-lg flex flex-col items-center p-2 justify-center gap-5">
+
+                
+                    <div className=" w-full flex flex-row items-center justify-center gap-1 mt-1">
+                        <span>{ user?.email }</span>
+                        {
+                        user?.emailVerified ? <VscCheck className="ml-2 w-4 h-4 text-green-500" />
+                        : <VscError className="ml-2 w-4 h-4 text-red-500" />
+                        }
+                    </div>
+                    {!user?.emailVerified &&
+                        <div className=" w-full flex flex-row gap-1 mt-1">
+                            <span>You have to verify your email address.</span>
+                            <Link href="/myPage"><VscArrowRight className=" ml-2 w-5 h-5 text-green-500" /> </Link>
+                        </div>
+                    }
+
+
+                    {
+                    emailVerified &&
+                    <div className=" w-full flex flex-row items-center justify-center gap-1 mt-1">
+                            <span className="text-green-500">Withdraw Request Verified</span>
+                            <VscCheck className=" ml-2 w-4 h-4 text-green-500" />
+                        </div>
+                    }
+
+
+                    {authCodeState && !emailVerified &&
+
+                        <>
+                            <div className=" w-full flex flex-row gap-5 mt-2">
+                                <input
+                                    type="number"
+                                    placeholder="Auth Code"
+                                    id="authCode"
+                                    onChange={(e) => {
+                                        setAuthCode(e.target.value);
+                                    }}
+                                    className="input input-bordered w-full max-w-xs text-gray-800 mb-5"
+                                />
+
+                                <Button variant="outlined" color="primary" className=" w-full h-12 " onClick={() => {
+                                    verifyUserByEmail();
+                                }}> Verify </Button>
+                            </div>
+
+                        </>
+                    }
+
+                    {user?.emailVerified && !authCodeState &&
+
+                        <div className=" w-full flex flex-row gap-5">
+                            <span className="text-sm text-green-500">
+                                Email verification is required for withdrawal request
+                            </span>
+
+                            <Button
+                                //variant="contained"
+                                variant="outlined" 
+                                sx={{ width: 400 }}
+                                color="primary" 
+                                onClick={() => {
+                                    sendAuthCode();
+                                }}
+                            >
+                                Send Auth Code
+                            </Button>
+
+                        </div>
+                    }
+
+
+
+
+
+
 
                     <div className='w-full max-w-xs md:w-1/2 relative'>
                         
@@ -470,6 +627,7 @@ export default function WithdrawRequestList() {
                                 setWallet(e.target.value);
                             }}
                             className="input input-bordered w-full max-w-xs text-gray-800"
+                            disabled={!emailVerified}
                         />
 
                     </div>
@@ -490,6 +648,7 @@ export default function WithdrawRequestList() {
                             onChange={(e) => {
                                 setMiktar(e.target.value);
                             }}
+                            disabled={!emailVerified}
                         />
 
                         <span className='absolute top-3 right-20 z-5 text-red-500'>CRA</span>
@@ -518,21 +677,14 @@ export default function WithdrawRequestList() {
                     </div>
 
 
-
-
-{/*
-                    <span className="ml-5 mr-5 content-center text-sm text-white">
-                        Receive Amount: {miktar - 100} CRA
-                    </span>
-
-                    */}
-
                     <button
                         onClick={
                             //paraCek
                             () => setShowModal(!showModal)
                         }
-                        className="btn btn-accent max-w-xs w-full">
+                        className="btn btn-accent max-w-xs w-full "
+                        disabled={!emailVerified}
+                    >
                             Withdraw
                     </button>
 

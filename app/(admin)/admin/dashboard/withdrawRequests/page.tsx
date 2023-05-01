@@ -6,6 +6,8 @@ import { getCookie } from 'cookies-next';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+import { VscGear, VscError, VscCheck } from "react-icons/vsc";
+
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -45,14 +47,33 @@ export default function WithdrawRequests() {
                 return new Date(params.value).toLocaleString();
             }, // burada tarih formatı değiştirilebilir.
         },
+
         {
             field: "email1",
-            headerName: "E-Mail",
+            headerName: "Email",
             flex: 0.2,
-            minWidth: 200,
+            minWidth: 220,
             align: "center",
             headerAlign: "center",
-        },
+            renderCell: (params) => {
+
+              return (
+                <>
+                  <span className=" w-60 justify-right">{params.value}</span>
+                  <div className='flex justify-center items-center '>
+                    {params.row.emailVerified ?
+                        <VscCheck className=" w-5 h-5 text-green-500" />
+                        :
+                        <VscError className=" w-5 h-5 text-red-500" />
+                    }
+                  </div>
+                </>
+              );
+            },
+            
+          },
+
+
         {
             field: "wallet",
             headerName: "Wallet",
@@ -293,6 +314,7 @@ export default function WithdrawRequests() {
             kayitId: item._id,
             id: i,
             email1: item.email1,
+            emailVerified: item.emailVerified,
             requestAmount: item.withdrawAmount,
             withdrawFee: item.withdrawFee,
             lastAmount: item.withdrawAmount - item.withdrawFee,

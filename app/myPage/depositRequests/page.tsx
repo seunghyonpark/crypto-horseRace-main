@@ -91,24 +91,6 @@ export default function DepositRequestList() {
         },
 
         {
-            field: "createdAt",
-            headerName: "Date",
-            align: "center",
-            headerAlign: "center",
-            width: 150,
-            type: "dateTime",
-            minWidth: 120,
-            valueFormatter: (params) => {
-                //return new Date(params.value).toLocaleString();
-
-                var date = new Date(params.value);
-            
-                return format(date, "yy/MM/dd HH:mm:ss");
-
-            }, // burada tarih formatı değiştirilebilir.
-        },
-
-        {
             field: "status",
             headerName: "Status",
             align: "center",
@@ -132,6 +114,25 @@ export default function DepositRequestList() {
                 
             },
           },
+
+          {
+            field: "createdAt",
+            headerName: "Date",
+            align: "center",
+            headerAlign: "center",
+            width: 150,
+            type: "dateTime",
+            minWidth: 120,
+            valueFormatter: (params) => {
+                //return new Date(params.value).toLocaleString();
+
+                var date = new Date(params.value);
+            
+                return format(date, "yy/MM/dd HH:mm:ss");
+
+            }, // burada tarih formatı değiştirilebilir.
+        },
+
 
     ];
 

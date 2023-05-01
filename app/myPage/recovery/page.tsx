@@ -30,7 +30,6 @@ const schema = Yup.object().shape({
     pass2: Yup.string()
         .required()
         .min(7),
-
 });
 
 export default function RecoveryPage() {
@@ -167,6 +166,7 @@ export default function RecoveryPage() {
                 email: email,
                 pass1: pass1,
                 pass2: pass2,
+                authCode: authCode,
             };
             fetch("/api/user", {
                 method: "POST",

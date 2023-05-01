@@ -200,7 +200,7 @@ export default async function handler(
         `,
     });
 
-    res.status(200).json({ message: "Sent Auth Code", data: user });
+    res.status(200).json({ message: "Sent Auth Code", data: user.message });
   }
 
 
@@ -306,13 +306,15 @@ export default async function handler(
       email,
       pass1,
       pass2,
+      authCode,
     } =
       req.body;
 
     if (
       !email ||
       !pass1 ||
-      !pass2
+      !pass2 ||
+      !authCode
     ) {
       res.status(400).json({ status: false, message: "Missing data" });
       return;
@@ -337,6 +339,7 @@ export default async function handler(
       email,
       pass1,
       pass2,
+      authCode,
     );
 
     if (!updateUser) {

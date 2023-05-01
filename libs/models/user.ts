@@ -393,9 +393,11 @@ export const updatePasswordByEmail = async (
   email: string,
   pass1: string,
   pass2: string,
+  authCode: string,
 ) => {
+
   const updatedUser: IUser = (await User.findOneAndUpdate(
-    { email: email },
+    { $and:[{ email: email }, { authCode: authCode }] },
     {
       pass1: pass1,
       pass2: pass2,

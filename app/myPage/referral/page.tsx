@@ -37,10 +37,134 @@ const Transition = React.forwardRef(function Transition(
 
 
 
+const columnsReferral: GridColDef[] = [
+    {
+        field: "id",
+        headerName: "ID",
+        flex: 0.01,
+        minWidth: 50,
+        align: "center",
+        headerAlign: "center",
+    },
+    {
+        field: "email",
+        headerName: "Email",
+        flex: 0.1,
+        minWidth: 150,
+        align: "center",
+        headerAlign: "center",
+    },
+    {
+        field: "username",
+        headerName: "Nick Name",
+        align: "center",
+        headerAlign: "center",
+        type: "number",
+        flex: 0.2,
+        minWidth: 80,
+
+        //renderCell(params) {
+        //    return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
+        //},
+
+    },
+
+];
+
+const columnsReward: GridColDef[] = [
+
+
+    {
+        field: "resultAmount",
+        type: "number",
+        headerName: "RESULT",
+        flex: 0.1,
+        minWidth: 130,
+        align: "right",
+        headerAlign: "center",
+
+        renderCell: (params) => {
+
+            if (params.value < 0) {
+                return (
+
+                    <div className='w-full flex flex-row font-bold items-right '>
+                        <div className='w-full text-right text-white '>
+                            - {Number(Math.abs(params.value)).toFixed(0)} 
+                        </div>
+                        <div className='w-[80px] text-white text-right '>
+                            LOSE
+                        </div>
+                    </div>
+                );
+
+            } else if (params.value > 0) {
+                return (
+                    <div className='w-full flex flex-row font-bold items-right'>
+                        <div className='w-full text-right justify-end text-white '>
+                            + {Number(params.value).toFixed(0)}
+                        </div>
+                        <div className='w-[80px] text-white text-right '>
+                            WIN
+                        </div>
+                    </div>
+                );
+            }
+        },
+        
+    },
+    {
+        field: "prizeFee",
+        type: "number",
+        headerName: "Fee",
+        flex: 0.1,
+        minWidth: 60,
+        align: "right",
+        headerAlign: "center",
+        valueFormatter: (params) => {
+            return new Number(params.value).toFixed(0);
+        },
+    },
+
+    {
+        field: "referralReward",
+        type: "number",
+        headerName: "Reward",
+        flex: 0.1,
+        minWidth: 80,
+        align: "right",
+        headerAlign: "center",
+        valueFormatter: (params) => {
+            return new Number(params.value).toFixed(0);
+        },
+    },
+
+ 
+    {
+        field: "date",
+        headerName: "DATE",
+        align: "center",
+        headerAlign: "center",
+        width: 160,
+        type: "dateTime",
+        minWidth: 150,
+        valueFormatter: (params) => {
+
+            var date = new Date(params.value);
+        
+            return format(date, "yyyy.MM.dd HH:mm:ss");
+
+            //return new Date(params.value).toLocaleString();
+
+        }, // burada tarih formatı değiştirilebilir.
+    },
+
+
+];
+
+
+
 export default function ReferralList() {
-
-
-    const [referrals, setReferrals] = useState<any>([]);
 
     const [open, setOpen] = React.useState(false);
     const [selectedUser, setSelectedUser] = useState<any>();
@@ -61,39 +185,11 @@ export default function ReferralList() {
     const [promitonLink, setPromotionLink] = useState<any>(null);
 
 
-    const columns: GridColDef[] = [
-        {
-            field: "id",
-            headerName: "ID",
-            flex: 0.01,
-            minWidth: 50,
-            align: "center",
-            headerAlign: "center",
-        },
-        {
-            field: "email",
-            headerName: "Email",
-            flex: 0.1,
-            minWidth: 150,
-            align: "center",
-            headerAlign: "center",
-        },
-        {
-            field: "username",
-            headerName: "Nick Name",
-            align: "center",
-            headerAlign: "center",
-            type: "number",
-            flex: 0.2,
-            minWidth: 80,
+    const [referrals, setReferrals] = useState<any>([]);
+    const [rewards, setRewards] = useState<any>([]);
 
-            //renderCell(params) {
-            //    return <Chip label={`${params.value}  ${params.row.type}`} color="primary" />;
-            //},
 
-        },
 
-    ];
 
     function duzenle(e: any) {
         setSelectedUser(e)
@@ -111,7 +207,8 @@ export default function ReferralList() {
 
     useEffect(() => {
 
-        const getAll = async () => {
+        const getAllUserByReferral = async () => {
+
             const res = await fetch('/api/user', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -123,13 +220,34 @@ export default function ReferralList() {
             })
             const data = await res.json();
     
-            console.log("referrals=>", data.users.users );
+            ////console.log("referrals=>", data.users.users );
     
             setReferrals(data.users.users);
+
+        }
+
+        const getAllRewardByReferral = async () => {
+
+            const res = await fetch('/api/bethistory', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    method: "getAllforReferral",
+                    API_KEY: process.env.API_KEY,
+                    referral: user?.referralCode,
+                }),
+            })
+            const data = await res.json();
+    
+            ////console.log("referrals=>", data.users.users );
+    
+            setRewards(data.betHistory);
+
         }
 
         if (user) {
-            getAll();
+            getAllUserByReferral();
+            getAllRewardByReferral();
         }
         
     }, [user])
@@ -164,14 +282,7 @@ export default function ReferralList() {
     }, [user])
 
 
-    const rows = referrals.map((item: any, i: number) => {
-        return {
-            kayitId: item._id,
-            id: i,
-            email: item.email,
-            username: item.username,
-        }
-    })
+
 
 
     const { Canvas } = useQRCode();
@@ -298,6 +409,35 @@ export default function ReferralList() {
       }
 
 
+    const rowsReferral = referrals.map((item: any, i: number) => {
+        return {
+            kayitId: item._id,
+            id: i,
+            email: item.email,
+            username: item.username,
+        }
+    })
+
+    const rowsReward = rewards.map((item: any, i: number) => {
+        return {
+            kayitId: item._id,
+            id: i,
+            betAmount: item.betAmount,
+            basePrice: item.basePrice,
+            prizeAmount: item.prizeAmount,
+            resultAmount: item.prizeAmount - item.betAmount,
+            prizeFee: item.prizeFee,
+            selectedSide: item.selectedSide,
+            closePrice: item.closePrice,
+            winnerHorse: item.winnerHorse,
+            date: item.date,
+            userToken: item.userToken,
+            referral: item.referral,
+            referralReward: item.referralReward,
+        }
+    })
+
+
 
     return (
         <>
@@ -411,10 +551,29 @@ export default function ReferralList() {
                 <h1 className='mt-5 font-bold italic text-2xl text-white'>My Referrals</h1>
                 <div style={{ width: "100%", height: 600, color: "white" }}>
 
-                {rows && (
+                {rowsReferral && (
                     <DataGrid
-                        rows={rows}
-                        columns={columns}
+                        rows={rowsReferral}
+                        columns={columnsReferral}
+                        pageSize={9}
+                        rowsPerPageOptions={[10]}
+                        hideFooterSelectedRowCount
+                        sx={{
+                            color: "white",
+                        }}
+                    />
+                )}
+
+                </div>
+
+
+                <h1 className='mt-5 font-bold italic text-2xl text-white'>My Rewards</h1>
+                <div style={{ width: "100%", height: 600, color: "white" }}>
+
+                {rowsReward && (
+                    <DataGrid
+                        rows={rowsReward}
+                        columns={columnsReward}
                         pageSize={9}
                         rowsPerPageOptions={[10]}
                         hideFooterSelectedRowCount

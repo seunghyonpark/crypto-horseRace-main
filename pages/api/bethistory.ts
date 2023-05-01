@@ -4,6 +4,7 @@ import {
   getAllBetHistoryBetSum,
   getAllBetHistoryPrizeSum,
   getAllBetHistoryforUser,
+  getAllBetHistoryforReferral,
 } from "@/libs/models/bethistory";
 
 
@@ -157,6 +158,29 @@ export default async function handler(
     }
 
     const betHistory = await getAllBetHistoryforUser(user.username);
+    if (!betHistory) {
+      return res.status(200).json({
+        status: false,
+        message: "Bet histories request failed",
+      });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: "Bet histories request successful",
+      betHistory,
+    });
+  }
+
+
+  if (method === "getAllforReferral") {
+
+    const { referral } = req.body;
+    if (!referral) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const betHistory = await getAllBetHistoryforReferral(referral);
     if (!betHistory) {
       return res.status(200).json({
         status: false,

@@ -138,3 +138,13 @@ export const getAllBetHistoryforUser = async (username: string) => {
     return null;
   }
 };
+
+
+export const getAllBetHistoryforReferral = async (referral: string) => {
+  const requests = await Bethistory.find({ referral: referral }).sort( { date: -1 } );
+  if (requests) {
+    return requests;
+  } else {
+    return null;
+  }
+};

@@ -17,6 +17,7 @@ import { IGame } from '@/libs/interface/game';
 ///import Winner from './winner';
 
 
+import { VscGear, VscTriangleUp, VscTriangleDown } from "react-icons/vsc";
 
 
 export default function Dashboard() {
@@ -544,7 +545,7 @@ export default function Dashboard() {
                     <div className="w-full h-20 mt-0 ">
 
                         <div
-                            className="flex min-w-[300px] items-end justify-end -mt-10 ml-5"
+                            className="flex min-w-[450px] items-end justify-end -mt-10 ml-2"
                             style={{
                                 width: `${progress1}%`,
                             }}
@@ -560,11 +561,18 @@ export default function Dashboard() {
                             <div
                             className="flex flex-row gap-2 text-sm text-white w-full ml-2 mb-2"
                             >
-                                <div>{`${game.username}`}</div>
-                                <div className='text-yellow-400'>{game.basePrice}</div>
-                                <div className=' text-yellow-400  '>{game.selectedSide}</div>
-                                <div className='text-yellow-400'>{game.betAmount}</div>
-                                <div className='text-red-400'>{game.referral}</div>
+                                <div className=" w-20 text-white">{`${game.username}`}</div>
+                                <div className='w-14 text-yellow-400'>{Number(game.basePrice).toFixed(2)}</div>
+                                <div className=' text-yellow-400  '>
+                                    
+                                    {game.selectedSide === "Long" ?
+                                        <VscTriangleUp className="fill-green-500 w-6 h-6" />
+                                        :  <VscTriangleDown className="fill-red-500 w-6 h-6" />
+                                    }
+                                
+                                </div>
+                                <div className='w-14 text-right text-yellow-400'>${game.betAmount}</div>
+                                <div className='text-blue-300'>{game.referral}</div>
                                 
                             </div>
                         </div>

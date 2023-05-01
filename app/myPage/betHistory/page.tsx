@@ -31,7 +31,6 @@ export default function BetHistoryList() {
     const { push } = useRouter();
 
     const columns: GridColDef[] = [
- 
 
         {
             field: "date",

@@ -21,6 +21,14 @@ const BetHistorySchema = new Schema({
     type: String,
     required: true,
   },
+  referral: {
+    type: String,
+    required: false,
+  },
+  referralReward: {
+    type: Number,
+    required: false,
+  },
   betAmount: {
     type: Number,
     required: true,

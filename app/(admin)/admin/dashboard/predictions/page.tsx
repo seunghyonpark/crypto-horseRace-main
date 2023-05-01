@@ -73,78 +73,6 @@ export default function PredictionList() {
 
 
 
-/*
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  userToken: {
-    type: String,
-    required: true,
-  },
-  username: {
-    type: String,
-    required: true,
-  },
-  img: {
-    type: String,
-    required: true,
-  },
-  betAmount: {
-    type: Number,
-    required: true,
-  },
-  basePrice: {
-    type: Number,
-    required: true,
-  },
-  selectedSide: {
-    type: String,
-    required: true,
-  },
-  closePrice: {
-    type: Number,
-    required: true,
-  },
-  winnerHorse: {
-    type: String,
-    required: true,
-  },
-  placements: {
-    type: Array,
-    line: {
-      type: Number,
-      required: true,
-    },
-    horse: {
-      type: String,
-      required: true,
-    },
-  },
-
-  prizeAmount: {
-    type: Number,
-    required: true,
-  },
-  resultAmount: {
-    type: Number,
-    required: true,
-  },
-  prizeFee: {
-    type: Number,
-    required: false,
-  },
-  depositBefore: {
-    type: Number,
-    required: true,
-  },
-  depositAfter: {
-    type: Number,
-    required: true,
-  },
-*/
-
-
 
   const columns: GridColDef[] = [
     {
@@ -173,6 +101,22 @@ export default function PredictionList() {
       flex: 0.2,
       minWidth: 120,
       align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "referral",
+      headerName: "Referral",
+      flex: 0.2,
+      minWidth: 100,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "referralReward",
+      headerName: "Reward",
+      flex: 0.2,
+      minWidth: 100,
+      align: "right",
       headerAlign: "center",
     },
     {
@@ -526,6 +470,8 @@ export default function PredictionList() {
       date: item.date,
       userToken: item.userToken,
       username: item.username,
+      referral: item.referral,
+      referralReward: item.referralReward,
       betAmount: item.betAmount,
       basePrice: item.basePrice,
       closePrice: item.closePrice,

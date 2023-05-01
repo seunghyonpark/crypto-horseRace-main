@@ -558,13 +558,13 @@ export default function Dashboard() {
                                 alt={"at"}
                             />
                             <div
-                            className="flex flex-row gap-2 text-xs text-white w-full ml-2 mb-2"
+                            className="flex flex-row gap-2 text-sm text-white w-full ml-2 mb-2"
                             >
                                 <div>{`${game.username}`}</div>
-                                <div className='text-yellow-500'>{game.basePrice}</div>
-                                <div className=' text-yellow-500  '>{game.selectedSide}</div>
-                                <div className='text-yellow-500'>{game.betAmount}</div>
-                                <div className='text-red-500'>{game.referral}</div>
+                                <div className='text-yellow-400'>{game.basePrice}</div>
+                                <div className=' text-yellow-400  '>{game.selectedSide}</div>
+                                <div className='text-yellow-400'>{game.betAmount}</div>
+                                <div className='text-red-400'>{game.referral}</div>
                                 
                             </div>
                         </div>

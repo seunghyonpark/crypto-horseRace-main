@@ -5,6 +5,8 @@ export interface IGame {
   userToken: string;
   username: string;
   img: string;
+  referral: string;
   betAmount: number;
   selectedSide: string;
+  basePrice: number;
 }

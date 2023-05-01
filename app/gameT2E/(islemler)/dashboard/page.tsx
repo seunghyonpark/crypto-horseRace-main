@@ -544,7 +544,7 @@ export default function Dashboard() {
                     <div className="w-full h-20 mt-0 ">
 
                         <div
-                            className="flex min-w-[250px] items-end justify-end -mt-10 ml-5"
+                            className="flex min-w-[300px] items-end justify-end -mt-10 ml-5"
                             style={{
                                 width: `${progress1}%`,
                             }}
@@ -553,17 +553,18 @@ export default function Dashboard() {
                                 src={
                                     game.selectedSide === "Long" ? imageRabbit1 : imageRabbit2
                                 }
-                                width={50}
-                                height={50}
+                                width={48}
+                                height={48}
                                 alt={"at"}
                             />
                             <div
                             className="flex flex-row gap-2 text-xs text-white w-full ml-2 mb-2"
                             >
-                                <div>Better: {`${game.username}`}</div>
-                                {/*<li className='text-yellow-500'>Entry: {game.entry}</li>*/}
-                                <div className=' text-yellow-500  '>Position: {game.selectedSide}</div>
-                                <div className='text-yellow-500'>Bet: {game.betAmount}</div>
+                                <div>{`${game.username}`}</div>
+                                <div className='text-yellow-500'>{game.basePrice}</div>
+                                <div className=' text-yellow-500  '>{game.selectedSide}</div>
+                                <div className='text-yellow-500'>{game.betAmount}</div>
+                                <div className='text-red-500'>{game.referral}</div>
                                 
                             </div>
                         </div>

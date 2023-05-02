@@ -72,6 +72,21 @@ import {
 
 export default function GameT2E() {
 
+
+  const { push } = useRouter();
+
+  useEffect(() => {
+    push( '/Notice' );
+  });
+
+  return (
+    <div className="">
+      <h3 className="text-[#A02635]">Redirecting...</h3>
+    </div>
+  );
+
+
+
     const [status, setStatus] = useState<any>();
 
     const [time, setTime] = useState<any>(0);

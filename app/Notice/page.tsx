@@ -249,7 +249,7 @@ export default function Notice() {
     return (
         <>
 
-        <div className='flex w-full h-full items-center justify-center pt-60 '>      
+        <div className='flex w-full h-full items-center justify-center pt-28 '>      
 
           <Image
             src="/notice.jpg"

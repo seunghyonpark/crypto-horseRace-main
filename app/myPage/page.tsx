@@ -39,6 +39,11 @@ const schema = Yup.object().shape({
 });
 
 
+// Yup schema to validate the form
+const schemaUsername = Yup.object().shape({
+    username: Yup.string()
+        .required(),
+});
 
 
 
@@ -287,6 +292,59 @@ export default function MyPage() {
 
     // Destructure the formik object
     const { errors, touched, values, handleChange, handleSubmit } = formik;
+
+
+
+    // Formik hook to handle the form state
+    const formikUsername = useFormik({
+        
+        ////console.log("useFormik===========");
+
+        initialValues: {
+            username: "",
+        },
+
+        // Pass the Yup schema to validate the form
+        validationSchema: schemaUsername,
+
+        // Handle form submission
+        onSubmit: async ({ username}) => {
+            // Make a request to your backend to store the data
+
+            const formInput = {
+                method: 'updateUsername',
+                API_KEY: process.env.API_KEY,
+                userToken: getCookie('user'),
+                username: username,
+            };
+            fetch("/api/user", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formInput),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.user) {
+                        alert(data.message);
+                        //handleClickSucc();
+                        router.push("/");
+                    }
+                    else {
+                        alert(data.message);
+                        //setErrMsg(data.message);
+                        //handleClickErr();
+                    }
+                    //todo
+                    // handleClickSucc();
+                });
+
+        },
+    });
+
+    ////const { errorsUsername, touchedUsername, valuesUsername, handleChangeUsername, handleSubmitUsername } = formikUsername;
+    ///const { handleChange, handleSubmit } = formikUsername;
+
+    ///const { errorsUsername, touchedUsername, valuesUsername, handleChangeUsername, handleSubmitUsername } = formikUsername;
 
     
 

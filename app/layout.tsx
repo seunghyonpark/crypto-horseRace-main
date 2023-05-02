@@ -9,7 +9,6 @@ import { Inter } from '@next/font/google';
 //import { MetamaskProvider } from "../hooks/useMetamask";
 
 
-
 /*
 import RootProvider from "./providers";
 */
@@ -39,6 +38,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
+
+
+
   return (
 
       <html lang="en">
@@ -51,6 +55,8 @@ export default function RootLayout({
 
 
             {children}
+
+
 
 
 

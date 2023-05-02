@@ -163,6 +163,7 @@ export const getAllReward = async () => {
           _id: "$username",
           betCount: { $sum: 1 },
           rewardCount: { $sum: 1 },
+          betAmount: { $sum: "$betAmount" },
           prizeAmount: { $sum: "$prizeAmount" },
           prizeFee: { $sum: "$prizeFee" },
           rewardAmount: { $sum: "$referralReward" }
@@ -209,6 +210,7 @@ export const getAllRewardForReferral = async (referral: string) => {
           _id: "$username",
           betCount: { $sum: 1 },
           rewardCount: { $sum: 1 },
+          betAmount: { $sum: "$betAmount" },
           prizeAmount: { $sum: "$prizeAmount" },
           prizeFee: { $sum: "$prizeFee" },
           rewardAmount: { $sum: "$referralReward" }

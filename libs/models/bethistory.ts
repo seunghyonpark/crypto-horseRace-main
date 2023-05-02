@@ -133,6 +133,9 @@ export const getAllBetHistoryPrizeSum = async () => {
 export const getAllBetHistoryforUser = async (username: string) => {
   const requests = await Bethistory.find({ username: username }).sort( { date: -1 } );
   if (requests) {
+
+    ///console.log(requests)
+
     return requests;
   } else {
     return null;
@@ -148,3 +151,67 @@ export const getAllBetHistoryforReferral = async (referral: string) => {
     return null;
   }
 };
+
+
+
+export const getAllReward = async () => {
+
+  const requests = await Bethistory.aggregate([
+    {
+      $group:
+      {
+          _id: "$username",
+          betCount: { $sum: 1 },
+          rewardCount: { $sum: 1 },
+          prizeAmount: { $sum: "$prizeAmount" },
+          prizeFee: { $sum: "$prizeFee" },
+          rewardAmount: { $sum: "$referralReward" }
+      }
+    }
+  ]).sort({ prizeAmount: -1 })
+  /*
+    .then(result => {
+        //console.log(result)
+
+        //return result;
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    */
+
+    if (requests) {
+      return requests;
+    } else {
+      return null;
+    }
+  
+};
+
+
+export const getAllRewardForReferral = async (referral: string) => {
+
+  Bethistory.aggregate([
+    {
+      //$match: {
+      //  referral: referral,
+      //},
+      $group:
+      {
+          _id: "$username",
+          rewardCount: { $sum: 1 },
+          prizeAmount: { $sum: "$prizeAmount" },
+          prizeFee: { $sum: "$prizeFee" },
+          rewardAmount: { $sum: "$referralReward" }
+      }
+    }
+  ])
+    .then(result => {
+        ///console.log(result)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+  
+};
+

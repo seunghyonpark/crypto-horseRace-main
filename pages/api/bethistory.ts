@@ -4,7 +4,9 @@ import {
   getAllBetHistoryBetSum,
   getAllBetHistoryPrizeSum,
   getAllBetHistoryforUser,
+  getAllReward,
   getAllBetHistoryforReferral,
+  getAllRewardForReferral,
 } from "@/libs/models/bethistory";
 
 
@@ -173,6 +175,9 @@ export default async function handler(
   }
 
 
+
+
+
   if (method === "getAllforReferral") {
 
     const { referral } = req.body;
@@ -188,12 +193,38 @@ export default async function handler(
       });
     }
 
+
+  
+    ////const reward = await getAllReward();
+    /////console.log(reward);
+
+      
     return res.status(200).json({
       status: true,
       message: "Bet histories request successful",
       betHistory,
     });
   }
+
+
+
+
+
+  if (method === "getAllReward") {
+
+    const reward = await getAllReward();
+
+    if (!reward) {
+      return res.status(400).json({ message: "error" });
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: "Reward request successful",
+      reward: reward,
+    });
+  }
+
 
 
   return res.status(400).json({ message: "Missing required fields" });

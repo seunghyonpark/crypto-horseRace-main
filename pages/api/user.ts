@@ -506,7 +506,7 @@ export default async function handler(
     }
 
     console.log("api getAllByReferral", referral);
-    console.log("api getAllByReferral", users);
+    ////console.log("api getAllByReferral", users);
 
     res.status(200).json({ message: "Users found", users: users });
   }

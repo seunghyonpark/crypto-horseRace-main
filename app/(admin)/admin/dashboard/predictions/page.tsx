@@ -191,6 +191,30 @@ export default function PredictionList() {
       } ,
     },
 
+
+    {
+      field: "depositBefore",
+      headerName: "Before",
+      flex: 0.1,
+      minWidth: 120,
+      align: "right",
+      headerAlign: "center",
+      valueFormatter: (params) => {
+        return new Number(params.value).toFixed(2);
+      } ,
+    },
+    {
+      field: "depositAfter",
+      headerName: "After",
+      flex: 0.1,
+      minWidth: 120,
+      align: "right",
+      headerAlign: "center",
+      valueFormatter: (params) => {
+        return new Number(params.value).toFixed(2);
+      } ,
+    },
+
   ];
 
 
@@ -479,6 +503,8 @@ export default function PredictionList() {
       winnerHorse: item.winnerHorse,
       prizeFee: item.prizeFee,
       resultAmount: item.resultAmount - item.prizeFee,
+      depositBefore: item.depositBefore,
+      depositAfter: item.depositAfter,
 
     }
 

@@ -47,22 +47,60 @@ const columnsReferral: GridColDef[] = [
         headerAlign: "center",
     },
     {
-        field: "email",
-        headerName: "Email",
-        flex: 0.1,
-        minWidth: 150,
-        align: "center",
-        headerAlign: "center",
-    },
-    {
         field: "username",
         headerName: "Nick Name",
         align: "center",
         headerAlign: "center",
         type: "number",
         flex: 0.2,
-        minWidth: 80,
+        minWidth: 100,
 
+    },
+    {
+        field: "betCount",
+        type: "number",
+        headerName: "Bet",
+        flex: 0.1,
+        minWidth: 60,
+        align: "right",
+        headerAlign: "center",
+    },
+    {
+        field: "prizeAmount",
+        type: "number",
+        headerName: "Prize",
+        flex: 0.1,
+        minWidth: 100,
+        align: "right",
+        headerAlign: "center",
+        valueFormatter: (params) => {
+            return new Number(params.value).toFixed(0);
+        },
+    },
+    {
+        field: "prizeFee",
+        type: "number",
+        headerName: "Fee",
+        flex: 0.1,
+        minWidth: 100,
+        align: "right",
+        headerAlign: "center",
+        valueFormatter: (params) => {
+            return new Number(params.value).toFixed(0);
+        },
+    },
+
+    {
+        field: "rewardAmount",
+        type: "number",
+        headerName: "Reward",
+        flex: 0.1,
+        minWidth: 100,
+        align: "right",
+        headerAlign: "center",
+        valueFormatter: (params) => {
+            return new Number(params.value).toFixed(0);
+        },
     },
 
 ];
@@ -215,23 +253,24 @@ export default function ReferralList() {
 
         const getAllUserByReferral = async () => {
 
-            const res = await fetch('/api/user', {
+            const res = await fetch('/api/bethistory', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    method: "getAllByReferral",
+                    method: "getAllRewardForReferral",
                     API_KEY: process.env.API_KEY,
                     referral: user?.referralCode,
                 }),
             })
             const data = await res.json();
     
-            ////console.log("referrals=>", data.users.users );
+            /////console.log("referrals=>", data.reward );
     
-            setReferrals(data.users.users);
+            setReferrals(data.reward);
 
         }
 
+        /*
         const getAllRewardByReferral = async () => {
 
             const res = await fetch('/api/bethistory', {
@@ -250,10 +289,11 @@ export default function ReferralList() {
             setRewards(data.betHistory);
 
         }
+        */
 
         if (user) {
             getAllUserByReferral();
-            getAllRewardByReferral();
+            ////getAllRewardByReferral();
         }
         
     }, [user])
@@ -415,14 +455,19 @@ export default function ReferralList() {
       }
 
 
-    const rowsReferral = referrals.map((item: any, i: number) => {
+    const rowsReferral = referrals?.map((item: any, i: number) => {
         return {
             kayitId: item._id,
             id: i,
-            email: item.email,
-            username: item.username,
+            username: item._id,
+            betCount: item.betCount,
+            prizeAmount: item.prizeAmount,
+            prizeFee: item.prizeFee,
+            rewardCount: item.rewardCount,
+            rewardAmount: item.rewardAmount,
         }
-    })
+      })
+
 
     const rowsReward = rewards.map((item: any, i: number) => {
         return {

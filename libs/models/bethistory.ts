@@ -189,29 +189,50 @@ export const getAllReward = async () => {
 };
 
 
+
+/*
+db.employees.aggregate([ 
+  { $match:{ gender:'male'}}, 
+  { $group:{ _id:'$department.name', totalEmployees: { $sum:1 } } 
+}])
+*/
+
 export const getAllRewardForReferral = async (referral: string) => {
 
-  Bethistory.aggregate([
+  const requests = await Bethistory.aggregate([
+
+    { $match: { referral: referral } },
+
     {
-      //$match: {
-      //  referral: referral,
-      //},
       $group:
       {
           _id: "$username",
+          betCount: { $sum: 1 },
           rewardCount: { $sum: 1 },
           prizeAmount: { $sum: "$prizeAmount" },
           prizeFee: { $sum: "$prizeFee" },
           rewardAmount: { $sum: "$referralReward" }
       }
     }
-  ])
+  ]).sort({ prizeAmount: -1 })
+  /*
     .then(result => {
-        ///console.log(result)
+        //console.log(result)
+
+        //return result;
     })
     .catch(error => {
         console.log(error)
     })
+    */
+
+    if (requests) {
+      return requests;
+    } else {
+      return null;
+    }
   
 };
+
+
 

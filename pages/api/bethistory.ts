@@ -178,31 +178,28 @@ export default async function handler(
 
 
 
-  if (method === "getAllforReferral") {
+  if (method === "getAllRewardForReferral") {
 
     const { referral } = req.body;
     if (!referral) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const betHistory = await getAllBetHistoryforReferral(referral);
-    if (!betHistory) {
-      return res.status(200).json({
-        status: false,
-        message: "Bet histories request failed",
-      });
+    const reward = await getAllRewardForReferral(referral);
+
+    ////console.log(reward);
+
+
+    if (!reward) {
+      return res.status(400).json({ message: "error" });
     }
 
-
-  
-    ////const reward = await getAllReward();
-    /////console.log(reward);
 
       
     return res.status(200).json({
       status: true,
-      message: "Bet histories request successful",
-      betHistory,
+      message: "Reward request successful",
+      reward,
     });
   }
 

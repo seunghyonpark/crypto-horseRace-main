@@ -245,7 +245,7 @@ export default function RewardList() {
         rewardCount: item.rewardCount,
         rewardAmount: item.rewardAmount,
     }
-})
+  })
   
 
 

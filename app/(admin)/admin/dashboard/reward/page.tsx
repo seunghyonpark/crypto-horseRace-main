@@ -417,17 +417,8 @@ export default function RewardList() {
 
             </DialogContent>
 
-
-
-
             <DialogActions>
-
-            {user?.admin && user?.adminLevel === 1 && (
-              <Button onClick={deleteUser}>DELETE</Button>
-            )}
-
               <Button onClick={handleClose}>Close</Button>
-              <Button color='success' onClick={updateUser}>Save</Button>
             </DialogActions>
           </Dialog>
         )}

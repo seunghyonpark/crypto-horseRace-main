@@ -571,7 +571,7 @@ export default function Dashboard() {
                                     }
                                 
                                 </div>
-                                <div className='w-14 text-right text-yellow-400'>$(CRA){game.betAmount}</div>
+                                <div className='w-18 text-right text-yellow-400'>$(CRA){game.betAmount}</div>
                                 <div className='text-blue-300'>{game.referral}</div>
                                 
                             </div>

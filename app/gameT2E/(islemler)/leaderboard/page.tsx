@@ -78,7 +78,7 @@ export default function LeaderboardList() {
   const columns: GridColDef[] = [
     {
         field: "id",
-        headerName: "ID",
+        headerName: "RANK",
         flex: 0.01,
         minWidth: 80,
         align: "center",

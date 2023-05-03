@@ -290,7 +290,7 @@ export default function LeaderboardList() {
 
 
         <div className='flex flex-col p-10 mt-5 text-gray-200'>
-          <h1 className='font-bold italic text-2xl'>Reward</h1>
+          <h1 className='font-bold italic text-2xl'>Leaderboard</h1>
 
 {/*
           <h1 className='font-bold italic text-2xl'>Total Reward Amount: {Number(depositSum).toFixed(2)}</h1>

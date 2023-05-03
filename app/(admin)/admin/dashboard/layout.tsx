@@ -90,13 +90,15 @@ export default function RootLayout({
                                     Bet History
                                 </Link>
 
+                                <Link className={`${pathName === '/admin/dashboard/reward' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/reward">
+                                    Reward History
+                                </Link>
+
                                 <Link className={`${pathName === '/admin/dashboard/leaderboard' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/leaderboard">
                                     Leaderboard
                                 </Link>
 
-                                <Link className={`${pathName === '/admin/dashboard/reward' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/reward">
-                                    Bet Reward
-                                </Link>
+
 
                                 {/*
                                 <Link className={`${pathName === '/admin/dashboard/settings' ? 'text-gray-200' : 'text-gray-500'} `} href="/admin/dashboard/settings">

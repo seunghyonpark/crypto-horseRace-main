@@ -78,7 +78,7 @@ const columnsReferral: GridColDef[] = [
         },
     },
     {
-        field: "resultAmount",
+        field: "prizeAmount",
         type: "number",
         headerName: "Prize",
         flex: 0.1,
@@ -474,7 +474,7 @@ export default function ReferralList() {
             username: item._id,
             betCount: item.betCount,
             betAmount: item.betAmount,
-            prizeAmount: item.prizeAmount,
+            prizeAmount: item.prizeAmount / 2,
             resultAmount: item.resultAmount,
             prizeFee: item.prizeFee,
             rewardCount: item.rewardCount,

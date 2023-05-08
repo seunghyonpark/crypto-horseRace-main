@@ -73,6 +73,9 @@ const columnsReferral: GridColDef[] = [
         minWidth: 100,
         align: "right",
         headerAlign: "center",
+        valueFormatter: (params) => {
+            return new Number(params.value).toFixed(0);
+        },
     },
     {
         field: "prizeAmount",
@@ -470,6 +473,7 @@ export default function ReferralList() {
             id: i,
             username: item._id,
             betCount: item.betCount,
+            betAmount: item.betAmount,
             prizeAmount: item.prizeAmount,
             prizeFee: item.prizeFee,
             rewardCount: item.rewardCount,
@@ -477,6 +481,7 @@ export default function ReferralList() {
         }
       })
 
+      
 
     const rowsReward = rewards.map((item: any, i: number) => {
         return {

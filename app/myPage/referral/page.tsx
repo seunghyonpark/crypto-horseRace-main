@@ -59,9 +59,18 @@ const columnsReferral: GridColDef[] = [
     {
         field: "betCount",
         type: "number",
-        headerName: "Bet",
+        headerName: "Bet Cnt",
         flex: 0.1,
         minWidth: 60,
+        align: "right",
+        headerAlign: "center",
+    },
+    {
+        field: "betAmount",
+        type: "number",
+        headerName: "Bet Amount",
+        flex: 0.1,
+        minWidth: 100,
         align: "right",
         headerAlign: "center",
     },
@@ -264,7 +273,7 @@ export default function ReferralList() {
             })
             const data = await res.json();
     
-            /////console.log("referrals=>", data.reward );
+            console.log("referrals=>", data.reward );
     
             setReferrals(data.reward);
 

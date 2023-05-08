@@ -212,6 +212,7 @@ export const getAllRewardForReferral = async (referral: string) => {
           rewardCount: { $sum: 1 },
           betAmount: { $sum: "$betAmount" },
           prizeAmount: { $sum: "$prizeAmount" },
+          resultAmount: { $sum: "$resultAmount" },
           prizeFee: { $sum: "$prizeFee" },
           rewardAmount: { $sum: "$referralReward" }
       }

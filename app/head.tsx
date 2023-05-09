@@ -17,12 +17,8 @@ export default function Head() {
       <meta name="twitter:image" content="/craclegames.jpg"></meta>
   
 
-
-
       <link rel="icon" href="/favicon.ico" />
 
-
-  
 
     </>
   )

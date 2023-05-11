@@ -252,7 +252,7 @@ export default function Notice() {
         <div className='flex w-full h-full items-center justify-center pt-28 '>      
 
           <Image
-            src="/notice.jpg"
+            src="/notice.png"
             alt="Picture of the author"
             width={500}
             height={500}

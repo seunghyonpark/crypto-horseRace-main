@@ -73,6 +73,7 @@ export default function Home() {
 
   const { push } = useRouter();
 
+  /*
   useEffect(() => {
     push( '/Notice' );
   });
@@ -82,7 +83,7 @@ export default function Home() {
       <h3 className="text-[#A02635]">Redirecting...</h3>
     </div>
   );
-
+    */
 
 
 
